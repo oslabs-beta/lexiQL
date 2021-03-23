@@ -11,7 +11,7 @@ app.use(express.json());
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 app.get('/', (req, res) =>
-  res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'))
+  res.status(200).sendFile(path.resolve(__dirname, '../client/index.html')),
 );
 
 app.use('*', (req, res) => {
