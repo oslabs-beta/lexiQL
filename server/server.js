@@ -1,12 +1,12 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
-
+const { getSQLSchema } = require('./controllers/SQLController');
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-
+// route to dummy db
+app.get('/sql-schema', getSQLSchema, 
+(req, res) => {res.status(200).json(res.locals.SQLSchema)})
 // to only run build and get static when in production, not development
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
