@@ -4,6 +4,7 @@ const router = require('./router');
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 // route to dummy db
 app.use('/', router) 
 // to only run build and get static when in production, not development

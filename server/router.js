@@ -1,13 +1,22 @@
 const express = require('express');
-const { ModuleFilenameHelpers } = require('webpack');
 const router = express.Router();
 const SQLController = require('./controllers/SQLController');
+const GQLController = require('./controllers/GQLController');
 
-/* Route for SQL Schema */
-router.get('/sql-schema', SQLController.getSQLSchema,
+/* Route for example SQL Schema */
+router.get('/example-schema', SQLController.getSQLSchema,
  (req, res) => {res.status(200).json(res.locals.SQLSchema)
-})
+});
 
-/* Route  */
+/* Route to get user db schema */
+router.post('/sql-schema', SQLController.getSQLSchema,
+(req, res) => {res.status(200).json(res.locals.SQLSchema)
+});
+
+/* Route to get user (table specific) GraphQL Schema and Resolvers */
+router.post('gql-schema', GQLController.createGQLSchema,
+(req, res) => {res.status(200).json(res.locals.GQLSchema)
+});
+
 
 module.exports = router;
