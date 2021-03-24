@@ -1,16 +1,17 @@
 const { Pool } = require('pg');
-
-const PG_URI = 'postgres://zhocexop:Ipv9EKas6bU6z9ehDXZQRorjITIXijGv@ziggy.db.elephantsql.com:5432/zhocexop';
+/* Example db URI */
+const EX_PG_URI = 'postgres://zhocexop:Ipv9EKas6bU6z9ehDXZQRorjITIXijGv@ziggy.db.elephantsql.com:5432/zhocexop';
 const fs = require('fs');
 const sqlQuery = fs.readFileSync('server/tableQuery.sql', 'utf8');
 
-const db = new Pool({
-    connectionString: PG_URI
-});
 
 const SQLController = {};
 
 SQLController.getSQLSchema = (req, res, next) => {
+    let PSQL_URI;
+    console.log('request body', req.body);
+    req.body.link ? PSQL_URI = req.body.link : PSQL_URI = EX_PG_URI
+    const db = new Pool({connectionString: PSQL_URI});
     db.query(sqlQuery)
     .then((data) => {
         res.locals.SQLSchema = data.rows[0].tables;
