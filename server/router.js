@@ -1,4 +1,5 @@
 const express = require('express');
+const { ModuleFilenameHelpers } = require('webpack');
 const router = express.Router();
 const SQLController = require('./controllers/SQLController');
 
@@ -8,3 +9,5 @@ router.get('/sql-schema', SQLController.getSQLSchema,
 })
 
 /* Route  */
+
+module.exports = router;
