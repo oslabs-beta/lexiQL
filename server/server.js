@@ -1,12 +1,11 @@
 const express = require('express');
 const path = require('path');
-const { getSQLSchema } = require('./controllers/SQLController');
+const router = require('./router');
 const app = express();
 
 app.use(express.json());
 // route to dummy db
-app.get('/sql-schema', getSQLSchema, 
-(req, res) => {res.status(200).json(res.locals.SQLSchema)})
+app.use('/', router) 
 // to only run build and get static when in production, not development
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
