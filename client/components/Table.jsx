@@ -34,9 +34,9 @@ const Table = (props) => {
   
   return (
     <div>
-      <h1>
+      <h2>
         {props.tableName}
-      </h1>
+      </h2>
       {tableColumns}
     </div>
   )

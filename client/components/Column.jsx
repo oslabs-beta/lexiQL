@@ -33,9 +33,9 @@ export default function Column (props) {
 
   return (
     <div>
-      <h6 style={{color:'red'}}>
+      <h5 style={{color:'red'}}>
         {props.columnName}
-      </h6>
+      </h5>
       {currentSchema}
     </div>
   )

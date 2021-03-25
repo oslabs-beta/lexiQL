@@ -4,11 +4,11 @@ export default function ColumnsDisplay (props) {
   
   return (
     <div>
-      <p>
+      <h6>
         {props.propertyKey}
         <br></br>
         {props.propertyValue}
-      </p>
+      </h6>
     </div>
   )
 }
