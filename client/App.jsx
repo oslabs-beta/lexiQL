@@ -49,7 +49,7 @@ const App = (props) => {
     // <Visualizer />
     <div>
       <h1>Hi</h1>
-      {/* {arrComponents} */}
+      {arrComponents}
     </div>
   );
 };
