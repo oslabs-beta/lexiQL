@@ -1,5 +1,5 @@
 # lexiQL
 
-A GraphQL prototyping tool brought to you by CS Jr.
+An open-source GraphQL tool that visualizes your relational database relationships and facilitates GraphQL API prototyping and configuration. Currently in production.
 
-IN PRODUCTION!
+COMING APRIL 2021!
