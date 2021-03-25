@@ -1,5 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const webpack = require('webpack');
+// const crypto = require('crypto-browserify');
 
 module.exports = {
   mode: process.env.NODE_ENV,
