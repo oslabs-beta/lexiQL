@@ -2,8 +2,8 @@ import React from 'react';
 import ColumnsDisplay from './ColumnsDisplay';
 
 export default function Column (props) {
-  console.log('props.columnName', props.columnName);
-  console.log('props.columnValue', props.columnValue);
+  // console.log('props.columnName', props.columnName);
+  // console.log('props.columnValue', props.columnValue);
 
   const currentSchema = [];
 
@@ -16,8 +16,8 @@ export default function Column (props) {
     const key = Object.keys(props.columnValue)[i];
     const value = Object.values(props.columnValue)[i];
     
-    console.log('KEY: ', key);
-    console.log('VALUE: ', value);
+    // console.log('KEY: ', key);
+    // console.log('VALUE: ', value);
 
     currentSchema.push(
       <ColumnsDisplay 
@@ -29,7 +29,7 @@ export default function Column (props) {
     )
   }
 
-    console.log('currentSchema: ', currentSchema);
+    // console.log('currentSchema: ', currentSchema);
 
   return (
     <div>
