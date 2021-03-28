@@ -51,10 +51,10 @@ export default function appPage() {
   return (
     <div className="dataPageContainer">
       {/* {arrComponents} */}
-
+      <PopupContainer />
       <VisualizerContainer />
       <CodeContainer />
       <Footer />
     </div>
-  )
+  );
 }
