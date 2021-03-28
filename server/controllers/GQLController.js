@@ -1,16 +1,24 @@
-const { createTypes, createResolvers} = require('../GQLFactory/schemaFactory');
-
+const { createTypes, createResolvers } = require("../GQLFactory/schemaFactory");
 
 const GQLController = {};
 
 GQLController.createGQLSchema = (req, res, next) => {
-const { SQLSchema } = req.body
-console.log(SQLSchema)
-/* Loop through each property(tablename) and for each one create types and resolvers*/
-for(const tableName in SQLSchema) {
-    const tableData = SQLSchema[tableName];
-    createTypes(tableName, tableData)
-} 
+  const { SQLSchema } = res.locals;
+  try {
+    const types = createTypes(SQLSchema);
+    const resolvers = createResolvers(SQLSchema);
+    res.locals.schema = { types, resolvers };
+    return next();
+  } catch (err) {
+    const errObject = {
+      log: `Error in createGQLSchema: ${err}`,
+      status: 400,
+      message: {
+        err: "Unable to create GQL schema",
+      },
+    };
+    return next(errObject);
+  }
 };
 
 module.exports = GQLController;
