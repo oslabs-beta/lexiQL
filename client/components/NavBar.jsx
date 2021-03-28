@@ -5,35 +5,28 @@ import DataPage from '../pages/dataPage.jsx';
 // import Table from './visualizer/Table.jsx';
 
 export default function navBar() {
-  return(
-  // <div id="navBar">
-  <body>
-    <nav id="appHeader">
-      <Link
-        className="headerLinks"
-        to="/"
-      >
-        <p>Home</p>
-      </Link>
+  return (
+    // <div id="navBar">
+    <body>
+      <nav id="appHeader">
+        <Link className="headerLinks" to="/">
+          <p>Home</p>
+        </Link>
 
-      <Link
-        className="headerLinks"
-        to='/data'
-      >
-        <p>Visualizer</p>
-      </Link>
-    </nav>
+        <Link className="headerLinks" to="/data">
+          <p>Visualizer</p>
+        </Link>
+      </nav>
 
-    <Switch>
-      <Route path="/data">
-        <DataPage />
-      </Route>
+      <Switch>
+        <Route path="/data">
+          <DataPage />
+        </Route>
 
-      <Route exact path="/">
-        <HomePage />
-      </Route>
-
-    </Switch>
-  </body>
-  )
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+      </Switch>
+    </body>
+  );
 }
