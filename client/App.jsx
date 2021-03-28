@@ -3,41 +3,24 @@ import { Route, Switch, Link } from 'react-router-dom';
 // import G6 from '@antv/g6';
 // import Visualizer from './visualizer/Visualizer.jsx';
 import NavBar from './components/navBar.jsx';
-import HomePage from './pages/homePage.jsx';
-import DataPage from './pages/dataPage.jsx';
-import Table from './visualizer/Table.jsx';
+// import HomePage from './pages/homePage.jsx';
+// import DataPage from './pages/dataPage.jsx';
+// import Table from './visualizer/Table.jsx';
+
+// import Provider from './context/state.js';
+
+// const App = ({ Component, props }) => {
+//   return (
+//     <Provider>
+//       <Component {...props} />
+//     </Provider>);
+// }
+
+// export default App;
 
 const App = (props) => {
   return (
-    <NavBar />
-    // <div>
-    //   <nav id="appHeader">
-    //     <Link
-    //       className="headerLinks"
-    //       to="/"
-    //     >
-    //       <p>Home</p>
-    //     </Link>
-
-    //     <Link
-    //       className="headerLinks"
-    //       to='/data'
-    //     >
-    //       <p>Visualizer</p>
-    //     </Link>
-    //   </nav>
-
-    //   <Switch>
-    //     <Route path="/data">
-    //       <DataPage />
-    //     </Route>
-
-    //     <Route exact path="/">
-    //       <HomePage />
-    //     </Route>
-
-    //   </Switch>
-    // </div>
+      <NavBar />
   );
 };
 
