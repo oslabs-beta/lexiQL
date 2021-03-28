@@ -7,7 +7,7 @@ GQLController.createGQLSchema = (req, res, next) => {
   try {
     const types = createTypes(SQLSchema);
     const resolvers = createResolvers(SQLSchema);
-    res.locals.schema = { types, resolvers };
+    res.locals.GQLSchema = { types, resolvers };
     return next();
   } catch (err) {
     const errObject = {

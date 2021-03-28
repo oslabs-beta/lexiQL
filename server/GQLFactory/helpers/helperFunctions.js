@@ -4,6 +4,7 @@
 //   };
 
 const isJoinTable = (foreignKeys, columns) => {
+  if (!foreignKeys) return false;
   return Object.keys(foreignKeys).length + 1 === Object.keys(columns).length;
 };
 

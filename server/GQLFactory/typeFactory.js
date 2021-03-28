@@ -3,7 +3,7 @@ const { mutationsHelper, customHelper } = require("./helpers/typeHelpers");
 
 const typeFactory = {};
 
-typeFactory.queries = () => {};
+typeFactory.queries = (tableName, tableData) => {};
 
 typeFactory.mutations = () => {};
 
