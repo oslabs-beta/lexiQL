@@ -1,6 +1,5 @@
-const setType = require('./helperfunctions');
-const { mutationsHelper, customHelper } = require('./helperfunctions');
-
+const setType = require("./helpers/helperFunctions");
+const { mutationsHelper, customHelper } = require("./helpers/typeHelpers");
 
 const typeFactory = {};
 
