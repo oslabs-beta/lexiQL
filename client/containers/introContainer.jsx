@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function aboutContainer() {
+export default function introContainer() {
   return (
     <div id='about'>
       <div className='aboutProject'>
