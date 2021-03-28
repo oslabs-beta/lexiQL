@@ -13,8 +13,10 @@ export default function DemoContainer() {
 
   return (
     <div className ='demoContainer'>
-      <h3>DEMOS BELOW:</h3>
-      <div id="allDemos">
+      <div className="demoHeader">
+        <h3>DEMOS BELOW:</h3>
+      </div>
+      <div className="allDemos">
         {demoItems}
       </div>
     </div>
