@@ -1,5 +1,135 @@
 body {
-  background-color: #99c0ff;
-  color: white;
+  display: flex;
+  background-color: #5a95f5;
+  color: rgb(5, 5, 5);
   font-size: 40px;
+}
+
+#appHeader {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 20px 0px 20px;
+}
+
+#about {
+  // border: 1px solid rgb(22, 22, 12);
+  background-color: rgb(226, 220, 220);
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0px 0px 40px 0px;
+
+  .aboutProject {
+    // border: 1px solid red;
+    background: rgb(243, 243, 243);
+    width: 30%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    // flex-wrap: wrap;
+    // align-items: center;
+    // justify-content: space-evenly;
+
+    h3 {
+      font-size: 50px;
+    }
+    
+    p {
+      font-size: 30px;
+    }
+  }
+}
+
+// .teamInfo {
+//   display: flex;
+//   flex-direction: column;
+//   width: 100%;
+//   height: 30vh;
+// }
+
+.teamContainer {
+  // border: 1px solid rgb(239, 255, 10);
+  display: flex;
+  flex-direction: column;
+  // flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+  height: 70vh;
+  margin: 0px 0px 30px 0px;
+
+  h3 {
+    // border: 1px solid red;
+    color: rgb(0, 0, 0);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #allCards {
+    // border: 3px solid white;
+    width: 60%;
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
+  .teamCard {
+    border: 2px solid orange;
+    border-radius: 5px;
+    width: 40%;
+    padding: 50px 0px;
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .name {
+      font-size: 35px;
+      color: rgb(12, 12, 12);
+    }
+
+    .teamMemberLinks {
+      color: orange;
+      font-size: 25px;
+    }
+  }
+}
+
+#contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 300px 0px 50px 0px;
+
+  .contactDescription {
+    color: rgb(75, 71, 71);
+  }
+  
+  .contactForm {
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    height: 300px;
+    width: 50%;
+
+    input {
+      height: 50px;
+    }
+
+    textarea {
+      height: 150px;
+    }
+
+    #submit {
+      width: 25%;
+      margin: 10px auto 0px auto;
+      border-radius: 5px;
+    }
+  }
 }
