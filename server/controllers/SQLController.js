@@ -28,4 +28,8 @@ SQLController.getSQLSchema = (req, res, next) => {
           return next(errObj);
         });
 };
+/* Format the SQL Schema for visualizer */
+SQLController.createGraphData = (req, res, next) => {
+  
+}
 module.exports = SQLController
