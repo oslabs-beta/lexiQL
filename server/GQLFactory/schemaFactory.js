@@ -4,7 +4,7 @@ const {
   collectMutations,
   collectCustomObjectRelationships,
 } = require("./resolverFactory");
-const isJoinTable = require("./helperfunctions");
+const isJoinTable = require("./helpers/helperFunctions");
 /*    High level functions tasked with assembling the Types and the Resolvers */
 schemaFactory = {};
 /*  Creates query, mutation, and custom Object Types  */

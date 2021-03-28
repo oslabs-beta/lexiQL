@@ -1,9 +1,6 @@
-
-
-
-const isJoinTable = () => {};
-
-const setType = () => {};
+const toCamelCase = require("camelcase");
+const { singular } = require("pluralize");
+const { pascalCase } = require("pascal-case");
 
 /*   Functions facilitating creation of mutation types */
 const mutationsHelper = {};
@@ -24,8 +21,6 @@ customHelper.getFields = () => {};
 customHelper.getRelationships = () => {};
 
 module.exports = {
-    isJoinTable,
-    setType,
-    mutationsHelper,
-    customHelper
-}
+  mutationsHelper,
+  customHelper,
+};
