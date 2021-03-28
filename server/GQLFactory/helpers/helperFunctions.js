@@ -3,9 +3,29 @@
 //     return uri.slice(0, 12).includes('postgres://');
 //   };
 
-const isJoinTable = () => {};
+const isJoinTable = (foreignKeys, columns) => {
+  return Object.keys(foreignKeys).length + 1 === Object.keys(columns).length;
+};
 
-const setType = () => {};
+// to add more PSQL types
+const setType = (str) => {
+  switch (str) {
+    case "character varying":
+      return "String";
+    case "character":
+      return "String";
+    case "integer":
+      return "Int";
+    case "text":
+      return "String";
+    case "date":
+      return "String";
+    case "boolean":
+      return "Boolean";
+    default:
+      return "Int";
+  }
+};
 
 // to add more PSQL types
 const typeConversion = {
