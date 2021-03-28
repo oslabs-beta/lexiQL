@@ -1,14 +1,15 @@
 import React from 'react';
+// import headshot from '../assets/empty-headshot.png';
 
-export default function teamMember(props) {
-  // will be receiving team member info in props
-  
+// took out headshot from props
+export default function teamMember({name, headshot, github, linkedin}) {
   return (
     <div className ='teamMember'>
-      <h1 className="name">JOE SCHMO</h1>
+      <img className="headshot" src={headshot} alt='headshot' />
+      <h1 className="name">{name}</h1>
       <div className="teamMemberLinks">
-        <p>LinkedIn</p>
-        <p>GitHub</p>
+        <a href={linkedin}>LinkedIn</a>
+        <a href={github}>GitHub</a>
       </div>
     </div>
   )

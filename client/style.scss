@@ -151,6 +151,8 @@ body {
     .teamMemberLinks {
       color: orange;
       font-size: 25px;
+      display: flex;
+      flex-direction: column;
     }
   }
 }
