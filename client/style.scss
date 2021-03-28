@@ -14,6 +14,7 @@ body {
   // padding: 0px 0px;
   // display: flex;
   // flex-direction: column;
+  margin-bottom: 40px;
 }
 
 #appHeader {
@@ -155,9 +156,12 @@ body {
 }
 
 .footer {
-  margin-top: 100px;
+  width: 100%;
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 0px;
   border-top: 2px solid orange;
-  padding: 40px 0px;
+  padding: 0px 0px;
 }
 
 .footerIcons {
@@ -168,33 +172,56 @@ body {
 }
 
 // DATA PAGE STYLING
-.dataPageContainer {
-  // background-color: purple;
-  // border: 2px solid red;
-  // width: 100%;
-  // display: flex;
-  background-color: rgb(226, 220, 220);
+// .dataPageContainer {
+//   // background-color: purple;
+//   // border: 2px solid red;
+//   // width: 100%;
+//   // display: flex;
+//   background-color: rgb(226, 220, 220);
+//   width: 100%;
+//   height: 100vh;
+//   display: flex;
+//   justify-content: space-evenly;
+//   align-items: center;
+//   flex-direction: column;
+//   padding: 40px 0px;
+//   margin: 0px 0px 10px 0px;
+// }
+
+.dataPage {
   width: 100%;
-  height: 60vh;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
   flex-direction: column;
-  margin: 0px 0px 40px 0px;
+  align-items: center;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: stretch;
+  // justify-content: center;
+}
+
+.graphicalContainer {
+  display: flex;
+  height: 90vh;
+  width: 90%;
+  justify-content: space-between;
 }
 
 .visualizerContainer {
   background-color: green;
   border: 2px solid red;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  margin-right: 20px;
 }
 
 .codeContainer {
   background-color: #5aebf5;
   border: 2px solid red;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  margin-left: 20px;
 }

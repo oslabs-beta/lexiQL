@@ -49,11 +49,13 @@ export default function appPage() {
   */
 
   return (
-    <div className="dataPageContainer">
+    <div className="dataPage">
       {/* {arrComponents} */}
-      <PopupContainer />
-      <VisualizerContainer />
-      <CodeContainer />
+      {/* <PopupContainer /> */}
+      <div className="graphicalContainer">
+        <VisualizerContainer />
+        <CodeContainer />
+      </div>
       <Footer />
     </div>
   );
