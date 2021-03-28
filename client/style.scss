@@ -1,11 +1,23 @@
 body {
-  display: flex;
+  width: 100%;
+  // margin: 0px 0px;
+  // padding: 0px 0px;
+  // display: flex;
   background-color: #5a95f5;
   color: rgb(5, 5, 5);
   font-size: 40px;
 }
 
+#navBar {
+  // width: 100%;
+  // margin: 0px 0px;
+  // padding: 0px 0px;
+  // display: flex;
+  // flex-direction: column;
+}
+
 #appHeader {
+  width: 95%;
   display: flex;
   justify-content: space-between;
   margin: 0px 20px 0px 20px;
@@ -58,7 +70,8 @@ body {
   align-items: center;
   max-width: 100%;
   height: 70vh;
-  margin: 0px 0px 30px 0px;
+  padding: 0px 0px 300px 0px;
+  // margin: 0px 0px 100px 0px;
 
   h3 {
     // border: 1px solid red;
@@ -75,9 +88,10 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    margin-bottom: 100px;
   }
 
-  .teamCard {
+  .teamMember {
     border: 2px solid orange;
     border-radius: 5px;
     width: 40%;
@@ -100,36 +114,23 @@ body {
   }
 }
 
-#contact {
+.footer {
+  margin-top: 100px;
+}
+
+.footerIcons {
+  border: 1px solid yellow;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+
+// DATA PAGE STYLING
+.dataPageContainer {
+  border: 1px solid red;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 300px 0px 50px 0px;
-
-  .contactDescription {
-    color: rgb(75, 71, 71);
-  }
-  
-  .contactForm {
-    display: flex;
-    flex-direction: column;
-    // align-items: center;
-    height: 300px;
-    width: 50%;
-
-    input {
-      height: 50px;
-    }
-
-    textarea {
-      height: 150px;
-    }
-
-    #submit {
-      width: 25%;
-      margin: 10px auto 0px auto;
-      border-radius: 5px;
-    }
-  }
 }

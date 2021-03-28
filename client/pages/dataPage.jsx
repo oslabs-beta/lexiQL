@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Table from '../visualizer/Table.jsx';
+import PopupContainer from '../containers/popupContainer';
+import VisualizerContainer from '../containers/visualizerContainer';
+import CodeContainer from '../containers/codeContainer';
+import Footer from '../containers/footer.jsx';
 
 export default function appPage() {
+  /*
   const [ state, setState ] = useState([]);
   const [ tables, setTables ] = useState([]);
 
@@ -41,10 +46,15 @@ export default function appPage() {
       />
     )
   }
+  */
 
   return (
-    <div>
-      {arrComponents}
+    <div className="dataPageContainer">
+      {/* {arrComponents} */}
+
+      <VisualizerContainer />
+      <CodeContainer />
+      <Footer />
     </div>
   )
 }

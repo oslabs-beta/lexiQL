@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import AboutContainer from '../containers/aboutContainer.jsx';
-import TeamContainer from '../containers/teamContainer.jsx';
-import ContactContainer from '../containers/contactContainer.jsx';
+import IntroContainer from '../containers/introContainer.jsx';
+import DemoContainer from '../containers/demoContainer.jsx';
+import AboutUsContainer from '../containers/aboutUsContainer.jsx';
+import FooterContainer from '../containers/footer.jsx';
 
 export default function homePage() {
+  //STATE MANAGEMENT
+
   return (
     <div>
-      <AboutContainer />
+      <IntroContainer />
+      <DemoContainer />
       <div className="teamInfo">
-        <TeamContainer />
+        <AboutUsContainer />
       </div>
-      <ContactContainer />
+      <FooterContainer />
     </div>
   )
 }
