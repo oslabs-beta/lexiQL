@@ -2,29 +2,61 @@ import React, { useContext } from 'react';
 import { VisualizerContext, CodeContext } from '../state/contexts';
 
 export default function URIForm() {
-  const { visualizerDispatch } = useContext(VisualizerContext);
+  // const { visualizerDispatch } = useContext(VisualizerContext);
   const { codeDispatch } = useContext(CodeContext);
 
-  const getData = () => {
+  // get the data from the sample DB
+  const handleSampleData = (e) => {
+    e.preventDefault();
+
     fetch('/example-schema')
-    .then((res) => res.json())
-    .then((data) => {
-      visualizerDispatch({
-        type: 'SET_TABLE',
-        payload: data.allTables
+      .then((res) => res.json())
+      .then((data) => {
+        // visualizerDispatch({
+        //   type: 'SET_TABLE',
+        //   payload: data,
+        // });
+
+        codeDispatch({
+          type: 'SET_CODE',
+          payload:
+            // schema: data.schema.types,
+            // resolver: data.schema.resolvers,
+            { test: Object.keys(data) },
+        });
       });
-      
-      codeDispatch({
-        type: 'SET_CODE',
-        payload: {
-          schema: data.schema.types,
-          resolver: data.schema.resolvers,
-        }
-      });
-    });
   };
-  
-  
+
+  // get data from user input DB
+  const handleURI = (e) => {
+    e.preventDefault();
+    const URILink = document.getElementById('URILink').value;
+    // if there's no input, do nothing
+    if (!URILink) return;
+    alert(URILink);
+
+    fetch('/sql-schema', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ link: URILink }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // visualizerDispatch({
+        //   type: 'SET_TABLE',
+        //   payload: data,
+        // });
+        console.log('data: ', data);
+        // codeDispatch({
+        //   type: 'SET_CODE',
+        //   payload:
+        //     // schema: data.schema.types,
+        //     // resolver: data.schema.resolvers,
+        //     { test: Object.keys(data) },
+        // });
+      });
+  };
+
   return (
     // <div>
     //   <div id="myModal" class="modal">
@@ -34,31 +66,25 @@ export default function URIForm() {
     //     </div>
     //   </div>
     <div id="uriForm">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          alert('user input DB');
-        }}
-      >
-
+      <form onSubmit={handleURI}>
         <label htmlFor="link">INPUT YOUR LINK:</label>
         <br />
 
-        <input className="dbForm" />
+        <input id="URILink" className="dbForm" />
         <br />
 
         <button className="URIbutton">Submit</button>
         <br />
-
-        <button
-          className="sampleDataButton"
-          onClick={getData}
-        >
-          Use Sample Database
-        </button>
-        <br />
-
       </form>
+
+      <button
+        type="button"
+        className="sampleDataButton"
+        onClick={handleSampleData}
+      >
+        Use Sample Database
+      </button>
+      <br />
     </div>
   );
 }
