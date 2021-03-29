@@ -1,19 +1,16 @@
 import React from 'react';
 import example from '../assets/visualizer-sample.png';
 
-export default function demoItem(props) {
+export default function demoItem({ title, description, gif }) {
   // will be receiving team member info in props
   
   return (
     <div className ='demoItem'>
-      {/* <img id='demoGif' src='../assets/knees.png'></img> */}
-      <img id='demoGif' src={example} alt="Example visualizer"></img>
-
+      <img id='demoGif' src={example} alt='demo-gif' />
       <div className="featureWords">
-      <h1 className="featureName">EXAMPLE FEATURE</h1>
-        <p className="featureDescription">Description line #1 Description line #1 Description line #1 Description line #1 Description line #1</p>
+        <h1 className="featureName">{title}</h1>
+        <p className="featureDescription">{description}</p>
       </div>
-
     </div>
   )
 }
