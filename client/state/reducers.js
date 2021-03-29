@@ -5,36 +5,38 @@ export const initialVisualizerState = {
 
 export const visualizerReducer = (state, action) => {
   switch (action.type) {
-  case 'SET_TABLE':
-    return {
-      ...state,
-      allTables: action.payload,
-    }
-  // case 'UPDATE_TABLE':
-  //   return {
-  //     ...state,
-  //   }
+    case 'SET_TABLE':
+      return {
+        ...state,
+        allTables: action.payload,
+      };
+    // case 'UPDATE_TABLE':
+    //   return {
+    //     ...state,
+    //   }
   }
 };
 
 // Code display on app page
 export const initialCodeState = {
-  schema: '',
-  resolver: '',
+  // schema: '',
+  // resolver: '',
+  test: '',
 };
 
 export const codeReducer = (state, action) => {
   switch (action.type) {
-  case 'SET_CODE':
-    return {
-      ...state,
-      schema: action.payload.schema,
-      resolver: action.payload.resolver,
-    }
+    case 'SET_CODE':
+      return {
+        ...state,
+        // schema: action.payload.schema,
+        // resolver: action.payload.resolver,
+        test: action.payload.test,
+      };
 
-  // case 'TEAM_LOAD':
-  //   return {
-  //     ...state,
-  //   }
+    // case 'TEAM_LOAD':
+    //   return {
+    //     ...state,
+    //   }
   }
 };

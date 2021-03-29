@@ -2,29 +2,30 @@ import React, { useContext } from 'react';
 import { VisualizerContext, CodeContext } from '../state/contexts';
 
 export default function URIForm() {
-  const { visualizerDispatch } = useContext(VisualizerContext);
+  // const { visualizerDispatch } = useContext(VisualizerContext);
   const { codeDispatch } = useContext(CodeContext);
 
-  const getData = () => {
+  const getData = (e) => {
+    e.preventDefault();
+
     fetch('/example-schema')
-    .then((res) => res.json())
-    .then((data) => {
-      visualizerDispatch({
-        type: 'SET_TABLE',
-        payload: data.allTables
+      .then((res) => res.json())
+      .then((data) => {
+        // visualizerDispatch({
+        //   type: 'SET_TABLE',
+        //   payload: data,
+        // });
+
+        codeDispatch({
+          type: 'SET_CODE',
+          payload:
+            // schema: data.schema.types,
+            // resolver: data.schema.resolvers,
+            { test: Object.keys(data) },
+        });
       });
-      
-      codeDispatch({
-        type: 'SET_CODE',
-        payload: {
-          schema: data.schema.types,
-          resolver: data.schema.resolvers,
-        }
-      });
-    });
   };
-  
-  
+
   return (
     // <div>
     //   <div id="myModal" class="modal">
@@ -35,12 +36,11 @@ export default function URIForm() {
     //   </div>
     <div id="uriForm">
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          alert('user input DB');
-        }}
+      // onSubmit={(e) => {
+      //   e.preventDefault();
+      //   alert('user input DB');
+      // }}
       >
-
         <label htmlFor="link">INPUT YOUR LINK:</label>
         <br />
 
@@ -50,14 +50,10 @@ export default function URIForm() {
         <button className="URIbutton">Submit</button>
         <br />
 
-        <button
-          className="sampleDataButton"
-          onClick={getData}
-        >
+        <button type="button" className="sampleDataButton" onClick={getData}>
           Use Sample Database
         </button>
         <br />
-
       </form>
     </div>
   );
