@@ -18,7 +18,7 @@ export default function introContainer() {
         </p>
       </div>
       <div className="aboutProject">
-        <h3>Header #3</h3>
+        <h3>Featured on Medium</h3>
         <p>
           Here's a third absolutely killer reason you should use this kickin'
           tool. Seriously, just use it.

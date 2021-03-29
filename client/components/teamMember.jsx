@@ -8,8 +8,8 @@ export default function teamMember({name, headshot, github, linkedin}) {
       <img className="headshot" src={headshot} alt='headshot' />
       <h1 className="name">{name}</h1>
       <div className="teamMemberLinks">
-        <a href={linkedin}>LinkedIn</a>
-        <a href={github}>GitHub</a>
+        <a className="teamMemberLink" href={linkedin}>LinkedIn</a>
+        <a className="teamMemberLink" href={github}>GitHub</a>
       </div>
     </div>
   )

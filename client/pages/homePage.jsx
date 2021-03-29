@@ -11,9 +11,7 @@ export default function homePage() {
         <div className='homePageContent'>
           <IntroContainer />
           <DemoContainer />
-          <div className="teamInfo">
-            <AboutUsContainer />
-          </div>
+          <AboutUsContainer />
         </div>
       <Footer />
     </div>
