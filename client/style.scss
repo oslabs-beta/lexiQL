@@ -13,59 +13,54 @@ body {
 NAVBAR STYLING
 */
 #navBar {
-  margin-bottom: 40px;
+  // margin-bottom: 30px;
 }
 
 #appHeader {
+  background-color: #5a95f5;
   width: 100%;
   display: flex;
   justify-content: space-around;
 
   .headerLinks {
-    color: #5a95f5;
+    color: #f5ba5a;
+    font-size: 40px;
   }
   
   .headerLinks:visited {
-    color: #5a95f5;
+    color: #f5ba5a;
   }
   
   .headerLinks:hover {
     color: #f5ba5a;
+    font-size: 43px;
   }
   
   .headerLinks:active {
-    color: #5a95f5;
+    color: #f5ba5a;
   }
 }
 
-
 /*
-SET HOMEPAGE WIDTH
+HOMEPAGE INTRO/ABOUT STYLING
 */
 
 .homePage {
   width: 100%;
 }
 
-// .homePageContent {
-//   width: 100%;
-// }
-
-/*
-HOMEPAGE INTRO/ABOUT STYLING
-*/
-
 #about {
-  // border: 1px solid rgb(22, 22, 12);
   background-color: #5a95f5;
   width: 100%;
-  height: 60vh;
+  height: 75vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   margin: 0px 0px 20px 0px;
-  // border: 1px solid #f5ba5a;
-  // border-radius: 5px;
+
+  #logo {
+    height: 50%;
+  }
 
   .aboutProject {
     background-color: #f0f1f1;
@@ -152,7 +147,7 @@ ABOUT US/TEAM STYLING
   justify-content: space-between;
   align-items: center;
   max-width: 100%;
-  height: 70vh;
+  height: 90vh;
   margin-top: 50px;
   padding: 0px 0px 300px 0px;
   // margin: 0px 0px 100px 0px;
@@ -194,32 +189,29 @@ ABOUT US/TEAM STYLING
       color: #f5ba5a;
     }
 
-    .teamMemberLinks {
-      font-size: 25px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .teamMemberLink {
-      color: #f5ba5a;
-    }
-    
-    .teamMemberLink:visited {
-      color: #f5ba5a;
-    }
-    
-    .teamMemberLink:hover {
-      color: #f5ac38;
-    }
-    
-    .teamMemberLink:active {
-      color: #f5ba5a;
-    }
-
     .headshot {
-      height: 100px;
-      width: 100px;
+      height: 200px;
+      width: 200px;
       border-radius: 50%;
+    }
+
+    .teamMemberLinks {
+      // border: 1px solid red;
+      // font-size: 25px;
+      display: flex;
+      justify-content: space-between;
+      width: 25%;
+      cursor: pointer;
+    }
+
+    .siteLogos {
+      height: 50px;
+      width: 50px;
+    }
+
+    .siteLogos:hover {
+      height: 55px;
+      width: 55px;
     }
   }
 }
@@ -274,6 +266,7 @@ FOOTER
   margin: 30px 0px;
   // border-top: 2px solid orange;
   padding: 0px 0px;
+  font-size: 40px;
 }
 
 .footerIcons {
@@ -292,6 +285,7 @@ FOOTER
   
   .footerLink:hover {
     color: #f5ba5a;
+    font-size: 43px;
   }
   
   .footerLink:active {
