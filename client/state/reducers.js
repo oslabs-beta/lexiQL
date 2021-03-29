@@ -1,6 +1,6 @@
 // Visualizer display on app page
-export const initialVisualizerState = () => {
-  allTables: []
+export const initialVisualizerState = {
+  allTables: [],
 };
 
 export const visualizerReducer = (state, action) => {
@@ -10,7 +10,7 @@ export const visualizerReducer = (state, action) => {
       ...state,
       allTables: action.payload,
     }
-  // case 'TEAM_LOAD':
+  // case 'UPDATE_TABLE':
   //   return {
   //     ...state,
   //   }
@@ -18,20 +18,23 @@ export const visualizerReducer = (state, action) => {
 };
 
 // Code display on app page
-export const initialCodeState = () => {
-
+export const initialCodeState = {
+  schema: '',
+  resolver: '',
 };
 
 export const codeReducer = (state, action) => {
   switch (action.type) {
-  case 'HOMEPAGE_LOAD':
+  case 'SET_CODE':
     return {
       ...state,
+      schema: action.payload.schema,
+      resolver: action.payload.resolver,
     }
 
-  case 'TEAM_LOAD':
-    return {
-      ...state,
-    }
+  // case 'TEAM_LOAD':
+  //   return {
+  //     ...state,
+  //   }
   }
 };

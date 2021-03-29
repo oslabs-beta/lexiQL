@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { VisualizerContext, CodeContext } from '../state/contexts';
 
 export default function URIForm() {
   const { visualizerDispatch } = useContext(VisualizerContext);
@@ -14,9 +15,10 @@ export default function URIForm() {
       });
       
       codeDispatch({
-        type: '',
+        type: 'SET_CODE',
         payload: {
-
+          schema: data.schema.types,
+          resolver: data.schema.resolvers,
         }
       });
     });
@@ -31,26 +33,32 @@ export default function URIForm() {
     //       <p>Some text in the Modal..</p>
     //     </div>
     //   </div>
-
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        alert('user input DB');
-      }}
-    >
-      <label htmlFor="link">INPUT YOUR LINK:</label>
-      <br />
-      <input className="dbForm" />
-      <br />
-      <button className="URIbutton">Submit</button>
-      <br />
-      <button
-        className="sampleDataButton"
-        onClick={getData}}
+    <div id="uriForm">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          alert('user input DB');
+        }}
       >
-        Use Sample Database
-      </button>
-      <br />
-    </form>
+
+        <label htmlFor="link">INPUT YOUR LINK:</label>
+        <br />
+
+        <input className="dbForm" />
+        <br />
+
+        <button className="URIbutton">Submit</button>
+        <br />
+
+        <button
+          className="sampleDataButton"
+          onClick={getData}
+        >
+          Use Sample Database
+        </button>
+        <br />
+
+      </form>
+    </div>
   );
 }

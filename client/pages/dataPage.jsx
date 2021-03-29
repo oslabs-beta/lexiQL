@@ -38,22 +38,21 @@ export default function dataPage() {
       {/* {arrComponents} */}
       {/* <PopupContainer /> */}
       <div className="graphicalContainer">
-
-      <VisualizerContext.Provider
+      {/* <VisualizerContext.Provider
         value={{
           visualizerState,
           visualizerDispatch
-        }}>
+        }}> */}
         <VisualizerContainer />
-      </VisualizerContext.Provider>
+      {/* </VisualizerContext.Provider> */}
 
-      <CodeContext.Provider
+      {/* <CodeContext.Provider
         value={{
           codeState,
           codeDispatch
-        }}>
+        }}> */}
         <CodeContainer />
-      </CodeContext.Provider>
+      {/* </CodeContext.Provider> */}
 
       </div>
       <Footer />
