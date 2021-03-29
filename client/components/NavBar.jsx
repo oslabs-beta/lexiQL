@@ -6,7 +6,6 @@ import DataPage from '../pages/dataPage.jsx';
 
 export default function navBar() {
   return (
-    // <div id="navBar">
     <body>
       <nav id="appHeader">
         <Link className="headerLinks" to="/">
