@@ -22,7 +22,7 @@ export default function introContainer() {
         <h3>Featured on Medium</h3>
         <p>
           Here's a third absolutely killer reason you should use this kickin'
-          tool. Seriously, just use it.
+          tool. Seriously, just use it. 
         </p>
       </div> */}
     </div>
