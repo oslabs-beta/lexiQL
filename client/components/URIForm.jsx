@@ -1,6 +1,28 @@
 import React from 'react';
 
 export default function URIForm() {
+  const { visualizerDispatch } = useContext(VisualizerContext);
+  const { codeDispatch } = useContext(CodeContext);
+
+  const getData = () => {
+    fetch('/example-schema')
+    .then((res) => res.json())
+    .then((data) => {
+      visualizerDispatch({
+        type: 'SET_TABLE',
+        payload: data.allTables
+      });
+      
+      codeDispatch({
+        type: '',
+        payload: {
+
+        }
+      });
+    });
+  };
+  
+  
   return (
     // <div>
     //   <div id="myModal" class="modal">
@@ -24,10 +46,7 @@ export default function URIForm() {
       <br />
       <button
         className="sampleDataButton"
-        onClick={(e) => {
-          e.preventDefault();
-          alert('sample DB');
-        }}
+        onClick={getData}}
       >
         Use Sample Database
       </button>

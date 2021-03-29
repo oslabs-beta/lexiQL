@@ -1,15 +1,28 @@
 import React from 'react';
 import DemoItem from '../components/demoItem';
-// IMPORT RELEVANT CONTEXT HERE
-
 
 export default function DemoContainer() {
-  // THIS IS ALL TEMPORARY CODE
-  // STATE MANAGEMENT NEEDED!
-  const demoItems = [];
-  for (let i = 0; i < 3; i++) {
-    demoItems.push(<DemoItem />);
-  }
+  const content = [
+    [
+      'Title for #1',
+      'This is a description of our first lexiQL feature,  which will have some words in and and take up some amount of space.',
+      '../assets/visualizer-sample.png',
+    ],
+    [
+      'Title for #2',
+      'This is a description of our second lexiQL feature,  which will have some words in and and take up some amount of space.',
+      '../assets/visualizer-sample.png'
+    ],
+    [
+      'Title for #3',
+      'This is a description of our third lexiQL feature,  which will have some words in and and take up some amount of space.',
+      '../assets/visualizer-sample.png'
+    ]
+  ];
+
+  const introContent = content.map((feature, index) => {
+    return <DemoItem key={index} title={feature[0]} description={feature[1]} gif={feature[2]} />
+  });
 
   return (
     <div className ='demoContainer'>
@@ -17,7 +30,7 @@ export default function DemoContainer() {
         <h3>DEMOS BELOW:</h3>
       </div>
       <div className="allDemos">
-        {demoItems}
+        {introContent}
       </div>
     </div>
   );
