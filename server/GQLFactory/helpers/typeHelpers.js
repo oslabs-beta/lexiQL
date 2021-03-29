@@ -14,13 +14,13 @@ mutationsHelper.create = (tableName, primaryKey, foreignKeys, columns) => {
     foreignKeys,
     columns,
     false
-  )}): ${pascalCase(singular(tableName))}\n`;
+  )}): ${pascalCase(singular(tableName))}!\n`;
 };
 
 mutationsHelper.delete = (tableName, primaryKey) => {
   return `\n    ${toCamelCase(
     `delete_${singular(tableName)}`
-  )}(${primaryKey}: ID!): ${pascalCase(singular(tableName))}\n`;
+  )}(${primaryKey}: ID!): ${pascalCase(singular(tableName))}!\n`;
 };
 
 mutationsHelper.update = (tableName, primaryKey, foreignKeys, columns) => {
@@ -31,7 +31,7 @@ mutationsHelper.update = (tableName, primaryKey, foreignKeys, columns) => {
     foreignKeys,
     columns,
     true
-  )}): ${pascalCase(singular(tableName))}\n`;
+  )}): ${pascalCase(singular(tableName))}!\n`;
 };
 
 mutationsHelper.mutationFields = (
@@ -48,19 +48,22 @@ mutationsHelper.mutationFields = (
     if (!primaryKeyRequired && columnName === primaryKey) {
       continue;
     }
-
     // update mutations need the primary key to update the specific field
     // primaryKey fields are ID scalar types
     if (primaryKeyRequired && columnName === primaryKey) {
       mutationFields += `      ${columnName}: ID!,\n`;
       // foreignKey field types are ID scalar types
     } else if (foreignKeys && foreignKeys[columnName]) {
-      mutationFields += `      ${columnName}: ID!,\n`;
+      mutationFields += `      ${columnName}: ID`;
+      // if the field is not nullable and for a create mutation type, ! operator is added to the response type
+      if (isNullable === 'NO' && !primaryKeyRequired) mutationFields += '!';
+      mutationFields += ',\n';
     } else {
       mutationFields += `      ${columnName}: ${
         typeConversion[dataType] ? typeConversion[dataType] : 'Int'
       }`;
-      if (isNullable === 'NO') mutationFields += '!';
+      // if the field is not nullable and for a create mutation type, ! operator is added to the response type
+      if (isNullable === 'NO' && !primaryKeyRequired) mutationFields += '!';
       mutationFields += ',\n';
     }
   }
