@@ -5,7 +5,7 @@ export default function introContainer() {
   return (
     <div id="about">
       <img id='logo' src={Logo} alt='logo' />
-      {/* <div className="aboutProject">
+      {/* <div className="aboutProject"> 
         <h3>What do we do?</h3>
         <p>
           Provide you with a <i>lexical</i> framework for your GraphQL schemas and resolvers.
