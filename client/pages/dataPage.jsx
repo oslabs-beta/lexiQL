@@ -16,26 +16,37 @@ import Footer from '../containers/footer.jsx';
 export default function dataPage() {
   // unclear if we should set the second argument in useReducer as an empty array or to an initial state or 'initialCodeState' as in reducers.js
   const [testCode, codeDispatch] = useReducer(codeReducer, '');
+  const [visualizerState, visualizerDispatch] = useReducer(
+    visualizerReducer,
+    initialVisualizerState,
+  );
 
   return (
     <div className="dataPage">
       {/* {arrComponents} */}
 
       <div className="graphicalContainer">
-        {/* <VisualizerContext.Provider
-        value={{
-          visualizerState,
-          visualizerDispatch
-        }}> */}
-        <VisualizerContainer />
-        {/* </VisualizerContext.Provider> */}
+        <VisualizerContext.Provider
+          value={{
+            visualizerState,
+            visualizerDispatch,
+          }}
+        >
+          <VisualizerContainer />
+          {/* <TableNode /> */}
+        </VisualizerContext.Provider>
 
         {/* <CodeContext.Provider
         value={{
           codeState,
           codeDispatch
         }}> */}
-        <CodeContext.Provider value={{ testCode, codeDispatch }}>
+        <CodeContext.Provider
+          value={{
+            testCode,
+            codeDispatch,
+          }}
+        >
           <PopupContainer />
           <CodeContainer />
         </CodeContext.Provider>

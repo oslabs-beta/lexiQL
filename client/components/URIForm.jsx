@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { VisualizerContext, CodeContext } from '../state/contexts';
+import TableNode from './tableNode';
 
 export default function URIForm() {
   // const { visualizerDispatch } = useContext(VisualizerContext);
@@ -12,12 +13,16 @@ export default function URIForm() {
     fetch('/example-schema')
       .then((res) => res.json())
       .then((data) => {
-        visualizerDispatch({
-          type: 'SET_TABLES',
-          payload: {
-            allTableNames: Object.keys(d),
-          },
-        });
+        const tableNames = Object.keys(data);
+        const tableNodes = [];
+
+        // visualizerDispatch({
+        //   type: 'SET_TABLES',
+        //   payload: {
+        //     // change below based on whatever backend has their data
+        //     tableNames,
+        //   },
+        // });
 
         codeDispatch({
           type: 'SET_CODE',
@@ -52,13 +57,13 @@ export default function URIForm() {
         //   payload: data,
         // });
         console.log('data: ', data);
-        // codeDispatch({
-        //   type: 'SET_CODE',
-        //   payload:
-        //     // schema: data.schema.types,
-        //     // resolver: data.schema.resolvers,
-        //     { test: Object.keys(data) },
-        // });
+        codeDispatch({
+          type: 'SET_CODE',
+          payload:
+            // schema: data.schema.types,
+            // resolver: data.schema.resolvers,
+            { test: Object.keys(data) },
+        });
       });
   };
 
