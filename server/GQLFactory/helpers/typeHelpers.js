@@ -1,7 +1,7 @@
 const toCamelCase = require('camelcase');
 const { singular } = require('pluralize');
 const { pascalCase } = require('pascal-case');
-const { typeConversion } = require('./helperFunctions');
+const { typeConversion, isJunctionTable } = require('./helperFunctions');
 
 /*   Functions facilitating creation of mutation types */
 const mutationsHelper = {};
@@ -102,12 +102,21 @@ customHelper.getRelationships = (tableName, sqlSchema) => {
   }
   if (referencedBy) {
     for (const refTableName of Object.keys(referencedBy)) {
-      const { foreignKeys } = sqlSchema[refTableName];
-      for (const foreignFK of Object.keys(foreignKeys)) {
-        if (foreignKeys[foreignFK].referenceTable !== tableName) {
-          relationshipFields += `\n  ${
-            foreignKeys[foreignFK].referenceTable
-          }: [${pascalCase(singular(foreignKeys[foreignFK].referenceTable))}]`;
+      if (
+        isJunctionTable(
+          sqlSchema[refTableName].foreignKeys,
+          sqlSchema[refTableName].columns
+        )
+      ) {
+        const { foreignKeys } = sqlSchema[refTableName];
+        for (const foreignFK of Object.keys(foreignKeys)) {
+          if (foreignKeys[foreignFK].referenceTable !== tableName) {
+            relationshipFields += `\n  ${
+              foreignKeys[foreignFK].referenceTable
+            }: [${pascalCase(
+              singular(foreignKeys[foreignFK].referenceTable)
+            )}]`;
+          }
         }
       }
     }

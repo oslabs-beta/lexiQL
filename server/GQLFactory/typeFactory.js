@@ -7,14 +7,13 @@ const { singular } = require('pluralize');
 const typeFactory = {};
 
 typeFactory.queries = (tableName, tableData) => {
-  const { primaryKey, columns } = tableData;
+  const { primaryKey } = tableData;
   const singularName = singular(tableName);
-  const pkType = setType(columns[primaryKey].dataType);
   let byID = toCamelCase(singularName);
   if (singularName === tableName) byID += 'ByID';
   return (
     `    ${toCamelCase(tableName)}: [${pascalCase(singularName)}!]!\n` +
-    `    ${byID}(${primaryKey}: ${pkType}!): ${pascalCase(singularName)}!\n`
+    `    ${byID}(${primaryKey}: ID!): ${pascalCase(singularName)}!\n`
   );
 };
 
