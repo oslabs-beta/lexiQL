@@ -7,7 +7,7 @@ import { VisualizerContext } from '../state/contexts';
 export default function visualizerContainer() {
   return (
     <div className="visualizerContainer">
-      <h1>Visualizer will go here</h1>
+      {/* <h1>Visualizer will go here</h1> */}
       {/* <Table /> */}
       {/* <Visualizer /> */}
       <TableNode />
