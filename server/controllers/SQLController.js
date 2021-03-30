@@ -27,6 +27,56 @@ SQLController.getSQLSchema = (req, res, next) => {
       return next(errObj);
     });
 };
+
 /* Format the SQL Schema for visualizer */
-SQLController.createGraphData = (req, res, next) => {};
+SQLController.formatGraphData = (req, res, next) => {
+  try {
+    const sqlSchema = res.locals.SQLSchema;
+    let graphData = [];
+    for (const tableName of Object.keys(sqlSchema)) {
+      const tableObject = {};
+      tableObject[tableName] = sqlSchema[tableName];
+      if (sqlSchema[tableName].foreignKeys) {
+        const foreignKeysArray = [];
+        for (const fk of Object.keys(sqlSchema[tableName].foreignKeys)) {
+          const foreignKeyObject = {};
+          foreignKeyObject[fk] = sqlSchema[tableName].foreignKeys[fk];
+          foreignKeysArray.push(foreignKeyObject);
+        }
+        sqlSchema[tableName].foreignKeys = foreignKeysArray;
+      }
+
+      if (sqlSchema[tableName].referencedBy) {
+        const referencedByArray = [];
+        for (const refBy of Object.keys(sqlSchema[tableName].referencedBy)) {
+          const referencedByObject = {};
+          referencedByObject[refBy] = sqlSchema[tableName].referencedBy[refBy];
+          referencedByArray.push(referencedByObject);
+        }
+        sqlSchema[tableName].referencedBy = referencedByArray;
+      }
+
+      if (sqlSchema[tableName].columns) {
+        const columnsArray = [];
+        for (const columnName of Object.keys(sqlSchema[tableName].columns)) {
+          const columnsObject = {};
+          columnsObject[columnName] = sqlSchema[tableName].columns[columnName];
+          columnsArray.push(columnsObject);
+        }
+        sqlSchema[tableName].columns = columnsArray;
+      }
+
+      graphData.push(tableObject);
+    }
+    res.locals.SQLSchema = graphData;
+    return next();
+  } catch (err) {
+    const errObject = {
+      log: `Error in formatGraphData: ${err}`,
+      status: 400,
+      message: { err: `Format graph data failed` },
+    };
+    return next(errObject);
+  }
+};
 module.exports = SQLController;

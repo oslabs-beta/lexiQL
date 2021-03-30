@@ -4,8 +4,8 @@
   "description": "GraphQL prototyping tool",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production webpack & nodemon server/server.js",
-    "build": "webpack",
+    "start": "node server/server.js",
+    "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development nodemon server/server.js & webpack serve --open --hot --inline"
   },
   "repository": {
