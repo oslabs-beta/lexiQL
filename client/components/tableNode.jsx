@@ -34,7 +34,9 @@ export default function tableNode() {
   // };
 
   // this lets you connect to other nodes
+
   const onConnect = (params) => setElements((e) => addEdge(params, e));
+
 
   return (
     <Fragment>
@@ -42,7 +44,9 @@ export default function tableNode() {
         elements={visualizerState.tableNodes}
         onLoad={onLoad}
         style={{ width: '100%', height: '90vh' }}
+
         onConnect={onConnect}
+
         connectionLineStyle={{ stroke: '#ddd', strokeWidth: 2 }}
         connectionLineType="bezier"
         snapToGrid={true}

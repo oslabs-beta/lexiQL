@@ -13,6 +13,7 @@ export default function URIForm() {
     fetch('/example-schema')
       .then((res) => res.json())
       .then((data) => {
+
         const tableNames = [];
         const sqlSchema = data.SQLSchema;
         console.log('data:', data);
@@ -37,6 +38,7 @@ export default function URIForm() {
           tableNodes.push({
             id: i.toString(),
             data: { label: tableName },
+
             position: {
               x: Math.random() * window.innerWidth,
               y: Math.random() * window.innerHeight,
@@ -44,13 +46,17 @@ export default function URIForm() {
           });
         }
         console.log('SEND NODES: ', tableNodes);
+
         console.log('sqlSchema: ', sqlSchema);
+
 
         visualizerDispatch({
           type: 'SET_TABLES',
           payload: {
             // change below based on whatever backend has their data
+
             sqlSchema,
+
             tableNodes,
           },
         });
@@ -83,6 +89,7 @@ export default function URIForm() {
     })
       .then((res) => res.json())
       .then((data) => {
+
         const tableNames = Object.keys(data);
         const tableNodes = [];
 
@@ -117,6 +124,7 @@ export default function URIForm() {
             resolver: '124124214!!!',
             test: '12345124124124',
           },
+
         });
       });
   };
