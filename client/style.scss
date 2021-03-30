@@ -211,6 +211,14 @@ ABOUT US/TEAM STYLING
   }
 }
 
+
+/*
+URI FORM STYLING
+*/
+.uriForm {
+  border: 1px solid red; 
+}
+
 /*
 DATA PAGE STYLING
 */
@@ -225,7 +233,7 @@ DATA PAGE STYLING
 .graphicalContainer {
   display: flex;
   height: 90vh;
-  width: 90%;
+  width: 100%;
   justify-content: space-between;
 }
 
@@ -242,7 +250,7 @@ DATA PAGE STYLING
 .codeContainer {
   background-color: #5aebf5;
   border: 2px solid red;
-  width: 100%;
+  width: 50%;
   height: 100%;
   display: flex;
   flex-direction: column;

@@ -47,9 +47,6 @@ export default function URIForm() {
         }
         console.log('SEND NODES: ', tableNodes);
 
-        console.log('sqlSchema: ', sqlSchema);
-
-
         visualizerDispatch({
           type: 'SET_TABLES',
           payload: {
