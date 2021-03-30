@@ -7,21 +7,8 @@ import NavBar from './components/navBar.jsx';
 // import DataPage from './pages/dataPage.jsx';
 // import Table from './visualizer/Table.jsx';
 
-// import Provider from './context/state.js';
-
-// const App = ({ Component, props }) => {
-//   return (
-//     <Provider>
-//       <Component {...props} />
-//     </Provider>);
-// }
-
-// export default App;
-
-const App = (props) => {
-  return (
-      <NavBar />
-  );
+const App = () => {
+  return <NavBar />;
 };
 
 export default App;

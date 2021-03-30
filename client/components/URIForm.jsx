@@ -66,17 +66,40 @@ export default function URIForm() {
     })
       .then((res) => res.json())
       .then((data) => {
-        // visualizerDispatch({
-        //   type: 'SET_TABLE',
-        //   payload: data,
-        // });
-        console.log('data: ', data);
+        const tableNames = Object.keys(data);
+        const tableNodes = [];
+
+        for (let i = 0; i < tableNames.length; i += 1) {
+          tableNodes.push({
+            id: i.toString(),
+            data: { label: tableNames[i] },
+            position: {
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+            },
+          });
+        }
+        console.log('SEND NODES: ', tableNodes);
+        console.log('TABLE NAMES: ', tableNames);
+
+        visualizerDispatch({
+          type: 'SET_TABLES',
+          payload: {
+            // change below based on whatever backend has their data
+            tableNames,
+            tableNodes,
+          },
+        });
+
         codeDispatch({
           type: 'SET_CODE',
-          payload:
-            // schema: data.schema.types,
-            // resolver: data.schema.resolvers,
-            { test: Object.keys(data) },
+          payload: {
+            // schema: data.GQLSchema.types,
+            // resolver: data.GQLSchema.resolvers,
+            schema: 'abc124124124',
+            resolver: '124124214!!!',
+            test: '12345124124124',
+          },
         });
       });
   };
