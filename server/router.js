@@ -3,7 +3,7 @@ const router = express.Router();
 const { getSQLSchema } = require("./controllers/SQLController");
 const { createGQLSchema } = require("./controllers/GQLController");
 
-/* Route for example SQL Schema and example GQL Schema*/
+/* Route for example SQL Schema and example GQL Schema */
 router.get("/example-schema", getSQLSchema, createGQLSchema, (req, res) => {
   res.status(200).json(res.locals);
 });

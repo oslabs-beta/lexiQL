@@ -1,4 +1,4 @@
-const { createTypes, createResolvers } = require("../GQLFactory/schemaFactory");
+const { createTypes, createResolvers } = require('../GQLFactory/schemaFactory');
 
 const GQLController = {};
 
@@ -14,7 +14,7 @@ GQLController.createGQLSchema = (req, res, next) => {
       log: `Error in createGQLSchema: ${err}`,
       status: 400,
       message: {
-        err: "Unable to create GQL schema",
+        err: 'Unable to create GQL schema',
       },
     };
     return next(errObject);
