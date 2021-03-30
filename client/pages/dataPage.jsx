@@ -15,7 +15,7 @@ import Footer from '../containers/footer.jsx';
 
 export default function dataPage() {
   // unclear if we should set the second argument in useReducer as an empty array or to an initial state or 'initialCodeState' as in reducers.js
-  const [testCode, codeDispatch] = useReducer(codeReducer, initialCodeState);
+  const [testCode, codeDispatch] = useReducer(codeReducer, '');
 
   return (
     <div className="dataPage">
