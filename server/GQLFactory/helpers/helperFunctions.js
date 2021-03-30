@@ -8,7 +8,6 @@ const isJunctionTable = (foreignKeys, columns) => {
   return Object.keys(foreignKeys).length + 1 === Object.keys(columns).length;
 };
 
-// to add more PSQL types
 const setType = (str) => {
   switch (str) {
     case 'character varying':
@@ -17,6 +16,8 @@ const setType = (str) => {
       return 'String';
     case 'integer':
       return 'Int';
+    case 'bigint':
+      return 'String';
     case 'text':
       return 'String';
     case 'date':
@@ -24,11 +25,10 @@ const setType = (str) => {
     case 'boolean':
       return 'Boolean';
     default:
-      return 'Int';
+      return 'String';
   }
 };
 
-// to add more PSQL types
 const typeConversion = {
   'character varying': 'String',
   character: 'String',
@@ -37,6 +37,7 @@ const typeConversion = {
   date: 'String',
   boolean: 'Boolean',
   numeric: 'Int',
+  bigint: 'String',
 };
 
 module.exports = {

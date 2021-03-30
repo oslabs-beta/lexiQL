@@ -9,11 +9,11 @@ const typeFactory = {};
 typeFactory.queries = (tableName, tableData) => {
   const { primaryKey } = tableData;
   const singularName = singular(tableName);
-  let byID = toCamelCase(singularName);
-  if (singularName === tableName) byID += 'ByID';
+  let tableByID = toCamelCase(singularName);
+  if (singularName === tableName) tableByID += 'ByID';
   return (
     `    ${toCamelCase(tableName)}: [${pascalCase(singularName)}!]!\n` +
-    `    ${byID}(${primaryKey}: ID!): ${pascalCase(singularName)}!\n`
+    `    ${tableByID}(${primaryKey}: ID!): ${pascalCase(singularName)}!\n`
   );
 };
 
@@ -30,7 +30,7 @@ typeFactory.mutations = (tableName, tableData) => {
 typeFactory.customObjects = (tableName, sqlSchema) => {
   const tableData = sqlSchema[tableName];
   const { primaryKey, foreignKeys, columns } = tableData;
-  const pkType = setType(columns[primaryKey].dataType);
+  const pkType = 'ID';
 
   return `${
     `type ${pascalCase(singular(tableName))} {\n` +

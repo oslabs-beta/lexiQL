@@ -76,12 +76,12 @@ const customHelper = {};
 /*  Loops through SQL columns getting their name as fieldName, type, and isNullable to be returned as fields */
 customHelper.getFields = (primaryKey, foreignKeys, columns) => {
   let fields = ``;
-
   for (const fieldName of Object.keys(columns)) {
-    if (!(foreignKeys && foreignKeys[fieldName]) && fieldName !== primaryKey) {
-      const { dataType, columnDefault, isNullable } = columns[fieldName];
+    // check if current column is neither a foreign key or a primary key
+    if ((!foreignKeys || !foreignKeys[fieldName]) && fieldName !== primaryKey) {
+      const { dataType, isNullable } = columns[fieldName];
       fields += `\n  ${fieldName}: ${typeConversion[dataType]}`;
-      if (isNullable === 'NO' && columnDefault === null) fields += `!`;
+      if (isNullable === 'NO') fields += `!`;
     }
   }
   return fields;
@@ -89,19 +89,24 @@ customHelper.getFields = (primaryKey, foreignKeys, columns) => {
 
 customHelper.getRelationships = (tableName, sqlSchema) => {
   let relationshipFields = ``;
+  const inRelationshipString = []; // used to check if field is already added
   const tableData = sqlSchema[tableName];
   const { foreignKeys, referencedBy } = tableData;
-
+  // tableName's foreign keys : adds each foreign key as fields to custom object type
   if (foreignKeys) {
     for (const fk of Object.keys(foreignKeys)) {
-      console.log('RELATIONSHIP FIELDS:', relationshipFields);
-      relationshipFields += `\n  ${
-        foreignKeys[fk].referenceTable
-      }: [${pascalCase(singular(foreignKeys[fk].referenceTable))}]`;
+      if (!inRelationshipString.includes(foreignKeys[fk].referenceTable)) {
+        inRelationshipString.push(foreignKeys[fk].referenceTable);
+        relationshipFields += `\n  ${
+          foreignKeys[fk].referenceTable
+        }: [${pascalCase(singular(foreignKeys[fk].referenceTable))}]`;
+      }
     }
   }
   if (referencedBy) {
     for (const refTableName of Object.keys(referencedBy)) {
+      // if the referencedby tableName is a junction table, add all of the junction table's foreign keys to
+      // the current custom object type's field (excluding its own)
       if (
         isJunctionTable(
           sqlSchema[refTableName].foreignKeys,
@@ -111,12 +116,28 @@ customHelper.getRelationships = (tableName, sqlSchema) => {
         const { foreignKeys } = sqlSchema[refTableName];
         for (const foreignFK of Object.keys(foreignKeys)) {
           if (foreignKeys[foreignFK].referenceTable !== tableName) {
-            relationshipFields += `\n  ${
-              foreignKeys[foreignFK].referenceTable
-            }: [${pascalCase(
-              singular(foreignKeys[foreignFK].referenceTable)
-            )}]`;
+            if (
+              !inRelationshipString.includes(
+                foreignKeys[foreignFK].referenceTable
+              )
+            ) {
+              inRelationshipString.push(foreignKeys[foreignFK].referenceTable);
+              relationshipFields += `\n  ${
+                foreignKeys[foreignFK].referenceTable
+              }: [${pascalCase(
+                singular(foreignKeys[foreignFK].referenceTable)
+              )}]`;
+            }
           }
+        }
+        // if referencedBy tableName is not a junction table,
+        // only add the referencedBy tableName if not already added
+      } else {
+        if (!inRelationshipString.includes(refTableName)) {
+          inRelationshipString.push(refTableName);
+          relationshipFields += `\n  ${refTableName}: [${pascalCase(
+            singular(refTableName)
+          )}]`;
         }
       }
     }
