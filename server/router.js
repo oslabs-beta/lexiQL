@@ -14,7 +14,7 @@ router.get(
   formatGraphData,
   (req, res) => {
     res.status(200).json(res.locals);
-  }
+  },
 );
 
 /* Route for example SQL Schema */
@@ -30,7 +30,7 @@ router.post(
   formatGraphData,
   (req, res) => {
     res.status(200).json(res.locals);
-  }
+  },
 );
 
 /* Route to get user (table specific) GraphQL Schema and Resolvers */
