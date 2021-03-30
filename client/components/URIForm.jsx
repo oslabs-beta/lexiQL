@@ -12,17 +12,22 @@ export default function URIForm() {
     fetch('/example-schema')
       .then((res) => res.json())
       .then((data) => {
-        // visualizerDispatch({
-        //   type: 'SET_TABLE',
-        //   payload: data,
-        // });
+        visualizerDispatch({
+          type: 'SET_TABLES',
+          payload: {
+            allTableNames: Object.keys(d),
+          },
+        });
 
         codeDispatch({
           type: 'SET_CODE',
-          payload:
-            // schema: data.schema.types,
-            // resolver: data.schema.resolvers,
-            { test: Object.keys(data) },
+          payload: {
+            // schema: data.GQLSchema.types,
+            // resolver: data.GQLSchema.resolvers,
+            schema: 'abc',
+            resolver: '!!!',
+            test: '12345',
+          },
         });
       });
   };

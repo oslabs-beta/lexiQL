@@ -8,6 +8,8 @@ export default function codeContainer() {
     <div className="codeContainer">
       <h1>Code will go here!!!!</h1>
       <p>{testCode.test}</p>
+      <p>{testCode.schema}</p>
+      <p>{testCode.resolver}</p>
       <br />
 
       <button
