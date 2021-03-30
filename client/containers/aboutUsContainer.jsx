@@ -6,6 +6,9 @@ import johnHeadshot from '../assets/john-headshot.png';
 import stacyHeadshot from '../assets/stacy-headshot.png';
 import ryanHeadshot from '../assets/ryan-headshot.jpeg';
 
+// import githubIcon from '../assets/github-icon.jpeg';
+// import linkedinIcon from '../assets/linkedin-icon.jpeg';
+
 export default function aboutUsContainer() {
   const teamMembers = [
     // need to add Carney's LinkedIn when he makes a profile
