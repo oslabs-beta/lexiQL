@@ -8,12 +8,10 @@ body {
   font-size: 40px;
 }
 
-
 /*
 NAVBAR STYLING
 */
 #navBar {
-  // margin-bottom: 30px;
 }
 
 #appHeader {
@@ -26,16 +24,16 @@ NAVBAR STYLING
     color: #f5ba5a;
     font-size: 40px;
   }
-  
+
   .headerLinks:visited {
     color: #f5ba5a;
   }
-  
+
   .headerLinks:hover {
     color: #f5ba5a;
     font-size: 43px;
   }
-  
+
   .headerLinks:active {
     color: #f5ba5a;
   }
@@ -51,7 +49,7 @@ HOMEPAGE INTRO/ABOUT STYLING
 
 #about {
   background-color: #5a95f5;
-  width: 100%; 
+  width: 100%;
   height: 65vh;
   display: flex;
   justify-content: space-evenly;
@@ -82,7 +80,6 @@ HOMEPAGE INTRO/ABOUT STYLING
   }
 }
 
-
 /*
 HOMEPAGE DEMO STYLING
 */
@@ -91,7 +88,6 @@ HOMEPAGE DEMO STYLING
   // background: white;
   display: flex;
   flex-direction: column;
-
 
   .demoHeader {
     // border: 1px solid red;
@@ -133,7 +129,6 @@ HOMEPAGE DEMO STYLING
     font-size: 30px;
   }
 }
-
 
 /*
 ABOUT US/TEAM STYLING
@@ -216,7 +211,6 @@ ABOUT US/TEAM STYLING
   }
 }
 
-
 /*
 DATA PAGE STYLING
 */
@@ -259,6 +253,7 @@ DATA PAGE STYLING
 FOOTER
 */
 .footer {
+  // background-color: #5a95f5;
   width: 100%;
   display: flex;
   // margin-top: 30px;
@@ -278,16 +273,16 @@ FOOTER
   .footerLink {
     color: #5a95f5;
   }
-  
+
   .footerLink:visited {
     color: #5a95f5;
   }
-  
+
   .footerLink:hover {
     color: #f5ba5a;
     font-size: 43px;
   }
-  
+
   .footerLink:active {
     color: #5a95f5;
   }
