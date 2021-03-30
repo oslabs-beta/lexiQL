@@ -3,7 +3,7 @@
 //     return uri.slice(0, 12).includes('postgres://');
 //   };
 
-const isJoinTable = (foreignKeys, columns) => {
+const isJunctionTable = (foreignKeys, columns) => {
   if (!foreignKeys) return false;
   return Object.keys(foreignKeys).length + 1 === Object.keys(columns).length;
 };
@@ -40,7 +40,7 @@ const typeConversion = {
 };
 
 module.exports = {
-  isJoinTable,
+  isJunctionTable,
   setType,
   typeConversion,
 };

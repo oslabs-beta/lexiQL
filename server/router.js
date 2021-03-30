@@ -1,20 +1,20 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { getSQLSchema } = require('./controllers/SQLController');
-const { createGQLSchema } = require('./controllers/GQLController');
+const { getSQLSchema } = require("./controllers/SQLController");
+const { createGQLSchema } = require("./controllers/GQLController");
 
 /* Route for example SQL Schema and example GQL Schema */
-router.get('/example-schema', getSQLSchema, createGQLSchema, (req, res) => {
+router.get("/example-schema", getSQLSchema, createGQLSchema, (req, res) => {
   res.status(200).json(res.locals);
 });
 
 /* Route for example SQL Schema */
-router.get('/example-schema-json', getSQLSchema, (req, res) => {
+router.get("/example-schema-json", getSQLSchema, (req, res) => {
   res.status(200).json(res.locals.SQLSchema);
 });
 
 /* Route to get user db schema */
-router.post('/sql-schema', getSQLSchema, createGQLSchema, (req, res) => {
+router.post("/sql-schema", getSQLSchema, createGQLSchema, (req, res) => {
   res.status(200).json(res.locals);
 });
 
