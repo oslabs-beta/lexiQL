@@ -4,7 +4,7 @@ const {
   collectMutations,
   collectCustomObjectRelationships,
 } = require('./resolverFactory');
-const { isJoinTable } = require('./helpers/helperFunctions');
+const { isJunctionTable } = require('./helpers/helperFunctions');
 /*    High level functions tasked with assembling the Types and the Resolvers */
 schemaFactory = {};
 /*  Creates query, mutation, and custom Object Types  */
@@ -16,10 +16,10 @@ schemaFactory.createTypes = (sqlSchema) => {
   for (const tableName of Object.keys(sqlSchema)) {
     const tableData = sqlSchema[tableName];
     const { foreignKeys, columns } = tableData;
-    if (!isJoinTable(foreignKeys, columns)) {
+    if (!isJunctionTable(foreignKeys, columns)) {
       queryType += queries(tableName, tableData);
       mutationType += mutations(tableName, tableData);
-      customObjectType += customObjects(tableName, tableData);
+      customObjectType += customObjects(tableName, sqlSchema);
     }
   }
 

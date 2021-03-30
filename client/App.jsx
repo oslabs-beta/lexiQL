@@ -1,19 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import G6 from '@antv/g6';
-import Visualizer from './components/Visualizer.jsx'
+import React, { useEffect, useState, lazy, Suspense } from 'react';
+import { Route, Switch, Link } from 'react-router-dom';
+// import G6 from '@antv/g6';
+// import Visualizer from './visualizer/Visualizer.jsx';
+import NavBar from './components/navBar.jsx';
+// import HomePage from './pages/homePage.jsx';
+// import DataPage from './pages/dataPage.jsx';
+// import Table from './visualizer/Table.jsx';
 
-// function App() {
-//   return <div>??o</div>;
+// import Provider from './context/state.js';
+
+// const App = ({ Component, props }) => {
+//   return (
+//     <Provider>
+//       <Component {...props} />
+//     </Provider>);
 // }
 
-const App = () => {
-  // useEffect(() => {
+// export default App;
 
-  // })
-
+const App = (props) => {
   return (
-    <Visualizer />
-  )
-}
+      <NavBar />
+  );
+};
 
 export default App;

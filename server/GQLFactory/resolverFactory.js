@@ -1,5 +1,5 @@
-const isJoinTable = require("./helpers/helperFunctions");
-const resolverHelper = require("./helpers/resolverHelpers");
+const isJunctionTable = require('./helpers/helperFunctions');
+const resolverHelper = require('./helpers/resolverHelpers');
 
 const resolverFactory = {};
 
