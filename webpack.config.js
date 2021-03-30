@@ -1,9 +1,11 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// const webpack = require('webpack');
+// const crypto = require('crypto-browserify');
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: './client/index.js',
+  entry: ['babel-polyfill', './client/index.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
@@ -14,7 +16,8 @@ module.exports = {
     inline: true,
     hot: true,
     proxy: {
-      '/api': 'http://localhost:3000',
+      '/': 'http://localhost:3000',
+      '/data': 'http://localhost:3000',
     },
   },
   module: {
@@ -36,6 +39,10 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [{ loader: 'file-loader' }],
       },
     ],
   },
