@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { VisualizerContext, CodeContext } from '../state/contexts';
+import TableNode from './tableNode';
 
 export default function URIForm() {
-  // const { visualizerDispatch } = useContext(VisualizerContext);
+  const { visualizerDispatch } = useContext(VisualizerContext);
   const { codeDispatch } = useContext(CodeContext);
 
   // get the data from the sample DB
@@ -12,10 +13,28 @@ export default function URIForm() {
     fetch('/example-schema')
       .then((res) => res.json())
       .then((data) => {
+        const tableNames = Object.keys(data);
+        const tableNodes = [];
+
+        for (let i = 0; i < tableNames.length; i += 1) {
+          tableNodes.push({
+            id: i.toString(),
+            data: { label: tableNames[i] },
+            position: {
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+            },
+          });
+        }
+        console.log('SEND NODES: ', tableNodes);
+        console.log('TABLE NAMES: ', tableNames);
+
         visualizerDispatch({
           type: 'SET_TABLES',
           payload: {
-            allTableNames: Object.keys(d),
+            // change below based on whatever backend has their data
+            tableNames,
+            tableNodes,
           },
         });
 
@@ -52,13 +71,13 @@ export default function URIForm() {
         //   payload: data,
         // });
         console.log('data: ', data);
-        // codeDispatch({
-        //   type: 'SET_CODE',
-        //   payload:
-        //     // schema: data.schema.types,
-        //     // resolver: data.schema.resolvers,
-        //     { test: Object.keys(data) },
-        // });
+        codeDispatch({
+          type: 'SET_CODE',
+          payload:
+            // schema: data.schema.types,
+            // resolver: data.schema.resolvers,
+            { test: Object.keys(data) },
+        });
       });
   };
 

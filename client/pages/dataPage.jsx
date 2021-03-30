@@ -12,10 +12,16 @@ import Table from '../visualizer/Table.jsx';
 import VisualizerContainer from '../containers/visualizerContainer';
 import CodeContainer from '../containers/codeContainer';
 import Footer from '../containers/footer.jsx';
+import TableNode from '../components/tableNode';
+import URIForm from '../components/URIForm';
 
 export default function dataPage() {
   // unclear if we should set the second argument in useReducer as an empty array or to an initial state or 'initialCodeState' as in reducers.js
-  const [testCode, codeDispatch] = useReducer(codeReducer, '');
+  const [testCode, codeDispatch] = useReducer(codeReducer, initialCodeState);
+  const [visualizerState, visualizerDispatch] = useReducer(
+    visualizerReducer,
+    initialVisualizerState,
+  );
 
   return (
     <div className="dataPage">
@@ -23,21 +29,37 @@ export default function dataPage() {
 
       <div className="graphicalContainer">
         {/* <VisualizerContext.Provider
-        value={{
-          visualizerState,
-          visualizerDispatch
-        }}> */}
-        <VisualizerContainer />
-        {/* </VisualizerContext.Provider> */}
+          value={{
+            visualizerState,
+            visualizerDispatch,
+          }}
+        >
+          <VisualizerContainer />
+          <TableNode />
+        </VisualizerContext.Provider> */}
 
         {/* <CodeContext.Provider
         value={{
           codeState,
           codeDispatch
         }}> */}
-        <CodeContext.Provider value={{ testCode, codeDispatch }}>
-          <PopupContainer />
-          <CodeContainer />
+        <CodeContext.Provider
+          value={{
+            testCode,
+            codeDispatch,
+          }}
+        >
+          <VisualizerContext.Provider
+            value={{
+              visualizerState,
+              visualizerDispatch,
+            }}
+          >
+            <VisualizerContainer />
+            {/* <TableNode /> */}
+            <PopupContainer />
+            <CodeContainer />
+          </VisualizerContext.Provider>
         </CodeContext.Provider>
         {/* </CodeContext.Provider> */}
       </div>
