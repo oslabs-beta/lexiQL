@@ -7,9 +7,9 @@ import ReactFlow, {
 } from 'react-flow-renderer';
 import { VisualizerContext } from '../state/contexts';
 
-const initialElements = [
-  { id: '1', type: 'input', data: { label: 'Node' }, position: { x: 0, y: 0 } },
-];
+// const initialElements = [
+//   { id: '1', type: 'input', data: { label: 'Node' }, position: { x: 0, y: 0 } },
+// ];
 
 const onLoad = (reactFlowInstance) => {
   reactFlowInstance.fitView();
@@ -17,31 +17,32 @@ const onLoad = (reactFlowInstance) => {
 
 export default function tableNode() {
   const { visualizerState } = useContext(VisualizerContext);
-  const [elements, setElements] = useState(initialElements);
-  const [name, setName] = useState('');
+  // const [elements, setElements] = useState(initialElements);
+  // const [name, setName] = useState('');
 
-  const addNode = () => {
-    setElements((e) =>
-      e.concat({
-        id: (e.length + 1).toString(),
-        data: { label: `${name}` },
-        position: {
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-        },
-      }),
-    );
-  };
+  // const addNode = () => {
+  //   setElements((e) =>
+  //     e.concat({
+  //       id: (e.length + 1).toString(),
+  //       data: { label: `${name}` },
+  //       position: {
+  //         x: Math.random() * window.innerWidth,
+  //         y: Math.random() * window.innerHeight,
+  //       },
+  //     }),
+  //   );
+  // };
 
-  const onConnect = (params) => setElements((e) => addEdge(params, e));
+  // this lets you connect to other nodes
+  // const onConnect = (params) => setElements((e) => addEdge(params, e));
 
   return (
     <Fragment>
       <ReactFlow
-        elements={elements}
-        // onLoad={onLoad}
+        elements={visualizerState.tableNodes}
+        onLoad={onLoad}
         style={{ width: '100%', height: '90vh' }}
-        onConnect={onConnect}
+        // onConnect={onConnect}
         connectionLineStyle={{ stroke: '#ddd', strokeWidth: 2 }}
         connectionLineType="bezier"
         snapToGrid={true}
@@ -56,7 +57,7 @@ export default function tableNode() {
           }}
         /> */}
       </ReactFlow>
-      <div>
+      {/* <div>
         <input
           type="text"
           onChange={(e) => setName(e.target.value)}
@@ -65,7 +66,7 @@ export default function tableNode() {
         <button type="button" onClick={addNode}>
           Add Node
         </button>
-      </div>
+      </div> */}
     </Fragment>
   );
 }

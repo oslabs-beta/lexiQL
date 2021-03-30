@@ -6,7 +6,7 @@ export const initialVisualizerState = {
 
 export const visualizerReducer = (state, action) => {
   switch (action.type) {
-    case 'SET_TABLE':
+    case 'SET_TABLES':
       return {
         ...state,
         tableNames: action.payload.tableNames,
