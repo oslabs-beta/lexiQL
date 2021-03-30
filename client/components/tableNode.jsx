@@ -1,10 +1,11 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useContext } from 'react';
 import ReactFlow, {
   addEdge,
   Background,
   Controls,
   MiniMap,
 } from 'react-flow-renderer';
+import { VisualizerContext } from '../state/contexts';
 
 const initialElements = [
   { id: '1', type: 'input', data: { label: 'Node' }, position: { x: 0, y: 0 } },
@@ -15,6 +16,7 @@ const onLoad = (reactFlowInstance) => {
 };
 
 export default function tableNode() {
+  const { visualizerState } = useContext(VisualizerContext);
   const [elements, setElements] = useState(initialElements);
   const [name, setName] = useState('');
 
