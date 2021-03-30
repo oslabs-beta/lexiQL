@@ -35,17 +35,25 @@ export default function URIForm() {
           const dataType = oneColumn.dataType;
           console.log('dataType:', dataType);
 
+          // let horizontal = 100;
+          // let vertical = 100;
+
           tableNodes.push({
             id: i.toString(),
             data: { label: tableName },
 
             position: {
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              // x: Math.random() * window.innerWidth,
+              // y: Math.random() * window.innerHeight,
+              // x: 100,
+              // y: 300,
             },
           });
         }
         console.log('SEND NODES: ', tableNodes);
+
+        // horizontal += 100; 
+        // vertical += 100;
 
         visualizerDispatch({
           type: 'SET_TABLES',
@@ -97,6 +105,8 @@ export default function URIForm() {
             position: {
               x: Math.random() * window.innerWidth,
               y: Math.random() * window.innerHeight,
+              // x: 100,
+              // y: 300,
             },
           });
         }
@@ -134,21 +144,21 @@ export default function URIForm() {
     //       <p>Some text in the Modal..</p>
     //     </div>
     //   </div>
-    <div id="uriForm">
+    <div className="uriForm" id="uriForm">
       <form onSubmit={handleURI}>
-        <label htmlFor="link">INPUT YOUR LINK:</label>
+        <label className="formHeader" htmlFor="link">Link a database:</label>
         <br />
 
-        <input id="URILink" className="dbForm" />
+        <input className="dbInput" id="URILink" />
         <br />
 
-        <button className="URIbutton">Submit</button>
+        <button className="formButtons" id="uriSubmitButton">Submit</button>
         <br />
       </form>
 
       <button
         type="button"
-        className="sampleDataButton"
+        className="formButtons" id="sampleDataButton"
         onClick={handleSampleData}
       >
         Use Sample Database
