@@ -80,7 +80,7 @@ customHelper.getFields = (primaryKey, foreignKeys, columns) => {
   for (const fieldName of Object.keys(columns)) {
     if (!(foreignKeys && foreignKeys[fieldName]) && fieldName !== primaryKey) {
       const { dataType, columnDefault, isNullable } = columns[fieldName];
-      fields += `\n${fieldName}: ${typeConversion[dataType]}`;
+      fields += `\n  ${fieldName}: ${typeConversion[dataType]}`;
       if (isNullable === 'NO' && columnDefault === null) fields += `!`;
     }
   }
@@ -95,9 +95,9 @@ customHelper.getRelationships = (tableName, sqlSchema) => {
   if (foreignKeys) {
     for (const fk of Object.keys(foreignKeys)) {
       console.log('RELATIONSHIP FIELDS:', relationshipFields);
-      relationshipFields += `\n${foreignKeys[fk].referenceTable}: [${pascalCase(
-        singular(foreignKeys[fk].referenceTable)
-      )}]`;
+      relationshipFields += `\n  ${
+        foreignKeys[fk].referenceTable
+      }: [${pascalCase(singular(foreignKeys[fk].referenceTable))}]`;
     }
   }
   if (referencedBy) {
@@ -105,7 +105,7 @@ customHelper.getRelationships = (tableName, sqlSchema) => {
       const { foreignKeys } = sqlSchema[refTableName];
       for (const foreignFK of Object.keys(foreignKeys)) {
         if (foreignKeys[foreignFK].referenceTable !== tableName) {
-          relationshipFields += `\n${
+          relationshipFields += `\n  ${
             foreignKeys[foreignFK].referenceTable
           }: [${pascalCase(singular(foreignKeys[foreignFK].referenceTable))}]`;
         }

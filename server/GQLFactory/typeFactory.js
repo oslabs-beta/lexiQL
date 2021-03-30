@@ -34,13 +34,13 @@ typeFactory.customObjects = (tableName, sqlSchema) => {
   const pkType = setType(columns[primaryKey].dataType);
 
   return `${
-    `  type ${pascalCase(singular(tableName))} {\n` +
-    `${primaryKey}: ${pkType}!`
+    `type ${pascalCase(singular(tableName))} {\n` +
+    `  ${primaryKey}: ${pkType}!`
   }${customHelper.getFields(
     primaryKey,
     foreignKeys,
     columns
-  )}${customHelper.getRelationships(tableName, sqlSchema)}\n  }\n\n`;
+  )}${customHelper.getRelationships(tableName, sqlSchema)}\n}\n\n`;
 };
 
 module.exports = typeFactory;
