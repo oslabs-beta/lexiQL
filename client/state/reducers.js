@@ -9,8 +9,8 @@ export const visualizerReducer = (state, action) => {
     case 'SET_TABLE':
       return {
         ...state,
-
         tableNames: action.payload.tableNames,
+        tableNodes: action.payload.tableNodes,
       };
     // case 'UPDATE_TABLE':
     //   return {
@@ -21,13 +21,12 @@ export const visualizerReducer = (state, action) => {
 
 // Code display on app page
 // don't think we need to initialize state here? can just pass an empty string
-/*
+
 export const initialCodeState = {
-  // schema: '',
-  // resolver: '',
+  schema: '',
+  resolver: '',
   test: '',
 };
-*/
 
 export const codeReducer = (state, action) => {
   switch (action.type) {

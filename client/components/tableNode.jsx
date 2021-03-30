@@ -10,11 +10,11 @@ const initialElements = [
   { id: '1', type: 'input', data: { label: 'Node' }, position: { x: 0, y: 0 } },
 ];
 
-// const onLoad = (reactFlowInstance) => {
-//   reactFlowInstance.fitView();
-// };
+const onLoad = (reactFlowInstance) => {
+  reactFlowInstance.fitView();
+};
 
-const tableNode = () => {
+export default function tableNode() {
   const [elements, setElements] = useState(initialElements);
   const [name, setName] = useState('');
 
@@ -66,6 +66,4 @@ const tableNode = () => {
       </div>
     </Fragment>
   );
-};
-
-export default tableNode;
+}
