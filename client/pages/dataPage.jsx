@@ -56,7 +56,7 @@ export default function dataPage() {
             }}
           >
             <VisualizerContainer />
-            <TableNode />
+            {/* <TableNode /> */}
             <PopupContainer />
             <CodeContainer />
           </VisualizerContext.Provider>

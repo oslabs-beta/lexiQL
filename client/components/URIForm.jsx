@@ -28,6 +28,7 @@ export default function URIForm() {
         }
         console.log('SEND NODES: ', tableNodes);
         console.log('TABLE NAMES: ', tableNames);
+
         visualizerDispatch({
           type: 'SET_TABLES',
           payload: {
