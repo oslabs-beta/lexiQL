@@ -24,13 +24,13 @@ resolverHelper.createMutation = (tableName, primaryKey, columns) => {
   const valuesList = columnsArray.map((column) => `args.${column}`).join(', ');
 
   return `
-			${mutationName}: (parent, args) => {
-				const query = 'INSERT INTO ${tableName} (${columnsArgument}) VALUES (${valuesArgument}) RETURNING *';
-				const values = [${valuesList}];
-				return db.query(query, values)
-					.then(data => data.rows[0])
-					.catch(err => new Error(err));
-			},`;
+	${mutationName}: (parent, args) => {
+	  const query = 'INSERT INTO ${tableName} (${columnsArgument}) VALUES (${valuesArgument}) RETURNING *';
+	  const values = [${valuesList}];
+	  return db.query(query, values)
+	    .then(data => data.rows[0])
+	    .catch(err => new Error(err));
+	},`;
 };
 
 resolverHelper.updateMutation = (tableName, primaryKey, columns) => {
@@ -48,26 +48,26 @@ resolverHelper.updateMutation = (tableName, primaryKey, columns) => {
   const primaryKeyArgument = `$${columnsArray.length + 1}`;
 
   return `
-			${mutationName}: (parent, args) => {
-				const query = 'UPDATE ${tableName} SET ${setStatement} WHERE ${primaryKey} = ${primaryKeyArgument} RETURNING *';
-				const values = ${valuesList};
-				return db.query(query, values)
-					.then(data => data.rows[0])
-					.catch(err => new Error(err));
-			},`;
+	${mutationName}: (parent, args) => {
+	  const query = 'UPDATE ${tableName} SET ${setStatement} WHERE ${primaryKey} = ${primaryKeyArgument} RETURNING *';
+	  const values = [${valuesList}];
+	  return db.query(query, values)
+	    .then(data => data.rows[0])
+	    .catch(err => new Error(err));
+	},`;
 };
 
 resolverHelper.deleteMutation = (tableName, primaryKey) => {
   const mutationName = toCamelCase('delete_' + singular(tableName));
 
   return `
-			${mutationName}: (parent, args) => {
-				const query = 'DELETE FROM ${tableName} WHERE ${primaryKey} = $1 RETURNING *';
-				const values = [args.${primaryKey}];
-				return db.query(query, values)
-					.then(data => data.rows[0])
-					.catch(err => new Error(err));
-			},`;
+	${mutationName}: (parent, args) => {
+	  const query = 'DELETE FROM ${tableName} WHERE ${primaryKey} = $1 RETURNING *';
+	  const values = [args.${primaryKey}];
+	  return db.query(query, values)
+	    .then(data => data.rows[0])
+	    .catch(err => new Error(err));
+	},`;
 };
 
 /* */
