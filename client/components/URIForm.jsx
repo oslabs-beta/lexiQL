@@ -50,7 +50,7 @@ export default function URIForm() {
             },
           });
         }
-        console.log('SEND NODES: ', tableNodes);
+        console.log('SEND NODES!: ', tableNodes);
 
         // horizontal += 100;
         // vertical += 100;
