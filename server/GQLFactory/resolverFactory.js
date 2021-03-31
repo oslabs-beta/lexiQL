@@ -22,7 +22,7 @@ resolverFactory.collectMutations = (tableName, tableData) => {
     columns
   );
   const deleteMutation = resolverHelper.deleteMutation(tableName, primaryKey);
-  return `${createMutation}\n${updateMutation}\n${deleteMutation}`;
+  return `${createMutation}\n${updateMutation}\n${deleteMutation}\n`;
 };
 /* ------------------------------------ */
 resolverFactory.collectCustomObjectRelationships = () => {};
