@@ -16,6 +16,7 @@ const onLoad = (reactFlowInstance) => {
 };
 
 export default function tableNode() {
+  // console.log('inside table node', sqlSchema);
   const { visualizerState } = useContext(VisualizerContext);
   // const [elements, setElements] = useState(initialElements);
   // const [name, setName] = useState('');
@@ -58,16 +59,6 @@ export default function tableNode() {
           }}
         /> */}
       </ReactFlow>
-      {/* <div>
-        <input
-          type="text"
-          onChange={(e) => setName(e.target.value)}
-          name="title"
-        />
-        <button type="button" onClick={addNode}>
-          Add Node
-        </button>
-      </div> */}
     </Fragment>
   );
 }

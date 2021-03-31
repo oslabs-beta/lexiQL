@@ -29,13 +29,24 @@ export default function codeContainer() {
 
   return (
     <div className="codeContainer">
-      <button type="button" className="schemaButton" onClick={handleSchema}>
+      <button
+        type="button"
+        className="codeContainerButton"
+        id="schemaButton"
+        onClick={handleSchema}
+      >
         Schema
       </button>
       <br />
-      <button type="button" className="resolverButton" onClick={handleResolver}>
+      <button
+        type="button"
+        className="codeContainerButton"
+        id="resolverButton"
+        onClick={handleResolver}
+      >
         Resolver
       </button>
+
       {/* <p>{codeState.resolver}</p> */}
       {/* <p>{codeState.schema}</p> */}
       <p>{codeState.displayCode}</p>
