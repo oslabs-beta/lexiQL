@@ -13,7 +13,6 @@ export default function URIForm() {
     fetch('/example-schema')
       .then((res) => res.json())
       .then((data) => {
-
         const tableNames = [];
         const sqlSchema = data.SQLSchema;
         console.log('data:', data);
@@ -26,14 +25,14 @@ export default function URIForm() {
           const tableName = Object.keys(fullTable)[0];
           tableNames.push(tableName);
           // console.log('fullTable in loop:', fullTable);
-          console.log('tableName in loop:', tableName);
+          // console.log('tableName in loop:', tableName);
 
           const columns = fullTable[tableName].columns;
-          console.log('columns:', columns);
+          // console.log('columns:', columns);
           const oneColumn = columns[0];
-          console.log('oneColumn:', oneColumn);
+          // console.log('oneColumn:', oneColumn);
           const dataType = oneColumn.dataType;
-          console.log('dataType:', dataType);
+          // console.log('dataType:', dataType);
 
           tableNodes.push({
             id: i.toString(),
@@ -45,8 +44,8 @@ export default function URIForm() {
             },
           });
         }
-        console.log('SEND NODES: ', tableNodes);
-
+        // console.log('SEND NODES: ', tableNodes);
+        // console.log('GQLSCHEMA: ', data.GQLSchema.types);
         visualizerDispatch({
           type: 'SET_TABLES',
           payload: {
@@ -61,11 +60,9 @@ export default function URIForm() {
         codeDispatch({
           type: 'SET_CODE',
           payload: {
-            // schema: data.GQLSchema.types,
+            schema: data.GQLSchema.types,
             // resolver: data.GQLSchema.resolvers,
-            schema: 'abc',
-            resolver: '!!!',
-            test: '12345',
+            displayCode: data.GQLSchema.types,
           },
         });
       });
@@ -86,28 +83,42 @@ export default function URIForm() {
     })
       .then((res) => res.json())
       .then((data) => {
-
-        const tableNames = Object.keys(data);
+        const tableNames = [];
+        const sqlSchema = data.SQLSchema;
+        // console.log('data:', data);
+        console.log('SQL schema:', data.SQLSchema);
         const tableNodes = [];
 
-        for (let i = 0; i < tableNames.length; i += 1) {
+        for (let i = 0; i < data.SQLSchema.length; i += 1) {
+          const fullTable = data.SQLSchema[i];
+          const tableName = Object.keys(fullTable)[0];
+          tableNames.push(tableName);
+          // console.log('fullTable in loop:', fullTable);
+          // console.log('tableName in loop:', tableName);
+
+          const columns = fullTable[tableName].columns;
+          // console.log('columns:', columns);
+          const oneColumn = columns[0];
+          // console.log('oneColumn:', oneColumn);
+          const dataType = oneColumn.dataType;
+          // console.log('dataType:', dataType);
+
           tableNodes.push({
             id: i.toString(),
-            data: { label: tableNames[i] },
+            data: { label: tableName },
+
             position: {
               x: Math.random() * window.innerWidth,
               y: Math.random() * window.innerHeight,
             },
           });
         }
-        console.log('SEND NODES: ', tableNodes);
-        console.log('TABLE NAMES: ', tableNames);
+        // console.log('SEND NODES: ', tableNodes);
 
         visualizerDispatch({
           type: 'SET_TABLES',
           payload: {
-            // change below based on whatever backend has their data
-            tableNames,
+            sqlSchema,
             tableNodes,
           },
         });
@@ -115,13 +126,12 @@ export default function URIForm() {
         codeDispatch({
           type: 'SET_CODE',
           payload: {
-            // schema: data.GQLSchema.types,
+            schema: data.GQLSchema.types,
             // resolver: data.GQLSchema.resolvers,
-            schema: 'abc124124124',
-            resolver: '124124214!!!',
-            test: '12345124124124',
+            // schema: 'abc124124124',
+            // resolver: '124124214!!!',
+            // test: '12345124124124',
           },
-
         });
       });
   };

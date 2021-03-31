@@ -16,8 +16,7 @@ import TableNode from '../components/tableNode';
 import URIForm from '../components/URIForm';
 
 export default function dataPage() {
-  // unclear if we should set the second argument in useReducer as an empty array or to an initial state or 'initialCodeState' as in reducers.js
-  const [testCode, codeDispatch] = useReducer(codeReducer, initialCodeState);
+  const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);
   const [visualizerState, visualizerDispatch] = useReducer(
     visualizerReducer,
     initialVisualizerState,
@@ -45,7 +44,7 @@ export default function dataPage() {
         }}> */}
         <CodeContext.Provider
           value={{
-            testCode,
+            codeState,
             codeDispatch,
           }}
         >

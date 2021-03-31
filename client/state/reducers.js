@@ -24,19 +24,28 @@ export const visualizerReducer = (state, action) => {
 
 export const initialCodeState = {
   schema: '',
-  resolver: '',
-  test: '',
+  // resolver: '',
+  // viewSchema: true,
+  displayCode: '',
 };
 
 export const codeReducer = (state, action) => {
   switch (action.type) {
     case 'SET_CODE':
       return {
-        // ...state,
-        schema: action.payload.schema,
-        resolver: action.payload.resolver,
-        test: action.payload.test,
+        ...state,
+        schema: 'TESTING 123',
+        // schema: action.payload.schema,
+        resolver: 'TEMP HARDCODED TEXT',
+        displayCode: action.payload.displayCode,
+        // display:
       };
+    // case 'SET_DISPLAY':
+    //   return {
+    //     ...state,
+    //     displayCode: action.payload.displayCode,
+    //     // display:
+    //   };
 
     // case 'TEAM_LOAD':
     //   return {
