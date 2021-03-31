@@ -6,7 +6,7 @@ export default function codeContainer() {
   // console.log(testCode.test);
   return (
     <div className="codeContainer">
-      <h1>Code will go here!!!!</h1>
+      {/* <h1>Code will go here</h1> */}
       <p>{testCode.test}</p>
       <p>{testCode.schema}</p>
       <p>{testCode.resolver}</p>
@@ -14,7 +14,8 @@ export default function codeContainer() {
 
       <button
         type="button"
-        className="schemaButton"
+        className="codeContainerButton"
+        id="schemaButton"
         // onClick={handleSampleData}
       >
         Schema
@@ -22,7 +23,8 @@ export default function codeContainer() {
       <br />
       <button
         type="button"
-        className="resolverButton"
+        className="codeContainerButton"
+        id="resolverButton"
         // onClick={handleSampleData}
       >
         Resolver

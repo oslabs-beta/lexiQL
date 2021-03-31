@@ -55,9 +55,8 @@ export default function dataPage() {
               visualizerDispatch,
             }}
           >
-            <VisualizerContainer />
-            {/* <TableNode /> */}
             <PopupContainer />
+            <VisualizerContainer />
             <CodeContainer />
           </VisualizerContext.Provider>
         </CodeContext.Provider>
