@@ -9,7 +9,7 @@ export default function codeContainer() {
     e.preventDefault();
     console.log('TESTING SCHEMA HANDLER: ', codeState.schema);
     codeDispatch({
-      type: 'SET_CODE',
+      type: 'SET_DISPLAY',
       payload: {
         displayCode: codeState.schema,
       },
@@ -20,7 +20,7 @@ export default function codeContainer() {
     e.preventDefault();
     console.log('TESTING RESOLVER HANDLER: ', codeState.resolver);
     codeDispatch({
-      type: 'SET_CODE',
+      type: 'SET_DISPLAY',
       payload: {
         displayCode: codeState.resolver,
       },
@@ -46,7 +46,6 @@ export default function codeContainer() {
       >
         Resolver
       </button>
-
       {/* <p>{codeState.resolver}</p> */}
       {/* <p>{codeState.schema}</p> */}
       <p>{codeState.displayCode}</p>
