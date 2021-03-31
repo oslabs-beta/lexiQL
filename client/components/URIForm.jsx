@@ -34,26 +34,17 @@ export default function URIForm() {
           const dataType = oneColumn.dataType;
           // console.log('dataType:', dataType);
 
-          // let horizontal = 100;
-          // let vertical = 100;
-
           tableNodes.push({
             id: i.toString(),
             data: { label: tableName },
-            // columns: [[colName, datatype]],
 
             position: {
               x: Math.random() * window.innerWidth,
               y: Math.random() * window.innerHeight,
-              // x: 100,
-              // y: 300,
             },
           });
         }
         console.log('SEND NODES!: ', tableNodes);
-
-        // horizontal += 100;
-        // vertical += 100;
 
         visualizerDispatch({
           type: 'SET_TABLES',

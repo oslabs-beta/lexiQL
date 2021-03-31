@@ -49,7 +49,7 @@ export default function codeContainer() {
 
       {/* <p>{codeState.resolver}</p> */}
       {/* <p>{codeState.schema}</p> */}
-      <p>{codeState.displayCode}</p>
+      <p className="displayCode" id="displayCode">{codeState.displayCode}</p>
       <br />
     </div>
   );
