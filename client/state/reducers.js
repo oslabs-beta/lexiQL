@@ -36,7 +36,7 @@ export const codeReducer = (state, action) => {
         ...state,
         // schema: 'TESTING 123',
         schema: action.payload.schema,
-        resolver: 'TEMP HARDCODED TEXT!',
+        resolver: 'TEMP HARDCODED TEXT!!!!',
         displayCode: action.payload.displayCode,
         // display:
       };
