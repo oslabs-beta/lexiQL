@@ -50,16 +50,11 @@ export default function URIForm() {
             },
           });
         }
-<<<<<<< HEAD
-        // console.log('SEND NODES: ', tableNodes);
-        // console.log('GQLSCHEMA: ', data.GQLSchema.types);
-=======
         console.log('SEND NODES: ', tableNodes);
 
-        // horizontal += 100; 
+        // horizontal += 100;
         // vertical += 100;
 
->>>>>>> frontend
         visualizerDispatch({
           type: 'SET_TABLES',
           payload: {
@@ -160,19 +155,24 @@ export default function URIForm() {
     //   </div>
     <div className="uriForm" id="uriForm">
       <form onSubmit={handleURI}>
-        <label className="formHeader" htmlFor="link">Link a database:</label>
+        <label className="formHeader" htmlFor="link">
+          Link a database:
+        </label>
         <br />
 
-        <input className="dbInput" id="URILink" placeholder='postgres://' />
+        <input className="dbInput" id="URILink" placeholder="postgres://" />
         <br />
 
-        <button className="formButtons" id="uriSubmitButton">Submit</button>
+        <button className="formButtons" id="uriSubmitButton">
+          Submit
+        </button>
         <br />
       </form>
 
       <button
         type="button"
-        className="formButtons" id="sampleDataButton"
+        className="formButtons"
+        id="sampleDataButton"
         onClick={handleSampleData}
       >
         Use Sample Database
