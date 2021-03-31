@@ -50,14 +50,14 @@ schemaFactory.createResolvers = (sqlSchema) => {
   }
 
   const resolvers =
-    '\n  const resolvers = {\n' +
-    '    Query: {' +
-    `      ${queryResolvers}\n` +
-    '    },\n\n' +
-    '    Mutation: {\n' +
-    `      ${mutationResolvers}\n` +
-    '    },\n' +
-    `      ${customObjectTypeResolvers}\n  }\n`;
+    '\nconst resolvers = {\n' +
+    '  Query: {' +
+    `    ${queryResolvers}\n` +
+    '  },\n\n' +
+    '  Mutation: {\n' +
+    `    ${mutationResolvers}\n` +
+    '  },\n' +
+    `    ${customObjectTypeResolvers}\n  }\n`;
 
   return resolvers;
 };
