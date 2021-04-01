@@ -20,6 +20,7 @@ module.exports = {
       '/data': 'http://localhost:3000',
     },
   },
+  plugins: [new MiniCssExtractPlugin()],
   module: {
     rules: [
       {

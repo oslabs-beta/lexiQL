@@ -4,12 +4,13 @@ import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 
 import styles from './style.scss';
+import styles2 from './codeMirror.scss';
 
-render((
+render(
   <BrowserRouter>
     <App />
-  </BrowserRouter>),
-  document.getElementById('root')
-)
+  </BrowserRouter>,
+  document.getElementById('root'),
+);
 
 // render(<App />, document.getElementById('root'));
