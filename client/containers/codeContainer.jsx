@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { CodeContext } from '../state/contexts';
+import CodeMirror from '../components/codeMirror';
 
 export default function codeContainer() {
   const { codeState, codeDispatch } = useContext(CodeContext);
@@ -9,7 +10,7 @@ export default function codeContainer() {
     e.preventDefault();
     console.log('TESTING SCHEMA HANDLER: ', codeState.schema);
     codeDispatch({
-      type: 'SET_CODE',
+      type: 'SET_DISPLAY',
       payload: {
         displayCode: codeState.schema,
       },
@@ -20,7 +21,7 @@ export default function codeContainer() {
     e.preventDefault();
     console.log('TESTING RESOLVER HANDLER: ', codeState.resolver);
     codeDispatch({
-      type: 'SET_CODE',
+      type: 'SET_DISPLAY',
       payload: {
         displayCode: codeState.resolver,
       },
@@ -29,6 +30,7 @@ export default function codeContainer() {
 
   return (
     <div className="codeContainer">
+      {/* <div> */}
       <button
         type="button"
         className="codeContainerButton"
@@ -46,11 +48,26 @@ export default function codeContainer() {
       >
         Resolver
       </button>
-
+      {/* <CodeMirror
+        className="CodeMirror"
+        value={codeState.displayCode}
+        options={{
+          mode: 'javascript',
+          theme: 'material',
+          lineNumbers: true,
+          lineWrapping: true,
+        }}
+        // onChange={(editor, data, value) => {}}
+      /> */}
       {/* <p>{codeState.resolver}</p> */}
       {/* <p>{codeState.schema}</p> */}
+<<<<<<< HEAD
       <p className="displayCode" id="displayCode">{codeState.displayCode}</p>
+=======
+      {/* <p>{codeState.displayCode}</p> */}
+>>>>>>> 24cf1a375ca382d4b2f2031ee70b18ead72dd922
       <br />
+      <CodeMirror />
     </div>
   );
 }
