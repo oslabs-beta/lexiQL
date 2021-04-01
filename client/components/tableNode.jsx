@@ -16,34 +16,17 @@ const onLoad = (reactFlowInstance) => {
 };
 
 export default function tableNode() {
-  // console.log('inside table node', sqlSchema);
   const { visualizerState } = useContext(VisualizerContext);
-  // const [elements, setElements] = useState(initialElements);
-  // const [name, setName] = useState('');
-
-  // const addNode = () => {
-  //   setElements((e) =>
-  //     e.concat({
-  //       id: (e.length + 1).toString(),
-  //       data: { label: `${name}` },
-  //       position: {
-  //         x: Math.random() * window.innerWidth,
-  //         y: Math.random() * window.innerHeight,
-  //       },
-  //     }),
-  //   );
-  // };
 
   // this lets you connect to other nodes
-
   const onConnect = (params) => setElements((e) => addEdge(params, e));
 
   return (
     <Fragment>
       <ReactFlow
-        minzoom={0.6}
-        maxzoom={1}
-        defaultzoom={.9}
+        minzoom={0.3}
+        maxzoom={0.7}
+        defaultzoom={.5}
         // zoomOnScroll={zoomOnScroll}
         elements={visualizerState.tableNodes}
         onLoad={onLoad}

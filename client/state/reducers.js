@@ -10,9 +10,9 @@ export const visualizerReducer = (state, action) => {
     case 'SET_TABLES':
       return {
         ...state,
-        tableNames: action.payload.tableNames,
+        // tableNames: action.payload.tableNames,
         tableNodes: action.payload.tableNodes,
-        // sqlSchema: action.payload.sqlSchema,
+        sqlSchema: action.payload.sqlSchema,
       };
     // case 'UPDATE_TABLE':
     //   return {
@@ -26,7 +26,7 @@ export const visualizerReducer = (state, action) => {
 
 export const initialCodeState = {
   schema: '',
-  // resolver: '',
+  resolver: '',
   // viewSchema: true,
   displayCode: '',
 };
@@ -38,7 +38,7 @@ export const codeReducer = (state, action) => {
         ...state,
         // schema: 'TESTING 123',
         schema: action.payload.schema,
-        resolver: 'TEMP HARDCODED TEXT',
+        resolver: action.payload.resolver,
         displayCode: action.payload.displayCode,
         // display:
       };
@@ -55,3 +55,4 @@ export const codeReducer = (state, action) => {
     //   }
   }
 };
+
