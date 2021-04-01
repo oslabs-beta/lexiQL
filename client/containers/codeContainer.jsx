@@ -31,23 +31,25 @@ export default function codeContainer() {
   return (
     <div className="codeContainer">
       {/* <div> */}
-      <button
-        type="button"
-        className="codeContainerButton"
-        id="schemaButton"
-        onClick={handleSchema}
-      >
-        Schema
-      </button>
-      <br />
-      <button
-        type="button"
-        className="codeContainerButton"
-        id="resolverButton"
-        onClick={handleResolver}
-      >
-        Resolver
-      </button>
+      <div className="codeButtons">
+        <button
+          type="button"
+          className="codeContainerButton"
+          id="schemaButton"
+          onClick={handleSchema}
+        >
+          Schema
+        </button>
+        <br />
+        <button
+          type="button"
+          className="codeContainerButton"
+          id="resolverButton"
+          onClick={handleResolver}
+        >
+          Resolver
+        </button>
+      </div>
       {/* <CodeMirror
         className="CodeMirror"
         value={codeState.displayCode}

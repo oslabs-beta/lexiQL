@@ -2,6 +2,7 @@
 export const initialVisualizerState = {
   tableNames: [],
   tableNodes: [],
+  // sqlSchema: []
 };
 
 export const visualizerReducer = (state, action) => {
@@ -11,6 +12,7 @@ export const visualizerReducer = (state, action) => {
         ...state,
         tableNames: action.payload.tableNames,
         tableNodes: action.payload.tableNodes,
+        // sqlSchema: action.payload.sqlSchema,
       };
     // case 'UPDATE_TABLE':
     //   return {

@@ -278,6 +278,13 @@ DATA PAGE STYLING
   justify-content: center;
 }
 
+.graphicalContainer {
+  display: flex;
+  height: 80vh;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .popupContainer {
   display: flex;
   flex-direction: column;
@@ -285,25 +292,15 @@ DATA PAGE STYLING
   // justify-content: center;
   padding: 30px 0px 0px 10px;
   width: 20%;
-  // background-color: #aaa9a9;
-  // height: 50%;
-  // border: 1px solid #f5ba5a;
-  // border-top: 1px solid #f5ba5a;
-  // border-bottom: 1px solid #f5ba5a;
-}
-
-.graphicalContainer {
-  display: flex;
-  height: 90vh;
-  width: 100%;
-  justify-content: space-between;
+  // height: 100%;
+  border: 2px solid #f5ba5a;
 }
 
 .visualizerContainer {
   // background-color: green;
   border: 2px solid #f5ba5a;
   width: 60%;
-  height: 100%;
+  // height: 100%;
   display: flex;
   flex-direction: column;
   // margin-right: 10px;
@@ -313,19 +310,26 @@ DATA PAGE STYLING
   background-color: #f0f1f1;
   border: 2px solid #f5ba5a;
   width: 20%;
-  height: 100%;
+  // height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  // justify-content: center;
+  // align-items: center;
   // for stacy's testing purposes below, can't see shit
   overflow-y: auto;
   font-size: 8px;
 
+  .codeButtons {
+    display: flex;
+    // flex-direction: column;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
   .codeContainerButton {
     border: none;
     border-radius: 5px;
-    width: 80%;
+    width: 30%;
     padding: 5px 0px;
     background-color: #5a95f5;
     color: #f5ba5a;
@@ -342,7 +346,15 @@ DATA PAGE STYLING
 
   // #resolverButton {
   // }
+
+  p {
+    font-size: 10px;
+  }
 }
+
+// #displayCode {
+//   font-size: 10px;
+// }
 
 /*
 FOOTER

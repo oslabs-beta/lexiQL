@@ -41,6 +41,10 @@ export default function tableNode() {
   return (
     <Fragment>
       <ReactFlow
+        minzoom={0.6}
+        maxzoom={1}
+        defaultzoom={.9}
+        // zoomOnScroll={zoomOnScroll}
         elements={visualizerState.tableNodes}
         onLoad={onLoad}
         style={{ width: '100%', height: '90vh' }}
