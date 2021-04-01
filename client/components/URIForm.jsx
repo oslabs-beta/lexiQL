@@ -41,7 +41,7 @@ export default function URIForm() {
 
           // [[tablename1, column11, column12..], [tablename2, column21, column22]....]
           const columns = fullTable[tableName].columns;
-          console.log("columns:", columns);
+          // console.log("columns:", columns);
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
@@ -122,7 +122,7 @@ export default function URIForm() {
 
           // [[tablename1, column11, column12..], [tablename2, column21, column22]....]
           const columns = fullTable[tableName].columns;
-          console.log("columns:", columns);
+          // console.log("columns:", columns);
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];

@@ -1,26 +1,25 @@
-import React, { useEffect, useState, useReducer } from 'react';
-import { VisualizerContext, CodeContext } from '../state/contexts';
+import React, { useEffect, useState, useReducer } from "react";
+import { VisualizerContext, CodeContext } from "../state/contexts";
 import {
   initialVisualizerState,
   visualizerReducer,
   initialCodeState,
   codeReducer,
-} from '../state/reducers';
+} from "../state/reducers";
 
-import PopupContainer from '../containers/popupContainer';
-import Table from '../visualizer/Table.jsx';
-import VisualizerContainer from '../containers/visualizerContainer';
-import CodeContainer from '../containers/codeContainer';
-import Footer from '../containers/footer.jsx';
-import TableNode from '../components/tableNode';
-import URIForm from '../components/URIForm';
-import Canvas from '../components/canvas';
+import PopupContainer from "../containers/popupContainer";
+import VisualizerContainer from "../containers/visualizerContainer";
+import CodeContainer from "../containers/codeContainer";
+import Footer from "../containers/footer.jsx";
+import TableNode from "../components/tableNode";
+import URIForm from "../components/URIForm";
+import Canvas from "../components/canvas";
 
 export default function dataPage() {
   const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);
   const [visualizerState, visualizerDispatch] = useReducer(
     visualizerReducer,
-    initialVisualizerState,
+    initialVisualizerState
   );
 
   return (
