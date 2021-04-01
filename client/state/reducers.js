@@ -36,13 +36,8 @@ export const codeReducer = (state, action) => {
     case 'SET_CODE':
       return {
         ...state,
-<<<<<<< HEAD
-        schema: 'TESTING 123!',
-        // schema: action.payload.schema,
-=======
         // schema: 'TESTING 123',
         schema: action.payload.schema,
->>>>>>> 6aa129352e7f1292e283af7217e27fd20a31316a
         resolver: 'TEMP HARDCODED TEXT',
         displayCode: action.payload.displayCode,
         // display:
