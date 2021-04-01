@@ -15,9 +15,10 @@ export default function URIForm() {
       .then((data) => {
         const tableNames = [];
         const sqlSchema = data.SQLSchema;
-        console.log('data:', data);
-        console.log('SQL schema:', data.SQLSchema);
+        // console.log('data:', data);
+        // console.log('SQL schema:', sqlSchema);
         // console.log('GQL schema:', data.GQLSchema);
+
         const tableNodes = [];
 
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
@@ -34,26 +35,17 @@ export default function URIForm() {
           const dataType = oneColumn.dataType;
           // console.log('dataType:', dataType);
 
-          // let horizontal = 100;
-          // let vertical = 100;
-
           tableNodes.push({
             id: i.toString(),
             data: { label: tableName },
-            // columns: [[colName, datatype]],
 
             position: {
               x: Math.random() * window.innerWidth,
               y: Math.random() * window.innerHeight,
-              // x: 100,
-              // y: 300,
             },
           });
         }
         console.log('SEND NODES!: ', tableNodes);
-
-        // horizontal += 100;
-        // vertical += 100;
 
         visualizerDispatch({
           type: 'SET_TABLES',
@@ -81,7 +73,6 @@ export default function URIForm() {
     const URILink = document.getElementById('URILink').value;
     // if there's no input, do nothing
     if (!URILink) return;
-    alert(URILink);
 
     fetch('/sql-schema', {
       method: 'POST',
@@ -103,11 +94,11 @@ export default function URIForm() {
           // console.log('fullTable in loop:', fullTable);
           // console.log('tableName in loop:', tableName);
 
-          const columns = fullTable[tableName].columns;
+          // const columns = fullTable[tableName].columns;
           // console.log('columns:', columns);
-          const oneColumn = columns[0];
+          // const oneColumn = columns[0];
           // console.log('oneColumn:', oneColumn);
-          const dataType = oneColumn.dataType;
+          // const dataType = oneColumn.dataType;
           // console.log('dataType:', dataType);
 
           tableNodes.push({

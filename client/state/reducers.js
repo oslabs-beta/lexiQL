@@ -2,6 +2,7 @@
 export const initialVisualizerState = {
   tableNames: [],
   tableNodes: [],
+  // sqlSchema: []
 };
 
 export const visualizerReducer = (state, action) => {
@@ -11,6 +12,7 @@ export const visualizerReducer = (state, action) => {
         ...state,
         tableNames: action.payload.tableNames,
         tableNodes: action.payload.tableNodes,
+        // sqlSchema: action.payload.sqlSchema,
       };
     // case 'UPDATE_TABLE':
     //   return {
@@ -34,18 +36,23 @@ export const codeReducer = (state, action) => {
     case 'SET_CODE':
       return {
         ...state,
+<<<<<<< HEAD
         schema: 'TESTING 123!',
         // schema: action.payload.schema,
+=======
+        // schema: 'TESTING 123',
+        schema: action.payload.schema,
+>>>>>>> 6aa129352e7f1292e283af7217e27fd20a31316a
         resolver: 'TEMP HARDCODED TEXT',
         displayCode: action.payload.displayCode,
         // display:
       };
-    // case 'SET_DISPLAY':
-    //   return {
-    //     ...state,
-    //     displayCode: action.payload.displayCode,
-    //     // display:
-    //   };
+    case 'SET_DISPLAY':
+      return {
+        ...state,
+        displayCode: action.payload.displayCode,
+        // display:
+      };
 
     // case 'TEAM_LOAD':
     //   return {
