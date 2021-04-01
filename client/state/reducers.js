@@ -26,7 +26,7 @@ export const visualizerReducer = (state, action) => {
 
 export const initialCodeState = {
   schema: '',
-  // resolver: '',
+  resolver: '',
   // viewSchema: true,
   displayCode: '',
 };
@@ -38,7 +38,7 @@ export const codeReducer = (state, action) => {
         ...state,
         // schema: 'TESTING 123',
         schema: action.payload.schema,
-        resolver: 'TEMP HARDCODED TEXT',
+        resolver: action.payload.resolver,
         displayCode: action.payload.displayCode,
         // display:
       };

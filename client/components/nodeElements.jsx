@@ -1,7 +1,11 @@
 import React from 'react';
 
-export funct
-export const columnElements = [
+export default function getColumnElements () {
+
+}
+
+// example below
+[
   {
     id: '1',
     type: 'input',

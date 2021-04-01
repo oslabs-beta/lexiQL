@@ -13,49 +13,89 @@ export default function URIForm() {
     fetch('/example-schema')
       .then((res) => res.json())
       .then((data) => {
-        const tableNames = [];
+        // const tableNames = [];
         const sqlSchema = data.SQLSchema;
-        // console.log('data:', data);
-        // console.log('SQL schema:', sqlSchema);
-        // console.log('GQL schema:', data.GQLSchema);
-
         const tableNodes = [];
 
+        // loop through the data and grab every table name
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
+          const currTableNodes = [];
           const fullTable = data.SQLSchema[i];
           const tableName = Object.keys(fullTable)[0];
-          tableNames.push(tableName);
-          // console.log('fullTable in loop:', fullTable);
-          // console.log('tableName in loop:', tableName);
-          
-          // grabs all the columns in the table
-          const columns = fullTable[tableName].columns;
-          console.log('columns:', columns);
-          console.log('columns[0]:', columns[0]);
-          // columns.unshift(tableName);
-          // console.log('columns after unshift:', columns);
-          // gets the contents of a single column
-          const oneColumn = columns[0];
-          console.log('oneColumn:', oneColumn);
-          // gets the data type of the specific column
-          const dataTypes = oneColumn['dataType'];
-          console.log('dataTypes:', dataTypes);
 
-          tableNodes.push({
+          currTableNodes.push({
             id: i.toString(),
             type: 'default',
-            style: { background:' #5a95f5' },
+            style: { background: '#f5ba5a' },
             data: { label: tableName },
 
             position: {
               x: 200 * i,
               y: 0,
-              // x: Math.random() * window.innerWidth,
-              // y: Math.random() * window.innerHeight,
             },
           });
+
+          tableNodes.push(currTableNodes);
+          console.log('tableNodes[i]:', tableNodes[i]);
+
+          // [[tablename1, column11, column12..], [tablename2, column21, column22]....] 
+          const columns = fullTable[tableName].columns;
+          console.log('columns:', columns);
+
+          for (let j = 0; j < columns.length; j++) {
+            const columnLabel = Object.keys(columns[j])[0];
+            tableNodes[i].push({
+              id: `${i}${j}`,
+              type: 'default',
+              style: { background:' #5a95f5' },
+              data: { label: columnLabel },
+  
+              position: {
+                x: 200 * i,
+                y: 100 * (j+1),
+              },
+            });
+          }
+
+          // tableNodes.push(currTableNodes);
         }
-        console.log('SEND NODES!: ', tableNodes);
+
+        console.log('tableNodes after 1st loop: ', tableNodes);
+
+        // loop thru a 2nd time to grab the column names and add them the tableNodes array
+        // for (let i = 0; i < data.SQLSchema.length; i += 1) {
+        //   const fullTable = data.SQLSchema[i];
+        //   const tableName = Object.keys(fullTable)[0];
+        //   const subArr = tableNodes[i];
+        //   console.log('subArr:', subArr);
+          
+        //   // grabs all the columns in the table
+        //   const columns = fullTable[tableName].columns;
+        //   console.log('columns:', columns);
+        //   console.log('columns[0]:', columns[0]);
+
+        //   // gets the contents of a single column
+        //   const oneColumn = columns[0];
+        //   console.log('oneColumn:', oneColumn);
+        //   // gets the data type of the specific column
+        //   const dataTypes = oneColumn['dataType'];
+        //   console.log('dataTypes:', dataTypes);
+
+        //   const columnLabel = Object.keys(oneColumn)[0];
+        //   tableNodes[i].push({
+        //     id: i.toString(),
+        //     type: 'default',
+        //     style: { background:' #5a95f5' },
+        //     data: { label: columnLabel },
+
+        //     position: {
+        //       x: 200 * i,
+        //       y: 100,
+        //     },
+        //   });
+        // }
+
+        // console.log('tableNodes after 2nd loop: ', tableNodes);
 
         visualizerDispatch({
           type: 'SET_TABLES',
@@ -70,7 +110,7 @@ export default function URIForm() {
           type: 'SET_CODE',
           payload: {
             schema: data.GQLSchema.types,
-            // resolver: data.GQLSchema.resolvers,
+            resolver: data.GQLSchema.resolvers,
             displayCode: data.GQLSchema.types,
           },
         });
@@ -91,7 +131,7 @@ export default function URIForm() {
     })
       .then((res) => res.json())
       .then((data) => {
-        const tableNames = [];
+        // const tableNames = [];
         const sqlSchema = data.SQLSchema;
         // console.log('data:', data);
         console.log('SQL schema:', data.SQLSchema);
@@ -100,7 +140,7 @@ export default function URIForm() {
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
           const fullTable = data.SQLSchema[i];
           const tableName = Object.keys(fullTable)[0];
-          tableNames.push(tableName);
+          // tableNames.push(tableName);
           // console.log('fullTable in loop:', fullTable);
           // console.log('tableName in loop:', tableName);
 
@@ -113,13 +153,13 @@ export default function URIForm() {
 
           tableNodes.push({
             id: i.toString(),
+            type: 'default',
+            style: { background:' #5a95f5' },
             data: { label: tableName },
 
             position: {
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              // x: 100,
-              // y: 300,
+              x: 200 * i,
+              y: 0,
             },
           });
         }
@@ -137,7 +177,7 @@ export default function URIForm() {
           type: 'SET_CODE',
           payload: {
             schema: data.GQLSchema.types,
-            // resolver: data.GQLSchema.resolvers,
+            resolver: data.GQLSchema.resolvers,
             // schema: 'abc124124124',
             // resolver: '124124214!!!',
             // test: '12345124124124',
