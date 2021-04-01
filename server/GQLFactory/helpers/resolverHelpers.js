@@ -124,6 +124,23 @@ resolverHelper.identifyRelationships = (tableName, sqlSchema) => {
           /* Check if refByTableFKName has already been added to resolverBody string */
           if (!inResolverBody.includes(refByTableFKName)) {
             inResolverBody.push(refByTableFKName);
+            console.log(
+              'tableName: ',
+              tableName,
+              'primaryKey: ',
+              primaryKey,
+              'refByTableTableNameAlias: ',
+              refByTableTableNameAlias,
+              'refByTable: ',
+              refByTable,
+              'refByTableFK: ',
+              refByTableFK,
+              'refByTableFKName: ',
+              refByTableFKName,
+              'refByTableFKKey: ',
+              refByTableFKKey
+            );
+
             /* Use inline comments below as example */
             resolverBody += resolverHelper.junctionTableRelationships(
               tableName, // -------------------species
@@ -175,7 +192,23 @@ resolverHelper.identifyRelationships = (tableName, sqlSchema) => {
   return resolverBody;
 };
 
-resolverHelper.junctionTableRelationships = () => {};
+resolverHelper.junctionTableRelationships = (
+  tableName,
+  primaryKey,
+  refByTableTableNameAlias,
+  refByTable,
+  refByTableFK,
+  refByTableFKName,
+  refByTableFKKey
+) => {
+  return `${refByTableFKName}: (${tableName}) => {
+          const query = 'SELECT * FROM ${refByTableFKName} LEFT OUTER JOIN ${refByTable} ON ${refByTableFKName}.${refByTableFKKey} = ${refByTable}.${refByTableFK} WHERE ${refByTable}.${refByTableTableNameAlias} = $1':
+          const values = [${refByTableFKName}.${refByTableFKKey}];
+          return db.query(query, values)
+            .then(data => data.rows)
+            .catch(err => new Error(err));
+    }, `;
+};
 
 resolverHelper.customObjectsRelationships = () => {};
 
