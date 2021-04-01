@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { CodeContext } from '../state/contexts';
+import CodeMirror from '../components/codeMirror';
 
 export default function codeContainer() {
   const { codeState, codeDispatch } = useContext(CodeContext);
@@ -29,6 +30,7 @@ export default function codeContainer() {
 
   return (
     <div className="codeContainer">
+      {/* <div> */}
       <button
         type="button"
         className="codeContainerButton"
@@ -46,10 +48,22 @@ export default function codeContainer() {
       >
         Resolver
       </button>
+      {/* <CodeMirror
+        className="CodeMirror"
+        value={codeState.displayCode}
+        options={{
+          mode: 'javascript',
+          theme: 'material',
+          lineNumbers: true,
+          lineWrapping: true,
+        }}
+        // onChange={(editor, data, value) => {}}
+      /> */}
       {/* <p>{codeState.resolver}</p> */}
       {/* <p>{codeState.schema}</p> */}
-      <p>{codeState.displayCode}</p>
+      {/* <p>{codeState.displayCode}</p> */}
       <br />
+      <CodeMirror />
     </div>
   );
 }
