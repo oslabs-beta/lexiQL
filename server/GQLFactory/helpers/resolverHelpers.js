@@ -1,6 +1,7 @@
 const toCamelCase = require('camelcase');
 const { singular } = require('pluralize');
 const { pascalCase } = require('pascal-case');
+const { isJunctionTable } = require('./helperFunctions');
 
 const resolverHelper = {};
 
@@ -94,11 +95,53 @@ resolverHelper.deleteMutation = (tableName, primaryKey) => {
 
 /* */
 
-resolverHelper.identifyRelationships = () => {};
+resolverHelper.identifyRelationships = (tableName, sqlSchema) => {
+  const { primaryKey, referencedBy, foreignKeys } = sqlSchema[tableName];
+  let resolverBody = '';
+  /* Looping through each table that references tableName */
+  for (const refByTable of Object.keys(referencedBy)) {
+    /* Shorthand labels for refByTable's properties */
+    const {
+      referencedBy: refBy,
+      foreignKeys: refFK,
+      columns: refCols,
+    } = sqlSchema[refByTable];
+    /* If refByTable is a Junction Table we concat its ForeignKeys refTableName to resolverBody */
+    if (isJunctionTable(refFK, refCols)) {
+      /* Column name on Junction Table (refByTable) referencing the current tableName */
+      let refByTableTableNameAlias = '';
+      for (const fK of Object.keys(refFK)) {
+        if (refFK[fK].referenceTable === tableName) {
+          refByTableTableNameAlias = fK;
+        }
+      }
+      /* Loop through refByTable's foreignkeys */
+      for (const refByTableFK of Object.keys(refFK)) {
+        /* Filtering out tableName */
+        if (refFK[refByTableFK].referenceTable !== tableName) {
+          const refByTableFKName =
+            refFK[refByTableFK].referenceTable; /* refByTableFKName = people */
+          const refByTableFKKey =
+            refFK[refByTableFK].referenceKey; /* refByTableFKKey = _id */
+          /* Use inline comments below as example */
+          resolverBody += resolverHelper.junctionTableRelationship(
+            tableName, // -------------------species
+            primaryKey, // ------------------_id
+            refByTableTableNameAlias, // ----species_id
+            refByTable, // ------------------species_in_films
+            refByTableFK, // ----------------film_id
+            refByTableFKName, // ------------films
+            refByTableFKKey // --------------_id
+          );
+        }
+      }
+    } else {
+      /* if conditional */
+    }
+  }
+};
 
-resolverHelper.oneToOne = () => {};
-
-resolverHelper.oneToMany = () => {};
+resolverHelper.junctionTableRelationship = () => {};
 
 resolverHelper.manyToMany = () => {};
 
