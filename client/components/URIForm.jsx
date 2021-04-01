@@ -19,14 +19,15 @@ export default function URIForm() {
 
         // loop through the data and grab every table name
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
-          const currTableNodes = [];
+          // const currTableNodes = [];
           const fullTable = data.SQLSchema[i];
           const tableName = Object.keys(fullTable)[0];
 
-          currTableNodes.push({
+          tableNodes.push({
             id: i.toString(),
             type: 'default',
-            style: { background: '#f5ba5a' },
+            style: { background:' #5a95f5' },
+            // style: { background: '#f5ba5a' },
             data: { label: tableName },
 
             position: {
@@ -35,8 +36,8 @@ export default function URIForm() {
             },
           });
 
-          tableNodes.push(currTableNodes);
-          console.log('tableNodes[i]:', tableNodes[i]);
+          // tableNodes.push(currTableNodes);
+          // console.log('tableNodes[i]:', tableNodes[i]);
 
           // [[tablename1, column11, column12..], [tablename2, column21, column22]....] 
           const columns = fullTable[tableName].columns;
@@ -44,15 +45,16 @@ export default function URIForm() {
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
-            tableNodes[i].push({
+            tableNodes.push({
               id: `${i}${j}`,
               type: 'default',
-              style: { background:' #5a95f5' },
+              style: { background: '#f5ba5a' },
+              // style: { background:' #5a95f5' },
               data: { label: columnLabel },
   
               position: {
                 x: 200 * i,
-                y: 100 * (j+1),
+                y: 30 * (j+1),
               },
             });
           }
