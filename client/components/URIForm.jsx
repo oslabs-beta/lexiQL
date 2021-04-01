@@ -13,11 +13,13 @@ export default function URIForm() {
     fetch('/example-schema')
       .then((res) => res.json())
       .then((data) => {
-        const tableNames = [];
+        // const tableNames = [];
         const sqlSchema = data.SQLSchema;
-        console.log('data:', data);
-        console.log('SQL schema:', data.SQLSchema);
+        // console.log('data:', data);
+        // console.log('SQL schema:', sqlSchema);
         // console.log('GQL schema:', data.GQLSchema);
+
+        /*
         const tableNodes = [];
 
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
@@ -45,13 +47,14 @@ export default function URIForm() {
           });
         }
         console.log('SEND NODES!: ', tableNodes);
+        */
 
         visualizerDispatch({
           type: 'SET_TABLES',
           payload: {
             // change below based on whatever backend has their data
             sqlSchema,
-            tableNodes,
+            // tableNodes,
           },
         });
 
@@ -94,11 +97,11 @@ export default function URIForm() {
           // console.log('fullTable in loop:', fullTable);
           // console.log('tableName in loop:', tableName);
 
-          const columns = fullTable[tableName].columns;
+          // const columns = fullTable[tableName].columns;
           // console.log('columns:', columns);
-          const oneColumn = columns[0];
+          // const oneColumn = columns[0];
           // console.log('oneColumn:', oneColumn);
-          const dataType = oneColumn.dataType;
+          // const dataType = oneColumn.dataType;
           // console.log('dataType:', dataType);
 
           tableNodes.push({

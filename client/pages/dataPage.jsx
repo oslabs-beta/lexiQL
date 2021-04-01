@@ -14,6 +14,7 @@ import CodeContainer from '../containers/codeContainer';
 import Footer from '../containers/footer.jsx';
 import TableNode from '../components/tableNode';
 import URIForm from '../components/URIForm';
+import Canvas from '../components/canvas';
 
 export default function dataPage() {
   const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);
@@ -55,7 +56,8 @@ export default function dataPage() {
             }}
           >
             <PopupContainer />
-            <VisualizerContainer />
+            <Canvas />
+            {/* <VisualizerContainer /> */}
             <CodeContainer />
           </VisualizerContext.Provider>
         </CodeContext.Provider>

@@ -20,8 +20,10 @@
   "homepage": "https://github.com/ryanmcd118/lexiQL#readme",
   "dependencies": {
     "@antv/g6": "^4.2.3",
+    "@mrblenny/react-flow-chart": "0.0.14",
     "camelcase": "^6.2.0",
     "crypto-browserify": "^3.12.0",
+    "dagre": "^0.8.5",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
     "g6": "^0.2.0",
@@ -40,6 +42,7 @@
     "react-router-dom": "^5.2.0",
     "request": "^2.79.0",
     "sass": "^1.32.8",
+    "styled-components": "^5.2.3",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {

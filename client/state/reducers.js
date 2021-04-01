@@ -1,7 +1,8 @@
 // Visualizer display on app page
 export const initialVisualizerState = {
-  tableNames: [],
-  tableNodes: [],
+  // tableNames: [],
+  // tableNodes: [],
+  sqlSchema: []
 };
 
 export const visualizerReducer = (state, action) => {
@@ -9,8 +10,9 @@ export const visualizerReducer = (state, action) => {
     case 'SET_TABLES':
       return {
         ...state,
-        tableNames: action.payload.tableNames,
-        tableNodes: action.payload.tableNodes,
+        // tableNames: action.payload.tableNames,
+        // tableNodes: action.payload.tableNodes,
+        sqlSchema: action.payload.sqlSchema,
       };
     // case 'UPDATE_TABLE':
     //   return {
