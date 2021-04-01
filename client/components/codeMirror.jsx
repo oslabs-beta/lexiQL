@@ -4,20 +4,14 @@ import { UnControlled as CodeMirror } from 'react-codemirror2';
 // import '../node_modules/codemirror/lib/codemirror.css';
 // import '../node_modules/codemirror/theme/material.css';
 // import 'codemirror/mode/javascript/javascript';
-require('../../node_modules/codemirror/mode/xml/xml');
-require('../../node_modules/codemirror/mode/javascript/javascript');
-require('../../node_modules/codemirror/mode/css/css');
-require('../../node_modules/codemirror/mode/jsx/jsx');
-require('../../node_modules/codemirror/lib/codemirror.css');
-require('../../node_modules/codemirror/theme/material.css');
-// require('./theme.css');
+// import 'codemirror/mode/javascript/javascript';
 
 export default function codeMirror() {
   const { codeState, codeDispatch } = useContext(CodeContext);
 
   return (
     <CodeMirror
-      className="CodeMirror"
+      className="codeMirror"
       value={codeState.displayCode}
       // value="hey hey hey pals"
       options={{
