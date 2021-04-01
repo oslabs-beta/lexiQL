@@ -10,9 +10,9 @@ export const visualizerReducer = (state, action) => {
     case 'SET_TABLES':
       return {
         ...state,
-        tableNames: action.payload.tableNames,
+        // tableNames: action.payload.tableNames,
         tableNodes: action.payload.tableNodes,
-        // sqlSchema: action.payload.sqlSchema,
+        sqlSchema: action.payload.sqlSchema,
       };
     // case 'UPDATE_TABLE':
     //   return {
@@ -55,3 +55,4 @@ export const codeReducer = (state, action) => {
     //   }
   }
 };
+
