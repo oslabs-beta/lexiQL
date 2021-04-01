@@ -1,21 +1,26 @@
-import React, { useEffect, useState, useReducer } from 'react';
-import { VisualizerContext, CodeContext } from '../state/contexts';
+import React, { useEffect, useState, useReducer } from "react";
+import { VisualizerContext, CodeContext } from "../state/contexts";
 import {
   initialVisualizerState,
   visualizerReducer,
   initialCodeState,
   codeReducer,
-} from '../state/reducers';
+} from "../state/reducers";
 
-import PopupContainer from '../containers/popupContainer';
-import Table from '../visualizer/Table.jsx';
-import VisualizerContainer from '../containers/visualizerContainer';
-import CodeContainer from '../containers/codeContainer';
-import Footer from '../containers/footer.jsx';
+import PopupContainer from "../containers/popupContainer";
+import VisualizerContainer from "../containers/visualizerContainer";
+import CodeContainer from "../containers/codeContainer";
+import Footer from "../containers/footer.jsx";
+import TableNode from "../components/tableNode";
+import URIForm from "../components/URIForm";
+import Canvas from "../components/canvas";
 
 export default function dataPage() {
-  // unclear if we should set the second argument in useReducer as an empty array or to an initial state or 'initialCodeState' as in reducers.js
-  const [testCode, codeDispatch] = useReducer(codeReducer, '');
+  const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);
+  const [visualizerState, visualizerDispatch] = useReducer(
+    visualizerReducer,
+    initialVisualizerState
+  );
 
   return (
     <div className="dataPage">
@@ -23,21 +28,37 @@ export default function dataPage() {
 
       <div className="graphicalContainer">
         {/* <VisualizerContext.Provider
-        value={{
-          visualizerState,
-          visualizerDispatch
-        }}> */}
-        <VisualizerContainer />
-        {/* </VisualizerContext.Provider> */}
+          value={{
+            visualizerState,
+            visualizerDispatch,
+          }}
+        >
+          <VisualizerContainer />
+          <TableNode />
+        </VisualizerContext.Provider> */}
 
         {/* <CodeContext.Provider
         value={{
           codeState,
           codeDispatch
         }}> */}
-        <CodeContext.Provider value={{ testCode, codeDispatch }}>
-          <PopupContainer />
-          <CodeContainer />
+        <CodeContext.Provider
+          value={{
+            codeState,
+            codeDispatch,
+          }}
+        >
+          <VisualizerContext.Provider
+            value={{
+              visualizerState,
+              visualizerDispatch,
+            }}
+          >
+            <PopupContainer />
+            {/* <Canvas /> */}
+            <VisualizerContainer />
+            <CodeContainer />
+          </VisualizerContext.Provider>
         </CodeContext.Provider>
         {/* </CodeContext.Provider> */}
       </div>
