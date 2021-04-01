@@ -31,6 +31,35 @@ schemaFactory.createTypes = (sqlSchema) => {
   return types;
 };
 
-schemaFactory.createResolvers = () => {};
+schemaFactory.createResolvers = (sqlSchema) => {
+  let queryResolvers = '';
+  let mutationResolvers = '';
+  let customObjectTypeResolvers = '';
+
+  for (const tableName of Object.keys(sqlSchema)) {
+    const tableData = sqlSchema[tableName];
+    const { foreignKeys, columns } = tableData;
+    if (!isJunctionTable(foreignKeys, columns)) {
+      queryResolvers += collectQueries(tableName, tableData);
+      mutationResolvers += collectMutations(tableName, tableData);
+      customObjectTypeResolvers += collectCustomObjectRelationships(
+        tableName,
+        sqlSchema
+      );
+    }
+  }
+
+  const resolvers =
+    '\nconst resolvers = {\n' +
+    '  Query: {' +
+    `    ${queryResolvers}\n` +
+    '  },\n\n' +
+    '  Mutation: {\n' +
+    `    ${mutationResolvers}\n` +
+    '  },\n' +
+    `    ${customObjectTypeResolvers}\n  }\n`;
+
+  return resolvers;
+};
 
 module.exports = schemaFactory;
