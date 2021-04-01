@@ -211,8 +211,8 @@ export default function Canvas() {
           }
         },
         position: {
-          x: Math.random() * 2000,
-          y: Math.random() * 2000
+          x: Math.random() * 1500,
+          y: Math.random() * 1500
         }
       }
 

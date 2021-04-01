@@ -22,7 +22,7 @@ export default function teamMember({ name, headshot, github, linkedin }) {
           src={LinkedinIcon}
           className="siteLogos"
           alt="logo"
-          onClick={() => window.open(github)}
+          onClick={() => window.open(linkedin)}
         />
       </div>
     </div>

@@ -31,23 +31,25 @@ export default function codeContainer() {
   return (
     <div className="codeContainer">
       {/* <div> */}
-      <button
-        type="button"
-        className="codeContainerButton"
-        id="schemaButton"
-        onClick={handleSchema}
-      >
-        Schema
-      </button>
-      <br />
-      <button
-        type="button"
-        className="codeContainerButton"
-        id="resolverButton"
-        onClick={handleResolver}
-      >
-        Resolver
-      </button>
+      <div className="codeButtons">
+        <button
+          type="button"
+          className="codeContainerButton"
+          id="schemaButton"
+          onClick={handleSchema}
+        >
+          Schema
+        </button>
+        <br />
+        <button
+          type="button"
+          className="codeContainerButton"
+          id="resolverButton"
+          onClick={handleResolver}
+        >
+          Resolver
+        </button>
+      </div>
       {/* <CodeMirror
         className="CodeMirror"
         value={codeState.displayCode}
@@ -61,11 +63,7 @@ export default function codeContainer() {
       /> */}
       {/* <p>{codeState.resolver}</p> */}
       {/* <p>{codeState.schema}</p> */}
-<<<<<<< HEAD
-      <p className="displayCode" id="displayCode">{codeState.displayCode}</p>
-=======
       {/* <p>{codeState.displayCode}</p> */}
->>>>>>> 24cf1a375ca382d4b2f2031ee70b18ead72dd922
       <br />
       <CodeMirror />
     </div>

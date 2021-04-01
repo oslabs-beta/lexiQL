@@ -56,8 +56,8 @@ export default function dataPage() {
             }}
           >
             <PopupContainer />
-            <Canvas />
-            {/* <VisualizerContainer /> */}
+            {/* <Canvas /> */}
+            <VisualizerContainer />
             <CodeContainer />
           </VisualizerContext.Provider>
         </CodeContext.Provider>
