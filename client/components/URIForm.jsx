@@ -27,21 +27,31 @@ export default function URIForm() {
           tableNames.push(tableName);
           // console.log('fullTable in loop:', fullTable);
           // console.log('tableName in loop:', tableName);
-
+          
+          // grabs all the columns in the table
           const columns = fullTable[tableName].columns;
-          // console.log('columns:', columns);
+          console.log('columns:', columns);
+          console.log('columns[0]:', columns[0]);
+          // columns.unshift(tableName);
+          // console.log('columns after unshift:', columns);
+          // gets the contents of a single column
           const oneColumn = columns[0];
-          // console.log('oneColumn:', oneColumn);
-          const dataType = oneColumn.dataType;
-          // console.log('dataType:', dataType);
+          console.log('oneColumn:', oneColumn);
+          // gets the data type of the specific column
+          const dataTypes = oneColumn['dataType'];
+          console.log('dataTypes:', dataTypes);
 
           tableNodes.push({
             id: i.toString(),
+            type: 'default',
+            style: { background:' #5a95f5' },
             data: { label: tableName },
 
             position: {
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: 200 * i,
+              y: 0,
+              // x: Math.random() * window.innerWidth,
+              // y: Math.random() * window.innerHeight,
             },
           });
         }
