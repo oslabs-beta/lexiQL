@@ -159,12 +159,10 @@ resolverHelper.identifyRelationships = (tableName, sqlSchema) => {
         if (!inResolverBody.includes(fkTableName)) {
           inResolverBody.push(fkTableName);
           const fkKey = foreignKeys[fk].referenceKey;
-          console.log(
-            `tableName: ${tableName}, primaryKey ${primaryKey}, fkTableName ${fkTableName} , fkKey: ${fkKey} `
-          );
           resolverBody += resolverHelper.foreignKeyRelationships(
             tableName,
             primaryKey,
+            fk,
             fkTableName,
             fkKey
           );
@@ -177,8 +175,37 @@ resolverHelper.identifyRelationships = (tableName, sqlSchema) => {
 
 resolverHelper.junctionTableRelationships = () => {};
 
-resolverHelper.customObjectsRelationships = () => {};
+resolverHelper.customObjectsRelationships = (
+  tableName,
+  primaryKey,
+  refByTable,
+  refByKey
+) => {
+  return `
+    ${toCamelCase(refByTable)}: (${toCamelCase(tableName)}) => {
+      const query = 'SELECT * FROM ${refByTable} WHERE ${refByKey} = $1';
+      const values = [${tableName}.${primaryKey}];
+      return db.query(query, values)
+        .then(data => data.rows)
+        .catch(err => new Error(err));
+    },`;
+};
 
-resolverHelper.foreignKeyRelationships = () => {};
+resolverHelper.foreignKeyRelationships = (
+  tableName,
+  primaryKey,
+  fk,
+  fkTableName,
+  fkKey
+) => {
+  return `
+    ${toCamelCase(fkTableName)}: (${toCamelCase(tableName)}) => {
+      const query = 'SELECT ${fkTableName}.* FROM ${fkTableName} LEFT OUTER JOIN ${tableName} ON ${fkTableName}.${fkKey} = ${tableName}.${fk} WHERE ${tableName}.${primaryKey} = $1';
+      const values = [${tableName}.${primaryKey}];
+      return db.query(query, values)
+        .then(data => data.rows)
+        .catch(err => new Error(err));
+    }, `;
+};
 
 module.exports = resolverHelper;
