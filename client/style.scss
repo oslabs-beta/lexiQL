@@ -123,19 +123,47 @@ HOMEPAGE DEMO STYLING
   height: 450px;
   margin-bottom: 60px;
 
-  #demoGif {
+  .demoGif {
     border: 2px solid #f5ba5a;
     border-radius: 5px;
-    width: 40%;
-    height: 90%;
+    // width: 40%;
+    // height: 90%;
     box-shadow: 0px 0px 10px #aaa9a9;
+  }
+
+  #input {
+    // height: 90%;
+    border: 2px solid #f5ba5a;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #aaa9a9;
+  }
+
+  #visual {
+    // height: 100%;
+    // width: 45%;
+    border: 2px solid #f5ba5a;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #aaa9a9;
+  }
+
+  .schemaResolver {
+    display: flex;
+    border: 2px solid #f5ba5a;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #aaa9a9;
+  }
+
+  #schemas {
+  }
+
+  #resolvers {
   }
 
   .featureWords {
     width: 40%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .featureName {
@@ -190,7 +218,7 @@ ABOUT US/TEAM STYLING
     border: 2px solid #f5ba5a;
     box-shadow: 0px 0px 10px #aaa9a9;
     border-radius: 5px;
-    width: 40%;
+    width: 35%;
     padding: 20px 0px;
     margin: 20px 0px;
     display: flex;
