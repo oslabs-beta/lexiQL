@@ -199,12 +199,13 @@ resolverHelper.junctionTableRelationships = (
   refByTableFKName,
   refByTableFKKey
 ) => {
-  return `${refByTableFKName}: (${tableName}) => {
-          const query = 'SELECT * FROM ${refByTableFKName} LEFT OUTER JOIN ${refByTable} ON ${refByTableFKName}.${refByTableFKKey} = ${refByTable}.${refByTableFK} WHERE ${refByTable}.${refByTableTableNameAlias} = $1':
-          const values = [${tableName}.${primaryKey}];
-          return db.query(query, values)
-            .then(data => data.rows)
-            .catch(err => new Error(err));
+  return `
+    ${refByTableFKName}: (${tableName}) => {
+      const query = 'SELECT * FROM ${refByTableFKName} LEFT OUTER JOIN ${refByTable} ON ${refByTableFKName}.${refByTableFKKey} = ${refByTable}.${refByTableFK} WHERE ${refByTable}.${refByTableTableNameAlias} = $1':
+      const values = [${tableName}.${primaryKey}];
+      return db.query(query, values)
+        .then(data => data.rows)
+        .catch(err => new Error(err));
     }, `;
 };
 

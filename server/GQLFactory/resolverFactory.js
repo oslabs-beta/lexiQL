@@ -37,7 +37,7 @@ resolverFactory.collectCustomObjectRelationships = (tableName, sqlSchema) => {
 
   return `
     ${resolverName}: {
-        ${resolverBody}
+      ${resolverBody}
     }, \n`;
 };
 
