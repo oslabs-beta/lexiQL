@@ -7,12 +7,12 @@ export const initialVisualizerState = {
 
 export const visualizerReducer = (state, action) => {
   switch (action.type) {
-    case 'SET_TABLES':
+    case "SET_TABLES":
       return {
         ...state,
-        tableNames: action.payload.tableNames,
+        // tableNames: action.payload.tableNames,
         tableNodes: action.payload.tableNodes,
-        // sqlSchema: action.payload.sqlSchema,
+        sqlSchema: action.payload.sqlSchema,
       };
     // case 'UPDATE_TABLE':
     //   return {
@@ -25,33 +25,44 @@ export const visualizerReducer = (state, action) => {
 // don't think we need to initialize state here? can just pass an empty string
 
 export const initialCodeState = {
-  schema: '',
-  // resolver: '',
+  schema: "",
+  resolver: "",
   // viewSchema: true,
-  displayCode: '',
+  displayCode: "",
+
+  // state for the collapsible panels, have to move out once we create a new context
+  codeIsOpen: true,
+  formIsOpen: true,
+  firstFetch: true,
 };
 
 export const codeReducer = (state, action) => {
   switch (action.type) {
-    case 'SET_CODE':
+    case "SET_CODE":
       return {
         ...state,
-        // schema: 'TESTING 123',
         schema: action.payload.schema,
-        resolver: 'TEMP HARDCODED TEXT',
+        resolver: action.payload.resolver,
         displayCode: action.payload.displayCode,
-        // display:
+        firstFetch: action.payload.firstFetch,
+        formIsOpen: action.payload.formIsOpen,
       };
-    case 'SET_DISPLAY':
+    case "SET_DISPLAY":
       return {
         ...state,
         displayCode: action.payload.displayCode,
-        // display:
       };
 
-    // case 'TEAM_LOAD':
-    //   return {
-    //     ...state,
-    //   }
+    // case for the collapsible panels, have to move out once we create a new context
+    case "TOGGLE_CODE":
+      return {
+        ...state,
+        codeIsOpen: action.payload.codeIsOpen,
+      };
+    case "TOGGLE_FORM":
+      return {
+        ...state,
+        formIsOpen: action.payload.formIsOpen,
+      };
   }
 };
