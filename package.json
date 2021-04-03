@@ -42,6 +42,7 @@
     "react-flow-renderer": "^9.4.1",
     "react-hooks": "^1.0.1",
     "react-router-dom": "^5.2.0",
+    "reactstrap": "^8.9.0",
     "request": "^2.79.0",
     "sass": "^1.32.8",
     "styled-components": "^5.2.3",

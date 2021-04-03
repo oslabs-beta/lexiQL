@@ -260,6 +260,78 @@ ABOUT US/TEAM STYLING
 }
 
 /*
+DATA PAGE STYLING
+*/
+.dataPage {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.graphicalContainer {
+  display: flex;
+  height: 80vh;
+  width: 100%;
+  justify-content: space-between;
+  // align-items: center;
+}
+
+.popupContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0px 0px 10px;
+  width: 15%;
+  border: 2px solid #f5ba5a;
+}
+
+.visualizerContainer {
+  border: 2px solid #f5ba5a;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+URI FORM PANEL STYLING
+*/
+.uripanel {
+  position: absolute;
+  top: 400px;
+  left: -300px;
+  height: 50%;
+  // width: 300px;
+  width: 15%;
+  transition: left 0.3s ease-in-out;
+  background-color: white;
+}
+// .uripanel-toggle {
+//   position: absolute;
+//   top: 20%;
+//   right: -60px;
+//   height: 60px;
+//   width: 60px;
+//   z-index: 1;
+// }
+
+.uripanel.open {
+  left: 0;
+}
+
+.uripanelbtn {
+  font-size: 50px;
+  position: fixed;
+  color: red;
+  width: 50px;
+  left: 0px;
+}
+
+.uripanelbtn.open {
+  left: 200px;
+}
+
+/*
 URI FORM STYLING
 */
 .uriForm {
@@ -293,56 +365,11 @@ URI FORM STYLING
     cursor: pointer;
     filter: brightness(85%);
   }
-
-  // #uriSubmitButton {
-  //   // color: #f5ba5a;
-  // }
-
-  // #sampleDataButton {
-  //   // color: #f5ba5a;
-  // }
 }
 
 /*
-DATA PAGE STYLING
+CODE CONTAINER STYLING
 */
-
-.dataPage {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  // align-items: center;
-  justify-content: center;
-}
-
-.graphicalContainer {
-  display: flex;
-  height: 80vh;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.popupContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  // justify-content: center;
-  padding: 30px 0px 0px 10px;
-  width: 15%;
-  // height: 100%;
-  border: 2px solid #f5ba5a;
-}
-
-.visualizerContainer {
-  // background-color: green;
-  border: 2px solid #f5ba5a;
-  width: 60%;
-  // height: 100%;
-  display: flex;
-  flex-direction: column;
-  // margin-right: 10px;
-}
-
 .codeContainer {
   background-color: #f0f1f1;
   border: 2px solid #f5ba5a;
@@ -351,7 +378,7 @@ DATA PAGE STYLING
   display: flex;
   flex-direction: column;
   // justify-content: center;
-  // align-items: center;
+  align-items: stretch;
   // for stacy's testing purposes below, can't see shit
   overflow-y: auto;
   font-size: 8px;
@@ -378,20 +405,34 @@ DATA PAGE STYLING
     filter: brightness(85%);
   }
 
-  // #schemaButton {
-  // }
-
-  // #resolverButton {
-  // }
-
   p {
     font-size: 10px;
   }
-}
 
-// #displayCode {
-//   font-size: 10px;
-// }
+  /*
+SCHEMA/RESOLVER PANEL STYLING
+*/
+  .sidebar {
+    display: none;
+    position: absolute;
+    // top: 60px;
+    right: -300px;
+    height: 80%;
+    width: 20%;
+    // transition: right 0.3s ease-in-out;
+    transition: width 0.3s ease;
+    background-color: white;
+  }
+
+  .sidebar.open {
+    display: block;
+    right: 0;
+  }
+
+  .codeToggleBtn {
+    color: red;
+  }
+}
 
 /*
 FOOTER
