@@ -42,13 +42,20 @@ export default function codeContainer() {
 
   return (
     <div className="codeContainer" id="codeContainer">
-      {/* <div className={codeState.codeIsOpen ? "sidebar open" : "sidebar"}> */}
-      <button className="codeToggleBtn" type="button" onClick={toggle}>
+      {/* <button className="codeToggleBtn" type="button" onClick={toggle}>
         Toggle
+      </button> */}
+      <button
+        type="button"
+        className={
+          codeState.codeIsOpen ? "codeToggleBtn open" : "codeToggleBtn"
+        }
+        onClick={toggle}
+      >
+        {codeState.codeIsOpen ? ">" : "<"}
       </button>
 
       <div className={codeState.codeIsOpen ? "sidebar open" : "sidebar"}>
-        {/* <div className="codeContainer"> */}
         <div className="codeButtons">
           <button
             type="button"

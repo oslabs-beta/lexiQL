@@ -55,6 +55,12 @@ NAVBAR STYLING
   .headerLinks:active {
     color: #f5ba5a;
   }
+
+  #homeLogo {
+    height: 110px;
+    // justify-content: flex-start;
+    margin: 10px -10px 0px 0px;
+  }
 }
 
 /*
@@ -273,47 +279,46 @@ DATA PAGE STYLING
   display: flex;
   height: 80vh;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-end;
   // align-items: center;
 }
 
-.popupContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px 0px 0px 10px;
-  width: 15%;
-  border: 2px solid #f5ba5a;
-}
+// .popupContainer {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   // padding: 30px 0px 0px 10px;
+//   // width: 15%;
+//   // border: 2px solid #f5ba5a;
+// }
 
 .visualizerContainer {
   border: 2px solid #f5ba5a;
-  width: 60%;
+  // width: 65%;
   display: flex;
   flex-direction: column;
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: 65%;
 }
 
 /*
 URI FORM PANEL STYLING
 */
 .uripanel {
+  // border: 1px solid #f5ba5a;
+  flex-basis: 20rem;
+  flex-grow: 1;
   position: absolute;
-  top: 400px;
-  left: -300px;
-  height: 50%;
-  // width: 300px;
-  width: 15%;
-  transition: left 0.3s ease-in-out;
+  top: 30%;
+  left: -25%;
+  height: 30%;
+  width: 25%;
+  transition: left 0.5s ease-in-out;
   background-color: white;
+  z-index: 9;
+  box-shadow: 0px 0px 10px #aaa9a9;
 }
-// .uripanel-toggle {
-//   position: absolute;
-//   top: 20%;
-//   right: -60px;
-//   height: 60px;
-//   width: 60px;
-//   z-index: 1;
-// }
 
 .uripanel.open {
   left: 0;
@@ -322,48 +327,67 @@ URI FORM PANEL STYLING
 .uripanelbtn {
   font-size: 50px;
   position: fixed;
-  color: red;
+  background-color: #f5ba5a;
+  color: #5a95f5;
+  border: 2px solid #f5ba5a;
   width: 50px;
+  top: 30%;
   left: 0px;
+  z-index: 10;
+  transition: left 0.5s ease-in-out;
+  box-shadow: 0px 0px 10px #aaa9a9;
 }
 
 .uripanelbtn.open {
-  left: 200px;
+  left: 25%;
+  background-color: #5a95f5;
+  color: #f5ba5a;
 }
 
 /*
 URI FORM STYLING
 */
 .uriForm {
+  // padding: 20px 20px;
   width: 100%;
-  height: 50%;
+  height: 100%;
   // border: 1px solid red;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
   // align-items: center;
 
   .formHeader {
     font-size: 40px;
+    // top: 50%;
+    margin: 30px 0px 0px 10px;
   }
 
   .dbInput {
-    width: 90%;
+    width: 80%;
+    margin: 0px 0px 10px 10px;
   }
 
   .formButtons {
+    margin: 0px 0px 0px 10px;
     border: none;
     border-radius: 5px;
-    width: 70%;
-    padding: 5px 0px;
+    width: 50%;
+    padding: 10px 0px;
     background-color: #5a95f5;
     color: #f5ba5a;
+    // border: 1px solid #f5ba5a;
+    border: none;
     font-size: 15px;
   }
 
   .formButtons:hover {
     cursor: pointer;
     filter: brightness(85%);
+  }
+
+  #sampleDataButton {
+    margin-bottom: -20px;
   }
 }
 
@@ -372,8 +396,8 @@ CODE CONTAINER STYLING
 */
 .codeContainer {
   background-color: #f0f1f1;
-  border: 2px solid #f5ba5a;
-  width: 25%;
+  // border: 2px solid #f5ba5a;
+  // width: 25%;
   // height: 100%;
   display: flex;
   flex-direction: column;
@@ -416,12 +440,15 @@ SCHEMA/RESOLVER PANEL STYLING
     display: none;
     position: absolute;
     // top: 60px;
-    right: -300px;
+    right: -25%;
     height: 80%;
-    width: 20%;
+    width: 25%;
     // transition: right 0.3s ease-in-out;
-    transition: width 0.3s ease;
+    transition: width 0.5s ease-in-out;
     background-color: white;
+    overflow-y: scroll;
+    box-shadow: 0px 0px 10px #aaa9a9;
+    z-index: 9;
   }
 
   .sidebar.open {
@@ -430,9 +457,37 @@ SCHEMA/RESOLVER PANEL STYLING
   }
 
   .codeToggleBtn {
-    color: red;
+    font-size: 50px;
+    background-color: #f5ba5a;
+    color: #5a95f5;
+    // padding: 10px 0px;
+    position: fixed;
+    width: 50px;
+    right: 0px;
+    // border: 2px solid #f5ba5a;
+    border: none;
+    transition: left 0.5s ease-in-out;
+    box-shadow: 0px 0px 10px #aaa9a9;
+    z-index: 10;
+  }
+
+  .codeToggleBtn.open {
+    right: 25%;
+    background-color: #5a95f5;
+    color: #f5ba5a;
   }
 }
+
+// .uripanelbtn {
+//   font-size: 50px;
+//   position: fixed;
+//   width: 50px;
+//   left: 0px;
+// }
+
+// .uripanelbtn.open {
+//   left: 200px;
+// }
 
 /*
 FOOTER

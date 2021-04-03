@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, Component } from "react";
 import { Collapse } from "reactstrap";
-
+import URIbtn from "./URIbtn";
 import { VisualizerContext, CodeContext } from "../state/contexts";
 import TableNode from "./tableNode";
 
@@ -68,6 +68,8 @@ export default function URIForm() {
             schema: data.GQLSchema.types,
             resolver: data.GQLSchema.resolvers,
             displayCode: data.GQLSchema.types,
+            firstFetch: false,
+            formIsOpen: false,
           },
         });
       });
@@ -80,7 +82,8 @@ export default function URIForm() {
     const valid = /^postgres:\/\//g;
 
     // if there is no input or if input is invalid do nothing
-    if (!URILink || !valid.test(URILink)) return;
+    if (!URILink || !valid.test(URILink))
+      return "Missing URI link or the link is invalid. Please enter a valid URI link.";
 
     fetch("/sql-schema", {
       method: "POST",
@@ -143,6 +146,8 @@ export default function URIForm() {
             schema: data.GQLSchema.types,
             resolver: data.GQLSchema.resolvers,
             displayCode: data.GQLSchema.types,
+            firstFetch: false,
+            formIsOpen: false,
           },
         });
       });
@@ -157,23 +162,30 @@ export default function URIForm() {
     });
   };
 
+  // don't have URI form toggle button appear if it's the user's first time on the page
+  let btnDisplay = "";
+  if (codeState.firstFetch) {
+    btnDisplay = "";
+  } else {
+    btnDisplay = <URIbtn />;
+  }
+
   return (
     <div className="uriForm" id="uriForm">
-      <button
+      {/* <button
         type="button"
         className={codeState.formIsOpen ? "uripanelbtn open" : "uripanelbtn"}
         onClick={toggle}
       >
         {codeState.formIsOpen ? "<" : ">"}
-      </button>
-
+      </button> */}
+      {btnDisplay}
       <div className={codeState.formIsOpen ? "uripanel open" : "uripanel"}>
         <form onSubmit={handleURI}>
           <label className="formHeader" htmlFor="link">
             Link a database:
           </label>
           <br />
-
           <input className="dbInput" id="URILink" placeholder="postgres://" />
           <br />
 

@@ -33,6 +33,7 @@ export const initialCodeState = {
   // state for the collapsible panels, have to move out once we create a new context
   codeIsOpen: true,
   formIsOpen: true,
+  firstFetch: true,
 };
 
 export const codeReducer = (state, action) => {
@@ -43,6 +44,8 @@ export const codeReducer = (state, action) => {
         schema: action.payload.schema,
         resolver: action.payload.resolver,
         displayCode: action.payload.displayCode,
+        firstFetch: action.payload.firstFetch,
+        formIsOpen: action.payload.formIsOpen,
       };
     case "SET_DISPLAY":
       return {

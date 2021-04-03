@@ -11,9 +11,9 @@ import PopupContainer from "../containers/popupContainer";
 import VisualizerContainer from "../containers/visualizerContainer";
 import CodeContainer from "../containers/codeContainer";
 import Footer from "../containers/footer.jsx";
-import TableNode from "../components/tableNode";
-import URIForm from "../components/URIForm";
-import Canvas from "../components/canvas";
+// import TableNode from "../components/tableNode";
+// import URIForm from "../components/URIForm";
+// import Canvas from "../components/canvas";
 
 export default function dataPage() {
   const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);
