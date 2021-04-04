@@ -1,13 +1,13 @@
 import React, { Fragment, useContext } from 'react';
 import ReactFlow, { addEdge, Background } from 'react-flow-renderer';
-import { VisualizerContext } from '../state/contexts';
+import { DiagramContext } from '../state/contexts';
 
 const onLoad = (reactFlowInstance) => {
   reactFlowInstance.fitView();
 };
 
 export default function tableNode() {
-  const { visualizerState } = useContext(VisualizerContext);
+  const { diagramState } = useContext(DiagramContext);
 
   // this lets you connect to other nodes
   const onConnect = (params) => setElements((e) => addEdge(params, e));
@@ -19,7 +19,7 @@ export default function tableNode() {
         maxzoom={0.7}
         defaultzoom={0.5}
         // zoomOnScroll={zoomOnScroll}
-        elements={visualizerState.tableNodes}
+        elements={diagramState.tableNodes}
         onLoad={onLoad}
         style={{ width: '100%', height: '90vh' }}
         onConnect={onConnect}

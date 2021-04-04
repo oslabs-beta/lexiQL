@@ -1,68 +1,95 @@
-import React, { useEffect, useState, useReducer } from "react";
-import { VisualizerContext, CodeContext } from "../state/contexts";
+import React, { useReducer } from 'react';
+import { DiagramContext, CodeContext } from '../state/contexts';
 import {
-  initialVisualizerState,
-  visualizerReducer,
+  initialDiagramState,
+  diagramReducer,
   initialCodeState,
   codeReducer,
-} from "../state/reducers";
+} from '../state/reducers';
 
-import PopupContainer from "../containers/popupContainer";
-import VisualizerContainer from "../containers/visualizerContainer";
-import CodeContainer from "../containers/codeContainer";
-import Footer from "../containers/footer.jsx";
-// import TableNode from "../components/tableNode";
-// import URIForm from "../components/URIForm";
-// import Canvas from "../components/canvas";
+import DBInputContainer from '../containers/dbInputContainer';
+import DiagramContainer from '../containers/diagramContainer';
+import CodeContainer from '../containers/codeContainer';
+import Footer from '../containers/footer.jsx';
 
 export default function dataPage() {
   const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);
-  const [visualizerState, visualizerDispatch] = useReducer(
-    visualizerReducer,
-    initialVisualizerState
+  const [diagramState, diagramDispatch] = useReducer(
+    diagramReducer,
+    initialDiagramState,
   );
 
   return (
     <div className="dataPage">
-      {/* {arrComponents} */}
-
       <div className="graphicalContainer">
-        {/* <VisualizerContext.Provider
-          value={{
-            visualizerState,
-            visualizerDispatch,
-          }}
-        >
-          <VisualizerContainer />
-          <TableNode />
-        </VisualizerContext.Provider> */}
-
-        {/* <CodeContext.Provider
-        value={{
-          codeState,
-          codeDispatch
-        }}> */}
         <CodeContext.Provider
           value={{
             codeState,
             codeDispatch,
           }}
         >
-          <VisualizerContext.Provider
+          <DiagramContext.Provider
             value={{
-              visualizerState,
-              visualizerDispatch,
+              diagramState,
+              diagramDispatch,
             }}
           >
-            <PopupContainer />
-            {/* <Canvas /> */}
-            <VisualizerContainer />
+            <DBInputContainer />
+
+            <DiagramContainer />
             <CodeContainer />
-          </VisualizerContext.Provider>
+          </DiagramContext.Provider>
         </CodeContext.Provider>
-        {/* </CodeContext.Provider> */}
       </div>
       <Footer />
     </div>
   );
 }
+
+// import React, { useReducer } from 'react';
+// import { VisualizerContext, CodeContext } from '../state/contexts';
+// import {
+//   initialVisualizerState,
+//   visualizerReducer,
+//   initialCodeState,
+//   codeReducer,
+// } from '../state/reducers';
+
+// import PopupContainer from '../containers/dbInputContainer';
+// import VisualizerContainer from '../containers/diagramContainer';
+// import CodeContainer from '../containers/codeContainer';
+// import Footer from '../containers/footer.jsx';
+
+// export default function dataPage() {
+//   const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);
+//   const [visualizerState, visualizerDispatch] = useReducer(
+//     visualizerReducer,
+//     initialVisualizerState,
+//   );
+
+//   return (
+//     <div className="dataPage">
+//       <div className="graphicalContainer">
+//         <CodeContext.Provider
+//           value={{
+//             codeState,
+//             codeDispatch,
+//           }}
+//         >
+//           <VisualizerContext.Provider
+//             value={{
+//               visualizerState,
+//               visualizerDispatch,
+//             }}
+//           >
+//             <PopupContainer />
+
+//             <VisualizerContainer />
+//             <CodeContainer />
+//           </VisualizerContext.Provider>
+//         </CodeContext.Provider>
+//       </div>
+//       <Footer />
+//     </div>
+//   );
+// }

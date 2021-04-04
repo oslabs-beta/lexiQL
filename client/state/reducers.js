@@ -1,13 +1,13 @@
 // Visualizer display on app page
-export const initialVisualizerState = {
+export const initialDiagramState = {
   tableNames: [],
   tableNodes: [],
   // sqlSchema: []
 };
 
-export const visualizerReducer = (state, action) => {
+export const diagramReducer = (state, action) => {
   switch (action.type) {
-    case "SET_TABLES":
+    case 'SET_TABLES':
       return {
         ...state,
         // tableNames: action.payload.tableNames,
@@ -25,10 +25,10 @@ export const visualizerReducer = (state, action) => {
 // don't think we need to initialize state here? can just pass an empty string
 
 export const initialCodeState = {
-  schema: "",
-  resolver: "",
+  schema: '',
+  resolver: '',
   // viewSchema: true,
-  displayCode: "",
+  displayCode: '',
 
   // state for the collapsible panels, have to move out once we create a new context
   codeIsOpen: true,
@@ -38,7 +38,7 @@ export const initialCodeState = {
 
 export const codeReducer = (state, action) => {
   switch (action.type) {
-    case "SET_CODE":
+    case 'SET_CODE':
       return {
         ...state,
         schema: action.payload.schema,
@@ -47,19 +47,19 @@ export const codeReducer = (state, action) => {
         firstFetch: action.payload.firstFetch,
         formIsOpen: action.payload.formIsOpen,
       };
-    case "SET_DISPLAY":
+    case 'SET_DISPLAY':
       return {
         ...state,
         displayCode: action.payload.displayCode,
       };
 
     // case for the collapsible panels, have to move out once we create a new context
-    case "TOGGLE_CODE":
+    case 'TOGGLE_CODE':
       return {
         ...state,
         codeIsOpen: action.payload.codeIsOpen,
       };
-    case "TOGGLE_FORM":
+    case 'TOGGLE_FORM':
       return {
         ...state,
         formIsOpen: action.payload.formIsOpen,

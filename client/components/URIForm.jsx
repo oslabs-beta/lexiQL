@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import URIbtn from './URIbtn';
-import { VisualizerContext, CodeContext } from '../state/contexts';
+import { DiagramContext, CodeContext } from '../state/contexts';
 
 export default function URIForm() {
-  const { visualizerDispatch } = useContext(VisualizerContext);
+  const { diagramDispatch } = useContext(DiagramContext);
   const { codeState, codeDispatch } = useContext(CodeContext);
 
   // get the data from the sample DB
@@ -51,7 +51,7 @@ export default function URIForm() {
           }
         }
 
-        visualizerDispatch({
+        diagramDispatch({
           type: 'SET_TABLES',
           payload: {
             sqlSchema,
@@ -130,7 +130,7 @@ export default function URIForm() {
           }
         }
 
-        visualizerDispatch({
+        diagramDispatch({
           type: 'SET_TABLES',
           payload: {
             sqlSchema,
