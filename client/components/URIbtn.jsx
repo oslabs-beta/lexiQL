@@ -1,14 +1,11 @@
-import React, { useContext, Component } from "react";
-// import { Collapse } from "reactstrap";
-
-import { VisualizerContext, CodeContext } from "../state/contexts";
+import React, { useContext } from 'react';
+import { CodeContext } from '../state/contexts';
 
 const URIbtn = () => {
-  const { visualizerDispatch } = useContext(VisualizerContext);
   const { codeState, codeDispatch } = useContext(CodeContext);
   const toggle = () => {
     codeDispatch({
-      type: "TOGGLE_FORM",
+      type: 'TOGGLE_FORM',
       payload: {
         formIsOpen: !codeState.formIsOpen,
       },
@@ -17,10 +14,10 @@ const URIbtn = () => {
   return (
     <button
       type="button"
-      className={codeState.formIsOpen ? "uripanelbtn open" : "uripanelbtn"}
+      className={codeState.formIsOpen ? 'uripanelbtn open' : 'uripanelbtn'}
       onClick={toggle}
     >
-      {codeState.formIsOpen ? "<" : ">"}
+      {codeState.formIsOpen ? '<' : '>'}
     </button>
   );
 };

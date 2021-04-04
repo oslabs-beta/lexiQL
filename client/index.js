@@ -3,8 +3,8 @@ import { render } from 'react-dom';
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 
-import styles from './style.scss';
-import styles2 from './codeMirror.scss';
+import './style.scss';
+import './codeMirror.scss';
 
 render(
   <BrowserRouter>
@@ -12,5 +12,3 @@ render(
   </BrowserRouter>,
   document.getElementById('root'),
 );
-
-// render(<App />, document.getElementById('root'));
