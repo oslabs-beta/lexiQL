@@ -1,66 +1,60 @@
-import React, { useEffect, useState, useReducer } from "react";
-import { VisualizerContext, CodeContext } from "../state/contexts";
+import React, { useReducer } from 'react';
+import { DiagramContext, CodeContext, FormContext } from '../state/contexts';
 import {
-  initialVisualizerState,
-  visualizerReducer,
+  initialDiagramState,
+  diagramReducer,
   initialCodeState,
   codeReducer,
-} from "../state/reducers";
+  initialFormState,
+  formReducer,
+} from '../state/reducers';
 
-import PopupContainer from "../containers/popupContainer";
-import VisualizerContainer from "../containers/visualizerContainer";
-import CodeContainer from "../containers/codeContainer";
-import Footer from "../containers/footer.jsx";
-// import TableNode from "../components/tableNode";
-// import URIForm from "../components/URIForm";
-// import Canvas from "../components/canvas";
+import DBInputContainer from '../containers/dbInputContainer';
+import DiagramContainer from '../containers/diagramContainer';
+import CodeContainer from '../containers/codeContainer';
+import Footer from '../containers/footer';
 
 export default function dataPage() {
   const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);
-  const [visualizerState, visualizerDispatch] = useReducer(
-    visualizerReducer,
-    initialVisualizerState
+  const [diagramState, diagramDispatch] = useReducer(
+    diagramReducer,
+    initialDiagramState,
   );
+  const [formState, formDispatch] = useReducer(formReducer, initialFormState);
 
   return (
     <div className="dataPage">
-      {/* {arrComponents} */}
-
       <div className="graphicalContainer">
-        {/* <VisualizerContext.Provider
+        <DiagramContext.Provider
           value={{
-            visualizerState,
-            visualizerDispatch,
+            diagramState,
+            diagramDispatch,
           }}
         >
-          <VisualizerContainer />
-          <TableNode />
-        </VisualizerContext.Provider> */}
+          <DiagramContainer />
+        </DiagramContext.Provider>
 
-        {/* <CodeContext.Provider
-        value={{
-          codeState,
-          codeDispatch
-        }}> */}
         <CodeContext.Provider
           value={{
             codeState,
             codeDispatch,
           }}
         >
-          <VisualizerContext.Provider
-            value={{
-              visualizerState,
-              visualizerDispatch,
-            }}
-          >
-            <PopupContainer />
-            {/* <Canvas /> */}
-            <VisualizerContainer />
-            <CodeContainer />
-          </VisualizerContext.Provider>
+          <CodeContainer />
         </CodeContext.Provider>
-        {/* </CodeContext.Provider> */}
+
+        <FormContext.Provider
+          value={{
+            formState,
+            formDispatch,
+            diagramState,
+            diagramDispatch,
+            codeState,
+            codeDispatch,
+          }}
+        >
+          <DBInputContainer />
+        </FormContext.Provider>
       </div>
       <Footer />
     </div>
