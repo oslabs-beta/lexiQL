@@ -1,10 +1,16 @@
 import React, { useContext } from 'react';
 import URIbtn from './URIbtn';
-import { DiagramContext, CodeContext } from '../state/contexts';
+import { FormContext } from '../state/contexts';
 
 export default function URIForm() {
-  const { diagramDispatch } = useContext(DiagramContext);
-  const { codeState, codeDispatch } = useContext(CodeContext);
+  const {
+    formState,
+    formDispatch,
+    diagramState,
+    diagramDispatch,
+    codeState,
+    codeDispatch,
+  } = useContext(FormContext);
 
   // get the data from the sample DB
   const handleSampleData = (e) => {
@@ -65,6 +71,12 @@ export default function URIForm() {
             schema: data.GQLSchema.types,
             resolver: data.GQLSchema.resolvers,
             displayCode: data.GQLSchema.types,
+          },
+        });
+
+        formDispatch({
+          type: 'TOGGLE_FORM',
+          payload: {
             firstFetch: false,
             formIsOpen: false,
           },
@@ -144,6 +156,12 @@ export default function URIForm() {
             schema: data.GQLSchema.types,
             resolver: data.GQLSchema.resolvers,
             displayCode: data.GQLSchema.types,
+          },
+        });
+
+        formDispatch({
+          type: 'TOGGLE_FORM',
+          payload: {
             firstFetch: false,
             formIsOpen: false,
           },
@@ -151,18 +169,9 @@ export default function URIForm() {
       });
   };
 
-  const toggle = () => {
-    codeDispatch({
-      type: 'TOGGLE_FORM',
-      payload: {
-        formIsOpen: !codeState.formIsOpen,
-      },
-    });
-  };
-
   // don't have URI form toggle button appear if it's the user's first time on the page
   let btnDisplay = '';
-  if (codeState.firstFetch) {
+  if (formState.firstFetch) {
     btnDisplay = '';
   } else {
     btnDisplay = <URIbtn />;
@@ -171,7 +180,7 @@ export default function URIForm() {
   return (
     <div className="uriForm" id="uriForm">
       {btnDisplay}
-      <div className={codeState.formIsOpen ? 'uripanel open' : 'uripanel'}>
+      <div className={formState.formIsOpen ? 'uripanel open' : 'uripanel'}>
         <form onSubmit={handleURI}>
           <label className="formHeader" htmlFor="link">
             Link a database:

@@ -1,23 +1,25 @@
 import React, { useContext } from 'react';
-import { CodeContext } from '../state/contexts';
+import { FormContext } from '../state/contexts';
 
 const URIbtn = () => {
-  const { codeState, codeDispatch } = useContext(CodeContext);
+  const { formState, formDispatch } = useContext(FormContext);
+
   const toggle = () => {
-    codeDispatch({
+    formDispatch({
       type: 'TOGGLE_FORM',
       payload: {
-        formIsOpen: !codeState.formIsOpen,
+        formIsOpen: !formState.formIsOpen,
       },
     });
   };
+
   return (
     <button
       type="button"
-      className={codeState.formIsOpen ? 'uripanelbtn open' : 'uripanelbtn'}
+      className={formState.formIsOpen ? 'uripanelbtn open' : 'uripanelbtn'}
       onClick={toggle}
     >
-      {codeState.formIsOpen ? '<' : '>'}
+      {formState.formIsOpen ? '<' : '>'}
     </button>
   );
 };
