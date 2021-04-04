@@ -2,7 +2,6 @@
 export const initialDiagramState = {
   tableNames: [],
   tableNodes: [],
-  // sqlSchema: []
 };
 
 export const diagramReducer = (state, action) => {
@@ -10,14 +9,10 @@ export const diagramReducer = (state, action) => {
     case 'SET_TABLES':
       return {
         ...state,
-        // tableNames: action.payload.tableNames,
+
         tableNodes: action.payload.tableNodes,
         sqlSchema: action.payload.sqlSchema,
       };
-    // case 'UPDATE_TABLE':
-    //   return {
-    //     ...state,
-    //   }
   }
 };
 
@@ -27,7 +22,6 @@ export const diagramReducer = (state, action) => {
 export const initialCodeState = {
   schema: '',
   resolver: '',
-  // viewSchema: true,
   displayCode: '',
 
   // state for the collapsible panels, have to move out once we create a new context
@@ -59,6 +53,21 @@ export const codeReducer = (state, action) => {
         ...state,
         codeIsOpen: action.payload.codeIsOpen,
       };
+    case 'TOGGLE_FORM':
+      return {
+        ...state,
+        formIsOpen: action.payload.formIsOpen,
+      };
+  }
+};
+
+export const initialFormState = {
+  formIsOpen: true,
+  firstFetch: true,
+};
+
+export const formReducer = (state, action) => {
+  switch (action.type) {
     case 'TOGGLE_FORM':
       return {
         ...state,

@@ -1,10 +1,12 @@
 import React, { useReducer } from 'react';
-import { DiagramContext, CodeContext } from '../state/contexts';
+import { DiagramContext, CodeContext, FormContext } from '../state/contexts';
 import {
   initialDiagramState,
   diagramReducer,
   initialCodeState,
   codeReducer,
+  initialFormState,
+  formReducer,
 } from '../state/reducers';
 
 import DBInputContainer from '../containers/dbInputContainer';
@@ -18,6 +20,7 @@ export default function dataPage() {
     diagramReducer,
     initialDiagramState,
   );
+  const [formState, formDispatch] = useReducer(formReducer, initialFormState);
 
   return (
     <div className="dataPage">
@@ -35,11 +38,19 @@ export default function dataPage() {
             }}
           >
             <DBInputContainer />
-
             <DiagramContainer />
             <CodeContainer />
           </DiagramContext.Provider>
         </CodeContext.Provider>
+
+        {/* <FormContext.Provider
+          value={{
+            formState,
+            formDispatch,
+          }}
+        >
+          <DBInputContainer />
+        </FormContext.Provider> */}
       </div>
       <Footer />
     </div>
@@ -47,25 +58,28 @@ export default function dataPage() {
 }
 
 // import React, { useReducer } from 'react';
-// import { VisualizerContext, CodeContext } from '../state/contexts';
+// import { DiagramContext, CodeContext, FormContext } from '../state/contexts';
 // import {
-//   initialVisualizerState,
-//   visualizerReducer,
+//   initialDiagramState,
+//   diagramReducer,
 //   initialCodeState,
 //   codeReducer,
+//   initialFormState,
+//   formReducer,
 // } from '../state/reducers';
 
-// import PopupContainer from '../containers/dbInputContainer';
-// import VisualizerContainer from '../containers/diagramContainer';
+// import DBInputContainer from '../containers/dbInputContainer';
+// import DiagramContainer from '../containers/diagramContainer';
 // import CodeContainer from '../containers/codeContainer';
 // import Footer from '../containers/footer.jsx';
 
 // export default function dataPage() {
 //   const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);
-//   const [visualizerState, visualizerDispatch] = useReducer(
-//     visualizerReducer,
-//     initialVisualizerState,
+//   const [diagramState, diagramDispatch] = useReducer(
+//     diagramReducer,
+//     initialDiagramState,
 //   );
+//   const [formState, formDispatch] = useReducer(formReducer, initialFormState);
 
 //   return (
 //     <div className="dataPage">
@@ -76,18 +90,26 @@ export default function dataPage() {
 //             codeDispatch,
 //           }}
 //         >
-//           <VisualizerContext.Provider
+//           <DiagramContext.Provider
 //             value={{
-//               visualizerState,
-//               visualizerDispatch,
+//               diagramState,
+//               diagramDispatch,
 //             }}
 //           >
-//             <PopupContainer />
-
-//             <VisualizerContainer />
+//             <DBInputContainer />
+//             <DiagramContainer />
 //             <CodeContainer />
-//           </VisualizerContext.Provider>
+//           </DiagramContext.Provider>
 //         </CodeContext.Provider>
+
+//         {/* <FormContext.Provider
+//           value={{
+//             formState,
+//             formDispatch,
+//           }}
+//         >
+//           <DBInputContainer />
+//         </FormContext.Provider> */}
 //       </div>
 //       <Footer />
 //     </div>
