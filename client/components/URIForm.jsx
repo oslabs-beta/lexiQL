@@ -34,7 +34,6 @@ export default function URIForm() {
           });
 
           const columns = fullTable[tableName].columns;
-          // console.log("columns:", columns);
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
@@ -113,7 +112,6 @@ export default function URIForm() {
           });
 
           const columns = fullTable[tableName].columns;
-          // console.log("columns:", columns);
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];

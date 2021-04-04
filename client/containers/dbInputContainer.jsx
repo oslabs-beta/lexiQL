@@ -1,9 +1,9 @@
 import React from 'react';
 import URIForm from '../components/URIForm.jsx';
 
-export default function popupContainer() {
+export default function dbInputContainer() {
   return (
-    <div className="popupContainer">
+    <div className="dbInputContainer">
       <URIForm />
     </div>
   );
