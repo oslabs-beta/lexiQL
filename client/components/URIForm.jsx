@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, Component } from "react";
+import { Collapse } from "reactstrap";
+import URIbtn from "./URIbtn";
 import { VisualizerContext, CodeContext } from "../state/contexts";
 import TableNode from "./tableNode";
 
 export default function URIForm() {
   const { visualizerDispatch } = useContext(VisualizerContext);
-  const { codeDispatch } = useContext(CodeContext);
+  const { codeState, codeDispatch } = useContext(CodeContext);
 
   // get the data from the sample DB
   const handleSampleData = (e) => {
@@ -13,13 +15,11 @@ export default function URIForm() {
     fetch("/example-schema")
       .then((res) => res.json())
       .then((data) => {
-        // const tableNames = [];
         const sqlSchema = data.SQLSchema;
         const tableNodes = [];
 
         // loop through the data and grab every table name
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
-          // const currTableNodes = [];
           const fullTable = data.SQLSchema[i];
           const tableName = Object.keys(fullTable)[0];
 
@@ -27,7 +27,6 @@ export default function URIForm() {
             id: i.toString(),
             type: "default",
             style: { background: " #5a95f5" },
-            // style: { background: '#f5ba5a' },
             data: { label: tableName },
 
             position: {
@@ -36,10 +35,6 @@ export default function URIForm() {
             },
           });
 
-          // tableNodes.push(currTableNodes);
-          // console.log('tableNodes[i]:', tableNodes[i]);
-
-          // [[tablename1, column11, column12..], [tablename2, column21, column22]....]
           const columns = fullTable[tableName].columns;
           // console.log("columns:", columns);
 
@@ -49,7 +44,6 @@ export default function URIForm() {
               id: `${i}${j}`,
               type: "default",
               style: { background: "#f5ba5a" },
-              // style: { background:' #5a95f5' },
               data: { label: columnLabel },
 
               position: {
@@ -58,8 +52,6 @@ export default function URIForm() {
               },
             });
           }
-
-          // tableNodes.push(currTableNodes);
         }
 
         visualizerDispatch({
@@ -76,6 +68,8 @@ export default function URIForm() {
             schema: data.GQLSchema.types,
             resolver: data.GQLSchema.resolvers,
             displayCode: data.GQLSchema.types,
+            firstFetch: false,
+            formIsOpen: false,
           },
         });
       });
@@ -85,8 +79,11 @@ export default function URIForm() {
   const handleURI = (e) => {
     e.preventDefault();
     const URILink = document.getElementById("URILink").value;
-    // if there's no input, do nothing
-    if (!URILink) return;
+    const valid = /^postgres:\/\//g;
+
+    // if there is no input or if input is invalid do nothing
+    if (!URILink || !valid.test(URILink))
+      return "Missing URI link or the link is invalid. Please enter a valid URI link.";
 
     fetch("/sql-schema", {
       method: "POST",
@@ -100,7 +97,6 @@ export default function URIForm() {
 
         // loop through the data and grab every table name
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
-          // const currTableNodes = [];
           const fullTable = data.SQLSchema[i];
           const tableName = Object.keys(fullTable)[0];
 
@@ -108,7 +104,6 @@ export default function URIForm() {
             id: i.toString(),
             type: "default",
             style: { background: " #5a95f5" },
-            // style: { background: '#f5ba5a' },
             data: { label: tableName },
 
             position: {
@@ -117,10 +112,6 @@ export default function URIForm() {
             },
           });
 
-          // tableNodes.push(currTableNodes);
-          // console.log('tableNodes[i]:', tableNodes[i]);
-
-          // [[tablename1, column11, column12..], [tablename2, column21, column22]....]
           const columns = fullTable[tableName].columns;
           // console.log("columns:", columns);
 
@@ -139,8 +130,6 @@ export default function URIForm() {
               },
             });
           }
-
-          // tableNodes.push(currTableNodes);
         }
 
         visualizerDispatch({
@@ -157,44 +146,65 @@ export default function URIForm() {
             schema: data.GQLSchema.types,
             resolver: data.GQLSchema.resolvers,
             displayCode: data.GQLSchema.types,
+            firstFetch: false,
+            formIsOpen: false,
           },
         });
       });
   };
 
+  const toggle = () => {
+    codeDispatch({
+      type: "TOGGLE_FORM",
+      payload: {
+        formIsOpen: !codeState.formIsOpen,
+      },
+    });
+  };
+
+  // don't have URI form toggle button appear if it's the user's first time on the page
+  let btnDisplay = "";
+  if (codeState.firstFetch) {
+    btnDisplay = "";
+  } else {
+    btnDisplay = <URIbtn />;
+  }
+
   return (
-    // <div>
-    //   <div id="myModal" class="modal">
-    //     <div class="modal-content">
-    //       <span class="close">&times;</span>
-    //       <p>Some text in the Modal..</p>
-    //     </div>
-    //   </div>
     <div className="uriForm" id="uriForm">
-      <form onSubmit={handleURI}>
-        <label className="formHeader" htmlFor="link">
-          Link a database:
-        </label>
-        <br />
+      {/* <button
+        type="button"
+        className={codeState.formIsOpen ? "uripanelbtn open" : "uripanelbtn"}
+        onClick={toggle}
+      >
+        {codeState.formIsOpen ? "<" : ">"}
+      </button> */}
+      {btnDisplay}
+      <div className={codeState.formIsOpen ? "uripanel open" : "uripanel"}>
+        <form onSubmit={handleURI}>
+          <label className="formHeader" htmlFor="link">
+            Link a database:
+          </label>
+          <br />
+          <input className="dbInput" id="URILink" placeholder="postgres://" />
+          <br />
 
-        <input className="dbInput" id="URILink" placeholder="postgres://" />
-        <br />
+          <button className="formButtons" id="uriSubmitButton">
+            Submit
+          </button>
+          <br />
+        </form>
 
-        <button className="formButtons" id="uriSubmitButton">
-          Submit
+        <button
+          type="button"
+          className="formButtons"
+          id="sampleDataButton"
+          onClick={handleSampleData}
+        >
+          Use Sample Database
         </button>
         <br />
-      </form>
-
-      <button
-        type="button"
-        className="formButtons"
-        id="sampleDataButton"
-        onClick={handleSampleData}
-      >
-        Use Sample Database
-      </button>
-      <br />
+      </div>
     </div>
   );
 }
