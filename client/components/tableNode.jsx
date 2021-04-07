@@ -18,9 +18,10 @@ export default function tableNode() {
         minzoom={0.3}
         maxzoom={0.7}
         defaultzoom={0.5}
-        // zoomOnScroll={zoomOnScroll}
-        elements={diagramState.tableNodes}
+        defaultPosition={[50, 50]}
         onLoad={onLoad}
+        elements={diagramState.tableNodes}
+        // fitView={{ padding: 2, includeHiddenNodes: true }}
         style={{ width: '100%', height: '90vh' }}
         onConnect={onConnect}
         connectionLineStyle={{ stroke: '#ddd', strokeWidth: 2 }}
