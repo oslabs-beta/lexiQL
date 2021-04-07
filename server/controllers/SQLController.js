@@ -1,15 +1,37 @@
 const { Pool } = require('pg');
+const CryptoJS = require('crypto-js');
 /* Example db URI */
 const EX_PG_URI =
   'postgres://zhocexop:Ipv9EKas6bU6z9ehDXZQRorjITIXijGv@ziggy.db.elephantsql.com:5432/zhocexop';
 const fs = require('fs');
 const sqlQuery = fs.readFileSync('server/tableQuery.sql', 'utf8');
 
+const secretKey = '),E?/*viF%ul,.d';
+
 const SQLController = {};
 
 SQLController.getSQLSchema = (req, res, next) => {
+  // to add to front-end during URL input, also import secretKey
+  /*
+  const encryptedURL = CryptoJS.AES.encrypt(
+    'user db URI',
+    secretKey
+  ).toString();
+  console.log('encryptedURL: ', encryptedURL);
+  */
+
   let PSQL_URI;
+
+  // old logic to delete
   req.body.link ? (PSQL_URI = req.body.link) : (PSQL_URI = EX_PG_URI);
+
+  // new logic to decrypt user input
+  req.body.link
+    ? (PSQL_URI = CryptoJS.AES.decrypt(req.body.link, secretKey).toString(
+        CryptoJS.enc.Utf8
+      ))
+    : (PSQL_URI = EX_PG_URI);
+
   const db = new Pool({ connectionString: PSQL_URI });
   db.query(sqlQuery)
     .then((data) => {
