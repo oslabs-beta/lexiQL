@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { VisualizerContext, CodeContext } from "../state/contexts";
 import TableNode from "./tableNode";
+import CryptoJS from 'crypto-js';
+import secretKey from '../../server/secretKey'
 
 export default function URIForm() {
   const { visualizerDispatch } = useContext(VisualizerContext);
@@ -88,10 +90,14 @@ export default function URIForm() {
     // if there's no input, do nothing
     if (!URILink) return;
 
+    // encrypt URI before sending to server
+    const encryptedURL = CryptoJS.AES.encrypt(URILink, secretKey).toString();
+
+
     fetch("/sql-schema", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ link: URILink }),
+      body: JSON.stringify({ link: encryptedURL }),
     })
       .then((res) => res.json())
       .then((data) => {

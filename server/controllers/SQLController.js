@@ -5,10 +5,15 @@ const EX_PG_URI =
   'postgres://zhocexop:Ipv9EKas6bU6z9ehDXZQRorjITIXijGv@ziggy.db.elephantsql.com:5432/zhocexop';
 const fs = require('fs');
 const sqlQuery = fs.readFileSync('server/tableQuery.sql', 'utf8');
-
-const secretKey = '),E?/*viF%ul,.d';
+const secretKey = require('../secretKey');
 
 const SQLController = {};
+
+const decryptedURI = (encryptedURL) => {
+  const bytes = CryptoJS.AES.decrypt(encryptedURL, secretKey);
+  const decrypted = bytes.toString(CryptoJS.enc.Utf8);
+  return decrypted;
+};
 
 SQLController.getSQLSchema = (req, res, next) => {
   // to add to front-end during URL input, also import secretKey
@@ -22,14 +27,8 @@ SQLController.getSQLSchema = (req, res, next) => {
 
   let PSQL_URI;
 
-  // old logic to delete
-  req.body.link ? (PSQL_URI = req.body.link) : (PSQL_URI = EX_PG_URI);
-
-  // new logic to decrypt user input
   req.body.link
-    ? (PSQL_URI = CryptoJS.AES.decrypt(req.body.link, secretKey).toString(
-        CryptoJS.enc.Utf8
-      ))
+    ? (PSQL_URI = decryptedURI(req.body.link))
     : (PSQL_URI = EX_PG_URI);
 
   const db = new Pool({ connectionString: PSQL_URI });
