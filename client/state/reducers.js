@@ -60,3 +60,10 @@ export const formReducer = (state, action) => {
       };
   }
 };
+
+/*
+export const setSelectedElements: (elements: Elements<any>) => {
+  type: "SET_SELECTED_ELEMENTS";
+  payload: Elements<any>;
+};
+*/
