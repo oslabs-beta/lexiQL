@@ -1,14 +1,12 @@
 import React, { useContext } from 'react';
-import { CodeContext } from '../state/contexts';
 import CodeMirror from '../components/codeMirror';
+import { CodeContext } from '../state/contexts';
 
 export default function codeContainer() {
   const { codeState, codeDispatch } = useContext(CodeContext);
-  // console.log(testCode.test);
 
   const handleSchema = (e) => {
     e.preventDefault();
-    console.log('TESTING SCHEMA HANDLER: ', codeState.schema);
     codeDispatch({
       type: 'SET_DISPLAY',
       payload: {
@@ -19,7 +17,6 @@ export default function codeContainer() {
 
   const handleResolver = (e) => {
     e.preventDefault();
-    console.log('TESTING RESOLVER HANDLER: ', codeState.resolver);
     codeDispatch({
       type: 'SET_DISPLAY',
       payload: {
@@ -28,44 +25,50 @@ export default function codeContainer() {
     });
   };
 
+  const toggle = () => {
+    codeDispatch({
+      type: 'TOGGLE_CODE',
+      payload: {
+        codeIsOpen: !codeState.codeIsOpen,
+      },
+    });
+  };
+
   return (
-    <div className="codeContainer">
-      {/* <div> */}
-      <div className="codeButtons">
-        <button
-          type="button"
-          className="codeContainerButton"
-          id="schemaButton"
-          onClick={handleSchema}
-        >
-          Schema
-        </button>
+    <div className="codeContainer" id="codeContainer">
+      <button
+        type="button"
+        className={
+          codeState.codeIsOpen ? 'codeToggleBtn open' : 'codeToggleBtn'
+        }
+        onClick={toggle}
+      >
+        {codeState.codeIsOpen ? '>' : '<'}
+      </button>
+
+      <div className={codeState.codeIsOpen ? 'sidebar open' : 'sidebar'}>
+        <div className="codeButtons">
+          <button
+            type="button"
+            className="codeContainerButton"
+            id="schemaButton"
+            onClick={handleSchema}
+          >
+            Schema
+          </button>
+          <br />
+          <button
+            type="button"
+            className="codeContainerButton"
+            id="resolverButton"
+            onClick={handleResolver}
+          >
+            Resolver
+          </button>
+        </div>
         <br />
-        <button
-          type="button"
-          className="codeContainerButton"
-          id="resolverButton"
-          onClick={handleResolver}
-        >
-          Resolver
-        </button>
+        <CodeMirror />
       </div>
-      {/* <CodeMirror
-        className="CodeMirror"
-        value={codeState.displayCode}
-        options={{
-          mode: 'javascript',
-          theme: 'material',
-          lineNumbers: true,
-          lineWrapping: true,
-        }}
-        // onChange={(editor, data, value) => {}}
-      /> */}
-      {/* <p>{codeState.resolver}</p> */}
-      {/* <p>{codeState.schema}</p> */}
-      {/* <p>{codeState.displayCode}</p> */}
-      <br />
-      <CodeMirror />
     </div>
   );
 }
