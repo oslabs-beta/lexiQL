@@ -1,3 +1,5 @@
+import { Elements } from 'react-flow-renderer';
+
 // Visualizer display on app page
 export const initialDiagramState = {
   tableNames: [],
@@ -11,6 +13,11 @@ export const diagramReducer = (state, action) => {
         ...state,
         tableNodes: action.payload.tableNodes,
         sqlSchema: action.payload.sqlSchema,
+      };
+    case 'SET_ALL':
+      return {
+        ...state,
+        displayCode: Elements,
       };
   }
 };
@@ -62,8 +69,10 @@ export const formReducer = (state, action) => {
 };
 
 /*
-export const setSelectedElements: (elements: Elements<any>) => {
-  type: "SET_SELECTED_ELEMENTS";
-  payload: Elements<any>;
+export const setSelectedElements: (
+  elements: Elements<any>,
+) => {
+  type: 'SET_SELECTED_ELEMENTS',
+  payload: Elements<any>,
 };
 */

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import URIbtn from './URIbtn';
 import { FormContext } from '../state/contexts';
-// import { setSelectedElements } from 'react-flow-renderer/dist/store/actions';
-// import { useStoreState, useStoreActions } from 'react-flow-renderer';
+// import { setSelectedElements } from 'react-flow-renderer';
+import { useStoreState, useStoreActions } from 'react-flow-renderer';
 
 export default function URIForm() {
   const {
@@ -20,12 +20,12 @@ export default function URIForm() {
   //   (actions) => actions.setSelectedElements,
   // );
 
-  // /*
-  // // after the visualizer renders, make each table a single unit
-  // useEffect(() => {
-  //   setSelectedElements(diagramState);
-  // }, diagramState); // only re-run the effect if the state changes
-  // */
+  /*
+  // after the visualizer renders, make each table a single unit
+  useEffect(() => {
+    setSelectedElements(diagramState);
+  }, diagramState); // only re-run the effect if the state changes
+  */
 
   // useEffect(() => {
   //   setSelectedElements(
