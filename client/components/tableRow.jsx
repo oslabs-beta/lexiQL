@@ -4,10 +4,13 @@ import { DiagramContext } from '../state/contexts';
 // probably want to create another component for each column in the row
 // but for now just testing this
 
-export default function estNodeRow() {
+export default function tableRow() {
   const { diagramState } = useContext(DiagramContext);
 
   const tableContents = diagramState.testNodes[0];
+  // [[TABLE1NAME, COLUMNS], [TABLE2NAME, COLUMNS]]
+  // one loop - create all array for each table
+  // second loop - populate each array
 
   return (
     <div>

@@ -8,19 +8,19 @@ import ReactFlow, {
   Controls,
 } from 'react-flow-renderer';
 
-import ColorSelectorNode from './testNode';
+import TableContainer from './tableContainer';
 
 // import './index.css';
 
 const onNodeDragStop = (event, node) => console.log('drag stop', node);
 const onElementClick = (event, element) => console.log('click', element);
 
-const initBgColor = '#1A192B';
+const initBgColor = '#9593AE';
 
 const connectionLineStyle = { stroke: '#fff' };
 const snapGrid = [20, 20];
 const nodeTypes = {
-  selectorNode: ColorSelectorNode,
+  selectorNode: TableContainer,
 };
 
 const CustomNodeFlow = () => {

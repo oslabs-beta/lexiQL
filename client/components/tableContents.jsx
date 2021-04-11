@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { DiagramContext } from '../state/contexts';
-import TestNodeRow from './testNodeRow';
+import TableRow from './tableRow';
 
 // probably want to create another component for each column in the row
 // but for now just testing this
 
-const TestNodeContainer = () => {
+const tableContents = () => {
   const { diagramState } = useContext(DiagramContext);
   // for pushing the columns when we create that component
   // const columns = [];
@@ -35,7 +35,7 @@ const TestNodeContainer = () => {
       //   <div key={`divKey${tableContents[0]}${i}`}>
 
       // </div>,
-      <TestNodeRow />,
+      <TableRow />,
     );
   }
   return (
@@ -60,4 +60,4 @@ const TableRow = () => (
 export default TableRow;
 */
 
-export default TestNodeContainer;
+export default tableContents;

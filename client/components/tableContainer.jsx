@@ -3,7 +3,7 @@ import { Handle } from 'react-flow-renderer';
 
 import { DiagramContext } from '../state/contexts';
 // import TestNodeRow from './testNodeRow';
-import TestNodeContainer from './testNodeContainer';
+import TableContents from './tableContents';
 
 export default memo(({ data }) => {
   const { diagramState } = useContext(DiagramContext);
@@ -27,7 +27,7 @@ export default memo(({ data }) => {
         onChange={data.onChange}
         defaultValue={data.color}
       /> */}
-      <TestNodeContainer />
+      <TableContents />
 
       {/* <TestNodeRow /> */}
       <Handle
