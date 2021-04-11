@@ -45,7 +45,7 @@ export default function URIForm() {
 
         // testing this for the new custom node
         // testNodes holds all the arrays, where each subarray represents a table - the first element is the table name and everything thereafter is a column in that table. this needs to be modified when we confirm this approach works
-        const testNodes = [];
+        const dbContents = {};
         //
 
         // loop through the data and grab every table name
@@ -54,10 +54,10 @@ export default function URIForm() {
           const tableName = Object.keys(fullTable)[0];
 
           // testing this for the new custom node
-          // subarray for each table
-          const testSubArr = [];
-          testSubArr.push(tableName);
-          //
+          // sub-object in the dbContents
+          const tableContents = {};
+          // store the table name as the first key
+          tableContents['tableName'] = tableName;
 
           tableNodes.push({
             id: i.toString(),
@@ -92,14 +92,24 @@ export default function URIForm() {
               },
             });
             // testing this for the new custom node
-            testSubArr.push(columnLabel);
+            // store each column and the data type as a key value pair
+            tableContents[columnLabel] =
+              fullTable[tableName].columns[j][columnLabel].dataType;
             //
+            // console.log('label: ', columnLabel);
+            // console.log(
+            //   '1: ',
+            //   fullTable[tableName].columns[j][columnLabel].dataType,
+            // );
+            // console.log('2 :', columnLabel);
+            // console.log('2 :', columnLabel);
           }
-          testNodes.push(testSubArr);
+          // store the sub obj into the main obj
+          dbContents[i] = tableContents;
         }
 
-        console.log('testingggggggg: ', testNodes);
-        console.log('testing for contents of first table: ', testNodes[0]);
+        // console.log('ALL TABLES ', dbContents);
+        // console.log('TABLE CONTENTS ', tableContents);
 
         diagramDispatch({
           type: 'SET_TABLES',
@@ -107,7 +117,7 @@ export default function URIForm() {
             sqlSchema,
             tableNodes,
             // testing this for the new custom node
-            testNodes,
+            dbContents,
           },
         });
 
