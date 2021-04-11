@@ -1,8 +1,15 @@
-import React, { memo } from 'react';
-
+import React, { memo, useContext } from 'react';
 import { Handle } from 'react-flow-renderer';
 
+import { DiagramContext } from '../state/contexts';
+// import TestNodeRow from './testNodeRow';
+import TestNodeContainer from './testNodeContainer';
+
 export default memo(({ data }) => {
+  const { diagramState } = useContext(DiagramContext);
+
+  // test
+
   return (
     <>
       <Handle
@@ -20,9 +27,9 @@ export default memo(({ data }) => {
         onChange={data.onChange}
         defaultValue={data.color}
       /> */}
-      <div>hi</div>
-      <div>test</div>
-      <div>bye</div>
+      <TestNodeContainer />
+
+      {/* <TestNodeRow /> */}
       <Handle
         type="source"
         position="right"

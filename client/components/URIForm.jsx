@@ -43,10 +43,21 @@ export default function URIForm() {
         const sqlSchema = data.SQLSchema;
         const tableNodes = [];
 
+        // testing this for the new custom node
+        // testNodes holds all the arrays, where each subarray represents a table - the first element is the table name and everything thereafter is a column in that table. this needs to be modified when we confirm this approach works
+        const testNodes = [];
+        //
+
         // loop through the data and grab every table name
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
           const fullTable = data.SQLSchema[i];
           const tableName = Object.keys(fullTable)[0];
+
+          // testing this for the new custom node
+          // subarray for each table
+          const testSubArr = [];
+          testSubArr.push(tableName);
+          //
 
           tableNodes.push({
             id: i.toString(),
@@ -80,14 +91,23 @@ export default function URIForm() {
                 y: 30 * (j + 1),
               },
             });
+            // testing this for the new custom node
+            testSubArr.push(columnLabel);
+            //
           }
+          testNodes.push(testSubArr);
         }
+
+        console.log('testingggggggg: ', testNodes);
+        console.log('testing for contents of first table: ', testNodes[0]);
 
         diagramDispatch({
           type: 'SET_TABLES',
           payload: {
             sqlSchema,
             tableNodes,
+            // testing this for the new custom node
+            testNodes,
           },
         });
 

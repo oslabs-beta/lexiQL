@@ -2,6 +2,8 @@
 export const initialDiagramState = {
   tableNames: [],
   tableNodes: [],
+  // testing this for the new custom node
+  testNodes: [['hey', 'sup', 'hello']],
 };
 
 export const diagramReducer = (state, action) => {
@@ -11,6 +13,8 @@ export const diagramReducer = (state, action) => {
         ...state,
         tableNodes: action.payload.tableNodes,
         sqlSchema: action.payload.sqlSchema,
+        // testing this for the new custom node
+        testNodes: action.payload.testNodes,
       };
   }
 };
