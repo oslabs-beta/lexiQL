@@ -151,7 +151,7 @@ const CustomNodeFlow = () => {
       snapGrid={snapGrid}
       defaultZoom={1.5}
     >
-      {/* <MiniMap
+      <MiniMap
         nodeStrokeColor={(n) => {
           if (n.type === 'input') return '#0041d0';
           if (n.type === 'selectorNode') return bgColor;
@@ -161,7 +161,7 @@ const CustomNodeFlow = () => {
           if (n.type === 'selectorNode') return bgColor;
           return '#fff';
         }}
-      /> */}
+      />
       <Controls />
     </ReactFlow>
   );

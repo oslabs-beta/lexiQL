@@ -1,5 +1,5 @@
 import React from 'react';
-import TableNode from '../components/xOGtableNode';
+import TableNode from '../components/tableNode';
 
 export default function diagramContainer() {
   return (
