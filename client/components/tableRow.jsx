@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { DiagramContext } from '../state/contexts';
+import Row from './row.jsx';
 
 // probably want to create another component for each column in the row
 // but for now just testing this
@@ -43,35 +44,4 @@ export default function tableRow({ columnName }) {
       {columnName}
     </div>
   );
-  // REFACTOR
-  /*
-  const rows = [];
-
-  // hard coded to test just for the first table
-  for (let i = 0; i < tableContents.length; i++) {
-    rows.push(
-      //   <div key={`divKey${tableContents[0]}${i}`}>
-
-      // </div>,
-      <div>{tableContents[i]}</div>,
-    );
-  }
-  return rows;
-  */
 }
-
-/*
-const TableRow = () => (
-
-  <div className="tableRow">
-
-    <h4>
-
-    </h4>
-  </div>
-);
-
-export default TableRow;
-*/
-
-// export default TestNodeRow;

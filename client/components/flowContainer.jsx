@@ -65,6 +65,7 @@ const CustomNodeFlow = () => {
   //       position: { x: 0, y: 50 },
   //       sourcePosition: 'right',
   //     },
+  //-----------ID 2 IS CUSTOM NODE
   //     {
   //       id: '2',
   //       type: 'selectorNode',
@@ -159,13 +160,13 @@ const CustomNodeFlow = () => {
     >
       {/* <MiniMap
         nodeStrokeColor={(n) => {
-          if (n.type === 'input') return '#0041d0';
-          if (n.type === 'selectorNode') return bgColor;
-          if (n.type === 'output') return '#ff0072';
+          if (n.type === "input") return "#0041d0";
+          if (n.type === "selectorNode") return bgColor;
+          if (n.type === "output") return "#ff0072";
         }}
         nodeColor={(n) => {
-          if (n.type === 'selectorNode') return bgColor;
-          return '#fff';
+          if (n.type === "selectorNode") return bgColor;
+          return "#fff";
         }}
       /> */}
       <Controls />
