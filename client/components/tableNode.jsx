@@ -2,6 +2,8 @@ import React, { Fragment, useContext } from 'react';
 import ReactFlow, { addEdge, Background } from 'react-flow-renderer';
 import { DiagramContext } from '../state/contexts';
 
+// the contents of this file could probably just go into diagramContainer when refactoring
+
 const onLoad = (reactFlowInstance) => {
   reactFlowInstance.fitView();
 };
