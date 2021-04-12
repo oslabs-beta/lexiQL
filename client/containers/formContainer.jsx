@@ -22,7 +22,6 @@ export default function formContainer() {
       .then((res) => res.json())
       .then((data) => {
         const sqlSchema = data.SQLSchema;
-        const allTables = [];
 
         // new storage for custom nodes - this works, possible delete 'tableNodes' ??
         const tableNodesRev = [];
@@ -38,15 +37,6 @@ export default function formContainer() {
         */
 
         const dbContents = {};
-        /*
-        dbContentsRev format:
-        { 0: { tableName: <table name>, 
-          columns: [<all column names>], 
-          dataTypes: [<all dataTypes of columns>] },
-          1: { .... }
-        }
-        */
-        const dbContentsRev = {};
 
         /*
         columnDataTypes format:
@@ -70,10 +60,6 @@ export default function formContainer() {
 
           const tableElements = fullTable[tableName];
 
-          // think of a better name, but this is a subarray to be stored in allTables where the format is:
-          // [tableName, columns....]
-          const tableNameColumn = [];
-
           // [ columns....]
           const columnsList = [];
           // testing this for the new custom node
@@ -83,17 +69,8 @@ export default function formContainer() {
           // store the table name as the first key
           tableContents['tableName'] = tableName;
 
-          // sub-object in the dbContentsRev
-          const tableContentsRev = { columns: [] };
-
           // sub-object in the columnDataTypes
           const tableColTypes = {};
-
-          // store the table name as the first key
-          tableContentsRev['tableName'] = tableName;
-
-          // store tableName in tableNameColumn
-          tableNameColumn.push(tableName);
 
           // grab every column name within the current table
           const columns = fullTable[tableName].columns;
@@ -181,14 +158,8 @@ export default function formContainer() {
             tableContents[columnLabel] =
               fullTable[tableName].columns[j][columnLabel].dataType;
 
-            // store tableName in tableNameColumn
-            tableNameColumn.push(columnLabel);
-
             // store column name in columnsList so it ends up being an array of all the columns
             columnsList.push(columnLabel);
-
-            // store each column label in the columns key
-            tableContentsRev.columns.push(columnLabel);
           }
           // new logic for custom node to store the stuff
           tableNodesRev.push({
@@ -235,22 +206,9 @@ export default function formContainer() {
             tableNodesRev[i].position.y = 1000;
           }
 
-          dbContentsRev[i] = tableContentsRev;
           // store the sub obj into the main obj
           dbContents[i] = tableContents;
-
-          // store the sub array into allTables array
-          allTables.push(tableNameColumn);
         }
-
-        // console.log("ALL TABLES ", dbContents);
-        // console.log('ALL TABLES ', dbContents[0]);
-        // console.log('ALL TABLES ', Object.keys(dbContents[0]));
-        // console.log('ALL TABLES ', Object.values(dbContents[0]));
-        // console.log("TABLE CONTENTS ", allTables);
-        // console.log('nodes: ', tableNodesRev);
-
-        console.log('relational database: ', relationalData);
 
         // logic for links
 
@@ -268,8 +226,6 @@ export default function formContainer() {
         style: { stroke: '#fff' },
       },
         */
-
-        console.log('table nodes before links added: ', tableNodesRev);
 
         const tableNames = Object.keys(relationalData);
 
@@ -367,6 +323,7 @@ export default function formContainer() {
         /*
         // create a link where the 'source' handle is the value in referencedBy from the respective table, and 'target' is the current table's _id
         */
+        console.log('dbContents: ', dbContents);
 
         diagramDispatch({
           type: 'SET_TABLES',
@@ -376,9 +333,8 @@ export default function formContainer() {
             // testing this for the new custom node
             // save as an array of objects
             dbContents: [dbContents],
-            allTables,
             tableNodesRev,
-            dbContentsRev,
+
             relationalData,
           },
         });

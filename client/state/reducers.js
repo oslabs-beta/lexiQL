@@ -33,10 +33,8 @@ export const diagramReducer = (state, action) => {
 
         // testing this for the new custom node
         dbContents: action.payload.dbContents,
-        allTables: action.payload.allTables,
         tableNodesRev: action.payload.tableNodesRev,
-        dbContentsRev: action.payload.dbContentsRev,
-        columnNodes: action.payload.columnNodes,
+
         relationalData: action.payload.relationalData,
       };
   }
