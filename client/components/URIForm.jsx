@@ -87,6 +87,8 @@ export default function URIForm() {
           // [tableName, columns....]
           const tableNameColumn = [];
 
+          // [ columns....]
+          const columnsList = [];
           // testing this for the new custom node
           // sub-object in the dbContents
           const tableContents = {};
@@ -118,21 +120,6 @@ export default function URIForm() {
             },
           });
 
-          // new logic for custom node to store the stuff
-
-          tableNodesRev.push({
-            id: i.toString(),
-            type: 'selectorNode',
-            // data: { onChange: onChange, color: initBgColor },
-            data: { label: tableName },
-            style: { border: '1px solid #777', padding: 10 },
-            // position: { x: 300, y: 50 },
-            position: {
-              x: 200 * i,
-              y: 0,
-            },
-          });
-
           // grab every column name within the table
           const columns = fullTable[tableName].columns;
 
@@ -158,9 +145,26 @@ export default function URIForm() {
             // store tableName in tableNameColumn
             tableNameColumn.push(columnLabel);
 
+            // store column name in columnsList so it ends up being an array of all the columns
+            columnsList.push(columnLabel);
+
             // store each column label in the columns key
             tableContentsRev.columns.push(columnLabel);
           }
+          // new logic for custom node to store the stuff
+
+          tableNodesRev.push({
+            id: i.toString(),
+            type: 'selectorNode',
+            // data: { onChange: onChange, color: initBgColor },
+            data: { tableName: tableName, columns: columnsList },
+            style: { border: '1px solid #777', padding: 10 },
+            // position: { x: 300, y: 50 },
+            position: {
+              x: 200 * i,
+              y: 0,
+            },
+          });
 
           dbContentsRev[i] = tableContentsRev;
           // store the sub obj into the main obj

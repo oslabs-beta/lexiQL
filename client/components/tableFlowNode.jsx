@@ -8,10 +8,19 @@ import TableContainer from './tableContainer';
 
 export default memo(({ data }) => {
   const { diagramState } = useContext(DiagramContext);
-
+  /*
   const tableNode = Object.keys(diagramState.dbContentsRev).map((table) => (
     <TableContainer key={table} index={table} />
   ));
+  */
+
+  // conditional because for some reason the array is undefined for the first two logs?? brute forcing it ...
+  const { tableName, columns } = data;
+
+  let tableColumns;
+  columns
+    ? (tableColumns = columns.map((column) => <p>{column}</p>))
+    : tableColumns;
 
   return (
     <>
@@ -22,8 +31,11 @@ export default memo(({ data }) => {
         onConnect={(params) => console.log('handle onConnect', params)}
       />
       <div>
-        Custom Color Picker Node: <strong>{data.color}</strong>
+        table name from tableFlowNode: <strong>{tableName}</strong>
+        {/* <p>{data.columns}</p> */}
       </div>
+
+      {tableColumns}
       {/* <input
         className="nodrag"
         type="color"
@@ -31,7 +43,7 @@ export default memo(({ data }) => {
         defaultValue={data.color}
       /> */}
       {/* <TableContents /> */}
-      {tableNode}
+      {/* {tableNode} */}
 
       {/* <Handle
         type="source"

@@ -15,7 +15,7 @@ import { DiagramContext } from '../state/contexts';
 const onNodeDragStop = (event, node) => console.log('drag stop', node);
 const onElementClick = (event, element) => console.log('click', element);
 
-const initBgColor = '#9593AE';
+// const initBgColor = '#9593AE';
 
 const connectionLineStyle = { stroke: '#fff' };
 const snapGrid = [20, 20];
@@ -30,6 +30,7 @@ const CustomNodeFlow = () => {
 
   const { diagramState } = useContext(DiagramContext);
 
+  // do this once the tableNodes has changed
   useEffect(() => {
     // const onChange = (event) => {
     //   setElements((els) =>

@@ -10,6 +10,7 @@ export const initialDiagramState = {
   dbContentsRev: {
     0: { tableName: 'hello', columns: ['test1a', 'test1b', 'test1c'] },
     1: { tableName: 'bye', columns: ['test2a', 'test2b', 'test2c'] },
+    3: { tableName: 'hi', columns: ['test3a', 'test3b', 'test3c'] },
   },
   allTables: [],
   tableNodesRev: [
