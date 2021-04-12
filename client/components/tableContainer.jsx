@@ -1,23 +1,56 @@
 import React, { useContext } from 'react';
 import { DiagramContext } from '../state/contexts';
+import TableRow from './tableRow';
+import TableName from './tableName';
+import TableContents from './tableContents';
 
-// probably want to create another component for each column in the row
-// but for now just testing this
-
-// create a row for each column in the table
-
-export default function tableContainer({ key, columns, name }) {
+const tableContainer = ({ index }) => {
   const { diagramState } = useContext(DiagramContext);
+  // for pushing the columns when we create that component
+  // const columns = [];
+  /*
+    for (let i = 0; i < 2; i++) {
+      //console.log(this.props)
+      columns.push(
+        <div key={`divKey${i}`}>
+          <Column
+            id={this.props.id + i}
+            handleClick={this.props.handleClick}
+            shape={this.props.shape}
+          />
+        </div>,
+      );
+    }
+    
 
-  const tableContents = diagramState.dbContentsRev;
+    return <section id="columnContainer">{columns}</section>;
+    */
 
-  // render one tableName component
-  // render the tableContents (container of all the rows)
+  // const rows = [];
+
+  // for (let i = 0; i < 1; i++) {
+  //   rows.push(<TableRow />);
+  // }
+
+  // render tableName
+  // render all the columns within that tableName
+  // const tableContents = Object.keys(diagramState.dbContentsRev).map((table) => (
+
+  // ));
 
   return (
     <div>
-      <p>Bye</p>
-      {name}
+      <TableName
+        key={index}
+        tableName={diagramState.dbContentsRev[index].tableName}
+      />
+      <TableContents
+        key={index}
+        index={index}
+        tableColumns={diagramState.dbContentsRev[index].columns}
+      />
     </div>
   );
-}
+};
+
+export default tableContainer;

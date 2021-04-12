@@ -5,7 +5,7 @@ import TableName from './tableName';
 
 // this file is basically a container for the rows
 
-const tableContents = () => {
+const tableContents = ({ index }) => {
   const { diagramState } = useContext(DiagramContext);
   // for pushing the columns when we create that component
   // const columns = [];
@@ -33,6 +33,7 @@ const tableContents = () => {
   //   rows.push(<TableRow />);
   // }
 
+  /*
   // for some reason this renders each row as the table name
   const rows2 = Object.keys(diagramState.dbContentsRev).map((table) => (
     <TableRow
@@ -41,8 +42,14 @@ const tableContents = () => {
       name={diagramState.dbContentsRev[table].tableName}
     />
   ));
+  */
 
-  return <div>{rows2}</div>;
+  // iterates over the columns key of the current table
+  const tableColumns = diagramState.dbContentsRev[
+    index
+  ].columns.map((column, i) => <TableRow key={i} columnName={column} />);
+
+  return <div>{tableColumns}</div>;
 };
 
 /*

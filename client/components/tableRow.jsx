@@ -5,8 +5,8 @@ import { DiagramContext } from '../state/contexts';
 // but for now just testing this
 
 // create a row for each column in the table
-
-export default function tableRow({ key, tableColumns, name }) {
+// key, tableColumns, name
+export default function tableRow({ columnName }) {
   const { diagramState } = useContext(DiagramContext);
 
   const tableContents = diagramState.dbContentsRev;
@@ -33,13 +33,14 @@ export default function tableRow({ key, tableColumns, name }) {
   ));
   */
 
-  const rows = tableColumns.map((column) => <p>{column}</p>);
+  // const rows = tableColumns.map((column) => <p>{column}</p>);
 
   return (
     <div>
-      <p>Hi</p>
+      <p>from table row</p>
       {/* {name} */}
-      {rows}
+      {/* {rows} */}
+      {columnName}
     </div>
   );
   // REFACTOR
