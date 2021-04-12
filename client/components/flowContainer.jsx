@@ -65,7 +65,7 @@ const CustomNodeFlow = () => {
   //       position: { x: 0, y: 50 },
   //       sourcePosition: 'right',
   //     },
-  //-----------ID 2 IS CUSTOM NODE
+
   //     {
   //       id: '2',
   //       type: 'selectorNode',
@@ -145,6 +145,7 @@ const CustomNodeFlow = () => {
 
   return (
     <ReactFlow
+      id="reactFlow"
       // zoom properties
       minzoom={0.1}
       maxzoom={0.75}

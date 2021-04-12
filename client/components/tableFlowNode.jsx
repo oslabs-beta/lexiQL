@@ -30,7 +30,6 @@ export default memo(({ data }) => {
       )))
     : tableColumns;
 
-  console.log('COLUMNS: ', tableColumns);
   return (
     <>
       {/* <Handle
@@ -49,8 +48,8 @@ export default memo(({ data }) => {
         type="color"
         onChange={data.onChange}
         defaultValue={data.color}
-      /> */}
-      {/* 
+      />
+
       <Handle
         type="source"
         position="right"

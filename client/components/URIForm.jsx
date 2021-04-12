@@ -91,8 +91,8 @@ export default function URIForm() {
           const fullTable = data.SQLSchema[i];
           // current table name
           const tableName = Object.keys(fullTable)[0];
-          console.log('FULLTABLE: ', fullTable);
-          console.log('tableName: ', tableName);
+          // console.log('FULLTABLE: ', fullTable);
+          // console.log('tableName: ', tableName);
           // console.log(
           //   'fkeys: ',
           //   Object.keys(fullTable[tableName].foreignKeys[0])[0],
@@ -100,7 +100,7 @@ export default function URIForm() {
 
           const tableElements = fullTable[tableName];
 
-          console.log('table: ', tableElements);
+          // console.log('table: ', tableElements);
           // const columnLabel = Object.keys(columns[j])[0];
           // console.log('ref by: ', fullTable[tableName].referencedBy[0]);
 
@@ -310,7 +310,18 @@ export default function URIForm() {
           allTables.push(tableNameColumn);
         }
 
+        // console.log("ALL TABLES ", dbContents);
+        // console.log('ALL TABLES ', dbContents[0]);
+        // console.log('ALL TABLES ', Object.keys(dbContents[0]));
+        // console.log('ALL TABLES ', Object.values(dbContents[0]));
+        // console.log("TABLE CONTENTS ", allTables);
+        // console.log('nodes: ', tableNodesRev);
+        // console.log('column nodes: ', columnNodes);
+        console.log('relational database: ', relationalData);
+
         // logic for links
+
+        // store everything in tableNodesRev - this is where the nodes are stored, later to be rendered by react flow
 
         /* 
         the elements in the 'foreignKeys' key will have a connection from their source handle to the target handle of the reference table/reference key listed in the 'foreignKeys' value
@@ -325,6 +336,37 @@ export default function URIForm() {
         style: { stroke: '#fff' },
       },
         */
+
+        console.log('table nodes before links added: ', tableNodesRev);
+        const tableNames = Object.keys(relationalData);
+
+        for (let i = 0; i < tableNames.length; i++) {
+          // check to see if the table has a foreignKeys key
+          if (relationalData[tableNames[i]].foreignKeys) {
+            const currTableFkeys = relationalData[tableNames[i]].foreignKeys;
+            for (let j = 0; j < currTableFkeys.length; j++) {
+              tableNodesRev.push({
+                id: `${tableNames[i]}-fkey${j}`,
+                source: currTableFkeys[j][0],
+                target: currTableFkeys[j][1],
+              });
+            }
+          }
+
+          // check to see if the table has a referencedBy key
+          if (relationalData[tableNames[i]].referencedBy) {
+            const currTableRefKeys = relationalData[tableNames[i]].referencedBy;
+            for (let j = 0; j < currTableRefKeys.length; j++) {
+              tableNodesRev.push({
+                id: `${tableNames[i]}-refKey${j}`,
+                source: currTableRefKeys[j][0],
+                target: currTableRefKeys[j][1],
+              });
+            }
+          }
+        }
+
+        console.log('table nodes after links added: ', tableNodesRev);
 
         /*
 
@@ -351,15 +393,6 @@ export default function URIForm() {
 
         // create a link where the 'source' handle is the value in referencedBy from the respective table, and 'target' is the current table's _id
         */
-
-        // console.log("ALL TABLES ", dbContents);
-        // console.log('ALL TABLES ', dbContents[0]);
-        // console.log('ALL TABLES ', Object.keys(dbContents[0]));
-        // console.log('ALL TABLES ', Object.values(dbContents[0]));
-        // console.log("TABLE CONTENTS ", allTables);
-        console.log('nodes: ', tableNodesRev);
-        console.log('column nodes: ', columnNodes);
-        console.log('relational database: ', relationalData);
 
         diagramDispatch({
           type: 'SET_TABLES',

@@ -17,7 +17,7 @@ export default memo(({ data, columnName, id }) => {
         <Handle
           type="target"
           position="left"
-          id={`${id}+target`}
+          id={`${id}`}
           style={{
             position: 'relative',
             background: 'orange',
@@ -33,7 +33,7 @@ export default memo(({ data, columnName, id }) => {
         <Handle
           type="source"
           position="right"
-          id={`${id}+source`}
+          id={`${id}`}
           style={{
             position: 'relative',
             background: 'blue',
