@@ -1,110 +1,62 @@
-import React, { useEffect, useState, useReducer } from "react";
-import { VisualizerContext, CodeContext } from "../state/contexts";
+import React, { useReducer } from 'react';
+import { DiagramContext, CodeContext, FormContext } from '../state/contexts';
 import {
-  initialVisualizerState,
-  visualizerReducer,
+  initialDiagramState,
+  diagramReducer,
   initialCodeState,
   codeReducer,
-} from "../state/reducers";
+  initialFormState,
+  formReducer,
+} from '../state/reducers';
 
-import PopupContainer from "../containers/popupContainer";
-import VisualizerContainer from "../containers/visualizerContainer";
-import CodeContainer from "../containers/codeContainer";
-import Footer from "../containers/footer.jsx";
-import TableNode from "../components/tableNode";
-import URIForm from "../components/URIForm";
-import Canvas from "../components/canvas";
+import DBInputContainer from '../containers/dbInputContainer';
+import DiagramContainer from '../containers/diagramContainer';
+import CodeContainer from '../containers/codeContainer';
+import Footer from '../containers/footer';
 
 export default function dataPage() {
   const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);
-  const [visualizerState, visualizerDispatch] = useReducer(
-    visualizerReducer,
-    initialVisualizerState
+  const [diagramState, diagramDispatch] = useReducer(
+    diagramReducer,
+    initialDiagramState,
   );
+  const [formState, formDispatch] = useReducer(formReducer, initialFormState);
 
   return (
     <div className="dataPage">
-      {/* {arrComponents} */}
-
       <div className="graphicalContainer">
-        {/* <VisualizerContext.Provider
+        <DiagramContext.Provider
           value={{
-            visualizerState,
-            visualizerDispatch,
+            diagramState,
+            diagramDispatch,
           }}
         >
-          <VisualizerContainer />
-          <TableNode />
-        </VisualizerContext.Provider> */}
+          <DiagramContainer />
+        </DiagramContext.Provider>
 
-        {/* <CodeContext.Provider
-        value={{
-          codeState,
-          codeDispatch
-        }}> */}
         <CodeContext.Provider
           value={{
             codeState,
             codeDispatch,
           }}
         >
-          <VisualizerContext.Provider
-            value={{
-              visualizerState,
-              visualizerDispatch,
-            }}
-          >
-            <PopupContainer />
-            {/* <Canvas /> */}
-            <VisualizerContainer />
-            <CodeContainer />
-          </VisualizerContext.Provider>
+          <CodeContainer />
         </CodeContext.Provider>
-        {/* </CodeContext.Provider> */}
+
+        <FormContext.Provider
+          value={{
+            formState,
+            formDispatch,
+            diagramState,
+            diagramDispatch,
+            codeState,
+            codeDispatch,
+          }}
+        >
+          <DBInputContainer />
+        </FormContext.Provider>
       </div>
       <Footer />
     </div>
   );
 }
-
-/*
-  const [ state, setState ] = useState([]);
-  const [ tables, setTables ] = useState([]);
-
-  useEffect(() => {
-    fetch('/example-schema')
-      .then((res) => res.json())
-      .then((data) => {
-        const tableNames = Object.keys(data);
-        setTables(tableNames)
-        // console.log('table names: ', tables);
-        
-        const stateArr = [];
-        for (let i = 0; i < tableNames.length; i++) {
-          let nestedObj = {};
-          nestedObj[tableNames[i]] = data[tableNames[i]];
-          // console.log('nestedObj', nestedObj);
-          stateArr.push(nestedObj);
-        }
-        // console.log('stateArr ', stateArr);
-        // console.log(stateArr[0]);
-        
-        setState(stateArr);
-        // console.log('state', state);
-      });
-  });
-
-  const arrComponents = [];
-  for (let i = 0; i < state.length; i++) {
-    const key = Object.keys(state[i])[0];
-    const value = Object.values(state[i])[0];
-    arrComponents.push(
-      <Table 
-        key={`Table${i}`}
-        // table={tables[i]}
-        tableName={key}
-        tableContent={value}
-      />
-    )
-  }
-  */

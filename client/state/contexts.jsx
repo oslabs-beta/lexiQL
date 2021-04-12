@@ -1,6 +1,5 @@
-import React, { createContext } from 'react';
+import { createContext } from 'react';
 
-// export const GeneralContext = createContext();
-// export const HomePageContext = createContext();
-export const VisualizerContext = createContext();
+export const DiagramContext = createContext();
 export const CodeContext = createContext();
+export const FormContext = createContext();
