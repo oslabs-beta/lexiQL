@@ -39,7 +39,7 @@ export default memo(({ data }) => {
         style={{ background: '#555' }}
         onConnect={(params) => console.log('handle onConnect', params)}
       /> */}
-      <div>
+      <div className="tableHeader">
         <strong>{tableName}</strong>
       </div>
       <br />

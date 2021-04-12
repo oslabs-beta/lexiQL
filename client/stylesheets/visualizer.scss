@@ -6,3 +6,40 @@
   flex-grow: 999;
   min-width: 65%;
 }
+
+#reactFlow {
+  // color: red;
+  // background-color: purple;
+  // width: 100%;
+}
+
+.tableHeader {
+  margin: 0px 0px;
+  padding: 0px 0px;
+  width: 100%;
+  background-color: $bright-blue;
+}
+
+.columnDotContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.leftColumn {
+  // background-color: red;
+  display: flex;
+  align-items: center;
+  padding: 3px 0px;
+}
+
+.rightColumn {
+  // background-color: blue;
+  // display: flex;
+  // align-items: center;
+}
+
+.columnName {
+  margin-left: 5px;
+  // font-weight: bold;
+}

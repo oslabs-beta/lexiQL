@@ -93,6 +93,9 @@ export default function URIForm() {
           const tableName = Object.keys(fullTable)[0];
           console.log('FULLTABLE: ', fullTable);
           console.log('tableName: ', tableName);
+          // console.log('fkeys: ', Object.keys(fullTable[tableName]))
+          // console.log('ref by: ', fullTable[tableName].referencedBy[0]);
+
           // think of a better name, but this is a subarray to be stored in allTables where the format is:
           // [tableName, columns....]
           const tableNameColumn = [];
@@ -139,13 +142,36 @@ export default function URIForm() {
           save any relational info in one obj in this format for each table:
           { <table name>: {
             primaryKey: <primary key>,
-            referencedBy: [<table name + column name>],
-            foreignKeys: [<table name + column name>]
+            referencedBy: [<table name + column name>, ...] 
+            foreignKeys: [[<fkey>, <table name + column name>], ...],
             },
             <table name 2>: ....
           }
           */
-          relationalTableData[tableName] = {};
+
+          /*
+          relationalTableData[tableName] = {
+            primaryKey: fullTable[tableName].primaryKey,
+          };
+
+          // check to see if there are any foreign keys and/or referencedBy
+          if (full[tableName].referencedBy) {
+            relationalTableData[tableName].referencedBy = []
+            for (let i = 0; i < full[tableName].foreignKeys.length; i++){
+              relationalTableData[tableName].referencedBy.push(`${full[tableName].referencedBy[i]}+${full[TableName].foreignKeys[i].referenceKey}`)
+            }
+          }
+
+          if (full[tableName].referencedBy) {
+            relationalTableData[tableName].referencedBy = [];
+              for (let i = 0; i < full[tableName].foreignKeys.length; i++){
+              const refBySubArr = [`${full[tableName]}+${full[TableName].foreignKeys[i]}`,`${full[tableName].foreignKeys[i].referenceTable}+${full[TableName].foreignKeys[i].referenceKey}`]
+              relationalTableData[tableName].referencedBy.push(refBySubArr)
+            }
+          }
+
+          }
+          */
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
@@ -198,17 +224,6 @@ export default function URIForm() {
             });
           }
           // new logic for custom node to store the stuff
-
-          // HOW MANY TABLES TO RENDER PER ROW ON CANVAS
-          let numTables = data.SQLSchema.length;
-          let tablesPerRow = 0;
-
-          if (numTables < 5) tablesPerRow = numTables;
-          else {
-            if (numTables % 5 === 1) tablesPerRow = 4;
-            else tablesPerRow = numTables;
-          }
-
           tableNodesRev.push({
             // id: `${tableName} ${columnLabel}`,
             id: i.toString(),
@@ -216,6 +231,7 @@ export default function URIForm() {
             // data: { onChange: onChange, color: initBgColor },
             data: { tableName: tableName, columns: columnsList },
             style: {
+              backgroundColor: 'white',
               border: '1px solid #777',
               padding: 10,
               width: 250,
@@ -230,31 +246,27 @@ export default function URIForm() {
             targetPosition: 'left',
           });
 
+          // HOW MANY TABLES TO RENDER PER ROW ON CANVAS
+          let numTables = data.SQLSchema.length;
+          let tablesPerRow = 0;
+
+          if (numTables < 5) tablesPerRow = numTables;
+          else {
+            if (numTables % 5 === 1) tablesPerRow = 4;
+            else tablesPerRow = numTables;
+          }
+
           // for (let j = 0; j < numTables; j++) {}
           if (i < tablesPerRow) {
             tableNodesRev[i].position.x = 300 * i;
             tableNodesRev[i].position.y = 0;
           } else if (i < tablesPerRow * 2) {
             tableNodesRev[i].position.x = 300 * (i - tablesPerRow);
-            tableNodesRev[i].position.y = 600;
+            tableNodesRev[i].position.y = 500;
           } else {
             tableNodesRev[i].position.x = 300 * (i - tablesPerRow * 2);
-            tableNodesRev[i].position.y = 1200;
+            tableNodesRev[i].position.y = 1000;
           }
-
-          // if (i < 5) {
-          //   tableNodesRev[i].position.x = 300 * i;
-          //   tableNodesRev[i].position.y = 0;
-          // } else if (i < 10) {
-          //   tableNodesRev[i].position.x = 300 * (i - 5);
-          //   tableNodesRev[i].position.y = 400;
-          // } else if (i < 15) {
-          //   tableNodesRev[i].position.x = 300 * (i - 10);
-          //   tableNodesRev[i].position.y = 800;
-          // } else {
-          //   tableNodesRev[i].position.x = 300 * (i - 15);
-          //   tableNodesRev[i].position.y = 1200;
-          // }
 
           dbContentsRev[i] = tableContentsRev;
           // store the sub obj into the main obj

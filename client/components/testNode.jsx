@@ -12,8 +12,8 @@ export default memo(({ data, columnName }) => {
   const { diagramState } = useContext(DiagramContext);
 
   return (
-    <div>
-      <div>
+    <div className="columnDotContainer">
+      <div className="leftColumn">
         <Handle
           type="target"
           position="left"
@@ -27,7 +27,9 @@ export default memo(({ data, columnName }) => {
             height: `10px`,
           }}
         />
-        <strong>{columnName}</strong>
+        <div className="columnName">{columnName}</div>
+      </div>
+      <div className="rightColumn">
         <Handle
           type="source"
           position="right"
