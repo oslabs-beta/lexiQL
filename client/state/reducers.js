@@ -2,7 +2,6 @@ import { Elements } from 'react-flow-renderer';
 
 // Visualizer display on app page
 export const initialDiagramState = {
-  tableNames: [],
   tableNodes: [],
   // testing this for the new custom node
   dbContents: [['hey', 'sup', 'hello']],
@@ -21,15 +20,7 @@ export const initialDiagramState = {
       style: { border: '1px solid #777', padding: 10 },
       position: { x: 300, y: 50 },
     },
-    // {
-    //   id: '3',
-    //   type: 'selectorNode',
-    //   data: { label: 'bye' },
-    //   style: { border: '1px solid #777', padding: 10 },
-    //   position: { x: 300, y: 50 },
-    // },
   ],
-  tableNodeLinks: [],
 };
 
 export const diagramReducer = (state, action) => {
@@ -37,20 +28,16 @@ export const diagramReducer = (state, action) => {
     case 'SET_TABLES':
       return {
         ...state,
-        tableNodes: action.payload.tableNodes,
         sqlSchema: action.payload.sqlSchema,
+        tableNodes: action.payload.tableNodes,
+
         // testing this for the new custom node
         dbContents: action.payload.dbContents,
-        dbContentsRev: action.payload.dbContentsRev,
         allTables: action.payload.allTables,
         tableNodesRev: action.payload.tableNodesRev,
+        dbContentsRev: action.payload.dbContentsRev,
         columnNodes: action.payload.columnNodes,
         relationalData: action.payload.relationalData,
-      };
-    case 'SET_ALL':
-      return {
-        ...state,
-        displayCode: Elements,
       };
   }
 };

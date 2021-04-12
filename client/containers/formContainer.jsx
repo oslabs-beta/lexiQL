@@ -321,6 +321,15 @@ export default function formContainer() {
           allTables.push(tableNameColumn);
         }
 
+        // console.log("ALL TABLES ", dbContents);
+        // console.log('ALL TABLES ', dbContents[0]);
+        // console.log('ALL TABLES ', Object.keys(dbContents[0]));
+        // console.log('ALL TABLES ', Object.values(dbContents[0]));
+        // console.log("TABLE CONTENTS ", allTables);
+        // console.log('nodes: ', tableNodesRev);
+        // console.log('column nodes: ', columnNodes);
+        console.log('relational database: ', relationalData);
+
         // logic for links
 
         // store everything in tableNodesRev - this is where the nodes are stored, later to be rendered by react flow
@@ -329,7 +338,6 @@ export default function formContainer() {
         the elements in the 'foreignKeys' key will have a connection from their source handle to the target handle of the reference table/reference key listed in the 'foreignKeys' value
         
         format for foreignKeys:
-
         {
         id: 'e2-3',
         source: '2', <-- this is the foreign key (key in current table)
@@ -374,8 +382,6 @@ export default function formContainer() {
         }
 
         /* testing stuff - can delete the stuff below
-
-
        for (let i = 0; i < tableNames.length; i++) {
           // check to see if the table has a foreignKeys key
           if (relationalData[tableNames[i]].foreignKeys) {
@@ -388,7 +394,6 @@ export default function formContainer() {
               });
             }
           }
-
           // check to see if the table has a referencedBy key
           if (relationalData[tableNames[i]].referencedBy) {
             const currTableRefKeys = relationalData[tableNames[i]].referencedBy;
@@ -401,11 +406,6 @@ export default function formContainer() {
             }
           }
         }
-
-
-
-
-
         const tableNames = Object.keys(relationalData);
         // foreign keys
         tableNodesRev.push({
@@ -414,20 +414,16 @@ export default function formContainer() {
           // target: 'films',
           // sourceHandle: 'name',
           // targetHandle: 'title',
-
           source: relationalData[tableNames[0]].foreignKeys[0][0],
           target: relationalData[tableNames[0]].foreignKeys[0][1],
                     sourceHandle: 'name',
           targetHandle: 'title',
         });
-
         // referenced by keys
         console.log('table nodes after links added: ', tableNodesRev);
-
         */
 
         /*
-
         // if the current column name is included in the foreign keys, create a link where 'source' is the current column name and 'target' is the reference key where you'll have to link to another table
         if ()
         
@@ -437,7 +433,6 @@ export default function formContainer() {
         the elements in the 'referencedBy" key will be nodes from a different table that reference that value
         
         format for referencedBy:
-
         {
         id: 'e1-2',
         source: '1', <-- this is the key that it is referenced by (key from a different table)
@@ -448,7 +443,6 @@ export default function formContainer() {
         */
 
         /*
-
         // create a link where the 'source' handle is the value in referencedBy from the respective table, and 'target' is the current table's _id
         */
 

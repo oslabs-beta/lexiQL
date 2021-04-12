@@ -1,14 +1,13 @@
-import React from "react";
-import { Route, Switch, Link, useLocation } from "react-router-dom";
-import HomePage from "../pages/homePage.jsx";
-import DataPage from "../pages/dataPage.jsx";
-// import Logo from '../assets/lexiql-logo.png';
-import Logo from "../assets/new-logo.png";
+import React from 'react';
+import { Route, Switch, Link, useLocation } from 'react-router-dom';
+import HomePage from '../pages/homePage.jsx';
+import DataPage from '../pages/dataPage.jsx';
+import Logo from '../assets/new-logo.png';
 
 export default function navBar() {
   const location = useLocation();
 
-  if (location.pathname === "/") {
+  if (location.pathname === '/') {
     return (
       <body id="homeBody">
         <nav id="homeHeader">
@@ -48,7 +47,7 @@ export default function navBar() {
     );
   }
 
-  if (location.pathname === "/data") {
+  if (location.pathname === '/data') {
     return (
       <body id="appBody">
         <nav id="appHeader">

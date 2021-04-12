@@ -3,11 +3,7 @@ import { Handle } from 'react-flow-renderer';
 
 import { DiagramContext } from '../state/contexts';
 
-// testing to see if tableFlowNode can render testNode
-
-export default memo(({ data, columnName, id }) => {
-  const { diagramState } = useContext(DiagramContext);
-
+export default memo(({ columnName, id }) => {
   return (
     <div className="columnDotContainer">
       <div className="leftColumn">
