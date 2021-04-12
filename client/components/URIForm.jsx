@@ -349,10 +349,43 @@ export default function URIForm() {
         */
 
         console.log('table nodes before links added: ', tableNodesRev);
-        /*
+
         const tableNames = Object.keys(relationalData);
 
         for (let i = 0; i < tableNames.length; i++) {
+          // check to see if the table has a foreignKeys key
+          if (relationalData[tableNames[i]].foreignKeys) {
+            const currTableFkeys = relationalData[tableNames[i]].foreignKeys;
+            for (let j = 0; j < currTableFkeys.length; j++) {
+              tableNodesRev.push({
+                id: `${tableNames[i]}-fkey${j}`,
+                source: currTableFkeys[j][0],
+                target: currTableFkeys[j][1],
+                sourceHandle: currTableFkeys[j][2],
+                targetHandle: currTableFkeys[j][3],
+              });
+            }
+          }
+
+          // check to see if the table has a referencedBy key
+          if (relationalData[tableNames[i]].referencedBy) {
+            const currTableRefKeys = relationalData[tableNames[i]].referencedBy;
+            for (let j = 0; j < currTableRefKeys.length; j++) {
+              tableNodesRev.push({
+                id: `${tableNames[i]}-refKey${j}`,
+                source: currTableRefKeys[j][0],
+                target: currTableRefKeys[j][1],
+                sourceHandle: currTableRefKeys[j][2],
+                targetHandle: currTableRefKeys[j][3],
+              });
+            }
+          }
+        }
+
+        /* testing stuff - can delete the stuff below
+
+
+       for (let i = 0; i < tableNames.length; i++) {
           // check to see if the table has a foreignKeys key
           if (relationalData[tableNames[i]].foreignKeys) {
             const currTableFkeys = relationalData[tableNames[i]].foreignKeys;
@@ -378,19 +411,29 @@ export default function URIForm() {
           }
         }
 
-        */
+
+
+
+
         const tableNames = Object.keys(relationalData);
+        // foreign keys
         tableNodesRev.push({
           id: `${tableNames[0]}-refKey${0}`,
-          source: 'people',
-          target: 'films',
-          sourceHandle: 'name',
+          // source: 'people',
+          // target: 'films',
+          // sourceHandle: 'name',
+          // targetHandle: 'title',
+
+          source: relationalData[tableNames[0]].foreignKeys[0][0],
+          target: relationalData[tableNames[0]].foreignKeys[0][1],
+                    sourceHandle: 'name',
           targetHandle: 'title',
-          // source: relationalData[tableNames[0]].foreignKeys[0][0],
-          // target: relationalData[tableNames[0]].foreignKeys[0][1],
         });
 
+        // referenced by keys
         console.log('table nodes after links added: ', tableNodesRev);
+
+        */
 
         /*
 
