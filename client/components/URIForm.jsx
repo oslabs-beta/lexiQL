@@ -1,14 +1,6 @@
-<<<<<<< HEAD
-import React, { useContext, useEffect } from 'react';
-import URIbtn from './URIbtn';
-import { FormContext } from '../state/contexts';
-// import { setSelectedElements } from 'react-flow-renderer/dist/store/actions';
-// import { useStoreState, useStoreActions } from 'react-flow-renderer';
-=======
 import React, { useContext } from "react";
 import URIbtn from "./URIbtn";
 import { FormContext } from "../state/contexts";
->>>>>>> feature
 
 export default function URIForm() {
   const {
@@ -71,22 +63,15 @@ export default function URIForm() {
           // sub-object in the dbContents
           const tableContents = {};
           // store the table name as the first key
-          tableContents['tableName'] = tableName;
+          tableContents["tableName"] = tableName;
 
           // store tableName in tableNameColumn
           tableNameColumn.push(tableName);
 
           tableNodes.push({
             id: i.toString(),
-<<<<<<< HEAD
-            // sourcePosition: 'right',
-            // targetPosition: 'left',
-            type: 'default',
-            style: { background: ' #5a95f5' },
-=======
             type: "default",
             style: { background: "#5a95f5" },
->>>>>>> feature
             data: { label: tableName },
 
             position: {
@@ -99,10 +84,10 @@ export default function URIForm() {
 
           tableNodesRev.push({
             id: i.toString(),
-            type: 'selectorNode',
+            type: "selectorNode",
             // data: { onChange: onChange, color: initBgColor },
             data: { label: tableName },
-            style: { border: '1px solid #777', padding: 10 },
+            style: { border: "1px solid #777", padding: 10 },
             // position: { x: 300, y: 50 },
             position: {
               x: 200 * i,
@@ -117,15 +102,8 @@ export default function URIForm() {
             const columnLabel = Object.keys(columns[j])[0];
             tableNodes.push({
               id: `${i}${j}`,
-<<<<<<< HEAD
-              sourcePosition: 'right',
-              targetPosition: 'left',
-              type: 'default',
-              style: { background: '#f5ba5a' },
-=======
               type: "default",
               style: { background: "#f5ba5a" },
->>>>>>> feature
               data: { label: columnLabel },
 
               position: {
@@ -148,12 +126,12 @@ export default function URIForm() {
           allTables.push(tableNameColumn);
         }
 
-        console.log('ALL TABLES ', dbContents);
+        console.log("ALL TABLES ", dbContents);
         // console.log('ALL TABLES ', dbContents[0]);
         // console.log('ALL TABLES ', Object.keys(dbContents[0]));
         // console.log('ALL TABLES ', Object.values(dbContents[0]));
-        console.log('TABLE CONTENTS ', allTables);
-        console.log('nodes: ', tableNodesRev);
+        console.log("TABLE CONTENTS ", allTables);
+        console.log("nodes: ", tableNodesRev);
 
         diagramDispatch({
           type: "SET_TABLES",
