@@ -54,8 +54,8 @@ const CustomNodeFlow = () => {
     //   );
     // };
 
-    setElements(diagramState.tableNodesRev);
-  }, diagramState.tableNodesRev);
+    setElements(diagramState.tableNodes);
+  }, diagramState.tableNodes);
 
   //   setElements([
   //     {

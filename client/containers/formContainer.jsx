@@ -23,31 +23,9 @@ export default function formContainer() {
       .then((data) => {
         const sqlSchema = data.SQLSchema;
 
-        // new storage for custom nodes - this works, possible delete 'tableNodes' ??
-        const tableNodesRev = [];
-
-        /*
-        dbContents format:
-        { 0: { tableName: <table name>, 
-          <columnName1>: <column1 dataType>, 
-          <columnName2>: <column2 dataType>, 
-          < so on >
-          1: { .... }
-        }
-        */
+        const tableNodes = [];
 
         const dbContents = {};
-
-        /*
-        columnDataTypes format:
-        { <table name[i]>: 
-          {columnName: <column name>, 
-            dataType: <data type>, 
-        <table name[i+1]>: 
-          {columnName: <column name>, 
-            dataType: <data type> }
-        */
-        const columnDataTypes = {};
 
         // store relational data here
         const relationalData = {};
@@ -68,9 +46,6 @@ export default function formContainer() {
 
           // store the table name as the first key
           tableContents['tableName'] = tableName;
-
-          // sub-object in the columnDataTypes
-          const tableColTypes = {};
 
           // grab every column name within the current table
           const columns = fullTable[tableName].columns;
@@ -100,8 +75,7 @@ export default function formContainer() {
             relationalTableData[tableName].foreignKeys = [];
             for (let j = 0; j < fkeys.length; j++) {
               const fkeyName = Object.keys(fkeys[j])[0];
-              // console.log('fkeyyy: ', fkeyName);
-              // console.log('fkey val: ', fkeys[j][fkeyName].referenceKey);
+
               // store in the format of [source, target, sourceHandle, targetHandle]
               relationalTableData[tableName].foreignKeys.push([
                 tableName,
@@ -129,25 +103,7 @@ export default function formContainer() {
             }
           }
 
-          /*
-                        relationalTableData[tableName].referencedBy.push([
-                `${refKey}+${refByKeys[j][refKey]}`,
-                `${tableName}+${tableElements.primaryKey}`,
-              ]);
-              */
-
           relationalData[tableName] = relationalTableData[tableName];
-
-          // if (full[tableName].referencedBy) {
-          //   relationalTableData[tableName].referencedBy = [];
-          //   for (let i = 0; i < full[tableName].foreignKeys.length; i++) {
-          //     const refBySubArr = [
-          //       `${full[tableName]}+${full[TableName].foreignKeys[i]}`,
-          //       `${full[tableName].foreignKeys[i].referenceTable}+${full[TableName].foreignKeys[i].referenceKey}`,
-          //     ];
-          //     relationalTableData[tableName].referencedBy.push(refBySubArr);
-          //   }
-          // }
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
@@ -162,7 +118,7 @@ export default function formContainer() {
             columnsList.push(columnLabel);
           }
           // new logic for custom node to store the stuff
-          tableNodesRev.push({
+          tableNodes.push({
             id: `${tableName}`,
             // id: i.toString(),
             type: 'selectorNode',
@@ -196,14 +152,14 @@ export default function formContainer() {
 
           // for (let j = 0; j < numTables; j++) {}
           if (i < tablesPerRow) {
-            tableNodesRev[i].position.x = 300 * i;
-            tableNodesRev[i].position.y = 0;
+            tableNodes[i].position.x = 300 * i;
+            tableNodes[i].position.y = 0;
           } else if (i < tablesPerRow * 2) {
-            tableNodesRev[i].position.x = 300 * (i - tablesPerRow);
-            tableNodesRev[i].position.y = 500;
+            tableNodes[i].position.x = 300 * (i - tablesPerRow);
+            tableNodes[i].position.y = 500;
           } else {
-            tableNodesRev[i].position.x = 300 * (i - tablesPerRow * 2);
-            tableNodesRev[i].position.y = 1000;
+            tableNodes[i].position.x = 300 * (i - tablesPerRow * 2);
+            tableNodes[i].position.y = 1000;
           }
 
           // store the sub obj into the main obj
@@ -234,7 +190,7 @@ export default function formContainer() {
           if (relationalData[tableNames[i]].foreignKeys) {
             const currTableFkeys = relationalData[tableNames[i]].foreignKeys;
             for (let j = 0; j < currTableFkeys.length; j++) {
-              tableNodesRev.push({
+              tableNodes.push({
                 id: `${tableNames[i]}-fkey${j}`,
                 source: currTableFkeys[j][0],
                 target: currTableFkeys[j][1],
@@ -248,7 +204,7 @@ export default function formContainer() {
           if (relationalData[tableNames[i]].referencedBy) {
             const currTableRefKeys = relationalData[tableNames[i]].referencedBy;
             for (let j = 0; j < currTableRefKeys.length; j++) {
-              tableNodesRev.push({
+              tableNodes.push({
                 id: `${tableNames[i]}-refKey${j}`,
                 source: currTableRefKeys[j][0],
                 target: currTableRefKeys[j][1],
@@ -258,48 +214,6 @@ export default function formContainer() {
             }
           }
         }
-
-        /* testing stuff - can delete the stuff below
-       for (let i = 0; i < tableNames.length; i++) {
-          // check to see if the table has a foreignKeys key
-          if (relationalData[tableNames[i]].foreignKeys) {
-            const currTableFkeys = relationalData[tableNames[i]].foreignKeys;
-            for (let j = 0; j < currTableFkeys.length; j++) {
-              tableNodesRev.push({
-                id: `${tableNames[i]}-fkey${j}`,
-                source: currTableFkeys[j][0],
-                target: currTableFkeys[j][1],
-              });
-            }
-          }
-          // check to see if the table has a referencedBy key
-          if (relationalData[tableNames[i]].referencedBy) {
-            const currTableRefKeys = relationalData[tableNames[i]].referencedBy;
-            for (let j = 0; j < currTableRefKeys.length; j++) {
-              tableNodesRev.push({
-                id: `${tableNames[i]}-refKey${j}`,
-                source: currTableRefKeys[j][0],
-                target: currTableRefKeys[j][1],
-              });
-            }
-          }
-        }
-        const tableNames = Object.keys(relationalData);
-        // foreign keys
-        tableNodesRev.push({
-          id: `${tableNames[0]}-refKey${0}`,
-          // source: 'people',
-          // target: 'films',
-          // sourceHandle: 'name',
-          // targetHandle: 'title',
-          source: relationalData[tableNames[0]].foreignKeys[0][0],
-          target: relationalData[tableNames[0]].foreignKeys[0][1],
-                    sourceHandle: 'name',
-          targetHandle: 'title',
-        });
-        // referenced by keys
-        console.log('table nodes after links added: ', tableNodesRev);
-        */
 
         /*
         // if the current column name is included in the foreign keys, create a link where 'source' is the current column name and 'target' is the reference key where you'll have to link to another table
@@ -333,7 +247,7 @@ export default function formContainer() {
             // testing this for the new custom node
             // save as an array of objects
             dbContents: [dbContents],
-            tableNodesRev,
+            tableNodes,
 
             relationalData,
           },

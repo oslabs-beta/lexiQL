@@ -1,18 +1,7 @@
-import { Elements } from 'react-flow-renderer';
-
 // Visualizer display on app page
 export const initialDiagramState = {
-  tableNodes: [],
-  // testing this for the new custom node
   dbContents: [['hey', 'sup', 'hello']],
-  // hardcoded for now but should be cleaned up
-  dbContentsRev: {
-    0: { tableName: 'hello', columns: ['test1a', 'test1b', 'test1c'] },
-    1: { tableName: 'bye', columns: ['test2a', 'test2b', 'test2c'] },
-    3: { tableName: 'hi', columns: ['test3a', 'test3b', 'test3c'] },
-  },
-  allTables: [],
-  tableNodesRev: [
+  tableNodes: [
     {
       id: '2',
       type: 'selectorNode',
@@ -33,8 +22,7 @@ export const diagramReducer = (state, action) => {
 
         // testing this for the new custom node
         dbContents: action.payload.dbContents,
-        tableNodesRev: action.payload.tableNodesRev,
-
+        // tableNodesRev: action.payload.tableNodesRev,
         relationalData: action.payload.relationalData,
       };
   }
