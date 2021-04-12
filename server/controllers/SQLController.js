@@ -9,6 +9,7 @@ const secretKey = require('../secretKey');
 
 const SQLController = {};
 
+// function to decrypt incoming PSQL URLs
 const decryptedURI = (encryptedURL) => {
   const bytes = CryptoJS.AES.decrypt(encryptedURL, secretKey);
   const decrypted = bytes.toString(CryptoJS.enc.Utf8);
@@ -16,17 +17,9 @@ const decryptedURI = (encryptedURL) => {
 };
 
 SQLController.getSQLSchema = (req, res, next) => {
-  // to add to front-end during URL input, also import secretKey
-  /*
-  const encryptedURL = CryptoJS.AES.encrypt(
-    'user db URI',
-    secretKey
-  ).toString();
-  console.log('encryptedURL: ', encryptedURL);
-  */
-
   let PSQL_URI;
 
+  // if user sent URI, call decryptedURI to decrypt the link
   req.body.link
     ? (PSQL_URI = decryptedURI(req.body.link))
     : (PSQL_URI = EX_PG_URI);
