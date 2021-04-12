@@ -43,3 +43,6 @@ export default function DemoContainer() {
     </div>
   );
 }
+
+// from line 24 of tableRow before trying to create Row component:
+// rows.push(<p>{diagramState.allTables[i][j]}</p>);
