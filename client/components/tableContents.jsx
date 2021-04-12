@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { DiagramContext } from '../state/contexts';
 import TableRow from './tableRow';
+import TableName from './tableName';
 
-// probably want to create another component for each column in the row
-// but for now just testing this
+// this file is basically a container for the rows
 
-const tableContents = () => {
+const tableContents = ({ index }) => {
   const { diagramState } = useContext(DiagramContext);
   // for pushing the columns when we create that component
   // const columns = [];
@@ -27,33 +27,29 @@ const tableContents = () => {
     return <section id="columnContainer">{columns}</section>;
     */
 
-  const rows = [];
+  // const rows = [];
 
-  // hard coded to test just for the first table
-  // for (let i = 0; i < 4; i++) {
-  //   rows.push(
-  //     //   <div key={`divKey${tableContents[0]}${i}`}>
-
-  //     // </div>,
-  //     <TableRow />,
-  //   );
+  // for (let i = 0; i < 1; i++) {
+  //   rows.push(<TableRow />);
   // }
 
-  for (let i = 0; i < 2; i++) {
-    rows.push(
-      //   <div key={`divKey${tableContents[0]}${i}`}>
+  /*
+  // for some reason this renders each row as the table name
+  const rows2 = Object.keys(diagramState.dbContentsRev).map((table) => (
+    <TableRow
+      key={table}
+      tableColumns={diagramState.dbContentsRev[table].columns}
+      name={diagramState.dbContentsRev[table].tableName}
+    />
+  ));
+  */
 
-      // </div>,
-      <TableRow />,
-    );
-  }
+  // iterates over the columns key of the current table
+  const tableColumns = diagramState.dbContentsRev[
+    index
+  ].columns.map((column, i) => <TableRow key={i} columnName={column} />);
 
-  return (
-    <div>
-      <h1>TESTINGG: </h1>
-      {rows}
-    </div>
-  );
+  return <div>{tableColumns}</div>;
 };
 
 /*
