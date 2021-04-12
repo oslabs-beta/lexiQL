@@ -7,7 +7,7 @@ import Logo from "../assets/new-logo.png";
 
 export default function navBar() {
   const location = useLocation();
-
+  //
   if (location.pathname === "/") {
     return (
       <body id="homeBody">
