@@ -16,27 +16,29 @@ export default memo(({ data, columnName }) => {
       <div>
         <Handle
           type="target"
-          position="leftt"
+          position="left"
           id="b"
           style={{
+            position: 'relative',
             background: 'red',
             float: 'left',
-
-            width: `32px`,
-            height: `32px`,
+            left: '0%',
+            width: `24px`,
+            height: `24px`,
           }}
         />
-        testNode: <strong>{columnName}</strong>
+        <strong>{columnName}</strong>
         <Handle
           type="source"
-          // position="right"
+          position="right"
           id="b"
           style={{
+            position: 'relative',
             background: 'blue',
             float: 'right',
-
-            width: `32px`,
-            height: `32px`,
+            left: '20%',
+            width: `24px`,
+            height: `24px`,
           }}
         />
       </div>
