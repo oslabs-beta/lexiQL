@@ -8,29 +8,40 @@ import ReactFlow, {
   Controls,
 } from "react-flow-renderer";
 
+<<<<<<< HEAD
 import TableContainer from "./tableContainer";
 import { DiagramContext } from "../state/contexts";
+=======
+import TableFlowNode from './tableFlowNode';
+import { DiagramContext } from '../state/contexts';
+>>>>>>> visualizer-cleanup
 // import './index.css';
 
 const onNodeDragStop = (event, node) => console.log("drag stop", node);
 const onElementClick = (event, element) => console.log("click", element);
 
+<<<<<<< HEAD
 const initBgColor = "#9593AE";
+=======
+// const initBgColor = '#9593AE';
+>>>>>>> visualizer-cleanup
 
 const connectionLineStyle = { stroke: "#fff" };
 const snapGrid = [20, 20];
 const nodeTypes = {
-  selectorNode: TableContainer,
+  selectorNode: TableFlowNode,
 };
 
 const CustomNodeFlow = () => {
   const [reactflowInstance, setReactflowInstance] = useState(null);
   const [elements, setElements] = useState([]);
-  const [bgColor, setBgColor] = useState(initBgColor);
+  // const [bgColor, setBgColor] = useState(initBgColor);
 
   const { diagramState } = useContext(DiagramContext);
 
+  // do this once the tableNodes has changed
   useEffect(() => {
+<<<<<<< HEAD
     const onChange = (event) => {
       setElements((els) =>
         els.map((e) => {
@@ -52,6 +63,29 @@ const CustomNodeFlow = () => {
         })
       );
     };
+=======
+    // const onChange = (event) => {
+    //   setElements((els) =>
+    //     els.map((e) => {
+    //       if (isEdge(e) || e.id !== '2') {
+    //         return e;
+    //       }
+
+    //       const color = event.target.value;
+
+    //       setBgColor(color);
+
+    //       return {
+    //         ...e,
+    //         data: {
+    //           ...e.data,
+    //           color,
+    //         },
+    //       };
+    //     }),
+    //   );
+    // };
+>>>>>>> visualizer-cleanup
 
     setElements(diagramState.tableNodesRev);
   }, diagramState.tableNodesRev);
@@ -149,7 +183,11 @@ const CustomNodeFlow = () => {
       onElementsRemove={onElementsRemove}
       onConnect={onConnect}
       onNodeDragStop={onNodeDragStop}
+<<<<<<< HEAD
       style={{ background: bgColor, width: "100%", height: "90vh" }}
+=======
+      style={{ width: '100%', height: '90vh' }}
+>>>>>>> visualizer-cleanup
       onLoad={onLoad}
       nodeTypes={nodeTypes}
       connectionLineStyle={connectionLineStyle}
@@ -157,7 +195,7 @@ const CustomNodeFlow = () => {
       snapGrid={snapGrid}
       defaultZoom={1.5}
     >
-      <MiniMap
+      {/* <MiniMap
         nodeStrokeColor={(n) => {
           if (n.type === "input") return "#0041d0";
           if (n.type === "selectorNode") return bgColor;
@@ -167,7 +205,7 @@ const CustomNodeFlow = () => {
           if (n.type === "selectorNode") return bgColor;
           return "#fff";
         }}
-      />
+      /> */}
       <Controls />
     </ReactFlow>
   );

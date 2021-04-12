@@ -1,46 +1,56 @@
-import React, { memo, useContext } from 'react';
-import { Handle } from 'react-flow-renderer';
-
+import React, { useContext } from 'react';
 import { DiagramContext } from '../state/contexts';
-// import TestNodeRow from './testNodeRow';
+import TableRow from './tableRow';
+import TableName from './tableName';
 import TableContents from './tableContents';
 
-export default memo(({ data }) => {
+const tableContainer = ({ index }) => {
   const { diagramState } = useContext(DiagramContext);
+  // for pushing the columns when we create that component
+  // const columns = [];
+  /*
+    for (let i = 0; i < 2; i++) {
+      //console.log(this.props)
+      columns.push(
+        <div key={`divKey${i}`}>
+          <Column
+            id={this.props.id + i}
+            handleClick={this.props.handleClick}
+            shape={this.props.shape}
+          />
+        </div>,
+      );
+    }
+    
 
-  // test
+    return <section id="columnContainer">{columns}</section>;
+    */
+
+  // const rows = [];
+
+  // for (let i = 0; i < 1; i++) {
+  //   rows.push(<TableRow />);
+  // }
+
+  // render tableName
+  // render all the columns within that tableName
+  // const tableContents = Object.keys(diagramState.dbContentsRev).map((table) => (
+
+  // ));
 
   return (
-    <>
-      <Handle
-        type="target"
-        position="left"
-        style={{ background: '#555' }}
-        onConnect={(params) => console.log('handle onConnect', params)}
+    <div>
+      <TableName
+        key={index}
+        tableName={diagramState.dbContentsRev[index].tableName}
       />
-      <div>
-        Custom Color Picker Node: <strong>{data.color}</strong>
-      </div>
-      {/* <input
-        className="nodrag"
-        type="color"
-        onChange={data.onChange}
-        defaultValue={data.color}
-      /> */}
-      <TableContents />
-
-      {/* <Handle
-        type="source"
-        position="right"
-        id="a"
-        style={{ top: 10, background: '#555' }}
-      /> */}
-      <Handle
-        type="source"
-        position="right"
-        id="b"
-        style={{ bottom: 10, top: 'auto', background: '#555' }}
+      <TableContents
+        key={index}
+        index={index}
+        tableColumns={diagramState.dbContentsRev[index].columns}
       />
-    </>
+    </div>
   );
-});
+};
+
+export default tableContainer;

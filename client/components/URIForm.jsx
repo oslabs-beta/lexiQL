@@ -46,10 +46,37 @@ export default function URIForm() {
         // new storage for custom nodes
         const tableNodesRev = [];
 
-        // testing this for the new custom node
-        // testNodes holds all the arrays, where each subarray represents a table - the first element is the table name and everything thereafter is a column in that table. this needs to be modified when we confirm this approach works
+        /*
+        dbContents format:
+        { 0: { tableName: <table name>, 
+          <columnName1>: <column1 dataType>, 
+          <columnName2>: <column2 dataType>, 
+          < so on >
+          1: { .... }
+        }
+        */
+
         const dbContents = {};
-        //
+        /*
+        dbContentsRev format:
+        { 0: { tableName: <table name>, 
+          columns: [<all column names>], 
+          dataTypes: [<all dataTypes of columns>] },
+          1: { .... }
+        }
+        */
+        const dbContentsRev = {};
+
+        /*
+        columnDataTypes format:
+        { <table name[i]>: 
+          {columnName: <column name>, 
+            dataType: <data type>, 
+        <table name[i+1]>: 
+          {columnName: <column name>, 
+            dataType: <data type> }
+        */
+        const columnDataTypes = {};
 
         // loop through the data and grab every table name
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
@@ -60,11 +87,23 @@ export default function URIForm() {
           // [tableName, columns....]
           const tableNameColumn = [];
 
+          // [ columns....]
+          const columnsList = [];
           // testing this for the new custom node
           // sub-object in the dbContents
           const tableContents = {};
+
           // store the table name as the first key
           tableContents['tableName'] = tableName;
+
+          // sub-object in the dbContentsRev
+          const tableContentsRev = { columns: [] };
+
+          // sub-object in the columnDataTypes
+          const tableColTypes = {};
+
+          // store the table name as the first key
+          tableContentsRev['tableName'] = tableName;
 
           // store tableName in tableNameColumn
           tableNameColumn.push(tableName);
@@ -94,21 +133,6 @@ export default function URIForm() {
           //   },
           // });
 >>>>>>> e233af8dc11408e8bb797a7c000acb2fc04d72a0
-
-          // new logic for custom node to store the stuff
-
-          tableNodesRev.push({
-            id: i.toString(),
-            type: 'selectorNode',
-            // data: { onChange: onChange, color: initBgColor },
-            data: { label: tableName },
-            style: { border: '1px solid #777', padding: 10 },
-            // position: { x: 300, y: 50 },
-            position: {
-              x: 200 * i,
-              y: 0,
-            },
-          });
 
           // grab every column name within the table
           const columns = fullTable[tableName].columns;
@@ -142,12 +166,35 @@ export default function URIForm() {
 >>>>>>> e233af8dc11408e8bb797a7c000acb2fc04d72a0
             // testing this for the new custom node
             // store each column and the data type as a key value pair
+            // this saves a key value pair where key is the column name, and its value is the data type
             tableContents[columnLabel] =
               fullTable[tableName].columns[j][columnLabel].dataType;
 
             // store tableName in tableNameColumn
             tableNameColumn.push(columnLabel);
+
+            // store column name in columnsList so it ends up being an array of all the columns
+            columnsList.push(columnLabel);
+
+            // store each column label in the columns key
+            tableContentsRev.columns.push(columnLabel);
           }
+          // new logic for custom node to store the stuff
+
+          tableNodesRev.push({
+            id: i.toString(),
+            type: 'selectorNode',
+            // data: { onChange: onChange, color: initBgColor },
+            data: { tableName: tableName, columns: columnsList },
+            style: { border: '1px solid #777', padding: 10 },
+            // position: { x: 300, y: 50 },
+            position: {
+              x: 200 * i,
+              y: 0,
+            },
+          });
+
+          dbContentsRev[i] = tableContentsRev;
           // store the sub obj into the main obj
           dbContents[i] = tableContents;
 
@@ -160,7 +207,10 @@ export default function URIForm() {
         // console.log('ALL TABLES ', dbContents[0]);
         // console.log('ALL TABLES ', Object.keys(dbContents[0]));
         // console.log('ALL TABLES ', Object.values(dbContents[0]));
-        console.log('TABLE CONTENTS ', allTables);
+        // console.log('TABLE CONTENTS ', allTables);
+        console.log('TABLE CONTENTS rev ', dbContentsRev);
+        console.log('TABLE CONTENTS rev keys', Object.keys(dbContentsRev));
+        // console.log('TABLE CONTENTS rev col ', dbContentsRev[0].columns);
         console.log('nodes: ', tableNodesRev);
 =======
         // console.log("ALL TABLES ", dbContents);
@@ -181,6 +231,7 @@ export default function URIForm() {
             dbContents: [dbContents],
             allTables,
             tableNodesRev,
+            dbContentsRev,
           },
         });
 
