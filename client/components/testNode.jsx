@@ -8,7 +8,7 @@ import TableContainer from './tableContainer';
 
 // testing to see if tableFlowNode can render testNode
 
-export default memo(({ data, columnName }) => {
+export default memo(({ data, columnName, id }) => {
   const { diagramState } = useContext(DiagramContext);
 
   return (
@@ -17,7 +17,7 @@ export default memo(({ data, columnName }) => {
         <Handle
           type="target"
           position="left"
-          id="b"
+          id={`${id}+target`}
           style={{
             position: 'relative',
             background: 'orange',
@@ -33,7 +33,7 @@ export default memo(({ data, columnName }) => {
         <Handle
           type="source"
           position="right"
-          id="b"
+          id={`${id}+source`}
           style={{
             position: 'relative',
             background: 'blue',

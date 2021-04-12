@@ -21,12 +21,12 @@ export default memo(({ data }) => {
     : tableColumns;
 
     */
-
+  // key={`${tableName}+${column}`}
   // test to see if we can render subnode
   let tableColumns;
   columns
     ? (tableColumns = columns.map((column) => (
-        <TestNode columnName={column} key={`${tableName}+${column}`} />
+        <TestNode columnName={column} id={`${tableName}+${column}`} />
       )))
     : tableColumns;
 

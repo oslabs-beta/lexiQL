@@ -45,6 +45,7 @@ export const diagramReducer = (state, action) => {
         allTables: action.payload.allTables,
         tableNodesRev: action.payload.tableNodesRev,
         columnNodes: action.payload.columnNodes,
+        relationalData: action.payload.relationalData,
       };
     case 'SET_ALL':
       return {

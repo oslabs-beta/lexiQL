@@ -93,11 +93,14 @@ export default function URIForm() {
           const tableName = Object.keys(fullTable)[0];
           console.log('FULLTABLE: ', fullTable);
           console.log('tableName: ', tableName);
-          console.log(
-            'fkeys: ',
-            Object.keys(fullTable[tableName].foreignKeys[0])[0],
-          );
+          // console.log(
+          //   'fkeys: ',
+          //   Object.keys(fullTable[tableName].foreignKeys[0])[0],
+          // );
 
+          const tableElements = fullTable[tableName];
+
+          console.log('table: ', tableElements);
           // const columnLabel = Object.keys(columns[j])[0];
           // console.log('ref by: ', fullTable[tableName].referencedBy[0]);
 
@@ -154,29 +157,55 @@ export default function URIForm() {
           }
           */
 
-          /*
           relationalTableData[tableName] = {
-            primaryKey: fullTable[tableName].primaryKey,
+            primaryKey: tableElements.primaryKey,
           };
 
-          // check to see if there are any foreign keys and/or referencedBy
-          if (full[tableName].referencedBy) {
-            relationalTableData[tableName].referencedBy = []
-            for (let i = 0; i < full[tableName].foreignKeys.length; i++){
-              relationalTableData[tableName].referencedBy.push(`${full[tableName].referencedBy[i]}+${full[TableName].foreignKeys[i].referenceKey}`)
+          // store the foreign key within the current table
+          const fkeys = tableElements.foreignKeys;
+
+          // check to see if there are any foreign keys and/or referencedByKeys
+          if (fkeys) {
+            relationalTableData[tableName].foreignKeys = [];
+            for (let j = 0; j < fkeys.length; j++) {
+              const fkeyName = Object.keys(fkeys[j])[0];
+              // console.log('fkeyyy: ', fkeyName);
+              // console.log('fkey val: ', fkeys[j][fkeyName].referenceKey);
+              relationalTableData[tableName].foreignKeys.push([
+                `${fkeys[j][fkeyName].referenceTable}+${fkeys[j][fkeyName].referenceKey}`,
+                `${fkeyName}`,
+              ]);
             }
           }
 
-          if (full[tableName].referencedBy) {
+          // store the referenced by values within the current table
+          const refByKeys = tableElements.referencedBy;
+
+          if (refByKeys) {
             relationalTableData[tableName].referencedBy = [];
-              for (let i = 0; i < full[tableName].foreignKeys.length; i++){
-              const refBySubArr = [`${full[tableName]}+${full[TableName].foreignKeys[i]}`,`${full[tableName].foreignKeys[i].referenceTable}+${full[TableName].foreignKeys[i].referenceKey}`]
-              relationalTableData[tableName].referencedBy.push(refBySubArr)
+            for (let j = 0; j < refByKeys.length; j++) {
+              const refKey = Object.keys(refByKeys[j])[0];
+              // console.log('fkeyyy: ', fkeyName);
+              // console.log('fkey val: ', fkeys[j][fkeyName].referenceKey);
+              relationalTableData[tableName].referencedBy.push([
+                `${refKey}+${refByKeys[j][refKey]}`,
+                `${tableName}+${tableElements.primaryKey}`,
+              ]);
             }
           }
 
-          }
-          */
+          relationalData[tableName] = relationalTableData[tableName];
+
+          // if (full[tableName].referencedBy) {
+          //   relationalTableData[tableName].referencedBy = [];
+          //   for (let i = 0; i < full[tableName].foreignKeys.length; i++) {
+          //     const refBySubArr = [
+          //       `${full[tableName]}+${full[TableName].foreignKeys[i]}`,
+          //       `${full[tableName].foreignKeys[i].referenceTable}+${full[TableName].foreignKeys[i].referenceKey}`,
+          //     ];
+          //     relationalTableData[tableName].referencedBy.push(refBySubArr);
+          //   }
+          // }
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
@@ -330,6 +359,7 @@ export default function URIForm() {
         // console.log("TABLE CONTENTS ", allTables);
         console.log('nodes: ', tableNodesRev);
         console.log('column nodes: ', columnNodes);
+        console.log('relational database: ', relationalData);
 
         diagramDispatch({
           type: 'SET_TABLES',
@@ -343,6 +373,7 @@ export default function URIForm() {
             tableNodesRev,
             dbContentsRev,
             columnNodes,
+            relationalData,
           },
         });
 
