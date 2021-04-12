@@ -6,7 +6,7 @@ import { DiagramContext } from '../state/contexts';
 
 // create a row for each column in the table
 
-export default function tableRow({ key, tableColumns, name }) {
+export default function tableName({ key, columns, name }) {
   const { diagramState } = useContext(DiagramContext);
 
   const tableContents = diagramState.dbContentsRev;
@@ -28,18 +28,15 @@ export default function tableRow({ key, tableColumns, name }) {
   // console.log('container in tableRow: ', rowsContainer);
 
   /*
-  const rows = diagramState.dbContentsRev[key].columns.map((column) => (
+  const rows = diagramState.dbContentsRev[0].columns.map((column) => (
     <p>{column}</p>
   ));
   */
 
-  const rows = tableColumns.map((column) => <p>{column}</p>);
-
   return (
     <div>
-      <p>Hi</p>
-      {/* {name} */}
-      {rows}
+      <p>From Table Name</p>
+      {name}
     </div>
   );
   // REFACTOR

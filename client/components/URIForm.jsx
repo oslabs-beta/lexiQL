@@ -46,10 +46,37 @@ export default function URIForm() {
         // new storage for custom nodes
         const tableNodesRev = [];
 
-        // testing this for the new custom node
-        // testNodes holds all the arrays, where each subarray represents a table - the first element is the table name and everything thereafter is a column in that table. this needs to be modified when we confirm this approach works
+        /*
+        dbContents format:
+        { 0: { tableName: <table name>, 
+          <columnName1>: <column1 dataType>, 
+          <columnName2>: <column2 dataType>, 
+          < so on >
+          1: { .... }
+        }
+        */
+
         const dbContents = {};
-        //
+        /*
+        dbContentsRev format:
+        { 0: { tableName: <table name>, 
+          columns: [<all column names>], 
+          dataTypes: [<all dataTypes of columns>] },
+          1: { .... }
+        }
+        */
+        const dbContentsRev = {};
+
+        /*
+        columnDataTypes format:
+        { <table name[i]>: 
+          {columnName: <column name>, 
+            dataType: <data type>, 
+        <table name[i+1]>: 
+          {columnName: <column name>, 
+            dataType: <data type> }
+        */
+        const columnDataTypes = {};
 
         // loop through the data and grab every table name
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
@@ -63,8 +90,18 @@ export default function URIForm() {
           // testing this for the new custom node
           // sub-object in the dbContents
           const tableContents = {};
+
           // store the table name as the first key
           tableContents['tableName'] = tableName;
+
+          // sub-object in the dbContentsRev
+          const tableContentsRev = { columns: [] };
+
+          // sub-object in the columnDataTypes
+          const tableColTypes = {};
+
+          // store the table name as the first key
+          tableContentsRev['tableName'] = tableName;
 
           // store tableName in tableNameColumn
           tableNameColumn.push(tableName);
@@ -114,12 +151,18 @@ export default function URIForm() {
             });
             // testing this for the new custom node
             // store each column and the data type as a key value pair
+            // this saves a key value pair where key is the column name, and its value is the data type
             tableContents[columnLabel] =
               fullTable[tableName].columns[j][columnLabel].dataType;
 
             // store tableName in tableNameColumn
             tableNameColumn.push(columnLabel);
+
+            // store each column label in the columns key
+            tableContentsRev.columns.push(columnLabel);
           }
+
+          dbContentsRev[i] = tableContentsRev;
           // store the sub obj into the main obj
           dbContents[i] = tableContents;
 
@@ -131,7 +174,10 @@ export default function URIForm() {
         // console.log('ALL TABLES ', dbContents[0]);
         // console.log('ALL TABLES ', Object.keys(dbContents[0]));
         // console.log('ALL TABLES ', Object.values(dbContents[0]));
-        console.log('TABLE CONTENTS ', allTables);
+        // console.log('TABLE CONTENTS ', allTables);
+        console.log('TABLE CONTENTS rev ', dbContentsRev);
+        console.log('TABLE CONTENTS rev keys', Object.keys(dbContentsRev));
+        // console.log('TABLE CONTENTS rev col ', dbContentsRev[0].columns);
         console.log('nodes: ', tableNodesRev);
 
         diagramDispatch({
@@ -144,6 +190,7 @@ export default function URIForm() {
             dbContents: [dbContents],
             allTables,
             tableNodesRev,
+            dbContentsRev,
           },
         });
 

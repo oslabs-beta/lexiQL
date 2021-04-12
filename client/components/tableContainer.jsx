@@ -1,46 +1,23 @@
-import React, { memo, useContext } from 'react';
-import { Handle } from 'react-flow-renderer';
-
+import React, { useContext } from 'react';
 import { DiagramContext } from '../state/contexts';
-// import TestNodeRow from './testNodeRow';
-import TableContents from './tableContents';
 
-export default memo(({ data }) => {
+// probably want to create another component for each column in the row
+// but for now just testing this
+
+// create a row for each column in the table
+
+export default function tableContainer({ key, columns, name }) {
   const { diagramState } = useContext(DiagramContext);
 
-  // test
+  const tableContents = diagramState.dbContentsRev;
+
+  // render one tableName component
+  // render the tableContents (container of all the rows)
 
   return (
-    <>
-      <Handle
-        type="target"
-        position="left"
-        style={{ background: '#555' }}
-        onConnect={(params) => console.log('handle onConnect', params)}
-      />
-      <div>
-        Custom Color Picker Node: <strong>{data.color}</strong>
-      </div>
-      {/* <input
-        className="nodrag"
-        type="color"
-        onChange={data.onChange}
-        defaultValue={data.color}
-      /> */}
-      <TableContents />
-
-      {/* <Handle
-        type="source"
-        position="right"
-        id="a"
-        style={{ top: 10, background: '#555' }}
-      /> */}
-      <Handle
-        type="source"
-        position="right"
-        id="b"
-        style={{ bottom: 10, top: 'auto', background: '#555' }}
-      />
-    </>
+    <div>
+      <p>Bye</p>
+      {name}
+    </div>
   );
-});
+}
