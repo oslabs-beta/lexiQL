@@ -1,11 +1,11 @@
-import React, { memo, useContext } from 'react';
-import { Handle } from 'react-flow-renderer';
+import React, { memo, useContext } from "react";
+import { Handle } from "react-flow-renderer";
 
-import { DiagramContext } from '../state/contexts';
+import { DiagramContext } from "../state/contexts";
 // import TestNodeRow from './testNodeRow';
-import TableContents from './tableContents';
-import TableContainer from './tableContainer';
-import TestNode from './testNode';
+import TableContents from "./tableContents";
+import TableContainer from "./tableContainer";
+import TestNode from "./testNode";
 
 export default memo(({ data }) => {
   const { diagramState } = useContext(DiagramContext);
@@ -30,7 +30,7 @@ export default memo(({ data }) => {
       )))
     : tableColumns;
 
-  console.log('COLUMNS: ', tableColumns);
+  // console.log('COLUMNS: ', tableColumns);
   return (
     <>
       {/* <Handle
