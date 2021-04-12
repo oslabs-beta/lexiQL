@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import URIbtn from './URIbtn';
+import URIbtn from '../components/URIbtn';
 import { FormContext } from '../state/contexts';
 
-export default function URIForm() {
+export default function formContainer() {
   const {
     formState,
     formDispatch,
