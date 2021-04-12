@@ -93,7 +93,12 @@ export default function URIForm() {
           const tableName = Object.keys(fullTable)[0];
           console.log('FULLTABLE: ', fullTable);
           console.log('tableName: ', tableName);
-          // console.log('fkeys: ', Object.keys(fullTable[tableName]))
+          console.log(
+            'fkeys: ',
+            Object.keys(fullTable[tableName].foreignKeys[0])[0],
+          );
+
+          // const columnLabel = Object.keys(columns[j])[0];
           // console.log('ref by: ', fullTable[tableName].referencedBy[0]);
 
           // think of a better name, but this is a subarray to be stored in allTables where the format is:
