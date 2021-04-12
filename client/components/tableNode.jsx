@@ -36,7 +36,7 @@ export default function tableNode() {
           snapToGrid={true}
           snapGrid={[16, 16]}
         >
-          <Background color="#888" gap={16} />
+          <Background variant="dots" gap={16} />
         </ReactFlow>
       </ReactFlowProvider>
     </Fragment>

@@ -12,31 +12,35 @@ export default memo(({ data, columnName }) => {
   const { diagramState } = useContext(DiagramContext);
 
   return (
-    <div>
-      <div>
+    <div className="columnDotContainer">
+      <div className="leftColumn">
         <Handle
           type="target"
-          position="leftt"
+          position="left"
           id="b"
           style={{
-            background: 'red',
+            position: 'relative',
+            background: 'orange',
             float: 'left',
-
-            width: `32px`,
-            height: `32px`,
+            left: '0%',
+            width: `10px`,
+            height: `10px`,
           }}
         />
-        testNode: <strong>{columnName}</strong>
+        <div className="columnName">{columnName}</div>
+      </div>
+      <div className="rightColumn">
         <Handle
           type="source"
-          // position="right"
+          position="right"
           id="b"
           style={{
+            position: 'relative',
             background: 'blue',
             float: 'right',
-
-            width: `32px`,
-            height: `32px`,
+            left: '250',
+            width: `10px`,
+            height: `10px`,
           }}
         />
       </div>

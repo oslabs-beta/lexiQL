@@ -145,19 +145,28 @@ const CustomNodeFlow = () => {
 
   return (
     <ReactFlow
+      // zoom properties
+      minzoom={0.1}
+      maxzoom={0.75}
+      defaultzoom={0.4}
+      // zoomOnScroll={zoomOnScroll}
+      // zoomOnDoubleClick={zoomOnDoubleClick}
+      // elements to be rendered
       elements={elements}
+      // event handlers
       onElementClick={onElementClick}
       onElementsRemove={onElementsRemove}
       onConnect={onConnect}
       onNodeDragStop={onNodeDragStop}
-      style={{ width: '100%', height: '90vh' }}
       onLoad={onLoad}
+      // style
+      style={{ width: '100%', height: '90vh', fontSize: '20px' }}
+      // custom node type
       nodeTypes={nodeTypes}
+      // connection lines
       connectionLineStyle={connectionLineStyle}
-      snapToGrid={true}
-      snapGrid={snapGrid}
-      defaultZoom={1.5}
     >
+      {/* <Background variant="dots" gap={16} /> */}
       {/* <MiniMap
         nodeStrokeColor={(n) => {
           if (n.type === "input") return "#0041d0";
@@ -169,6 +178,7 @@ const CustomNodeFlow = () => {
           return "#fff";
         }}
       /> */}
+      {/* <Background variant="dots" gap={12} size={4} /> */}
       <Controls />
     </ReactFlow>
   );

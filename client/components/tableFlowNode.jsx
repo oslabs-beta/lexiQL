@@ -25,9 +25,12 @@ export default memo(({ data }) => {
   // test to see if we can render subnode
   let tableColumns;
   columns
-    ? (tableColumns = columns.map((column) => <TestNode columnName={column} />))
+    ? (tableColumns = columns.map((column) => (
+        <TestNode columnName={column} key={`${tableName}+${column}`} />
+      )))
     : tableColumns;
 
+  console.log('COLUMNS: ', tableColumns);
   return (
     <>
       {/* <Handle
@@ -36,10 +39,10 @@ export default memo(({ data }) => {
         style={{ background: '#555' }}
         onConnect={(params) => console.log('handle onConnect', params)}
       /> */}
-      <div>
-        Table: <strong>{tableName}</strong>
+      <div className="tableHeader">
+        <strong>{tableName}</strong>
       </div>
-
+      <br />
       {tableColumns}
       {/* <input
         className="nodrag"
