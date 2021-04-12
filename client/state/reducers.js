@@ -29,6 +29,7 @@ export const initialDiagramState = {
     //   position: { x: 300, y: 50 },
     // },
   ],
+  tableNodeLinks: [],
 };
 
 export const diagramReducer = (state, action) => {
@@ -43,6 +44,7 @@ export const diagramReducer = (state, action) => {
         dbContentsRev: action.payload.dbContentsRev,
         allTables: action.payload.allTables,
         tableNodesRev: action.payload.tableNodesRev,
+        columnNodes: action.payload.columnNodes,
       };
     case 'SET_ALL':
       return {

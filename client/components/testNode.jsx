@@ -20,11 +20,11 @@ export default memo(({ data, columnName }) => {
           id="b"
           style={{
             position: 'relative',
-            background: 'red',
+            background: 'orange',
             float: 'left',
             left: '0%',
-            width: `24px`,
-            height: `24px`,
+            width: `10px`,
+            height: `10px`,
           }}
         />
         <strong>{columnName}</strong>
@@ -36,9 +36,9 @@ export default memo(({ data, columnName }) => {
             position: 'relative',
             background: 'blue',
             float: 'right',
-            left: '500',
-            width: `24px`,
-            height: `24px`,
+            left: '250',
+            width: `10px`,
+            height: `10px`,
           }}
         />
       </div>

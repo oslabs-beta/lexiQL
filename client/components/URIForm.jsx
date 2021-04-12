@@ -12,6 +12,8 @@ export default function URIForm() {
     codeDispatch,
   } = useContext(FormContext);
 
+  // this file needs to be cleaned up and possibly separated much further
+
   // const nodes = useStoreState((store) => store.nodes);
   // const transform = useStoreState((store) => store.transform);
   // const setSelectedElements = useStoreActions(
@@ -43,7 +45,10 @@ export default function URIForm() {
         const tableNodes = [];
         const allTables = [];
 
-        // new storage for custom nodes
+        // this will store a react node format for each column across all tables, where previously we were just saving one for each table
+        const columnNodes = [];
+
+        // new storage for custom nodes - this works, possible delete 'tableNodes' ??
         const tableNodesRev = [];
 
         /*
@@ -78,11 +83,16 @@ export default function URIForm() {
         */
         const columnDataTypes = {};
 
+        // store relational data here
+        const relationalData = {};
+
         // loop through the data and grab every table name
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
           const fullTable = data.SQLSchema[i];
+          // current table name
           const tableName = Object.keys(fullTable)[0];
-
+          console.log('FULLTABLE: ', fullTable);
+          console.log('tableName: ', tableName);
           // think of a better name, but this is a subarray to be stored in allTables where the format is:
           // [tableName, columns....]
           const tableNameColumn = [];
@@ -120,8 +130,22 @@ export default function URIForm() {
           //   },
           // });
 
-          // grab every column name within the table
+          // grab every column name within the current table
           const columns = fullTable[tableName].columns;
+
+          // sub-object in the relationalData obj
+          const relationalTableData = {};
+          /*
+          save any relational info in one obj in this format for each table:
+          { <table name>: {
+            primaryKey: <primary key>,
+            referencedBy: [<table name + column name>],
+            foreignKeys: [<table name + column name>]
+            },
+            <table name 2>: ....
+          }
+          */
+          relationalTableData[tableName] = {};
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
@@ -150,10 +174,43 @@ export default function URIForm() {
 
             // store each column label in the columns key
             tableContentsRev.columns.push(columnLabel);
+
+            // store react flow node format for each column in the columnNodes array
+            columnNodes.push({
+              id: `${tableName}+${columnLabel}`,
+              // id: i.toString(),
+              type: 'selectorNode',
+              // data: { onChange: onChange, color: initBgColor },
+              data: { tableName: tableName, columnName: columnLabel },
+              style: {
+                border: '1px solid #777',
+                padding: 10,
+                // width: 150,
+                boxShadow: '5px 7px 5px 0px #aaa9a9',
+                fontSize: '10px',
+              },
+              position: {
+                x: 200 * i,
+                y: 0,
+              },
+              sourcePosition: 'right',
+              targetPosition: 'left',
+            });
           }
           // new logic for custom node to store the stuff
 
+          // HOW MANY TABLES TO RENDER PER ROW ON CANVAS
+          let numTables = data.SQLSchema.length;
+          let tablesPerRow = 0;
+
+          if (numTables < 5) tablesPerRow = numTables;
+          else {
+            if (numTables % 5 === 1) tablesPerRow = 4;
+            else tablesPerRow = numTables;
+          }
+
           tableNodesRev.push({
+            // id: `${tableName} ${columnLabel}`,
             id: i.toString(),
             type: 'selectorNode',
             // data: { onChange: onChange, color: initBgColor },
@@ -161,16 +218,43 @@ export default function URIForm() {
             style: {
               border: '1px solid #777',
               padding: 10,
-              width: 500,
+              width: 250,
+              boxShadow: '5px 7px 5px 0px #aaa9a9',
+              fontSize: '20px',
             },
-            // position: { x: 300, y: 50 },
             position: {
-              x: 200 * i,
+              x: 300 * i,
               y: 0,
             },
             sourcePosition: 'right',
             targetPosition: 'left',
           });
+
+          // for (let j = 0; j < numTables; j++) {}
+          if (i < tablesPerRow) {
+            tableNodesRev[i].position.x = 300 * i;
+            tableNodesRev[i].position.y = 0;
+          } else if (i < tablesPerRow * 2) {
+            tableNodesRev[i].position.x = 300 * (i - tablesPerRow);
+            tableNodesRev[i].position.y = 600;
+          } else {
+            tableNodesRev[i].position.x = 300 * (i - tablesPerRow * 2);
+            tableNodesRev[i].position.y = 1200;
+          }
+
+          // if (i < 5) {
+          //   tableNodesRev[i].position.x = 300 * i;
+          //   tableNodesRev[i].position.y = 0;
+          // } else if (i < 10) {
+          //   tableNodesRev[i].position.x = 300 * (i - 5);
+          //   tableNodesRev[i].position.y = 400;
+          // } else if (i < 15) {
+          //   tableNodesRev[i].position.x = 300 * (i - 10);
+          //   tableNodesRev[i].position.y = 800;
+          // } else {
+          //   tableNodesRev[i].position.x = 300 * (i - 15);
+          //   tableNodesRev[i].position.y = 1200;
+          // }
 
           dbContentsRev[i] = tableContentsRev;
           // store the sub obj into the main obj
@@ -180,12 +264,55 @@ export default function URIForm() {
           allTables.push(tableNameColumn);
         }
 
+        // logic for links
+
+        /* 
+        the elements in the 'foreignKeys' key will have a connection from their source handle to the target handle of the reference table/reference key listed in the 'foreignKeys' value
+        
+        format for foreignKeys:
+
+        {
+        id: 'e2-3',
+        source: '2', <-- this is the foreign key (key in current table)
+        target: '3', <-- this is the reference key (key from a different table)
+        animated: true,
+        style: { stroke: '#fff' },
+      },
+        */
+
+        /*
+
+        // if the current column name is included in the foreign keys, create a link where 'source' is the current column name and 'target' is the reference key where you'll have to link to another table
+        if ()
+        
+        */
+
+        /* 
+        the elements in the 'referencedBy" key will be nodes from a different table that reference that value
+        
+        format for referencedBy:
+
+        {
+        id: 'e1-2',
+        source: '1', <-- this is the key that it is referenced by (key from a different table)
+        target: '2', <-- this is the current table's primary key
+        animated: true,
+        style: { stroke: '#fff' },
+      },
+        */
+
+        /*
+
+        // create a link where the 'source' handle is the value in referencedBy from the respective table, and 'target' is the current table's _id
+        */
+
         // console.log("ALL TABLES ", dbContents);
         // console.log('ALL TABLES ', dbContents[0]);
         // console.log('ALL TABLES ', Object.keys(dbContents[0]));
         // console.log('ALL TABLES ', Object.values(dbContents[0]));
         // console.log("TABLE CONTENTS ", allTables);
-        // console.log("nodes: ", tableNodesRev);
+        console.log('nodes: ', tableNodesRev);
+        console.log('column nodes: ', columnNodes);
 
         diagramDispatch({
           type: 'SET_TABLES',
@@ -198,6 +325,7 @@ export default function URIForm() {
             allTables,
             tableNodesRev,
             dbContentsRev,
+            columnNodes,
           },
         });
 
