@@ -1,8 +1,6 @@
-import React, { useContext, useEffect } from 'react';
-import URIbtn from './URIbtn';
-import { FormContext } from '../state/contexts';
-// import { setSelectedElements } from 'react-flow-renderer/dist/store/actions';
-// import { useStoreState, useStoreActions } from 'react-flow-renderer';
+import React, { useContext } from "react";
+import URIbtn from "./URIbtn";
+import { FormContext } from "../state/contexts";
 
 export default function URIForm() {
   const {
@@ -32,12 +30,13 @@ export default function URIForm() {
   //     nodes.map((node) => ({ id: node.id, type: node.type })),
   //   );
   // });
+  //
 
   // get the data from the sample DB
   const handleSampleData = (e) => {
     e.preventDefault();
 
-    fetch('/example-schema')
+    fetch("/example-schema")
       .then((res) => res.json())
       .then((data) => {
         const sqlSchema = data.SQLSchema;
@@ -65,17 +64,15 @@ export default function URIForm() {
           // sub-object in the dbContents
           const tableContents = {};
           // store the table name as the first key
-          tableContents['tableName'] = tableName;
+          tableContents["tableName"] = tableName;
 
           // store tableName in tableNameColumn
           tableNameColumn.push(tableName);
 
           tableNodes.push({
             id: i.toString(),
-            // sourcePosition: 'right',
-            // targetPosition: 'left',
-            type: 'default',
-            style: { background: ' #5a95f5' },
+            type: "default",
+            style: { background: "#5a95f5" },
             data: { label: tableName },
 
             position: {
@@ -88,10 +85,10 @@ export default function URIForm() {
 
           tableNodesRev.push({
             id: i.toString(),
-            type: 'selectorNode',
+            type: "selectorNode",
             // data: { onChange: onChange, color: initBgColor },
             data: { label: tableName },
-            style: { border: '1px solid #777', padding: 10 },
+            style: { border: "1px solid #777", padding: 10 },
             // position: { x: 300, y: 50 },
             position: {
               x: 200 * i,
@@ -106,10 +103,8 @@ export default function URIForm() {
             const columnLabel = Object.keys(columns[j])[0];
             tableNodes.push({
               id: `${i}${j}`,
-              sourcePosition: 'right',
-              targetPosition: 'left',
-              type: 'default',
-              style: { background: '#f5ba5a' },
+              type: "default",
+              style: { background: "#f5ba5a" },
               data: { label: columnLabel },
 
               position: {
@@ -132,15 +127,15 @@ export default function URIForm() {
           allTables.push(tableNameColumn);
         }
 
-        console.log('ALL TABLES ', dbContents);
+        console.log("ALL TABLES ", dbContents);
         // console.log('ALL TABLES ', dbContents[0]);
         // console.log('ALL TABLES ', Object.keys(dbContents[0]));
         // console.log('ALL TABLES ', Object.values(dbContents[0]));
-        console.log('TABLE CONTENTS ', allTables);
-        console.log('nodes: ', tableNodesRev);
+        console.log("TABLE CONTENTS ", allTables);
+        console.log("nodes: ", tableNodesRev);
 
         diagramDispatch({
-          type: 'SET_TABLES',
+          type: "SET_TABLES",
           payload: {
             sqlSchema,
             tableNodes,
@@ -153,7 +148,7 @@ export default function URIForm() {
         });
 
         codeDispatch({
-          type: 'SET_CODE',
+          type: "SET_CODE",
           payload: {
             schema: data.GQLSchema.types,
             resolver: data.GQLSchema.resolvers,
@@ -162,7 +157,7 @@ export default function URIForm() {
         });
 
         formDispatch({
-          type: 'TOGGLE_FORM',
+          type: "TOGGLE_FORM",
           payload: {
             firstFetch: false,
             formIsOpen: false,
@@ -174,18 +169,18 @@ export default function URIForm() {
   // get data from user input DB
   const handleURI = (e) => {
     e.preventDefault();
-    const URILink = document.getElementById('URILink').value;
+    const URILink = document.getElementById("URILink").value;
     const valid = /^postgres:\/\//g;
 
     // if there is no input or if input is invalid do nothing
     if (!URILink || !valid.test(URILink))
       return alert(
-        'Missing URI link or the link is invalid. Please enter a valid URI link.',
+        "Missing URI link or the link is invalid. Please enter a valid URI link."
       );
 
-    fetch('/sql-schema', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    fetch("/sql-schema", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ link: URILink }),
     })
       .then((res) => res.json())
@@ -200,8 +195,8 @@ export default function URIForm() {
 
           tableNodes.push({
             id: i.toString(),
-            type: 'default',
-            style: { background: ' #5a95f5' },
+            type: "default",
+            style: { background: " #5a95f5" },
             data: { label: tableName },
 
             position: {
@@ -217,8 +212,8 @@ export default function URIForm() {
             const columnLabel = Object.keys(columns[j])[0];
             tableNodes.push({
               id: `${i}${j}`,
-              type: 'default',
-              style: { background: '#f5ba5a' },
+              type: "default",
+              style: { background: "#f5ba5a" },
               // style: { background:' #5a95f5' },
               data: { label: columnLabel },
 
@@ -231,7 +226,7 @@ export default function URIForm() {
         }
 
         diagramDispatch({
-          type: 'SET_TABLES',
+          type: "SET_TABLES",
           payload: {
             sqlSchema,
             tableNodes,
@@ -239,7 +234,7 @@ export default function URIForm() {
         });
 
         codeDispatch({
-          type: 'SET_CODE',
+          type: "SET_CODE",
           payload: {
             schema: data.GQLSchema.types,
             resolver: data.GQLSchema.resolvers,
@@ -248,7 +243,7 @@ export default function URIForm() {
         });
 
         formDispatch({
-          type: 'TOGGLE_FORM',
+          type: "TOGGLE_FORM",
           payload: {
             firstFetch: false,
             formIsOpen: false,
@@ -258,9 +253,9 @@ export default function URIForm() {
   };
 
   // don't have URI form toggle button appear if it's the user's first time on the page
-  let btnDisplay = '';
+  let btnDisplay = "";
   if (formState.firstFetch) {
-    btnDisplay = '';
+    btnDisplay = "";
   } else {
     btnDisplay = <URIbtn />;
   }
@@ -268,7 +263,7 @@ export default function URIForm() {
   return (
     <div className="uriForm" id="uriForm">
       {btnDisplay}
-      <div className={formState.formIsOpen ? 'uripanel open' : 'uripanel'}>
+      <div className={formState.formIsOpen ? "uripanel open" : "uripanel"}>
         <form onSubmit={handleURI}>
           <label className="formHeader" htmlFor="link">
             Link a database:

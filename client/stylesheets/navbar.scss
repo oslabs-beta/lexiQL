@@ -1,0 +1,62 @@
+#homeHeader {
+  // background-color: #5a95f5;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  font-family: "Raleway";
+
+  .headerLinks {
+    color: black;
+    font-size: 40px;
+    text-decoration: none;
+    margin-right: 40px;
+  }
+
+  .headerLinks:visited {
+    color: black;
+  }
+
+  .headerLinks:hover {
+    color: $orange;
+  }
+
+  .headerLinks:active {
+    color: $orange;
+  }
+
+  #homeLogo {
+    height: 90px;
+    margin: 10px -10px 0px 0px;
+  }
+}
+
+#appHeader {
+  background-color: $bright-blue;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  .headerLinks {
+    color: black;
+    font-size: 40px;
+    text-decoration: none;
+    margin-right: 40px;
+  }
+
+  .headerLinks:visited {
+    color: black;
+  }
+
+  .headerLinks:hover {
+    color: $orange;
+  }
+
+  .headerLinks:active {
+    color: $orange;
+  }
+
+  #homeLogo {
+    height: 80px;
+    margin: 10px 25px 0px 0px;
+  }
+}
