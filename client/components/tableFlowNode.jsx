@@ -26,7 +26,7 @@ export default memo(({ data }) => {
   let tableColumns;
   columns
     ? (tableColumns = columns.map((column) => (
-        <TestNode columnName={column} id={`${tableName}+${column}`} />
+        <TestNode columnName={column} id={`${column}`} />
       )))
     : tableColumns;
 

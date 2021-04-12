@@ -150,8 +150,8 @@ export default function URIForm() {
           save any relational info in one obj in this format for each table:
           { <table name>: {
             primaryKey: <primary key>,
-            referencedBy: [<table name + column name>, ...] 
-            foreignKeys: [[<fkey>, <table name + column name>], ...],
+            referencedBy: [[source, target, sourcehandle]] 
+            foreignKeys: [[source, target, sourcehandle]],
             },
             <table name 2>: ....
           }
@@ -171,9 +171,12 @@ export default function URIForm() {
               const fkeyName = Object.keys(fkeys[j])[0];
               // console.log('fkeyyy: ', fkeyName);
               // console.log('fkey val: ', fkeys[j][fkeyName].referenceKey);
+              // store in the format of [source, target, sourceHandle, targetHandle]
               relationalTableData[tableName].foreignKeys.push([
-                `${fkeys[j][fkeyName].referenceTable}+${fkeys[j][fkeyName].referenceKey}`,
-                `${fkeyName}`,
+                tableName,
+                fkeys[j][fkeyName].referenceTable,
+                fkeyName,
+                fkeys[j][fkeyName].referenceKey,
               ]);
             }
           }
@@ -185,14 +188,22 @@ export default function URIForm() {
             relationalTableData[tableName].referencedBy = [];
             for (let j = 0; j < refByKeys.length; j++) {
               const refKey = Object.keys(refByKeys[j])[0];
-              // console.log('fkeyyy: ', fkeyName);
-              // console.log('fkey val: ', fkeys[j][fkeyName].referenceKey);
+              // store in the format of [source, target, sourceHandle, targetHandle]
               relationalTableData[tableName].referencedBy.push([
-                `${refKey}+${refByKeys[j][refKey]}`,
-                `${tableName}+${tableElements.primaryKey}`,
+                refKey,
+                tableName,
+                refByKeys[j][refKey],
+                tableElements.primaryKey,
               ]);
             }
           }
+
+          /*
+                        relationalTableData[tableName].referencedBy.push([
+                `${refKey}+${refByKeys[j][refKey]}`,
+                `${tableName}+${tableElements.primaryKey}`,
+              ]);
+              */
 
           relationalData[tableName] = relationalTableData[tableName];
 
@@ -259,8 +270,8 @@ export default function URIForm() {
           }
           // new logic for custom node to store the stuff
           tableNodesRev.push({
-            // id: `${tableName} ${columnLabel}`,
-            id: i.toString(),
+            id: `${tableName}`,
+            // id: i.toString(),
             type: 'selectorNode',
             // data: { onChange: onChange, color: initBgColor },
             data: { tableName: tableName, columns: columnsList },
@@ -338,6 +349,7 @@ export default function URIForm() {
         */
 
         console.log('table nodes before links added: ', tableNodesRev);
+        /*
         const tableNames = Object.keys(relationalData);
 
         for (let i = 0; i < tableNames.length; i++) {
@@ -365,6 +377,18 @@ export default function URIForm() {
             }
           }
         }
+
+        */
+        const tableNames = Object.keys(relationalData);
+        tableNodesRev.push({
+          id: `${tableNames[0]}-refKey${0}`,
+          source: 'people',
+          target: 'films',
+          sourceHandle: 'name',
+          targetHandle: 'title',
+          // source: relationalData[tableNames[0]].foreignKeys[0][0],
+          // target: relationalData[tableNames[0]].foreignKeys[0][1],
+        });
 
         console.log('table nodes after links added: ', tableNodesRev);
 
