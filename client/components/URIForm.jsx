@@ -69,17 +69,17 @@ export default function URIForm() {
           // store tableName in tableNameColumn
           tableNameColumn.push(tableName);
 
-          tableNodes.push({
-            id: i.toString(),
-            type: "default",
-            style: { background: "#5a95f5" },
-            data: { label: tableName },
+          // tableNodes.push({
+          //   id: i.toString(),
+          //   type: "default",
+          //   style: { background: "#5a95f5" },
+          //   data: { label: tableName },
 
-            position: {
-              x: 200 * i,
-              y: 0,
-            },
-          });
+          //   position: {
+          //     x: 200 * i,
+          //     y: 0,
+          //   },
+          // });
 
           // new logic for custom node to store the stuff
 
@@ -101,17 +101,17 @@ export default function URIForm() {
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
-            tableNodes.push({
-              id: `${i}${j}`,
-              type: "default",
-              style: { background: "#f5ba5a" },
-              data: { label: columnLabel },
+            // tableNodes.push({
+            //   id: `${i}${j}`,
+            //   type: "default",
+            //   style: { background: "#f5ba5a" },
+            //   data: { label: columnLabel },
 
-              position: {
-                x: 200 * i,
-                y: 30 * (j + 1),
-              },
-            });
+            //   position: {
+            //     x: 200 * i,
+            //     y: 30 * (j + 1),
+            //   },
+            // });
             // testing this for the new custom node
             // store each column and the data type as a key value pair
             tableContents[columnLabel] =
@@ -127,12 +127,12 @@ export default function URIForm() {
           allTables.push(tableNameColumn);
         }
 
-        console.log("ALL TABLES ", dbContents);
+        // console.log("ALL TABLES ", dbContents);
         // console.log('ALL TABLES ', dbContents[0]);
         // console.log('ALL TABLES ', Object.keys(dbContents[0]));
         // console.log('ALL TABLES ', Object.values(dbContents[0]));
-        console.log("TABLE CONTENTS ", allTables);
-        console.log("nodes: ", tableNodesRev);
+        // console.log("TABLE CONTENTS ", allTables);
+        // console.log("nodes: ", tableNodesRev);
 
         diagramDispatch({
           type: "SET_TABLES",

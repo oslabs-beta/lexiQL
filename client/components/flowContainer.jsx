@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from "react";
 
 import ReactFlow, {
   isEdge,
@@ -6,18 +6,18 @@ import ReactFlow, {
   addEdge,
   MiniMap,
   Controls,
-} from 'react-flow-renderer';
+} from "react-flow-renderer";
 
-import TableContainer from './tableContainer';
-import { DiagramContext } from '../state/contexts';
+import TableContainer from "./tableContainer";
+import { DiagramContext } from "../state/contexts";
 // import './index.css';
 
-const onNodeDragStop = (event, node) => console.log('drag stop', node);
-const onElementClick = (event, element) => console.log('click', element);
+const onNodeDragStop = (event, node) => console.log("drag stop", node);
+const onElementClick = (event, element) => console.log("click", element);
 
-const initBgColor = '#9593AE';
+const initBgColor = "#9593AE";
 
-const connectionLineStyle = { stroke: '#fff' };
+const connectionLineStyle = { stroke: "#fff" };
 const snapGrid = [20, 20];
 const nodeTypes = {
   selectorNode: TableContainer,
@@ -34,7 +34,7 @@ const CustomNodeFlow = () => {
     const onChange = (event) => {
       setElements((els) =>
         els.map((e) => {
-          if (isEdge(e) || e.id !== '2') {
+          if (isEdge(e) || e.id !== "2") {
             return e;
           }
 
@@ -49,12 +49,12 @@ const CustomNodeFlow = () => {
               color,
             },
           };
-        }),
+        })
       );
     };
 
     setElements(diagramState.tableNodesRev);
-  }, []);
+  }, diagramState.tableNodesRev);
 
   //   setElements([
   //     {
@@ -64,6 +64,7 @@ const CustomNodeFlow = () => {
   //       position: { x: 0, y: 50 },
   //       sourcePosition: 'right',
   //     },
+  //-----------ID 2 IS CUSTOM NODE
   //     {
   //       id: '2',
   //       type: 'selectorNode',
@@ -121,24 +122,24 @@ const CustomNodeFlow = () => {
   const onElementsRemove = useCallback(
     (elementsToRemove) =>
       setElements((els) => removeElements(elementsToRemove, els)),
-    [],
+    []
   );
   const onConnect = useCallback(
     (params) =>
       setElements((els) =>
-        addEdge({ ...params, animated: true, style: { stroke: '#fff' } }, els),
+        addEdge({ ...params, animated: true, style: { stroke: "#fff" } }, els)
       ),
-    [],
+    []
   );
 
   const onLoad = useCallback(
     (rfi) => {
       if (!reactflowInstance) {
         setReactflowInstance(rfi);
-        console.log('flow loaded:', rfi);
+        console.log("flow loaded:", rfi);
       }
     },
-    [reactflowInstance],
+    [reactflowInstance]
   );
 
   return (
@@ -148,7 +149,7 @@ const CustomNodeFlow = () => {
       onElementsRemove={onElementsRemove}
       onConnect={onConnect}
       onNodeDragStop={onNodeDragStop}
-      style={{ background: bgColor, width: '100%', height: '90vh' }}
+      style={{ background: bgColor, width: "100%", height: "90vh" }}
       onLoad={onLoad}
       nodeTypes={nodeTypes}
       connectionLineStyle={connectionLineStyle}
@@ -158,13 +159,13 @@ const CustomNodeFlow = () => {
     >
       <MiniMap
         nodeStrokeColor={(n) => {
-          if (n.type === 'input') return '#0041d0';
-          if (n.type === 'selectorNode') return bgColor;
-          if (n.type === 'output') return '#ff0072';
+          if (n.type === "input") return "#0041d0";
+          if (n.type === "selectorNode") return bgColor;
+          if (n.type === "output") return "#ff0072";
         }}
         nodeColor={(n) => {
-          if (n.type === 'selectorNode') return bgColor;
-          return '#fff';
+          if (n.type === "selectorNode") return bgColor;
+          return "#fff";
         }}
       />
       <Controls />
