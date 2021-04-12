@@ -30,12 +30,12 @@ export default memo(({ data }) => {
 
   return (
     <>
-      <Handle
+      {/* <Handle
         type="target"
         position="left"
         style={{ background: '#555' }}
         onConnect={(params) => console.log('handle onConnect', params)}
-      />
+      /> */}
       <div>
         Table: <strong>{tableName}</strong>
       </div>
@@ -47,7 +47,7 @@ export default memo(({ data }) => {
         onChange={data.onChange}
         defaultValue={data.color}
       /> */}
-
+      {/* 
       <Handle
         type="source"
         position="right"
@@ -59,7 +59,7 @@ export default memo(({ data }) => {
         position="right"
         id="b"
         style={{ bottom: 10, top: 'auto', background: '#555' }}
-      />
+      /> */}
     </>
   );
 });
