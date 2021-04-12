@@ -5,28 +5,11 @@ import { DiagramContext } from '../state/contexts';
 // import TestNodeRow from './testNodeRow';
 import TableContents from './tableContents';
 import TableContainer from './tableContainer';
-import TestNode from './testNode';
 
-export default memo(({ data }) => {
+// testing to see if tableFlowNode can render testNode
+
+export default memo(({ data, columnName }) => {
   const { diagramState } = useContext(DiagramContext);
-  const { tableName, columns } = data;
-
-  /*
-  // conditional because for some reason the array is undefined for the first two logs?? brute forcing it ...
-
-
-  let tableColumns;
-  columns
-    ? (tableColumns = columns.map((column) => <p>{column}</p>))
-    : tableColumns;
-
-    */
-
-  // test to see if we can render subnode
-  let tableColumns;
-  columns
-    ? (tableColumns = columns.map((column) => <TestNode columnName={column} />))
-    : tableColumns;
 
   return (
     <>
@@ -37,10 +20,10 @@ export default memo(({ data }) => {
         onConnect={(params) => console.log('handle onConnect', params)}
       />
       <div>
-        Table: <strong>{tableName}</strong>
+        testNode: <strong>{columnName}</strong>
       </div>
 
-      {tableColumns}
+      {/* {tableColumns} */}
       {/* <input
         className="nodrag"
         type="color"
