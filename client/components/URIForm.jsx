@@ -42,6 +42,10 @@ export default function URIForm() {
       .then((data) => {
         const sqlSchema = data.SQLSchema;
         const tableNodes = [];
+        const allTables = [];
+
+        // new storage for custom nodes
+        const tableNodesRev = [];
 
         // testing this for the new custom node
         // testNodes holds all the arrays, where each subarray represents a table - the first element is the table name and everything thereafter is a column in that table. this needs to be modified when we confirm this approach works
@@ -53,11 +57,18 @@ export default function URIForm() {
           const fullTable = data.SQLSchema[i];
           const tableName = Object.keys(fullTable)[0];
 
+          // think of a better name, but this is a subarray to be stored in allTables where the format is:
+          // [tableName, columns....]
+          const tableNameColumn = [];
+
           // testing this for the new custom node
           // sub-object in the dbContents
           const tableContents = {};
           // store the table name as the first key
           tableContents['tableName'] = tableName;
+
+          // store tableName in tableNameColumn
+          tableNameColumn.push(tableName);
 
           tableNodes.push({
             id: i.toString(),
@@ -67,6 +78,21 @@ export default function URIForm() {
             style: { background: ' #5a95f5' },
             data: { label: tableName },
 
+            position: {
+              x: 200 * i,
+              y: 0,
+            },
+          });
+
+          // new logic for custom node to store the stuff
+
+          tableNodesRev.push({
+            id: i.toString(),
+            type: 'selectorNode',
+            // data: { onChange: onChange, color: initBgColor },
+            data: { label: tableName },
+            style: { border: '1px solid #777', padding: 10 },
+            // position: { x: 300, y: 50 },
             position: {
               x: 200 * i,
               y: 0,
@@ -95,21 +121,23 @@ export default function URIForm() {
             // store each column and the data type as a key value pair
             tableContents[columnLabel] =
               fullTable[tableName].columns[j][columnLabel].dataType;
-            //
-            // console.log('label: ', columnLabel);
-            // console.log(
-            //   '1: ',
-            //   fullTable[tableName].columns[j][columnLabel].dataType,
-            // );
-            // console.log('2 :', columnLabel);
-            // console.log('2 :', columnLabel);
+
+            // store tableName in tableNameColumn
+            tableNameColumn.push(columnLabel);
           }
           // store the sub obj into the main obj
           dbContents[i] = tableContents;
+
+          // store the sub array into allTables array
+          allTables.push(tableNameColumn);
         }
 
-        // console.log('ALL TABLES ', dbContents);
-        // console.log('TABLE CONTENTS ', tableContents);
+        console.log('ALL TABLES ', dbContents);
+        // console.log('ALL TABLES ', dbContents[0]);
+        // console.log('ALL TABLES ', Object.keys(dbContents[0]));
+        // console.log('ALL TABLES ', Object.values(dbContents[0]));
+        console.log('TABLE CONTENTS ', allTables);
+        console.log('nodes: ', tableNodesRev);
 
         diagramDispatch({
           type: 'SET_TABLES',
@@ -117,7 +145,10 @@ export default function URIForm() {
             sqlSchema,
             tableNodes,
             // testing this for the new custom node
-            dbContents,
+            // save as an array of objects
+            dbContents: [dbContents],
+            allTables,
+            tableNodesRev,
           },
         });
 

@@ -30,7 +30,16 @@ const tableContents = () => {
   const rows = [];
 
   // hard coded to test just for the first table
-  for (let i = 0; i < 4; i++) {
+  // for (let i = 0; i < 4; i++) {
+  //   rows.push(
+  //     //   <div key={`divKey${tableContents[0]}${i}`}>
+
+  //     // </div>,
+  //     <TableRow />,
+  //   );
+  // }
+
+  for (let i = 0; i < 2; i++) {
     rows.push(
       //   <div key={`divKey${tableContents[0]}${i}`}>
 
@@ -38,6 +47,7 @@ const tableContents = () => {
       <TableRow />,
     );
   }
+
   return (
     <div>
       <h1>TESTINGG: </h1>

@@ -29,13 +29,12 @@ export default memo(({ data }) => {
       /> */}
       <TableContents />
 
-      {/* <TestNodeRow /> */}
-      <Handle
+      {/* <Handle
         type="source"
         position="right"
         id="a"
         style={{ top: 10, background: '#555' }}
-      />
+      /> */}
       <Handle
         type="source"
         position="right"

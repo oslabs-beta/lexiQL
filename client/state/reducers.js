@@ -3,7 +3,24 @@ export const initialDiagramState = {
   tableNames: [],
   tableNodes: [],
   // testing this for the new custom node
-  testNodes: [['hey', 'sup', 'hello']],
+  dbContents: [['hey', 'sup', 'hello']],
+  allTables: [],
+  tableNodesRev: [
+    {
+      id: '2',
+      type: 'selectorNode',
+      data: { label: 'hi' },
+      style: { border: '1px solid #777', padding: 10 },
+      position: { x: 300, y: 50 },
+    },
+    // {
+    //   id: '3',
+    //   type: 'selectorNode',
+    //   data: { label: 'bye' },
+    //   style: { border: '1px solid #777', padding: 10 },
+    //   position: { x: 300, y: 50 },
+    // },
+  ],
 };
 
 export const diagramReducer = (state, action) => {
@@ -14,7 +31,9 @@ export const diagramReducer = (state, action) => {
         tableNodes: action.payload.tableNodes,
         sqlSchema: action.payload.sqlSchema,
         // testing this for the new custom node
-        testNodes: action.payload.testNodes,
+        dbContents: action.payload.dbContents,
+        allTables: action.payload.allTables,
+        tableNodesRev: action.payload.tableNodesRev,
       };
   }
 };
