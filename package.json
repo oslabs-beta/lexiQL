@@ -22,6 +22,7 @@
     "camelcase": "^6.2.0",
     "codemirror": "^5.60.0",
     "crypto-browserify": "^3.12.0",
+    "crypto-js": "^4.0.0",
     "dagre": "^0.8.5",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",

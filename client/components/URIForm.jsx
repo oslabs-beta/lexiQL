@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import URIbtn from './URIbtn';
 import { FormContext } from '../state/contexts';
+import CryptoJS from 'crypto-js';
+import secretKey from '../../server/secretKey'
 // import { setSelectedElements } from 'react-flow-renderer/dist/store/actions';
 // import { useStoreState, useStoreActions } from 'react-flow-renderer';
 
@@ -113,6 +115,7 @@ export default function URIForm() {
   // get data from user input DB
   const handleURI = (e) => {
     e.preventDefault();
+
     const URILink = document.getElementById('URILink').value;
     const valid = /^postgres:\/\//g;
 
@@ -122,10 +125,13 @@ export default function URIForm() {
         'Missing URI link or the link is invalid. Please enter a valid URI link.',
       );
 
+    // encrypt URI before sending to server
+    const encryptedURL = CryptoJS.AES.encrypt(URILink, secretKey).toString();
+
     fetch('/sql-schema', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ link: URILink }),
+      body: JSON.stringify({ link: encryptedURL }),
     })
       .then((res) => res.json())
       .then((data) => {
