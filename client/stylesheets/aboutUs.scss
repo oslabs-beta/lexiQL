@@ -1,0 +1,72 @@
+.teamContainer {
+  // background-color: #5a95f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+  height: 90vh;
+  margin-top: 50px;
+  padding: 0px 0px 300px 0px;
+
+  h3 {
+    // color: #f5ba5a;
+    color: rgb(34, 34, 34);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  #allCards {
+    width: 75%;
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-bottom: 100px;
+  }
+
+  .teamMember {
+    // background-color: #5a95f5;
+    background-color: $dark-blue;
+    border: 2px solid $orange;
+    box-shadow: 0px 0px 10px #aaa9a9;
+    border-radius: 5px;
+    width: 35%;
+    padding: 20px 0px;
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .name {
+      font-size: 35px;
+      // color: #f5ba5a;
+      color: $orange;
+    }
+
+    .headshot {
+      height: 200px;
+      width: 200px;
+      border-radius: 50%;
+    }
+
+    .teamMemberLinks {
+      display: flex;
+      justify-content: space-between;
+      width: 30%;
+      cursor: pointer;
+    }
+
+    .siteLogos {
+      height: 50px;
+      width: 50px;
+    }
+
+    .siteLogos:hover {
+      height: 55px;
+      width: 55px;
+    }
+  }
+}

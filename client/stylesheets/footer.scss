@@ -1,0 +1,32 @@
+.footer {
+  // background-color: #5a95f5;
+  width: 100%;
+  display: flex;
+  margin: 30px 0px;
+  padding: 30px 0px;
+  font-size: 40px;
+}
+
+.footerIcons {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+
+  .footerLink {
+    color: $bright-blue;
+    text-decoration: none;
+  }
+
+  .footerLink:visited {
+    color: $bright-blue;
+  }
+
+  .footerLink:hover {
+    color: $orange;
+    font-size: 41px;
+  }
+
+  .footerLink:active {
+    color: $bright-blue;
+  }
+}

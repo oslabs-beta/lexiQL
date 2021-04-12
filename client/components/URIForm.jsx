@@ -1,8 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import URIbtn from './URIbtn';
 import { FormContext } from '../state/contexts';
-// import { setSelectedElements } from 'react-flow-renderer';
-import { useStoreState, useStoreActions } from 'react-flow-renderer';
 
 export default function URIForm() {
   const {
@@ -32,6 +30,7 @@ export default function URIForm() {
   //     nodes.map((node) => ({ id: node.id, type: node.type })),
   //   );
   // });
+  //
 
   // get the data from the sample DB
   const handleSampleData = (e) => {
@@ -72,10 +71,8 @@ export default function URIForm() {
 
           tableNodes.push({
             id: i.toString(),
-            // sourcePosition: 'right',
-            // targetPosition: 'left',
             type: 'default',
-            style: { background: ' #5a95f5' },
+            style: { background: '#5a95f5' },
             data: { label: tableName },
 
             position: {
@@ -106,8 +103,6 @@ export default function URIForm() {
             const columnLabel = Object.keys(columns[j])[0];
             tableNodes.push({
               id: `${i}${j}`,
-              sourcePosition: 'right',
-              targetPosition: 'left',
               type: 'default',
               style: { background: '#f5ba5a' },
               data: { label: columnLabel },
