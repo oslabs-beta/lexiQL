@@ -36,7 +36,7 @@ export default memo(({ data, columnName }) => {
             position: 'relative',
             background: 'blue',
             float: 'right',
-            left: '20%',
+            left: '500',
             width: `24px`,
             height: `24px`,
           }}

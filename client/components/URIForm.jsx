@@ -158,12 +158,18 @@ export default function URIForm() {
             type: 'selectorNode',
             // data: { onChange: onChange, color: initBgColor },
             data: { tableName: tableName, columns: columnsList },
-            style: { border: '1px solid #777', padding: 10 },
+            style: {
+              border: '1px solid #777',
+              padding: 10,
+              width: 500,
+            },
             // position: { x: 300, y: 50 },
             position: {
               x: 200 * i,
               y: 0,
             },
+            sourcePosition: 'right',
+            targetPosition: 'left',
           });
 
           dbContentsRev[i] = tableContentsRev;
