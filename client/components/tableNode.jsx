@@ -1,44 +1,64 @@
-import React, { Fragment, useContext } from 'react';
-import ReactFlow, {
-  addEdge,
-  Background,
-  ReactFlowProvider,
-} from 'react-flow-renderer';
+import React, { memo, useContext } from 'react';
+import { Handle } from 'react-flow-renderer';
+
 import { DiagramContext } from '../state/contexts';
+import ColumnNode from './columnNode';
 
-// the contents of this file could probably just go into diagramContainer when refactoring
-
-const onLoad = (reactFlowInstance) => {
-  reactFlowInstance.fitView();
-};
-
-export default function tableNode() {
+export default memo(({ data }) => {
   const { diagramState } = useContext(DiagramContext);
+  const { tableName, columns } = data;
 
-  // this lets you connect to other nodes
-  const onConnect = (params) => setElements((e) => addEdge(params, e));
+  /*
+  // conditional because for some reason the array is undefined for the first two logs?? brute forcing it ...
+
+
+  let tableColumns;
+  columns
+    ? (tableColumns = columns.map((column) => <p>{column}</p>))
+    : tableColumns;
+
+    */
+  // key={`${tableName}+${column}`}
+  // test to see if we can render subnode
+  let tableColumns;
+  columns
+    ? (tableColumns = columns.map((column) => (
+        <ColumnNode columnName={column} id={`${column}`} />
+      )))
+    : tableColumns;
 
   return (
-    <Fragment>
-      <ReactFlowProvider>
-        <ReactFlow
-          minzoom={0.3}
-          maxzoom={0.7}
-          defaultzoom={0.5}
-          defaultPosition={[50, 50]}
-          onLoad={onLoad}
-          elements={diagramState.tableNodes}
-          // fitView={{ padding: 2, includeHiddenNodes: true }}
-          style={{ width: '100%', height: '90vh' }}
-          onConnect={onConnect}
-          connectionLineStyle={{ stroke: '#ddd', strokeWidth: 2 }}
-          connectionLineType="bezier"
-          snapToGrid={true}
-          snapGrid={[16, 16]}
-        >
-          <Background variant="dots" gap={16} />
-        </ReactFlow>
-      </ReactFlowProvider>
-    </Fragment>
+    <>
+      {/* <Handle
+        type="target"
+        position="left"
+        style={{ background: '#555' }}
+        onConnect={(params) => console.log('handle onConnect', params)}
+      /> */}
+      <div className="tableHeader">
+        <strong>{tableName}</strong>
+      </div>
+      <br />
+      {tableColumns}
+      {/* <input
+        className="nodrag"
+        type="color"
+        onChange={data.onChange}
+        defaultValue={data.color}
+      />
+
+      <Handle
+        type="source"
+        position="right"
+        id="a"
+        style={{ top: 10, background: '#555' }}
+      />
+      <Handle
+        type="source"
+        position="right"
+        id="b"
+        style={{ bottom: 10, top: 'auto', background: '#555' }}
+      /> */}
+    </>
   );
-}
+});

@@ -321,15 +321,6 @@ export default function URIForm() {
           allTables.push(tableNameColumn);
         }
 
-        // console.log("ALL TABLES ", dbContents);
-        // console.log('ALL TABLES ', dbContents[0]);
-        // console.log('ALL TABLES ', Object.keys(dbContents[0]));
-        // console.log('ALL TABLES ', Object.values(dbContents[0]));
-        // console.log("TABLE CONTENTS ", allTables);
-        // console.log('nodes: ', tableNodesRev);
-        // console.log('column nodes: ', columnNodes);
-        console.log('relational database: ', relationalData);
-
         // logic for links
 
         // store everything in tableNodesRev - this is where the nodes are stored, later to be rendered by react flow

@@ -8,7 +8,7 @@ import ReactFlow, {
   Controls,
 } from 'react-flow-renderer';
 
-import TableFlowNode from './tableFlowNode';
+import TableNode from '../components/tableNode';
 import { DiagramContext } from '../state/contexts';
 // import './index.css';
 
@@ -20,7 +20,7 @@ const onElementClick = (event, element) => console.log('click', element);
 const connectionLineStyle = { stroke: '#fff' };
 const snapGrid = [20, 20];
 const nodeTypes = {
-  selectorNode: TableFlowNode,
+  selectorNode: TableNode,
 };
 
 const CustomNodeFlow = () => {
