@@ -14,26 +14,6 @@ export default function formContainer() {
 
   // this file needs to be cleaned up and possibly separated much further
 
-  // const nodes = useStoreState((store) => store.nodes);
-  // const transform = useStoreState((store) => store.transform);
-  // const setSelectedElements = useStoreActions(
-  //   (actions) => actions.setSelectedElements,
-  // );
-
-  /*
-  // after the visualizer renders, make each table a single unit
-  useEffect(() => {
-    setSelectedElements(diagramState);
-  }, diagramState); // only re-run the effect if the state changes
-  */
-
-  // useEffect(() => {
-  //   setSelectedElements(
-  //     nodes.map((node) => ({ id: node.id, type: node.type })),
-  //   );
-  // });
-  //
-
   // get the data from the sample DB
   const handleSampleData = (e) => {
     e.preventDefault();
@@ -42,11 +22,7 @@ export default function formContainer() {
       .then((res) => res.json())
       .then((data) => {
         const sqlSchema = data.SQLSchema;
-        const tableNodes = [];
         const allTables = [];
-
-        // this will store a react node format for each column across all tables, where previously we were just saving one for each table
-        const columnNodes = [];
 
         // new storage for custom nodes - this works, possible delete 'tableNodes' ??
         const tableNodesRev = [];
@@ -91,18 +67,8 @@ export default function formContainer() {
           const fullTable = data.SQLSchema[i];
           // current table name
           const tableName = Object.keys(fullTable)[0];
-          // console.log('FULLTABLE: ', fullTable);
-          // console.log('tableName: ', tableName);
-          // console.log(
-          //   'fkeys: ',
-          //   Object.keys(fullTable[tableName].foreignKeys[0])[0],
-          // );
 
           const tableElements = fullTable[tableName];
-
-          // console.log('table: ', tableElements);
-          // const columnLabel = Object.keys(columns[j])[0];
-          // console.log('ref by: ', fullTable[tableName].referencedBy[0]);
 
           // think of a better name, but this is a subarray to be stored in allTables where the format is:
           // [tableName, columns....]
@@ -128,18 +94,6 @@ export default function formContainer() {
 
           // store tableName in tableNameColumn
           tableNameColumn.push(tableName);
-
-          // tableNodes.push({
-          //   id: i.toString(),
-          //   type: "default",
-          //   style: { background: "#5a95f5" },
-          //   data: { label: tableName },
-
-          //   position: {
-          //     x: 200 * i,
-          //     y: 0,
-          //   },
-          // });
 
           // grab every column name within the current table
           const columns = fullTable[tableName].columns;
@@ -220,17 +174,7 @@ export default function formContainer() {
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
-            // tableNodes.push({
-            //   id: `${i}${j}`,
-            //   type: "default",
-            //   style: { background: "#f5ba5a" },
-            //   data: { label: columnLabel },
 
-            //   position: {
-            //     x: 200 * i,
-            //     y: 30 * (j + 1),
-            //   },
-            // });
             // testing this for the new custom node
             // store each column and the data type as a key value pair
             // this saves a key value pair where key is the column name, and its value is the data type
@@ -245,28 +189,6 @@ export default function formContainer() {
 
             // store each column label in the columns key
             tableContentsRev.columns.push(columnLabel);
-
-            // store react flow node format for each column in the columnNodes array
-            columnNodes.push({
-              id: `${tableName}+${columnLabel}`,
-              // id: i.toString(),
-              type: 'selectorNode',
-              // data: { onChange: onChange, color: initBgColor },
-              data: { tableName: tableName, columnName: columnLabel },
-              style: {
-                border: '1px solid #777',
-                padding: 10,
-                // width: 150,
-                boxShadow: '5px 7px 5px 0px #aaa9a9',
-                fontSize: '10px',
-              },
-              position: {
-                x: 200 * i,
-                y: 0,
-              },
-              sourcePosition: 'right',
-              targetPosition: 'left',
-            });
           }
           // new logic for custom node to store the stuff
           tableNodesRev.push({
@@ -327,7 +249,7 @@ export default function formContainer() {
         // console.log('ALL TABLES ', Object.values(dbContents[0]));
         // console.log("TABLE CONTENTS ", allTables);
         // console.log('nodes: ', tableNodesRev);
-        // console.log('column nodes: ', columnNodes);
+
         console.log('relational database: ', relationalData);
 
         // logic for links
@@ -450,14 +372,13 @@ export default function formContainer() {
           type: 'SET_TABLES',
           payload: {
             sqlSchema,
-            tableNodes,
+            // tableNodes,
             // testing this for the new custom node
             // save as an array of objects
             dbContents: [dbContents],
             allTables,
             tableNodesRev,
             dbContentsRev,
-            columnNodes,
             relationalData,
           },
         });
@@ -501,43 +422,14 @@ export default function formContainer() {
       .then((res) => res.json())
       .then((data) => {
         const sqlSchema = data.SQLSchema;
-        const tableNodes = [];
 
         // loop through the data and grab every table name
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
           const fullTable = data.SQLSchema[i];
           const tableName = Object.keys(fullTable)[0];
 
-          tableNodes.push({
-            id: i.toString(),
-            type: 'default',
-            style: { background: ' #5a95f5' },
-            data: { label: tableName },
-
-            position: {
-              x: 200 * i,
-              y: 0,
-            },
-          });
-
           // grab every column name within the table
           const columns = fullTable[tableName].columns;
-
-          for (let j = 0; j < columns.length; j++) {
-            const columnLabel = Object.keys(columns[j])[0];
-            tableNodes.push({
-              id: `${i}${j}`,
-              type: 'default',
-              style: { background: '#f5ba5a' },
-              // style: { background:' #5a95f5' },
-              data: { label: columnLabel },
-
-              position: {
-                x: 200 * i,
-                y: 30 * (j + 1),
-              },
-            });
-          }
         }
 
         diagramDispatch({

@@ -5,21 +5,11 @@ import { DiagramContext } from '../state/contexts';
 import ColumnNode from './columnNode';
 
 export default memo(({ data }) => {
-  const { diagramState } = useContext(DiagramContext);
   const { tableName, columns } = data;
 
   /*
   // conditional because for some reason the array is undefined for the first two logs?? brute forcing it ...
-
-
-  let tableColumns;
-  columns
-    ? (tableColumns = columns.map((column) => <p>{column}</p>))
-    : tableColumns;
-
-    */
-  // key={`${tableName}+${column}`}
-  // test to see if we can render subnode
+*/
   let tableColumns;
   columns
     ? (tableColumns = columns.map((column) => (
