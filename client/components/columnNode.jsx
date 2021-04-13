@@ -2,22 +2,15 @@ import React, { memo, useContext } from 'react';
 import { Handle } from 'react-flow-renderer';
 
 import { DiagramContext } from '../state/contexts';
-// import TestNodeRow from './testNodeRow';
-import TableContents from './tableContents';
-import TableContainer from './tableContainer';
 
-// testing to see if tableFlowNode can render testNode
-
-export default memo(({ data, columnName }) => {
-  const { diagramState } = useContext(DiagramContext);
-
+export default memo(({ columnName, id }) => {
   return (
     <div className="columnDotContainer">
       <div className="leftColumn">
         <Handle
           type="target"
           position="left"
-          id="b"
+          id={`${id}`}
           style={{
             position: 'relative',
             background: 'orange',
@@ -33,7 +26,7 @@ export default memo(({ data, columnName }) => {
         <Handle
           type="source"
           position="right"
-          id="b"
+          id={`${id}`}
           style={{
             position: 'relative',
             background: 'blue',
