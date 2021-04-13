@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import URIbtn from "../components/URIbtn";
 import { FormContext } from "../state/contexts";
+import CryptoJS from "crypto-js";
+import secretKey from "../../server/secretKey";
 
 export default function formContainer() {
   const {
@@ -301,10 +303,13 @@ export default function formContainer() {
         "Missing URI link or the link is invalid. Please enter a valid URI link."
       );
 
+    // encrypt URI before sending to server
+    const encryptedURL = CryptoJS.AES.encrypt(URILink, secretKey).toString();
+
     fetch("/sql-schema", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ link: URILink }),
+      body: JSON.stringify({ link: encryptedURL }),
     })
       .then((res) => res.json())
       .then((data) => {
