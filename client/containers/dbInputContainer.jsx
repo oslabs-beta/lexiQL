@@ -1,10 +1,10 @@
 import React from 'react';
-import URIForm from '../components/URIForm.jsx';
+import FormContainer from './formContainer.jsx';
 
 export default function dbInputContainer() {
   return (
     <div className="dbInputContainer">
-      <URIForm />
+      <FormContainer />
     </div>
   );
 }

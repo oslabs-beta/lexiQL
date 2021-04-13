@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 
 import ReactFlow, {
   isEdge,
@@ -6,30 +6,21 @@ import ReactFlow, {
   addEdge,
   MiniMap,
   Controls,
-} from "react-flow-renderer";
+} from 'react-flow-renderer';
 
-<<<<<<< HEAD
-import TableContainer from "./tableContainer";
-import { DiagramContext } from "../state/contexts";
-=======
-import TableFlowNode from './tableFlowNode';
+import TableNode from '../components/tableNode';
 import { DiagramContext } from '../state/contexts';
->>>>>>> visualizer-cleanup
 // import './index.css';
 
-const onNodeDragStop = (event, node) => console.log("drag stop", node);
-const onElementClick = (event, element) => console.log("click", element);
+const onNodeDragStop = (event, node) => console.log('drag stop', node);
+const onElementClick = (event, element) => console.log('click', element);
 
-<<<<<<< HEAD
-const initBgColor = "#9593AE";
-=======
 // const initBgColor = '#9593AE';
->>>>>>> visualizer-cleanup
 
-const connectionLineStyle = { stroke: "#fff" };
+const connectionLineStyle = { stroke: '#fff' };
 const snapGrid = [20, 20];
 const nodeTypes = {
-  selectorNode: TableFlowNode,
+  selectorNode: TableNode,
 };
 
 const CustomNodeFlow = () => {
@@ -41,29 +32,6 @@ const CustomNodeFlow = () => {
 
   // do this once the tableNodes has changed
   useEffect(() => {
-<<<<<<< HEAD
-    const onChange = (event) => {
-      setElements((els) =>
-        els.map((e) => {
-          if (isEdge(e) || e.id !== "2") {
-            return e;
-          }
-
-          const color = event.target.value;
-
-          setBgColor(color);
-
-          return {
-            ...e,
-            data: {
-              ...e.data,
-              color,
-            },
-          };
-        })
-      );
-    };
-=======
     // const onChange = (event) => {
     //   setElements((els) =>
     //     els.map((e) => {
@@ -85,10 +53,9 @@ const CustomNodeFlow = () => {
     //     }),
     //   );
     // };
->>>>>>> visualizer-cleanup
 
-    setElements(diagramState.tableNodesRev);
-  }, diagramState.tableNodesRev);
+    setElements(diagramState.tableNodes);
+  }, diagramState.tableNodes);
 
   //   setElements([
   //     {
@@ -98,7 +65,7 @@ const CustomNodeFlow = () => {
   //       position: { x: 0, y: 50 },
   //       sourcePosition: 'right',
   //     },
-  //-----------ID 2 IS CUSTOM NODE
+
   //     {
   //       id: '2',
   //       type: 'selectorNode',
@@ -156,45 +123,51 @@ const CustomNodeFlow = () => {
   const onElementsRemove = useCallback(
     (elementsToRemove) =>
       setElements((els) => removeElements(elementsToRemove, els)),
-    []
+    [],
   );
   const onConnect = useCallback(
     (params) =>
       setElements((els) =>
-        addEdge({ ...params, animated: true, style: { stroke: "#fff" } }, els)
+        addEdge({ ...params, animated: true, style: { stroke: '#fff' } }, els),
       ),
-    []
+    [],
   );
 
   const onLoad = useCallback(
     (rfi) => {
       if (!reactflowInstance) {
         setReactflowInstance(rfi);
-        console.log("flow loaded:", rfi);
+        console.log('flow loaded:', rfi);
       }
     },
-    [reactflowInstance]
+    [reactflowInstance],
   );
 
   return (
     <ReactFlow
+      id="reactFlow"
+      // zoom properties
+      minzoom={0.1}
+      maxzoom={0.75}
+      defaultzoom={0.4}
+      // zoomOnScroll={zoomOnScroll}
+      // zoomOnDoubleClick={zoomOnDoubleClick}
+      // elements to be rendered
       elements={elements}
+      // event handlers
       onElementClick={onElementClick}
       onElementsRemove={onElementsRemove}
       onConnect={onConnect}
       onNodeDragStop={onNodeDragStop}
-<<<<<<< HEAD
-      style={{ background: bgColor, width: "100%", height: "90vh" }}
-=======
-      style={{ width: '100%', height: '90vh' }}
->>>>>>> visualizer-cleanup
       onLoad={onLoad}
+      // style
+      style={{ width: '100%', height: '90vh', fontSize: '20px' }}
+      // custom node type
       nodeTypes={nodeTypes}
+      // connection lines
       connectionLineStyle={connectionLineStyle}
-      snapToGrid={true}
-      snapGrid={snapGrid}
-      defaultZoom={1.5}
     >
+      {/* <Background variant="dots" gap={16} /> */}
       {/* <MiniMap
         nodeStrokeColor={(n) => {
           if (n.type === "input") return "#0041d0";
@@ -206,6 +179,7 @@ const CustomNodeFlow = () => {
           return "#fff";
         }}
       /> */}
+      {/* <Background variant="dots" gap={12} size={4} /> */}
       <Controls />
     </ReactFlow>
   );

@@ -8,7 +8,9 @@
 // large container to hold visualizer and code
 .graphicalContainer {
   display: flex;
-  height: 80vh;
-  width: 100%;
+  height: 88vh;
+  width: 100vw;
+  // height: 80vh;
+  // width: 100%;
   justify-content: flex-end;
 }
