@@ -19,10 +19,7 @@ export const diagramReducer = (state, action) => {
         ...state,
         sqlSchema: action.payload.sqlSchema,
         tableNodes: action.payload.tableNodes,
-
-        // testing this for the new custom node
         dbContents: action.payload.dbContents,
-        // tableNodesRev: action.payload.tableNodesRev,
         relationalData: action.payload.relationalData,
       };
   }
@@ -73,12 +70,3 @@ export const formReducer = (state, action) => {
       };
   }
 };
-
-/*
-export const setSelectedElements: (
-  elements: Elements<any>,
-) => {
-  type: 'SET_SELECTED_ELEMENTS',
-  payload: Elements<any>,
-};
-*/

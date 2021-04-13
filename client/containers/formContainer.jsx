@@ -237,18 +237,14 @@ export default function formContainer() {
         /*
         // create a link where the 'source' handle is the value in referencedBy from the respective table, and 'target' is the current table's _id
         */
-        console.log('dbContents: ', dbContents);
+        // console.log('dbContents: ', dbContents);
 
         diagramDispatch({
           type: 'SET_TABLES',
           payload: {
             sqlSchema,
-            // tableNodes,
-            // testing this for the new custom node
-            // save as an array of objects
             dbContents: [dbContents],
             tableNodes,
-
             relationalData,
           },
         });
