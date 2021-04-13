@@ -1,8 +1,8 @@
-import React, { memo, useContext } from 'react';
-import { Handle } from 'react-flow-renderer';
+import React, { memo, useContext } from "react";
+import { Handle } from "react-flow-renderer";
 
-import { DiagramContext } from '../state/contexts';
-import ColumnNode from './columnNode';
+import { DiagramContext } from "../state/contexts";
+import ColumnNode from "./columnNode";
 
 export default memo(({ data }) => {
   const { tableName, columns } = data;
