@@ -8,7 +8,7 @@ import ReactFlow, {
   Controls,
 } from 'react-flow-renderer';
 
-import TableFlowNode from './tableFlowNode';
+import TableNode from '../components/tableNode';
 import { DiagramContext } from '../state/contexts';
 // import './index.css';
 
@@ -20,7 +20,7 @@ const onElementClick = (event, element) => console.log('click', element);
 const connectionLineStyle = { stroke: '#fff' };
 const snapGrid = [20, 20];
 const nodeTypes = {
-  selectorNode: TableFlowNode,
+  selectorNode: TableNode,
 };
 
 const CustomNodeFlow = () => {
@@ -54,8 +54,8 @@ const CustomNodeFlow = () => {
     //   );
     // };
 
-    setElements(diagramState.tableNodesRev);
-  }, diagramState.tableNodesRev);
+    setElements(diagramState.tableNodes);
+  }, diagramState.tableNodes);
 
   //   setElements([
   //     {
@@ -65,7 +65,7 @@ const CustomNodeFlow = () => {
   //       position: { x: 0, y: 50 },
   //       sourcePosition: 'right',
   //     },
-  //-----------ID 2 IS CUSTOM NODE
+
   //     {
   //       id: '2',
   //       type: 'selectorNode',
@@ -145,6 +145,7 @@ const CustomNodeFlow = () => {
 
   return (
     <ReactFlow
+      id="reactFlow"
       // zoom properties
       minzoom={0.1}
       maxzoom={0.75}

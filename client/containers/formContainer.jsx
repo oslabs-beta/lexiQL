@@ -1,8 +1,14 @@
+<<<<<<< HEAD:client/components/URIForm.jsx
 import React, { useContext } from "react";
 import URIbtn from "./URIbtn";
 import { FormContext } from "../state/contexts";
+=======
+import React, { useContext } from 'react';
+import URIbtn from '../components/URIbtn';
+import { FormContext } from '../state/contexts';
+>>>>>>> 394c0114bed5a62b07e0e5b5b72069c6373a27be:client/containers/formContainer.jsx
 
-export default function URIForm() {
+export default function formContainer() {
   const {
     formState,
     formDispatch,
@@ -14,26 +20,6 @@ export default function URIForm() {
 
   // this file needs to be cleaned up and possibly separated much further
 
-  // const nodes = useStoreState((store) => store.nodes);
-  // const transform = useStoreState((store) => store.transform);
-  // const setSelectedElements = useStoreActions(
-  //   (actions) => actions.setSelectedElements,
-  // );
-
-  /*
-  // after the visualizer renders, make each table a single unit
-  useEffect(() => {
-    setSelectedElements(diagramState);
-  }, diagramState); // only re-run the effect if the state changes
-  */
-
-  // useEffect(() => {
-  //   setSelectedElements(
-  //     nodes.map((node) => ({ id: node.id, type: node.type })),
-  //   );
-  // });
-  //
-
   // get the data from the sample DB
   const handleSampleData = (e) => {
     e.preventDefault();
@@ -42,46 +28,10 @@ export default function URIForm() {
       .then((res) => res.json())
       .then((data) => {
         const sqlSchema = data.SQLSchema;
+
         const tableNodes = [];
-        const allTables = [];
-
-        // this will store a react node format for each column across all tables, where previously we were just saving one for each table
-        const columnNodes = [];
-
-        // new storage for custom nodes - this works, possible delete 'tableNodes' ??
-        const tableNodesRev = [];
-
-        /*
-        dbContents format:
-        { 0: { tableName: <table name>, 
-          <columnName1>: <column1 dataType>, 
-          <columnName2>: <column2 dataType>, 
-          < so on >
-          1: { .... }
-        }
-        */
 
         const dbContents = {};
-        /*
-        dbContentsRev format:
-        { 0: { tableName: <table name>, 
-          columns: [<all column names>], 
-          dataTypes: [<all dataTypes of columns>] },
-          1: { .... }
-        }
-        */
-        const dbContentsRev = {};
-
-        /*
-        columnDataTypes format:
-        { <table name[i]>: 
-          {columnName: <column name>, 
-            dataType: <data type>, 
-        <table name[i+1]>: 
-          {columnName: <column name>, 
-            dataType: <data type> }
-        */
-        const columnDataTypes = {};
 
         // store relational data here
         const relationalData = {};
@@ -91,6 +41,7 @@ export default function URIForm() {
           const fullTable = data.SQLSchema[i];
           // current table name
           const tableName = Object.keys(fullTable)[0];
+<<<<<<< HEAD:client/components/URIForm.jsx
           // console.log('FULLTABLE: ', fullTable);
           // console.log('tableName: ', tableName);
           // console.log(
@@ -100,10 +51,10 @@ export default function URIForm() {
 
           // const columnLabel = Object.keys(columns[j])[0];
           // console.log('ref by: ', fullTable[tableName].referencedBy[0]);
+=======
+>>>>>>> 394c0114bed5a62b07e0e5b5b72069c6373a27be:client/containers/formContainer.jsx
 
-          // think of a better name, but this is a subarray to be stored in allTables where the format is:
-          // [tableName, columns....]
-          const tableNameColumn = [];
+          const tableElements = fullTable[tableName];
 
           // [ columns....]
           const columnsList = [];
@@ -114,6 +65,7 @@ export default function URIForm() {
           // store the table name as the first key
           tableContents["tableName"] = tableName;
 
+<<<<<<< HEAD:client/components/URIForm.jsx
           // sub-object in the dbContentsRev
           const tableContentsRev = { columns: [] };
 
@@ -138,6 +90,8 @@ export default function URIForm() {
           //   },
           // });
 
+=======
+>>>>>>> 394c0114bed5a62b07e0e5b5b72069c6373a27be:client/containers/formContainer.jsx
           // grab every column name within the current table
           const columns = fullTable[tableName].columns;
 
@@ -147,61 +101,67 @@ export default function URIForm() {
           save any relational info in one obj in this format for each table:
           { <table name>: {
             primaryKey: <primary key>,
-            referencedBy: [<table name + column name>, ...] 
-            foreignKeys: [[<fkey>, <table name + column name>], ...],
+            referencedBy: [[source, target, sourcehandle]] 
+            foreignKeys: [[source, target, sourcehandle]],
             },
             <table name 2>: ....
           }
           */
 
-          /*
           relationalTableData[tableName] = {
-            primaryKey: fullTable[tableName].primaryKey,
+            primaryKey: tableElements.primaryKey,
           };
 
-          // check to see if there are any foreign keys and/or referencedBy
-          if (full[tableName].referencedBy) {
-            relationalTableData[tableName].referencedBy = []
-            for (let i = 0; i < full[tableName].foreignKeys.length; i++){
-              relationalTableData[tableName].referencedBy.push(`${full[tableName].referencedBy[i]}+${full[TableName].foreignKeys[i].referenceKey}`)
+          // store the foreign key within the current table
+          const fkeys = tableElements.foreignKeys;
+
+          // check to see if there are any foreign keys and/or referencedByKeys
+          if (fkeys) {
+            relationalTableData[tableName].foreignKeys = [];
+            for (let j = 0; j < fkeys.length; j++) {
+              const fkeyName = Object.keys(fkeys[j])[0];
+
+              // store in the format of [source, target, sourceHandle, targetHandle]
+              relationalTableData[tableName].foreignKeys.push([
+                tableName,
+                fkeys[j][fkeyName].referenceTable,
+                fkeyName,
+                fkeys[j][fkeyName].referenceKey,
+              ]);
             }
           }
 
-          if (full[tableName].referencedBy) {
+          // store the referenced by values within the current table
+          const refByKeys = tableElements.referencedBy;
+
+          if (refByKeys) {
             relationalTableData[tableName].referencedBy = [];
-              for (let i = 0; i < full[tableName].foreignKeys.length; i++){
-              const refBySubArr = [`${full[tableName]}+${full[TableName].foreignKeys[i]}`,`${full[tableName].foreignKeys[i].referenceTable}+${full[TableName].foreignKeys[i].referenceKey}`]
-              relationalTableData[tableName].referencedBy.push(refBySubArr)
+            for (let j = 0; j < refByKeys.length; j++) {
+              const refKey = Object.keys(refByKeys[j])[0];
+              // store in the format of [source, target, sourceHandle, targetHandle]
+              relationalTableData[tableName].referencedBy.push([
+                refKey,
+                tableName,
+                refByKeys[j][refKey],
+                tableElements.primaryKey,
+              ]);
             }
           }
 
-          }
-          */
+          relationalData[tableName] = relationalTableData[tableName];
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
-            // tableNodes.push({
-            //   id: `${i}${j}`,
-            //   type: "default",
-            //   style: { background: "#f5ba5a" },
-            //   data: { label: columnLabel },
 
-            //   position: {
-            //     x: 200 * i,
-            //     y: 30 * (j + 1),
-            //   },
-            // });
             // testing this for the new custom node
             // store each column and the data type as a key value pair
             // this saves a key value pair where key is the column name, and its value is the data type
             tableContents[columnLabel] =
               fullTable[tableName].columns[j][columnLabel].dataType;
 
-            // store tableName in tableNameColumn
-            tableNameColumn.push(columnLabel);
-
             // store column name in columnsList so it ends up being an array of all the columns
             columnsList.push(columnLabel);
+<<<<<<< HEAD:client/components/URIForm.jsx
 
             // store each column label in the columns key
             tableContentsRev.columns.push(columnLabel);
@@ -233,6 +193,14 @@ export default function URIForm() {
             // id: `${tableName} ${columnLabel}`,
             id: i.toString(),
             type: "selectorNode",
+=======
+          }
+          // new logic for custom node to store the stuff
+          tableNodes.push({
+            id: `${tableName}`,
+            // id: i.toString(),
+            type: 'selectorNode',
+>>>>>>> 394c0114bed5a62b07e0e5b5b72069c6373a27be:client/containers/formContainer.jsx
             // data: { onChange: onChange, color: initBgColor },
             data: { tableName: tableName, columns: columnsList },
             style: {
@@ -263,31 +231,28 @@ export default function URIForm() {
 
           // for (let j = 0; j < numTables; j++) {}
           if (i < tablesPerRow) {
-            tableNodesRev[i].position.x = 300 * i;
-            tableNodesRev[i].position.y = 0;
+            tableNodes[i].position.x = 300 * i;
+            tableNodes[i].position.y = 0;
           } else if (i < tablesPerRow * 2) {
-            tableNodesRev[i].position.x = 300 * (i - tablesPerRow);
-            tableNodesRev[i].position.y = 500;
+            tableNodes[i].position.x = 300 * (i - tablesPerRow);
+            tableNodes[i].position.y = 500;
           } else {
-            tableNodesRev[i].position.x = 300 * (i - tablesPerRow * 2);
-            tableNodesRev[i].position.y = 1000;
+            tableNodes[i].position.x = 300 * (i - tablesPerRow * 2);
+            tableNodes[i].position.y = 1000;
           }
 
-          dbContentsRev[i] = tableContentsRev;
           // store the sub obj into the main obj
           dbContents[i] = tableContents;
-
-          // store the sub array into allTables array
-          allTables.push(tableNameColumn);
         }
 
         // logic for links
+
+        // store everything in tableNodesRev - this is where the nodes are stored, later to be rendered by react flow
 
         /* 
         the elements in the 'foreignKeys' key will have a connection from their source handle to the target handle of the reference table/reference key listed in the 'foreignKeys' value
         
         format for foreignKeys:
-
         {
         id: 'e2-3',
         source: '2', <-- this is the foreign key (key in current table)
@@ -297,8 +262,39 @@ export default function URIForm() {
       },
         */
 
-        /*
+        const tableNames = Object.keys(relationalData);
 
+        for (let i = 0; i < tableNames.length; i++) {
+          // check to see if the table has a foreignKeys key
+          if (relationalData[tableNames[i]].foreignKeys) {
+            const currTableFkeys = relationalData[tableNames[i]].foreignKeys;
+            for (let j = 0; j < currTableFkeys.length; j++) {
+              tableNodes.push({
+                id: `${tableNames[i]}-fkey${j}`,
+                source: currTableFkeys[j][0],
+                target: currTableFkeys[j][1],
+                sourceHandle: currTableFkeys[j][2],
+                targetHandle: currTableFkeys[j][3],
+              });
+            }
+          }
+
+          // check to see if the table has a referencedBy key
+          if (relationalData[tableNames[i]].referencedBy) {
+            const currTableRefKeys = relationalData[tableNames[i]].referencedBy;
+            for (let j = 0; j < currTableRefKeys.length; j++) {
+              tableNodes.push({
+                id: `${tableNames[i]}-refKey${j}`,
+                source: currTableRefKeys[j][0],
+                target: currTableRefKeys[j][1],
+                sourceHandle: currTableRefKeys[j][2],
+                targetHandle: currTableRefKeys[j][3],
+              });
+            }
+          }
+        }
+
+        /*
         // if the current column name is included in the foreign keys, create a link where 'source' is the current column name and 'target' is the reference key where you'll have to link to another table
         if ()
         
@@ -308,7 +304,6 @@ export default function URIForm() {
         the elements in the 'referencedBy" key will be nodes from a different table that reference that value
         
         format for referencedBy:
-
         {
         id: 'e1-2',
         source: '1', <-- this is the key that it is referenced by (key from a different table)
@@ -319,9 +314,9 @@ export default function URIForm() {
         */
 
         /*
-
         // create a link where the 'source' handle is the value in referencedBy from the respective table, and 'target' is the current table's _id
         */
+<<<<<<< HEAD:client/components/URIForm.jsx
 
         // console.log("ALL TABLES ", dbContents);
         // console.log('ALL TABLES ', dbContents[0]);
@@ -330,19 +325,17 @@ export default function URIForm() {
         // console.log("TABLE CONTENTS ", allTables);
         // console.log("nodes: ", tableNodesRev);
         // console.log("column nodes: ", columnNodes);
+=======
+        // console.log('dbContents: ', dbContents);
+>>>>>>> 394c0114bed5a62b07e0e5b5b72069c6373a27be:client/containers/formContainer.jsx
 
         diagramDispatch({
           type: "SET_TABLES",
           payload: {
             sqlSchema,
-            tableNodes,
-            // testing this for the new custom node
-            // save as an array of objects
             dbContents: [dbContents],
-            allTables,
-            tableNodesRev,
-            dbContentsRev,
-            columnNodes,
+            tableNodes,
+            relationalData,
           },
         });
 
@@ -385,13 +378,13 @@ export default function URIForm() {
       .then((res) => res.json())
       .then((data) => {
         const sqlSchema = data.SQLSchema;
-        const tableNodes = [];
 
         // loop through the data and grab every table name
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
           const fullTable = data.SQLSchema[i];
           const tableName = Object.keys(fullTable)[0];
 
+<<<<<<< HEAD:client/components/URIForm.jsx
           tableNodes.push({
             id: i.toString(),
             type: "default",
@@ -422,6 +415,10 @@ export default function URIForm() {
               },
             });
           }
+=======
+          // grab every column name within the table
+          const columns = fullTable[tableName].columns;
+>>>>>>> 394c0114bed5a62b07e0e5b5b72069c6373a27be:client/containers/formContainer.jsx
         }
 
         diagramDispatch({
