@@ -1,0 +1,57 @@
+.diagramContainer {
+  border: 2px solid $orange;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: 65%;
+}
+
+#reactFlow {
+  // color: red;
+  // background-color: purple;
+  // width: 100%;
+}
+
+.tableHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -10px -0px 0px -10px;
+  // padding: 0px -10px;
+  width: 320px;
+  height: 40px;
+  background-color: $bright-blue;
+  font-size: 20px;
+}
+
+.columnDotContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  // align-items: center;
+}
+
+.leftColumn {
+  // background-color: red;
+  display: flex;
+  align-items: center;
+  padding: 3px 0px;
+}
+
+.rightColumn {
+  // background-color: blue;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 3px 0px;
+}
+
+.columnName {
+  margin-left: 5px;
+  // font-weight: bold;
+}
+
+.dataType {
+  color: rgb(61, 60, 60);
+}

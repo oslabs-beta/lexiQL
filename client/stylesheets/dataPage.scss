@@ -1,0 +1,16 @@
+.dataPage {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+// large container to hold visualizer and code
+.graphicalContainer {
+  display: flex;
+  height: 88vh;
+  width: 100vw;
+  // height: 80vh;
+  // width: 100%;
+  justify-content: flex-end;
+}

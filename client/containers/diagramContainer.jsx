@@ -1,10 +1,10 @@
 import React from 'react';
-import TableNode from '../components/tableNode';
+import FlowContainer from './flowContainer';
 
 export default function diagramContainer() {
   return (
     <div className="diagramContainer">
-      <TableNode />
+      <FlowContainer />
     </div>
   );
 }

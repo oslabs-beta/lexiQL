@@ -1,5 +1,6 @@
-import React from 'react';
-import Logo from '../assets/lexiql-logo.png';
+import React from "react";
+// import Logo from '../assets/lexiql-logo.png';
+import Logo from "../assets/new-logo.png";
 
 export default function introContainer() {
   return (

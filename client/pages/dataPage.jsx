@@ -56,7 +56,7 @@ export default function dataPage() {
           <DBInputContainer />
         </FormContext.Provider>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
