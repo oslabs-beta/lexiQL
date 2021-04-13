@@ -1,0 +1,21 @@
+services:
+  - docker
+dist: xenial
+script:
+  - python3 -VV
+  - pip -V
+before_deploy:
+  # install the aws cli
+  - python3 -m pip install --user awscli
+  # install the elastic beanstalk cli
+  - python3 -m pip install --user awsebcli
+  # Append exe location to our PATH
+  - export PATH=$PATH:$HOME/.local/bin
+env:
+  global:
+    - PATH=/opt/python/3.7.1/bin:$PATH
+deploy:
+  provider: script
+  skip_cleanup: true
+  on: branch:main
+  script: sh $TRAVIS_BUILD_DIR/scripts/deploy.sh
