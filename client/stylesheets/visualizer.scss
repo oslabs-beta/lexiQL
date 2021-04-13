@@ -24,6 +24,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  // align-items: center;
 }
 
 .leftColumn {
@@ -35,11 +36,17 @@
 
 .rightColumn {
   // background-color: blue;
-  // display: flex;
-  // align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 3px 0px;
 }
 
 .columnName {
   margin-left: 5px;
   // font-weight: bold;
+}
+
+.dataType {
+  color: rgb(61, 60, 60);
 }

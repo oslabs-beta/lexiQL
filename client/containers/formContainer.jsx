@@ -22,12 +22,10 @@ export default function formContainer() {
       .then((res) => res.json())
       .then((data) => {
         const sqlSchema = data.SQLSchema;
-
         const tableNodes = [];
-
-        const dbContents = {};
-
         const relationalData = {};
+        const primaryKeys = {};
+        const dbContents = {};
 
         // loop through the data and grab every table name
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
@@ -36,7 +34,8 @@ export default function formContainer() {
           const tableName = Object.keys(fullTable)[0];
 
           const tableElements = fullTable[tableName];
-
+          // grab every column name within the current table
+          const columns = fullTable[tableName].columns;
           // [ columns....]
           const columnsList = [];
           // testing this for the new custom node
@@ -46,8 +45,8 @@ export default function formContainer() {
           // store the table name as the first key
           tableContents["tableName"] = tableName;
 
-          // grab every column name within the current table
-          const columns = fullTable[tableName].columns;
+          // store primary key of each table
+          primaryKeys[tableName] = tableElements.primaryKey;
 
           // sub-object in the relationalData obj
           const relationalTableData = {};
@@ -104,8 +103,11 @@ export default function formContainer() {
 
           relationalData[tableName] = relationalTableData[tableName];
 
+          let dataTypes = [];
+
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
+            console.log("columnLabel:", columnLabel);
 
             // testing this for the new custom node
             // store each column and the data type as a key value pair
@@ -115,25 +117,41 @@ export default function formContainer() {
 
             // store column name in columnsList so it ends up being an array of all the columns
             columnsList.push(columnLabel);
+            dataTypes.push(tableContents[columnLabel]);
+            console.log(
+              "tableContents[columnLabel] inside loop:",
+              tableContents[columnLabel]
+            );
           }
-          // new logic for custom node to store the stuff
+
+          // move primary key to front of columnsList array before saving it onto tableNodes
+          columnsList.forEach((column, i) => {
+            if (column === tableElements.primaryKey) {
+              columnsList.splice(i, 1);
+              columnsList.unshift(column);
+            }
+          });
 
           tableNodes.push({
             id: `${tableName}`,
             // id: i.toString(),
             type: "selectorNode",
             // data: { onChange: onChange, color: initBgColor },
-            data: { tableName: tableName, columns: columnsList },
+            data: {
+              tableName: tableName,
+              columns: columnsList,
+              dataTypes: dataTypes,
+            },
             style: {
               backgroundColor: "white",
               border: "1px solid #777",
               padding: 10,
-              width: 250,
+              width: 300,
               boxShadow: "5px 7px 5px 0px #aaa9a9",
-              fontSize: "20px",
+              fontSize: "14px",
             },
             position: {
-              x: 300 * i,
+              x: 0,
               y: 0,
             },
             sourcePosition: "right",
@@ -150,15 +168,15 @@ export default function formContainer() {
             else tablesPerRow = numTables;
           }
 
-          // for (let j = 0; j < numTables; j++) {}
+          // currently brute-forcing the actual placement of the 4 or 5 tables per row of tables:
           if (i < tablesPerRow) {
-            tableNodes[i].position.x = 300 * i;
+            tableNodes[i].position.x = 350 * i;
             tableNodes[i].position.y = 0;
           } else if (i < tablesPerRow * 2) {
-            tableNodes[i].position.x = 300 * (i - tablesPerRow);
+            tableNodes[i].position.x = 350 * (i - tablesPerRow);
             tableNodes[i].position.y = 500;
           } else {
-            tableNodes[i].position.x = 300 * (i - tablesPerRow * 2);
+            tableNodes[i].position.x = 350 * (i - tablesPerRow * 2);
             tableNodes[i].position.y = 1000;
           }
 
@@ -246,6 +264,7 @@ export default function formContainer() {
             dbContents: [dbContents],
             tableNodes,
             relationalData,
+            primaryKeys,
           },
         });
 
@@ -290,6 +309,8 @@ export default function formContainer() {
         const sqlSchema = data.SQLSchema;
         const tableNodes = [];
         const relationalData = {};
+        const primaryKeys = {};
+        const dbContents = {};
 
         // loop through the data and grab every table name
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
@@ -299,6 +320,16 @@ export default function formContainer() {
           // grab every column name within the table
           const columns = fullTable[tableName].columns;
           const columnsList = [];
+
+          // sub-object in the dbContents
+          const tableContents = {};
+
+          // store the table name as the first key
+          tableContents["tableName"] = tableName;
+
+          // store primary key of each table
+          primaryKeys[tableName] = tableElements.primaryKey;
+
           // sub-object in the relationalData obj
           const relationalTableData = {};
 
@@ -344,27 +375,45 @@ export default function formContainer() {
 
           relationalData[tableName] = relationalTableData[tableName];
 
+          let dataTypes = [];
+
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
+            tableContents[columnLabel] =
+              fullTable[tableName].columns[j][columnLabel].dataType;
+
             columnsList.push(columnLabel);
+            dataTypes.push(tableContents[columnLabel]);
           }
+
+          // move primary key to front of columnsList array before saving it onto tableNodes
+          columnsList.forEach((column, i) => {
+            if (column === tableElements.primaryKey) {
+              columnsList.splice(i, 1);
+              columnsList.unshift(column);
+            }
+          });
           // new logic for custom node to store the stuff
           tableNodes.push({
             id: `${tableName}`,
             // id: i.toString(),
             type: "selectorNode",
             // data: { onChange: onChange, color: initBgColor },
-            data: { tableName: tableName, columns: columnsList },
+            data: {
+              tableName: tableName,
+              columns: columnsList,
+              dataTypes: dataTypes,
+            },
             style: {
               backgroundColor: "white",
               border: "1px solid #777",
               padding: 10,
-              width: 250,
+              width: 300,
               boxShadow: "5px 7px 5px 0px #aaa9a9",
-              fontSize: "20px",
+              fontSize: "14px",
             },
             position: {
-              x: 300 * i,
+              x: 0,
               y: 0,
             },
             sourcePosition: "right",
@@ -383,15 +432,16 @@ export default function formContainer() {
 
           // for (let j = 0; j < numTables; j++) {}
           if (i < tablesPerRow) {
-            tableNodes[i].position.x = 300 * i;
+            tableNodes[i].position.x = 350 * i;
             tableNodes[i].position.y = 0;
           } else if (i < tablesPerRow * 2) {
-            tableNodes[i].position.x = 300 * (i - tablesPerRow);
+            tableNodes[i].position.x = 350 * (i - tablesPerRow);
             tableNodes[i].position.y = 500;
           } else {
-            tableNodes[i].position.x = 300 * (i - tablesPerRow * 2);
+            tableNodes[i].position.x = 350 * (i - tablesPerRow * 2);
             tableNodes[i].position.y = 1000;
           }
+          dbContents[i] = tableContents;
         }
 
         // logic for the input DB links
@@ -431,8 +481,10 @@ export default function formContainer() {
           type: "SET_TABLES",
           payload: {
             sqlSchema,
+            dbContents: [dbContents],
             tableNodes,
             relationalData,
+            primaryKeys,
           },
         });
 
