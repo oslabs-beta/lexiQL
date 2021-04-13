@@ -91,7 +91,7 @@ export default function navBar() {
 
         <Switch>
           <Route path="/playground">
-            <h1>insert Graphiql playground here</h1>
+            <h1>insert Graphiql playground here, Travis</h1>
           </Route>
 
           <Route path="/data">
