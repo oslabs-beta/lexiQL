@@ -129,6 +129,8 @@ export default function formContainer() {
             if (column === tableElements.primaryKey) {
               columnsList.splice(i, 1);
               columnsList.unshift(column);
+              const matchingCol = dataTypes.splice(i, 1);
+              dataTypes.unshift(matchingCol);
             }
           });
 
@@ -391,6 +393,8 @@ export default function formContainer() {
             if (column === tableElements.primaryKey) {
               columnsList.splice(i, 1);
               columnsList.unshift(column);
+              const matchingCol = dataTypes.splice(i, 1);
+              dataTypes.unshift(matchingCol);
             }
           });
           // new logic for custom node to store the stuff
