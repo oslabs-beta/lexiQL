@@ -3,7 +3,7 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  font-family: "Raleway";
+  font-family: 'Raleway';
 
   .headerLinks {
     color: black;
@@ -34,7 +34,8 @@
   background-color: $bright-blue;
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
 
   .headerLinks {
     color: black;
