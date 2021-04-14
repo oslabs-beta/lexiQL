@@ -22,6 +22,7 @@
   "dependencies": {
     "buffer": "^6.0.3",
     "camelcase": "^6.2.0",
+    "clipboard": "^2.0.8",
     "codemirror": "^5.60.0",
     "crypto-browserify": "^3.12.0",
     "crypto-js": "^4.0.0",

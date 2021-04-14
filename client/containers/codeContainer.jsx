@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import CodeMirror from "../components/codeMirror";
 import { CodeContext } from "../state/contexts";
+import Clipboard from "clipboard"
 
 export default function codeContainer() {
   const { codeState, codeDispatch } = useContext(CodeContext);
@@ -65,11 +66,13 @@ export default function codeContainer() {
           >
             Resolver
           </button>
+          <br/>
+          <button id='copyButton' onClick={() => {navigator.clipboard.writeText(codeState.displayCode)}}>Copy</button>
         </div>
         <br />
         <CodeMirror />
       </div>
-      {/* <button id='copyButton'>Copy</button> */}
+      
     </div>
   );
 }
