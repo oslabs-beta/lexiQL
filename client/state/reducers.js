@@ -53,6 +53,8 @@ export const initialFormState = {
   formIsOpen: true,
   firstFetch: true,
   URIvalidation: '',
+  sampleDBtext: 'Get started by using the sample database:',
+  inputDBtext: 'Or put a link to your database:',
 };
 
 export const formReducer = (state, action) => {
@@ -63,6 +65,8 @@ export const formReducer = (state, action) => {
         formIsOpen: action.payload.formIsOpen,
         firstFetch: action.payload.firstFetch,
         URIvalidation: action.payload.URIvalidation,
+        sampleDBtext: action.payload.sampleDBtext,
+        inputDBtext: action.payload.inputDBtext,
       };
   }
 };

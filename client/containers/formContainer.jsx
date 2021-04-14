@@ -326,6 +326,8 @@ export default function formContainer() {
           payload: {
             firstFetch: false,
             formIsOpen: false,
+            sampleDBtext: 'Use the sample database:',
+            inputDBtext: 'Or input a link to a different database:',
           },
         });
       });
@@ -564,6 +566,8 @@ export default function formContainer() {
           payload: {
             firstFetch: false,
             formIsOpen: false,
+            sampleDBtext: 'Use the sample database:',
+            inputDBtext: 'Or input a link to a different database:',
           },
         });
       });
@@ -581,43 +585,34 @@ export default function formContainer() {
     <div className="uriForm" id="uriForm">
       {btnDisplay}
       <div className={formState.formIsOpen ? 'uripanel open' : 'uripanel'}>
-        {/* <p>sample db button location?</p> */}
-        Get started by using the sample database:
-        <button
-          type="button"
-          className="formButtons"
-          id="sampleDataButton"
-          onClick={handleSampleData}
-        >
-          Use Sample Database
-        </button>
-        <br />
-        <br />
+        <div id="uriAboveForm">
+          <h6>
+            {/* {formState.sampleDBtext} <br /> */}
+            Get started by using <br /> the sample database:
+          </h6>
+
+          <button
+            type="button"
+            className="formButtons"
+            id="sampleDataButton"
+            onClick={handleSampleData}
+          >
+            Use Sample Database
+          </button>
+        </div>
         <form onSubmit={handleURI}>
           <label className="formHeader" htmlFor="link">
-            {/* Link a database: */}
-            Or input a link to your database:
+            <h6 id="inputHeader">
+              {/* {formState.inputDBtext} */}
+              Or input a link to <br /> your database:
+            </h6>
           </label>
-          <br />
           <input className="dbInput" id="URILink" placeholder="postgres://" />
-          <br />
           <p id="invalidURI">{formState.URIvalidation}</p>
           <button className="formButtons" id="uriSubmitButton">
             Submit
           </button>
-          {/* <br /> */}
         </form>
-        {/* Get started by using the sample database:
-        <button
-          type="button"
-          className="formButtons"
-          id="sampleDataButton"
-          onClick={handleSampleData}
-        >
-          
-          Use Sample Database
-        </button> */}
-        {/* <br /> */}
       </div>
     </div>
   );
