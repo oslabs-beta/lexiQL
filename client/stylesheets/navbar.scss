@@ -2,13 +2,23 @@
   // background-color: #5a95f5;
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   font-family: 'Raleway';
+
+  .socialLogos {
+    margin-left: 40px;
+  }
+
+  .rightLinks {
+    display: flex;
+  }
 
   .headerLinks {
     color: black;
-    font-size: 40px;
+    font-size: 37px;
     text-decoration: none;
+    // margin: 0px 40px 0px 10px;
     margin-right: 40px;
   }
 
@@ -24,8 +34,8 @@
     color: $orange;
   }
 
-  #homeLogo {
-    height: 90px;
+  .homeLogo {
+    height: 50px;
     margin: 10px -10px 0px 0px;
   }
 }
@@ -36,10 +46,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: 'Raleway';
 
   .headerLinks {
     color: black;
-    font-size: 40px;
+    font-size: 37px;
     text-decoration: none;
     margin-right: 40px;
   }
@@ -56,8 +67,13 @@
     color: $orange;
   }
 
-  #homeLogo {
+  .homeLogo {
     height: 80px;
-    margin: 10px 25px 0px 0px;
+    // margin: 10px 25px 0px 0px;
+    margin-left: 20px;
+  }
+
+  .homeLogo:hover {
+    color: $orange;
   }
 }

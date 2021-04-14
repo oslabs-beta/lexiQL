@@ -30,14 +30,14 @@ export default function DemoContainer() {
         title={feature[0]}
         description={feature[1]}
         gif={feature[2]}
-      />,
+      />
     );
   }
 
   return (
     <div className="demoContainer">
       <div className="demoHeader">
-        <h3>What does lexiQL do?</h3>
+        <h3 id="sectionHeader">What is lexiQL?</h3>
       </div>
       <div className="allDemos">{introContent}</div>
     </div>
