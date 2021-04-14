@@ -229,6 +229,9 @@ export default function formContainer() {
                 id: `${tableNames[i]}-refKey${j}`,
                 source: currTableRefKeys[j][0],
                 target: currTableRefKeys[j][1],
+                // testing
+                // arrowHeadType: 'arrowclosed',
+                selected: true,
                 sourceHandle: currTableRefKeys[j][2],
                 targetHandle: currTableRefKeys[j][3],
               });
@@ -586,9 +589,10 @@ export default function formContainer() {
       {btnDisplay}
       <div className={formState.formIsOpen ? 'uripanel open' : 'uripanel'}>
         <div id="uriAboveForm">
-          <h6>
-            {/* {formState.sampleDBtext} <br /> */}
-            Get started by using <br /> the sample database:
+          <h6 id="sampleHeader">
+            Get started by using
+            <br />
+            our sample database:
           </h6>
 
           <button
@@ -600,18 +604,20 @@ export default function formContainer() {
             Use Sample Database
           </button>
         </div>
-        <form onSubmit={handleURI}>
-          <label className="formHeader" htmlFor="link">
-            <h6 id="inputHeader">
-              {/* {formState.inputDBtext} */}
-              Or input a link to <br /> your database:
-            </h6>
-          </label>
+        <form className="formContainer" onSubmit={handleURI}>
+          {/* <label className="formHeader" htmlFor="link"> */}
+          <h6 id="inputHeader">
+            Or input a link to
+            <br />
+            your SQL database:
+          </h6>
+          {/* </label> */}
           <input className="dbInput" id="URILink" placeholder="postgres://" />
           <p id="invalidURI">{formState.URIvalidation}</p>
           <button className="formButtons" id="uriSubmitButton">
             Submit
           </button>
+          {/* <br /> */}
         </form>
       </div>
     </div>
