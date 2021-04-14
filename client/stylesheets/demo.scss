@@ -1,14 +1,16 @@
 .demoContainer {
+  font-family: $noto-serif;
   display: flex;
   flex-direction: column;
   color: white;
-  // background-color: #0f264b;
   background-color: $dark-blue;
 
   .demoHeader {
-    margin: -20px auto;
+    font-family: $noto-serif;
+    font-size: 60px;
+    letter-spacing: 0.1em;
+    margin: -20px auto -40px auto;
     padding: 0px 0px;
-    font-size: 50px;
   }
 }
 
@@ -19,7 +21,14 @@
   height: 450px;
   margin-bottom: 60px;
 
+  .imgContainer {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+  }
+
   .demoGif {
+    width: 50%;
     border: 2px solid $orange;
     border-radius: 5px;
     box-shadow: 0px 0px 10px #aaa9a9;
@@ -37,6 +46,8 @@
   }
 
   .schemaResolver {
+    width: 50%;
+    height: 80%;
     display: flex;
     border: 2px solid $orange;
     border-radius: 5px;
@@ -57,10 +68,12 @@
   }
 
   .featureName {
+    font-weight: normal;
     font-size: 40px;
+    letter-spacing: 0.05em;
   }
 
   .featureDescription {
-    font-size: 30px;
+    font-size: 26px;
   }
 }

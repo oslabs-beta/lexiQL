@@ -1,6 +1,8 @@
 import React from 'react';
-import LinkedinIcon from '../assets/linkedin-icon.png';
-import GitHubIcon from '../assets/github-icon.png';
+// import LinkedinIcon from '../assets/linkedin-icon.png';
+// import GitHubIcon from '../assets/github-icon.png';
+import LinkedinIcon from '../assets/white-linkedin.png';
+import GitHubIcon from '../assets/white-github.png';
 
 export default function teamMember({ name, headshot, github, linkedin }) {
   return (

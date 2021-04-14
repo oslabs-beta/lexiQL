@@ -1,4 +1,6 @@
 .diagramContainer {
+  // font-family: 'Comfortaa';
+  font-family: $comfortaa;
   border: 2px solid $orange;
   display: flex;
   flex-direction: column;
@@ -14,6 +16,8 @@
 }
 
 .tableHeader {
+  // font-family: 'RocknRoll One';
+  // font-family: 'Comfortaa';
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +30,8 @@
 }
 
 .columnDotContainer {
-  width: 100%;
+  width: 110%;
+  margin: 0px 0px 0px -18px;
   display: flex;
   justify-content: space-between;
   // align-items: center;
