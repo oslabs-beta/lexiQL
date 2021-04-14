@@ -57,8 +57,6 @@ const typeDefs = `
       birth_year: String,
     ): Person!
 
-    deletePerson(_id: ID!): Person!
-
     addFilm(
       director: String!,
       opening_crawl: String!,
@@ -78,7 +76,6 @@ const typeDefs = `
       producer: String,
     ): Film!
 
-    deleteFilm(_id: ID!): Film!
 
     addPlanet(
       orbital_period: Int,
@@ -105,7 +102,6 @@ const typeDefs = `
       diameter: Int,
     ): Planet!
 
-    deletePlanet(_id: ID!): Planet!
 
     addSpecies(
       hair_colors: String,
@@ -132,7 +128,6 @@ const typeDefs = `
       _id: ID!,
     ): Species!
 
-    deleteSpecies(_id: ID!): Species!
 
     addVessel(
       cost_in_credits: String,
@@ -165,7 +160,6 @@ const typeDefs = `
       _id: ID!,
     ): Vessel!
 
-    deleteVessel(_id: ID!): Vessel!
 
     addStarshipSpec(
       vessel_id: ID!,
@@ -180,7 +174,6 @@ const typeDefs = `
       hyperdrive_rating: String,
     ): StarshipSpec!
 
-    deleteStarshipSpec(_id: ID!): StarshipSpec!
   }
 
 type Person {
@@ -418,15 +411,6 @@ const resolvers = {
         .catch((err) => new Error(err));
     },
 
-    deletePerson: (parent, args) => {
-      const query = 'DELETE FROM people WHERE _id = $1 RETURNING *';
-      const values = [args._id];
-      return db
-        .query(query, values)
-        .then((data) => data.rows[0])
-        .catch((err) => new Error(err));
-    },
-
     addFilm: (parent, args) => {
       const query =
         'INSERT INTO films (director, opening_crawl, episode_id, title, release_date, producer) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
@@ -457,15 +441,6 @@ const resolvers = {
       const pKArg = `$${argsArray.length + 1}`;
       const query = `UPDATE films SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
       const values = valList;
-      return db
-        .query(query, values)
-        .then((data) => data.rows[0])
-        .catch((err) => new Error(err));
-    },
-
-    deleteFilm: (parent, args) => {
-      const query = 'DELETE FROM films WHERE _id = $1 RETURNING *';
-      const values = [args._id];
       return db
         .query(query, values)
         .then((data) => data.rows[0])
@@ -511,15 +486,6 @@ const resolvers = {
         .catch((err) => new Error(err));
     },
 
-    deletePlanet: (parent, args) => {
-      const query = 'DELETE FROM planets WHERE _id = $1 RETURNING *';
-      const values = [args._id];
-      return db
-        .query(query, values)
-        .then((data) => data.rows[0])
-        .catch((err) => new Error(err));
-    },
-
     addSpecies: (parent, args) => {
       const query =
         'INSERT INTO species (hair_colors, name, classification, average_height, average_lifespan, skin_colors, eye_colors, language, homeworld_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *';
@@ -553,15 +519,6 @@ const resolvers = {
       const pKArg = `$${argsArray.length + 1}`;
       const query = `UPDATE species SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
       const values = valList;
-      return db
-        .query(query, values)
-        .then((data) => data.rows[0])
-        .catch((err) => new Error(err));
-    },
-
-    deleteSpecies: (parent, args) => {
-      const query = 'DELETE FROM species WHERE _id = $1 RETURNING *';
-      const values = [args._id];
       return db
         .query(query, values)
         .then((data) => data.rows[0])
@@ -610,15 +567,6 @@ const resolvers = {
         .catch((err) => new Error(err));
     },
 
-    deleteVessel: (parent, args) => {
-      const query = 'DELETE FROM vessels WHERE _id = $1 RETURNING *';
-      const values = [args._id];
-      return db
-        .query(query, values)
-        .then((data) => data.rows[0])
-        .catch((err) => new Error(err));
-    },
-
     addStarshipSpec: (parent, args) => {
       const query =
         'INSERT INTO starship_specs (vessel_id, MGLT, hyperdrive_rating) VALUES ($1, $2, $3) RETURNING *';
@@ -642,15 +590,6 @@ const resolvers = {
       const pKArg = `$${argsArray.length + 1}`;
       const query = `UPDATE starship_specs SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
       const values = valList;
-      return db
-        .query(query, values)
-        .then((data) => data.rows[0])
-        .catch((err) => new Error(err));
-    },
-
-    deleteStarshipSpec: (parent, args) => {
-      const query = 'DELETE FROM starship_specs WHERE _id = $1 RETURNING *';
-      const values = [args._id];
       return db
         .query(query, values)
         .then((data) => data.rows[0])
