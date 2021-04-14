@@ -52,6 +52,7 @@ export const codeReducer = (state, action) => {
 export const initialFormState = {
   formIsOpen: true,
   firstFetch: true,
+  URIvalidation: '',
 };
 
 export const formReducer = (state, action) => {
@@ -61,6 +62,7 @@ export const formReducer = (state, action) => {
         ...state,
         formIsOpen: action.payload.formIsOpen,
         firstFetch: action.payload.firstFetch,
+        URIvalidation: action.payload.URIvalidation,
       };
   }
 };

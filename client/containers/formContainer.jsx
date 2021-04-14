@@ -338,10 +338,21 @@ export default function formContainer() {
     const valid = /^postgres:\/\//g;
 
     // if there is no input or if input is invalid do nothing
-    if (!URILink || !valid.test(URILink))
-      return alert(
-        'Missing URI link or the link is invalid. Please enter a valid URI link.',
-      );
+    if (!URILink || !valid.test(URILink)) {
+      // return alert(
+      //   'Missing URI link or the link is invalid. Please enter a valid URI link.',
+      // );
+
+      return formDispatch({
+        type: 'TOGGLE_FORM',
+        payload: {
+          URIvalidation: 'Invalid URI link.',
+        },
+      });
+    }
+    // return alert(
+    //   'Missing URI link or the link is invalid. Please enter a valid URI link.',
+    // );
 
     // encrypt URI before sending to server
     const encryptedURL = CryptoJS.AES.encrypt(URILink, secretKey).toString();
@@ -576,7 +587,7 @@ export default function formContainer() {
           <br />
           <input className="dbInput" id="URILink" placeholder="postgres://" />
           <br />
-
+          {formState.URIvalidation}
           <button className="formButtons" id="uriSubmitButton">
             Submit
           </button>
