@@ -1,4 +1,3 @@
-// Visualizer display on app page
 export const initialDiagramState = {
   dbContents: [],
   tableNodes: [{}],
@@ -23,7 +22,7 @@ export const initialCodeState = {
   schema: '',
   resolver: '',
   displayCode: '',
-  codeIsOpen: true,
+  codeIsOpen: false,
 };
 
 export const codeReducer = (state, action) => {
@@ -34,6 +33,7 @@ export const codeReducer = (state, action) => {
         schema: action.payload.schema,
         resolver: action.payload.resolver,
         displayCode: action.payload.displayCode,
+        codeIsOpen: action.payload.codeIsOpen,
       };
     case 'SET_DISPLAY':
       return {
@@ -52,6 +52,9 @@ export const codeReducer = (state, action) => {
 export const initialFormState = {
   formIsOpen: true,
   firstFetch: true,
+  URIvalidation: '',
+  sampleDBtext: 'Get started by using the sample database:',
+  inputDBtext: 'Or put a link to your database:',
 };
 
 export const formReducer = (state, action) => {
@@ -61,6 +64,9 @@ export const formReducer = (state, action) => {
         ...state,
         formIsOpen: action.payload.formIsOpen,
         firstFetch: action.payload.firstFetch,
+        URIvalidation: action.payload.URIvalidation,
+        sampleDBtext: action.payload.sampleDBtext,
+        inputDBtext: action.payload.inputDBtext,
       };
   }
 };

@@ -12,7 +12,6 @@ import {
 import DBInputContainer from '../containers/dbInputContainer';
 import DiagramContainer from '../containers/diagramContainer';
 import CodeContainer from '../containers/codeContainer';
-import Footer from '../containers/footer';
 
 export default function dataPage() {
   const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);
@@ -56,7 +55,6 @@ export default function dataPage() {
           <DBInputContainer />
         </FormContext.Provider>
       </div>
-      {/* <Footer /> */}
     </div>
   );
 }
