@@ -1,9 +1,9 @@
-import React from "react";
-import example from "../assets/visualizer-sample.png";
-import input from "../assets/db-input.png";
-import visual from "../assets/db-visualizer.png";
-import schemas from "../assets/schemas-result.png";
-import resolvers from "../assets/resolvers-result.png";
+import React from 'react';
+import example from '../assets/visualizer-sample.png';
+import input from '../assets/db-input.png';
+import visual from '../assets/db-visualizer.png';
+import schemas from '../assets/schemas-result.png';
+import resolvers from '../assets/resolvers-result.png';
 
 export default function demoItem({ index, title, description, gif }) {
   // console.log("gif path: ", gif);
@@ -13,7 +13,9 @@ export default function demoItem({ index, title, description, gif }) {
   if (index === 0) {
     return (
       <div className="demoItem">
-        <img className="demoGif" id="input" src={input} alt="demo-gif" />
+        <div className="imgContainer">
+          <img className="demoGif" id="input" src={input} alt="demo-gif" />
+        </div>
         <div className="featureWords">
           <h1 className="featureName">{title}</h1>
           <p className="featureDescription">{description}</p>
