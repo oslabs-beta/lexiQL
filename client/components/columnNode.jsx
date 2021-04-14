@@ -9,58 +9,33 @@ export default memo(({ columnName, dataType, id, tableName }) => {
   const colHandles = diagramState.hasHandles;
   // only render target/source nodes as needed
 
-  // iterate over an object that clarifies whether the column has any handles
   for (const table in colHandles) {
-    // if the table has no source or target handle, return stuff
-    // if the table has either source OR a target handle
-    // if there's a source handle, check if the array includes the column
-    // if there's a target handle, check if the array includes the column
-
-    if (
-      !colHandles[tableName].targetHandles &&
-      !colHandles[tableName].sourceHandles
-    ) {
-      return (
-        <div className="columnDotContainer">
-          <div className="leftColumn">
-            <Handle
-              type="target"
-              position="left"
-              id={`${id}`}
-              style={{
-                position: 'relative',
-                background: 'pink',
-                float: 'left',
-                left: '0%',
-                width: `10px`,
-                height: `10px`,
-              }}
-            />
-            <div className="columnName">{columnName}</div>
+    if (colHandles[tableName].sourceHandles) {
+      if (colHandles[tableName].sourceHandles.includes(columnName)) {
+        return (
+          <div className="columnDotContainer">
+            <div className="leftColumn">
+              <div className="columnName">{columnName}</div>
+            </div>
+            <div className="rightColumn">
+              <div className="dataType">{dataType}</div>
+              <Handle
+                type="source"
+                position="right"
+                id={`${id}`}
+                style={{
+                  position: 'relative',
+                  background: 'blue',
+                  float: 'right',
+                  left: '250',
+                  width: `10px`,
+                  height: `10px`,
+                }}
+              />
+            </div>
           </div>
-          <div className="rightColumn">
-            <div className="dataType">{dataType}</div>
-            <Handle
-              type="source"
-              position="right"
-              id={`${id}`}
-              style={{
-                position: 'relative',
-                background: 'pink',
-                float: 'right',
-                left: '250',
-                width: `10px`,
-                height: `10px`,
-              }}
-            />
-          </div>
-        </div>
-      );
-    } else if (
-      colHandles[tableName].targetHandles ||
-      colHandles[tableName].sourceHandles
-    ) {
-      if (colHandles[tableName].targetHandles) {
+        );
+      } else if (colHandles[tableName].targetHandles) {
         if (colHandles[tableName].targetHandles.includes(columnName)) {
           return (
             <div className="columnDotContainer">
@@ -85,9 +60,7 @@ export default memo(({ columnName, dataType, id, tableName }) => {
               </div>
             </div>
           );
-        }
-      } else if (colHandles[tableName].sourceHandles) {
-        if (colHandles[tableName].sourceHandles.includes(columnName)) {
+        } else {
           return (
             <div className="columnDotContainer">
               <div className="leftColumn">
@@ -95,24 +68,70 @@ export default memo(({ columnName, dataType, id, tableName }) => {
               </div>
               <div className="rightColumn">
                 <div className="dataType">{dataType}</div>
-                <Handle
-                  type="source"
-                  position="right"
-                  id={`${id}`}
-                  style={{
-                    position: 'relative',
-                    background: 'blue',
-                    float: 'right',
-                    left: '250',
-                    width: `10px`,
-                    height: `10px`,
-                  }}
-                />
               </div>
             </div>
           );
         }
+      } else {
+        return (
+          <div className="columnDotContainer">
+            <div className="leftColumn">
+              <div className="columnName">{columnName}</div>
+            </div>
+            <div className="rightColumn">
+              <div className="dataType">{dataType}</div>
+            </div>
+          </div>
+        );
       }
+    } else if (colHandles[tableName].targetHandles) {
+      if (colHandles[tableName].targetHandles.includes(columnName)) {
+        return (
+          <div className="columnDotContainer">
+            <div className="leftColumn">
+              <Handle
+                type="target"
+                position="left"
+                id={`${id}`}
+                style={{
+                  position: 'relative',
+                  background: 'orange',
+                  float: 'left',
+                  left: '0%',
+                  width: `10px`,
+                  height: `10px`,
+                }}
+              />
+              <div className="columnName">{columnName}</div>
+            </div>
+            <div className="rightColumn">
+              <div className="dataType">{dataType}</div>
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div className="columnDotContainer">
+            <div className="leftColumn">
+              <div className="columnName">{columnName}</div>
+            </div>
+            <div className="rightColumn">
+              <div className="dataType">{dataType}</div>
+            </div>
+          </div>
+        );
+      }
+    } else {
+      return (
+        <div className="columnDotContainer">
+          <div className="leftColumn">
+            <div className="columnName">{columnName}</div>
+          </div>
+          <div className="rightColumn">
+            <div className="dataType">{dataType}</div>
+          </div>
+        </div>
+      );
     }
   }
 });

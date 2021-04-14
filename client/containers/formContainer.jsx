@@ -279,7 +279,7 @@ export default function formContainer() {
             hasHandles[obj.target] = { targetHandles: [obj.targetHandle] };
           } else {
             if (!hasHandles[obj.target].targetHandles) {
-              hasHandles[obj.target].targetHandles = [obj.sourceHandle];
+              hasHandles[obj.target].targetHandles = [obj.targetHandle];
             } else if (
               !hasHandles[obj.target].targetHandles.includes(obj.targetHandle)
             ) {
@@ -355,7 +355,7 @@ export default function formContainer() {
     // if there is no input or if input is invalid do nothing
     if (!URILink || !valid.test(URILink))
       return alert(
-        'Missing URI link or the link is invalid. Please enter a valid URI link.'
+        'Missing URI link or the link is invalid. Please enter a valid URI link.',
       );
 
     // encrypt URI before sending to server
