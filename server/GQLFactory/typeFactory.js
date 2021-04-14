@@ -11,7 +11,6 @@ typeFactory.queries = (tableName, tableData) => {
   const singularName = singular(tableName);
   let tableByID = toCamelCase(singularName);
   if (singularName === tableName) tableByID += 'ById';
-  console.log(tableByID);
   return (
     `    ${toCamelCase(tableName)}: [${pascalCase(singularName)}!]!\n` +
     `    ${tableByID}(${primaryKey}: ID!): ${pascalCase(singularName)}!\n`
