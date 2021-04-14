@@ -1,4 +1,5 @@
 .dataPage {
+  font-family: 'RocknRoll One';
   max-width: 100%;
   display: flex;
   flex-direction: column;
@@ -7,6 +8,7 @@
 
 // large container to hold visualizer and code
 .graphicalContainer {
+  font-family: 'Raleway';
   display: flex;
   height: 88vh;
   width: 100vw;

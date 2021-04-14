@@ -1,6 +1,8 @@
-import React, { useContext } from "react";
-import URIbtn from "../components/URIbtn";
-import { FormContext } from "../state/contexts";
+import React, { useContext } from 'react';
+import URIbtn from '../components/URIbtn';
+import { FormContext } from '../state/contexts';
+import CryptoJS from 'crypto-js';
+import secretKey from '../../server/secretKey';
 
 export default function formContainer() {
   const {
@@ -18,7 +20,7 @@ export default function formContainer() {
   const handleSampleData = (e) => {
     e.preventDefault();
 
-    fetch("/example-schema")
+    fetch('/example-schema')
       .then((res) => res.json())
       .then((data) => {
         const sqlSchema = data.SQLSchema;
@@ -26,6 +28,10 @@ export default function formContainer() {
         const relationalData = {};
         const primaryKeys = {};
         const dbContents = {};
+        // store the foreign keys to use in 'hasHandles'
+        const allForeignKeys = [];
+        // store the referenced by values to use in 'hasHandles'
+        const allRefByValues = [];
 
         // loop through the data and grab every table name
         for (let i = 0; i < data.SQLSchema.length; i += 1) {
@@ -43,7 +49,7 @@ export default function formContainer() {
           const tableContents = {};
 
           // store the table name as the first key
-          tableContents["tableName"] = tableName;
+          tableContents['tableName'] = tableName;
 
           // store primary key of each table
           primaryKeys[tableName] = tableElements.primaryKey;
@@ -103,11 +109,18 @@ export default function formContainer() {
 
           relationalData[tableName] = relationalTableData[tableName];
 
+          // obj to keep track of which columns have source/target handles to help with  to avoid each node having handles when unnecessary
+          /*
+          const hasHandles = {}
+
+          for (let )
+          // iterate over relationalData object
+          */
+
           let dataTypes = [];
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
-            console.log("columnLabel:", columnLabel);
 
             // testing this for the new custom node
             // store each column and the data type as a key value pair
@@ -118,10 +131,6 @@ export default function formContainer() {
             // store column name in columnsList so it ends up being an array of all the columns
             columnsList.push(columnLabel);
             dataTypes.push(tableContents[columnLabel]);
-            console.log(
-              "tableContents[columnLabel] inside loop:",
-              tableContents[columnLabel]
-            );
           }
 
           // move primary key to front of columnsList array before saving it onto tableNodes
@@ -129,13 +138,15 @@ export default function formContainer() {
             if (column === tableElements.primaryKey) {
               columnsList.splice(i, 1);
               columnsList.unshift(column);
+              const matchingCol = dataTypes.splice(i, 1);
+              dataTypes.unshift(matchingCol);
             }
           });
 
           tableNodes.push({
             id: `${tableName}`,
             // id: i.toString(),
-            type: "selectorNode",
+            type: 'selectorNode',
             // data: { onChange: onChange, color: initBgColor },
             data: {
               tableName: tableName,
@@ -143,19 +154,19 @@ export default function formContainer() {
               dataTypes: dataTypes,
             },
             style: {
-              backgroundColor: "white",
-              border: "1px solid #777",
+              backgroundColor: 'white',
+              border: '1px solid #777',
               padding: 10,
               width: 300,
-              boxShadow: "5px 7px 5px 0px #aaa9a9",
-              fontSize: "14px",
+              boxShadow: '5px 7px 5px 0px #aaa9a9',
+              fontSize: '14px',
             },
             position: {
               x: 0,
               y: 0,
             },
-            sourcePosition: "right",
-            targetPosition: "left",
+            sourcePosition: 'right',
+            targetPosition: 'left',
           });
 
           // HOW MANY TABLES TO RENDER PER ROW ON CANVAS
@@ -215,6 +226,14 @@ export default function formContainer() {
                 sourceHandle: currTableFkeys[j][2],
                 targetHandle: currTableFkeys[j][3],
               });
+
+              allForeignKeys.push({
+                tableName: tableNames[i],
+                source: currTableFkeys[j][0],
+                target: currTableFkeys[j][1],
+                sourceHandle: currTableFkeys[j][2],
+                targetHandle: currTableFkeys[j][3],
+              });
             }
           }
 
@@ -229,10 +248,49 @@ export default function formContainer() {
                 sourceHandle: currTableRefKeys[j][2],
                 targetHandle: currTableRefKeys[j][3],
               });
+
+              allRefByValues.push({
+                tableName: tableNames[i],
+                source: currTableRefKeys[j][0],
+                target: currTableRefKeys[j][1],
+                sourceHandle: currTableRefKeys[j][2],
+                targetHandle: currTableRefKeys[j][3],
+              });
             }
           }
         }
 
+        // store all the source/target handles that a table has to only render handles for the columns that have them
+        const hasHandles = {};
+
+        // only care about the source and source handles
+        allForeignKeys.forEach((obj) => {
+          if (!hasHandles[obj.source]) {
+            hasHandles[obj.source] = { sourceHandles: [obj.sourceHandle] };
+          } else {
+            hasHandles[obj.source].sourceHandles.push(obj.sourceHandle);
+          }
+        });
+
+        // only care about the target and target handles
+
+        allRefByValues.forEach((obj) => {
+          if (!hasHandles[obj.target]) {
+            hasHandles[obj.target] = { targetHandles: [obj.targetHandle] };
+          } else {
+            if (!hasHandles[obj.target].targetHandles) {
+              hasHandles[obj.target].targetHandles = [obj.sourceHandle];
+            } else if (
+              !hasHandles[obj.target].targetHandles.includes(obj.targetHandle)
+            ) {
+              hasHandles[obj.target].targetHandles.push(obj.targetHandle);
+            }
+          }
+        });
+
+        console.log('table nodes in formcontainer: ', tableNodes);
+        console.log('has handles: ', hasHandles);
+        console.log('relational data: ', relationalData);
         /*
         // if the current column name is included in the foreign keys, create a link where 'source' is the current column name and 'target' is the reference key where you'll have to link to another table
         if ()
@@ -258,18 +316,19 @@ export default function formContainer() {
         // console.log('dbContents: ', dbContents);
 
         diagramDispatch({
-          type: "SET_TABLES",
+          type: 'SET_TABLES',
           payload: {
             sqlSchema,
             dbContents: [dbContents],
             tableNodes,
             relationalData,
             primaryKeys,
+            hasHandles,
           },
         });
 
         codeDispatch({
-          type: "SET_CODE",
+          type: 'SET_CODE',
           payload: {
             schema: data.GQLSchema.types,
             resolver: data.GQLSchema.resolvers,
@@ -278,7 +337,7 @@ export default function formContainer() {
         });
 
         formDispatch({
-          type: "TOGGLE_FORM",
+          type: 'TOGGLE_FORM',
           payload: {
             firstFetch: false,
             formIsOpen: false,
@@ -290,19 +349,22 @@ export default function formContainer() {
   // get data from user input DB
   const handleURI = (e) => {
     e.preventDefault();
-    const URILink = document.getElementById("URILink").value;
+    const URILink = document.getElementById('URILink').value;
     const valid = /^postgres:\/\//g;
 
     // if there is no input or if input is invalid do nothing
     if (!URILink || !valid.test(URILink))
       return alert(
-        "Missing URI link or the link is invalid. Please enter a valid URI link."
+        'Missing URI link or the link is invalid. Please enter a valid URI link.'
       );
 
-    fetch("/sql-schema", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ link: URILink }),
+    // encrypt URI before sending to server
+    const encryptedURL = CryptoJS.AES.encrypt(URILink, secretKey).toString();
+
+    fetch('/sql-schema', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ link: encryptedURL }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -325,7 +387,7 @@ export default function formContainer() {
           const tableContents = {};
 
           // store the table name as the first key
-          tableContents["tableName"] = tableName;
+          tableContents['tableName'] = tableName;
 
           // store primary key of each table
           primaryKeys[tableName] = tableElements.primaryKey;
@@ -391,13 +453,15 @@ export default function formContainer() {
             if (column === tableElements.primaryKey) {
               columnsList.splice(i, 1);
               columnsList.unshift(column);
+              const matchingCol = dataTypes.splice(i, 1);
+              dataTypes.unshift(matchingCol);
             }
           });
           // new logic for custom node to store the stuff
           tableNodes.push({
             id: `${tableName}`,
             // id: i.toString(),
-            type: "selectorNode",
+            type: 'selectorNode',
             // data: { onChange: onChange, color: initBgColor },
             data: {
               tableName: tableName,
@@ -405,19 +469,19 @@ export default function formContainer() {
               dataTypes: dataTypes,
             },
             style: {
-              backgroundColor: "white",
-              border: "1px solid #777",
+              backgroundColor: 'white',
+              border: '1px solid #777',
               padding: 10,
               width: 300,
-              boxShadow: "5px 7px 5px 0px #aaa9a9",
-              fontSize: "14px",
+              boxShadow: '5px 7px 5px 0px #aaa9a9',
+              fontSize: '14px',
             },
             position: {
               x: 0,
               y: 0,
             },
-            sourcePosition: "right",
-            targetPosition: "left",
+            sourcePosition: 'right',
+            targetPosition: 'left',
           });
 
           // HOW MANY TABLES TO RENDER PER ROW ON CANVAS
@@ -478,7 +542,7 @@ export default function formContainer() {
         }
 
         diagramDispatch({
-          type: "SET_TABLES",
+          type: 'SET_TABLES',
           payload: {
             sqlSchema,
             dbContents: [dbContents],
@@ -489,7 +553,7 @@ export default function formContainer() {
         });
 
         codeDispatch({
-          type: "SET_CODE",
+          type: 'SET_CODE',
           payload: {
             schema: data.GQLSchema.types,
             resolver: data.GQLSchema.resolvers,
@@ -498,7 +562,7 @@ export default function formContainer() {
         });
 
         formDispatch({
-          type: "TOGGLE_FORM",
+          type: 'TOGGLE_FORM',
           payload: {
             firstFetch: false,
             formIsOpen: false,
@@ -508,9 +572,9 @@ export default function formContainer() {
   };
 
   // don't have URI form toggle button appear if it's the user's first time on the page
-  let btnDisplay = "";
+  let btnDisplay = '';
   if (formState.firstFetch) {
-    btnDisplay = "";
+    btnDisplay = '';
   } else {
     btnDisplay = <URIbtn />;
   }
@@ -518,7 +582,7 @@ export default function formContainer() {
   return (
     <div className="uriForm" id="uriForm">
       {btnDisplay}
-      <div className={formState.formIsOpen ? "uripanel open" : "uripanel"}>
+      <div className={formState.formIsOpen ? 'uripanel open' : 'uripanel'}>
         <form onSubmit={handleURI}>
           <label className="formHeader" htmlFor="link">
             Link a database:

@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
-import CodeMirror from '../components/codeMirror';
-import { CodeContext } from '../state/contexts';
+import React, { useContext } from "react";
+import CodeMirror from "../components/codeMirror";
+import { CodeContext } from "../state/contexts";
 
 export default function codeContainer() {
   const { codeState, codeDispatch } = useContext(CodeContext);
@@ -8,7 +8,7 @@ export default function codeContainer() {
   const handleSchema = (e) => {
     e.preventDefault();
     codeDispatch({
-      type: 'SET_DISPLAY',
+      type: "SET_DISPLAY",
       payload: {
         displayCode: codeState.schema,
       },
@@ -18,7 +18,7 @@ export default function codeContainer() {
   const handleResolver = (e) => {
     e.preventDefault();
     codeDispatch({
-      type: 'SET_DISPLAY',
+      type: "SET_DISPLAY",
       payload: {
         displayCode: codeState.resolver,
       },
@@ -27,7 +27,7 @@ export default function codeContainer() {
 
   const toggle = () => {
     codeDispatch({
-      type: 'TOGGLE_CODE',
+      type: "TOGGLE_CODE",
       payload: {
         codeIsOpen: !codeState.codeIsOpen,
       },
@@ -39,14 +39,14 @@ export default function codeContainer() {
       <button
         type="button"
         className={
-          codeState.codeIsOpen ? 'codeToggleBtn open' : 'codeToggleBtn'
+          codeState.codeIsOpen ? "codeToggleBtn open" : "codeToggleBtn"
         }
         onClick={toggle}
       >
-        {codeState.codeIsOpen ? '>' : '<'}
+        {codeState.codeIsOpen ? "-" : "+"}
       </button>
 
-      <div className={codeState.codeIsOpen ? 'sidebar open' : 'sidebar'}>
+      <div className={codeState.codeIsOpen ? "sidebar open" : "sidebar"}>
         <div className="codeButtons">
           <button
             type="button"
@@ -69,6 +69,7 @@ export default function codeContainer() {
         <br />
         <CodeMirror />
       </div>
+      {/* <button id='copyButton'>Copy</button> */}
     </div>
   );
 }
