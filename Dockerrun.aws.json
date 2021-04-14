@@ -1,0 +1,10 @@
+{
+    "AWSEBDockerrunVersion": "1",
+        "Image": {
+            "Name": "027857029556.dkr.ecr.us-east-1.amazonaws.com/lexiql:<VERSION>",
+            "Update": "true"
+        },
+        "Ports": [{
+            "ContainerPort": "3000"
+        }]
+    }
