@@ -347,6 +347,7 @@ export default function formContainer() {
         type: 'TOGGLE_FORM',
         payload: {
           URIvalidation: 'Invalid URI link.',
+          formIsOpen: true,
         },
       });
     }
@@ -580,20 +581,8 @@ export default function formContainer() {
     <div className="uriForm" id="uriForm">
       {btnDisplay}
       <div className={formState.formIsOpen ? 'uripanel open' : 'uripanel'}>
-        <form onSubmit={handleURI}>
-          <label className="formHeader" htmlFor="link">
-            Link a database:
-          </label>
-          <br />
-          <input className="dbInput" id="URILink" placeholder="postgres://" />
-          <br />
-          {formState.URIvalidation}
-          <button className="formButtons" id="uriSubmitButton">
-            Submit
-          </button>
-          <br />
-        </form>
-
+        {/* <p>sample db button location?</p> */}
+        Get started by using the sample database:
         <button
           type="button"
           className="formButtons"
@@ -603,7 +592,68 @@ export default function formContainer() {
           Use Sample Database
         </button>
         <br />
+        <br />
+        <form onSubmit={handleURI}>
+          <label className="formHeader" htmlFor="link">
+            {/* Link a database: */}
+            Or input a link to your database:
+          </label>
+          <br />
+          <input className="dbInput" id="URILink" placeholder="postgres://" />
+          <br />
+          <p id="invalidURI">{formState.URIvalidation}</p>
+          <button className="formButtons" id="uriSubmitButton">
+            Submit
+          </button>
+          {/* <br /> */}
+        </form>
+        {/* Get started by using the sample database:
+        <button
+          type="button"
+          className="formButtons"
+          id="sampleDataButton"
+          onClick={handleSampleData}
+        >
+          
+          Use Sample Database
+        </button> */}
+        {/* <br /> */}
       </div>
     </div>
   );
 }
+
+// og form:
+{
+  /* <div className="uriForm" id="uriForm">
+      {btnDisplay}
+      <div className={formState.formIsOpen ? 'uripanel open' : 'uripanel'}>
+        <p>sample db button location?</p>
+
+        <form onSubmit={handleURI}>
+          <label className="formHeader" htmlFor="link">
+          {/* Get started by using the sample database: */
+}
+//         Link a database:
+//       </label>
+//       <br />
+//       <input className="dbInput" id="URILink" placeholder="postgres://" />
+//       <br />
+//       <p id="invalidURI">{formState.URIvalidation}</p>
+//       Or input a link to your database:
+//       <button className="formButtons" id="uriSubmitButton">
+//         Submit
+//       </button>
+//       <br />
+//     </form>
+//     <button
+//       type="button"
+//       className="formButtons"
+//       id="sampleDataButton"
+//       onClick={handleSampleData}
+//     >
+//       Use Sample Database
+//     </button>
+//     <br />
+//   </div>
+// </div> */}
