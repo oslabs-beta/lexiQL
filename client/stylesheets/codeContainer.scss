@@ -25,8 +25,8 @@
 
   .codeContainerButton:hover {
     cursor: pointer;
-    // filter: brightness(85%);
-    background-color: $dark-blue;
+    filter: brightness(85%);
+    // background-color: $dark-blue;
   }
 
   p {
@@ -68,7 +68,7 @@ SCHEMA/RESOLVER PANEL STYLING
   }
 
   .codeToggleBtn:hover {
-    background-color: $dark-blue;
+    filter: brightness(85%);
   }
 
   .codeToggleBtn.open {
@@ -78,7 +78,7 @@ SCHEMA/RESOLVER PANEL STYLING
   }
 
   .codeToggleBtn.open:hover {
-    background-color: $dark-blue;
+    filter: brightness(85%);
   }
   // #copyButton {
   //   display: flex;

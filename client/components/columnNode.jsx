@@ -28,7 +28,7 @@ export default memo(({ columnName, dataType, id, tableName }) => {
       id={`${id}`}
       style={{
         position: 'relative',
-        background: 'orange',
+        background: '#ff9149',
         float: 'left',
         left: '0%',
         width: `15px`,
@@ -44,7 +44,7 @@ export default memo(({ columnName, dataType, id, tableName }) => {
       id={`${id}`}
       style={{
         position: 'relative',
-        background: 'blue',
+        background: '#ff9149',
         float: 'right',
         left: '250',
         width: `15px`,
@@ -53,6 +53,7 @@ export default memo(({ columnName, dataType, id, tableName }) => {
     />
   );
 
+  console.log('colHandles inside columnNode: ', colHandles);
   // render source, target, or no handles accordingly
   for (const table in colHandles) {
     if (colHandles[tableName].sourceHandles) {

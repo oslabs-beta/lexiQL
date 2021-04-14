@@ -92,7 +92,6 @@ export default function formContainer() {
 
           relationalData[tableName] = relationalTableData[tableName];
 
-          console.log('relational table data: ', relationalTableData);
           // obj to keep track of which columns have source/target handles to help with  to avoid each node having handles when unnecessary
           /*
           const hasHandles = {}
@@ -165,13 +164,13 @@ export default function formContainer() {
 
           // currently brute-forcing the actual placement of the 4 or 5 tables per row of tables:
           if (i < tablesPerRow) {
-            tableNodes[i].position.x = 400 * i;
+            tableNodes[i].position.x = 500 * i;
             tableNodes[i].position.y = 0;
           } else if (i < tablesPerRow * 2) {
-            tableNodes[i].position.x = 400 * (i - tablesPerRow);
+            tableNodes[i].position.x = 500 * (i - tablesPerRow);
             tableNodes[i].position.y = 550;
           } else {
-            tableNodes[i].position.x = 400 * (i - tablesPerRow * 2);
+            tableNodes[i].position.x = 500 * (i - tablesPerRow * 2);
             tableNodes[i].position.y = 1100;
           }
 
@@ -229,9 +228,6 @@ export default function formContainer() {
                 id: `${tableNames[i]}-refKey${j}`,
                 source: currTableRefKeys[j][0],
                 target: currTableRefKeys[j][1],
-                // testing
-                // arrowHeadType: 'arrowclosed',
-                selected: true,
                 sourceHandle: currTableRefKeys[j][2],
                 targetHandle: currTableRefKeys[j][3],
               });
@@ -277,7 +273,7 @@ export default function formContainer() {
 
         // console.log('table nodes in formcontainer: ', tableNodes);
         // console.log('has handles: ', hasHandles);
-        console.log('relational data: ', relationalData);
+        // console.log('relational data: ', relationalData);
         /*
         // if the current column name is included in the foreign keys, create a link where 'source' is the current column name and 'target' is the reference key where you'll have to link to another table
         if ()
@@ -375,6 +371,10 @@ export default function formContainer() {
         const relationalData = {};
         const primaryKeys = {};
         const dbContents = {};
+        // store the foreign keys to use in 'hasHandles'
+        const allForeignKeys = [];
+        // store the referenced by values to use in 'hasHandles'
+        const allRefByValues = [];
 
         // loop through the data and grab every table name
         for (let i = 0; i < sqlSchema.length; i += 1) {
@@ -498,13 +498,13 @@ export default function formContainer() {
 
           // for (let j = 0; j < numTables; j++) {}
           if (i < tablesPerRow) {
-            tableNodes[i].position.x = 400 * i;
+            tableNodes[i].position.x = 500 * i;
             tableNodes[i].position.y = 0;
           } else if (i < tablesPerRow * 2) {
-            tableNodes[i].position.x = 400 * (i - tablesPerRow);
+            tableNodes[i].position.x = 500 * (i - tablesPerRow);
             tableNodes[i].position.y = 550;
           } else {
-            tableNodes[i].position.x = 400 * (i - tablesPerRow * 2);
+            tableNodes[i].position.x = 500 * (i - tablesPerRow * 2);
             tableNodes[i].position.y = 1100;
           }
           dbContents[i] = tableContents;
@@ -525,6 +525,14 @@ export default function formContainer() {
                 sourceHandle: currTableFkeys[j][2],
                 targetHandle: currTableFkeys[j][3],
               });
+
+              allForeignKeys.push({
+                tableName: tableNames[i],
+                source: currTableFkeys[j][0],
+                target: currTableFkeys[j][1],
+                sourceHandle: currTableFkeys[j][2],
+                targetHandle: currTableFkeys[j][3],
+              });
             }
           }
 
@@ -539,9 +547,44 @@ export default function formContainer() {
                 sourceHandle: currTableRefKeys[j][2],
                 targetHandle: currTableRefKeys[j][3],
               });
+
+              allRefByValues.push({
+                tableName: tableNames[i],
+                source: currTableRefKeys[j][0],
+                target: currTableRefKeys[j][1],
+                sourceHandle: currTableRefKeys[j][2],
+                targetHandle: currTableRefKeys[j][3],
+              });
             }
           }
         }
+
+        const hasHandles = {};
+
+        // only care about the source and source handles
+        allForeignKeys.forEach((obj) => {
+          if (!hasHandles[obj.source]) {
+            hasHandles[obj.source] = { sourceHandles: [obj.sourceHandle] };
+          } else {
+            hasHandles[obj.source].sourceHandles.push(obj.sourceHandle);
+          }
+        });
+
+        // only care about the target and target handles
+
+        allRefByValues.forEach((obj) => {
+          if (!hasHandles[obj.target]) {
+            hasHandles[obj.target] = { targetHandles: [obj.targetHandle] };
+          } else {
+            if (!hasHandles[obj.target].targetHandles) {
+              hasHandles[obj.target].targetHandles = [obj.targetHandle];
+            } else if (
+              !hasHandles[obj.target].targetHandles.includes(obj.targetHandle)
+            ) {
+              hasHandles[obj.target].targetHandles.push(obj.targetHandle);
+            }
+          }
+        });
 
         diagramDispatch({
           type: 'SET_TABLES',
@@ -551,6 +594,7 @@ export default function formContainer() {
             tableNodes,
             relationalData,
             primaryKeys,
+            hasHandles,
           },
         });
 
