@@ -3,6 +3,7 @@ import { Route, Switch, Link, useLocation } from 'react-router-dom';
 import HomePage from '../pages/homePage.jsx';
 import DataPage from '../pages/dataPage.jsx';
 import Logo from '../assets/new-logo.png';
+import WhiteLogo from '../assets/white-logo.png';
 import TwitterLogo from '../assets/navy-twitter.png';
 import LinkedinLogo from '../assets/navy-linkedin.png';
 import GithubLogo from '../assets/navy-github.png';
@@ -92,7 +93,12 @@ export default function navBar() {
       <body id="appBody">
         <nav id="appHeader">
           <Link className="headerLogo" to="/">
-            <img className="homeLogo" id="homeLogo" src={Logo} alt="logo" />
+            <img
+              className="homeLogo"
+              id="homeLogo"
+              src={WhiteLogo}
+              alt="logo"
+            />
           </Link>
 
           <Link className="headerLinks" to="/playground">
@@ -122,7 +128,12 @@ export default function navBar() {
       <body id="appBody">
         <nav id="appHeader">
           <Link className="headerLogo" to="/">
-            <img className="homeLogo" id="homeLogo" src={Logo} alt="logo" />
+            <img
+              className="homeLogo"
+              id="homeLogo"
+              src={WhiteLogo}
+              alt="logo"
+            />
           </Link>
           <Link className="headerLinks" to="/data">
             <p>Visualize</p>

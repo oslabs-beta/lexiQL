@@ -25,7 +25,8 @@ URI FORM PANEL STYLING
   position: fixed;
   background-color: $orange;
   color: $bright-blue;
-  border: 2px solid $orange;
+  // border: 2px solid $orange;
+  border: none;
   width: 50px;
   top: 30%;
   left: 0px;
@@ -40,7 +41,7 @@ URI FORM PANEL STYLING
 
 .uripanelbtn.open {
   left: 25%;
-  background-color: $bright-blue;
+  background-color: $dark-blue;
   color: $orange;
 }
 
@@ -73,7 +74,7 @@ URI FORM STYLING
     border-radius: 5px;
     width: 50%;
     padding: 10px 0px;
-    background-color: $bright-blue;
+    background-color: $dark-blue;
     color: $orange;
     border: none;
     font-size: 15px;

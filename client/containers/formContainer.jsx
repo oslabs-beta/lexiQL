@@ -92,7 +92,7 @@ export default function formContainer() {
 
           relationalData[tableName] = relationalTableData[tableName];
 
-          console.log('relational data: ', relationalData);
+          console.log('relational table data: ', relationalTableData);
           // obj to keep track of which columns have source/target handles to help with  to avoid each node having handles when unnecessary
           /*
           const hasHandles = {}
@@ -317,6 +317,7 @@ export default function formContainer() {
             schema: data.GQLSchema.types,
             resolver: data.GQLSchema.resolvers,
             displayCode: data.GQLSchema.types,
+            codeIsOpen: true,
           },
         });
 
@@ -542,6 +543,7 @@ export default function formContainer() {
             schema: data.GQLSchema.types,
             resolver: data.GQLSchema.resolvers,
             displayCode: data.GQLSchema.types,
+            codeIsOpen: true,
           },
         });
 

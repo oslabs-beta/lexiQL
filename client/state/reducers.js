@@ -22,7 +22,7 @@ export const initialCodeState = {
   schema: '',
   resolver: '',
   displayCode: '',
-  codeIsOpen: true,
+  codeIsOpen: false,
 };
 
 export const codeReducer = (state, action) => {
@@ -33,6 +33,7 @@ export const codeReducer = (state, action) => {
         schema: action.payload.schema,
         resolver: action.payload.resolver,
         displayCode: action.payload.displayCode,
+        codeIsOpen: action.payload.codeIsOpen,
       };
     case 'SET_DISPLAY':
       return {
