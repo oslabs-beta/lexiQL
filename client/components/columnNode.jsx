@@ -31,8 +31,8 @@ export default memo(({ columnName, dataType, id, tableName }) => {
         background: 'orange',
         float: 'left',
         left: '0%',
-        width: `10px`,
-        height: `10px`,
+        width: `15px`,
+        height: `15px`,
       }}
     />
   );
@@ -47,8 +47,8 @@ export default memo(({ columnName, dataType, id, tableName }) => {
         background: 'blue',
         float: 'right',
         left: '250',
-        width: `10px`,
-        height: `10px`,
+        width: `15px`,
+        height: `15px`,
       }}
     />
   );
@@ -60,11 +60,11 @@ export default memo(({ columnName, dataType, id, tableName }) => {
         return (
           <div className="columnDotContainer">
             <div className="leftColumn">
-              <div className="columnName">{columnName}</div>
+              <div className="sourceColumnName">{columnName}</div>
             </div>
             <div className="rightColumn">
-              <div className="dataType">{dataType}</div>
-              {sourceHandle}
+              <div className="sourceDataType">{dataType}</div>
+              <div className="sourceDot">{sourceHandle}</div>
             </div>
           </div>
         );
@@ -74,10 +74,10 @@ export default memo(({ columnName, dataType, id, tableName }) => {
             <div className="columnDotContainer">
               <div className="leftColumn">
                 {targetHandle}
-                <div className="columnName">{columnName}</div>
+                <div className="targetColumnName">{columnName}</div>
               </div>
               <div className="rightColumn">
-                <div className="dataType">{dataType}</div>
+                <div className="targetDataType">{dataType}</div>
               </div>
             </div>
           );
@@ -93,10 +93,10 @@ export default memo(({ columnName, dataType, id, tableName }) => {
           <div className="columnDotContainer">
             <div className="leftColumn">
               {targetHandle}
-              <div className="columnName">{columnName}</div>
+              <div className="targetColumnName">{columnName}</div>
             </div>
             <div className="rightColumn">
-              <div className="dataType">{dataType}</div>
+              <div className="targetDataType">{dataType}</div>
             </div>
           </div>
         );

@@ -14,9 +14,7 @@ export default function formContainer() {
     codeDispatch,
   } = useContext(FormContext);
 
-  // this file needs to be cleaned up and possibly separated much further
-
-  // get the data from the sample DB
+  // get data from the sample DB
   const handleSampleData = (e) => {
     e.preventDefault();
 
@@ -33,39 +31,24 @@ export default function formContainer() {
         // store the referenced by values to use in 'hasHandles'
         const allRefByValues = [];
 
-        // loop through the data and grab every table name
-        for (let i = 0; i < data.SQLSchema.length; i += 1) {
-          const fullTable = data.SQLSchema[i];
-          // current table name
+        for (let i = 0; i < sqlSchema.length; i += 1) {
+          const fullTable = sqlSchema[i];
           const tableName = Object.keys(fullTable)[0];
-
           const tableElements = fullTable[tableName];
-          // grab every column name within the current table
+
+          // all column names within the current table
           const columns = fullTable[tableName].columns;
-          // [ columns....]
           const columnsList = [];
-          // testing this for the new custom node
-          // sub-object in the dbContents
+
           const tableContents = {};
 
-          // store the table name as the first key
+          // store the table name as the first key in tableContents
           tableContents['tableName'] = tableName;
 
-          // store primary key of each table
+          // store primary key of each table in tableContents
           primaryKeys[tableName] = tableElements.primaryKey;
 
-          // sub-object in the relationalData obj
           const relationalTableData = {};
-          /*
-          save any relational info in one obj in this format for each table:
-          { <table name>: {
-            primaryKey: <primary key>,
-            referencedBy: [[source, target, sourcehandle]] 
-            foreignKeys: [[source, target, sourcehandle]],
-            },
-            <table name 2>: ....
-          }
-          */
 
           relationalTableData[tableName] = {
             primaryKey: tableElements.primaryKey,
@@ -109,6 +92,7 @@ export default function formContainer() {
 
           relationalData[tableName] = relationalTableData[tableName];
 
+          console.log('relational data: ', relationalData);
           // obj to keep track of which columns have source/target handles to help with  to avoid each node having handles when unnecessary
           /*
           const hasHandles = {}
@@ -157,7 +141,7 @@ export default function formContainer() {
               backgroundColor: 'white',
               border: '1px solid #777',
               padding: 10,
-              width: 300,
+              width: 350,
               boxShadow: '5px 7px 5px 0px #aaa9a9',
               fontSize: '14px',
             },
@@ -170,7 +154,7 @@ export default function formContainer() {
           });
 
           // HOW MANY TABLES TO RENDER PER ROW ON CANVAS
-          let numTables = data.SQLSchema.length;
+          let numTables = sqlSchema.length;
           let tablesPerRow = 0;
 
           if (numTables < 5) tablesPerRow = numTables;
@@ -181,14 +165,14 @@ export default function formContainer() {
 
           // currently brute-forcing the actual placement of the 4 or 5 tables per row of tables:
           if (i < tablesPerRow) {
-            tableNodes[i].position.x = 350 * i;
+            tableNodes[i].position.x = 400 * i;
             tableNodes[i].position.y = 0;
           } else if (i < tablesPerRow * 2) {
-            tableNodes[i].position.x = 350 * (i - tablesPerRow);
-            tableNodes[i].position.y = 500;
+            tableNodes[i].position.x = 400 * (i - tablesPerRow);
+            tableNodes[i].position.y = 550;
           } else {
-            tableNodes[i].position.x = 350 * (i - tablesPerRow * 2);
-            tableNodes[i].position.y = 1000;
+            tableNodes[i].position.x = 400 * (i - tablesPerRow * 2);
+            tableNodes[i].position.y = 1100;
           }
 
           // store the sub obj into the main obj
@@ -288,8 +272,8 @@ export default function formContainer() {
           }
         });
 
-        console.log('table nodes in formcontainer: ', tableNodes);
-        console.log('has handles: ', hasHandles);
+        // console.log('table nodes in formcontainer: ', tableNodes);
+        // console.log('has handles: ', hasHandles);
         console.log('relational data: ', relationalData);
         /*
         // if the current column name is included in the foreign keys, create a link where 'source' is the current column name and 'target' is the reference key where you'll have to link to another table
@@ -375,8 +359,8 @@ export default function formContainer() {
         const dbContents = {};
 
         // loop through the data and grab every table name
-        for (let i = 0; i < data.SQLSchema.length; i += 1) {
-          const fullTable = data.SQLSchema[i];
+        for (let i = 0; i < sqlSchema.length; i += 1) {
+          const fullTable = sqlSchema[i];
           const tableName = Object.keys(fullTable)[0];
           const tableElements = fullTable[tableName];
           // grab every column name within the table
@@ -472,7 +456,7 @@ export default function formContainer() {
               backgroundColor: 'white',
               border: '1px solid #777',
               padding: 10,
-              width: 300,
+              width: 350,
               boxShadow: '5px 7px 5px 0px #aaa9a9',
               fontSize: '14px',
             },
@@ -485,7 +469,7 @@ export default function formContainer() {
           });
 
           // HOW MANY TABLES TO RENDER PER ROW ON CANVAS
-          let numTables = data.SQLSchema.length;
+          let numTables = sqlSchema.length;
           let tablesPerRow = 0;
 
           if (numTables < 5) tablesPerRow = numTables;
@@ -496,14 +480,14 @@ export default function formContainer() {
 
           // for (let j = 0; j < numTables; j++) {}
           if (i < tablesPerRow) {
-            tableNodes[i].position.x = 350 * i;
+            tableNodes[i].position.x = 400 * i;
             tableNodes[i].position.y = 0;
           } else if (i < tablesPerRow * 2) {
-            tableNodes[i].position.x = 350 * (i - tablesPerRow);
-            tableNodes[i].position.y = 500;
+            tableNodes[i].position.x = 400 * (i - tablesPerRow);
+            tableNodes[i].position.y = 550;
           } else {
-            tableNodes[i].position.x = 350 * (i - tablesPerRow * 2);
-            tableNodes[i].position.y = 1000;
+            tableNodes[i].position.x = 400 * (i - tablesPerRow * 2);
+            tableNodes[i].position.y = 1100;
           }
           dbContents[i] = tableContents;
         }

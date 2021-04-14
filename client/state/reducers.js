@@ -1,4 +1,3 @@
-// Visualizer display on app page
 export const initialDiagramState = {
   dbContents: [],
   tableNodes: [{}],
