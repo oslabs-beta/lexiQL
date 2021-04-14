@@ -274,6 +274,7 @@ export default function formContainer() {
         // console.log('table nodes in formcontainer: ', tableNodes);
         // console.log('has handles: ', hasHandles);
         // console.log('relational data: ', relationalData);
+
         /*
         // if the current column name is included in the foreign keys, create a link where 'source' is the current column name and 'target' is the reference key where you'll have to link to another table
         if ()
@@ -585,6 +586,8 @@ export default function formContainer() {
             }
           }
         });
+
+        console.log('hashandles: ', hasHandles);
 
         diagramDispatch({
           type: 'SET_TABLES',

@@ -53,10 +53,11 @@ export default memo(({ columnName, dataType, id, tableName }) => {
     />
   );
 
-  console.log('colHandles inside columnNode: ', colHandles);
   // render source, target, or no handles accordingly
   for (const table in colHandles) {
-    if (colHandles[tableName].sourceHandles) {
+    if (!colHandles[tableName]) {
+      return noHandles;
+    } else if (colHandles[tableName].sourceHandles) {
       if (colHandles[tableName].sourceHandles.includes(columnName)) {
         return (
           <div className="columnDotContainer">
