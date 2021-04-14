@@ -14,7 +14,7 @@ resolverHelper.queryByPrimaryKey = (tableName, primaryKey) => {
   } else queryName = singular(tableName);
 
   return `
-    ${queryName}: (parent, args) => {
+    ${toCamelCase(queryName)}: (parent, args) => {
       const query = 'SELECT * FROM ${tableName} WHERE ${primaryKey} = $1';
       const values = [args.${primaryKey}];
       return db.query(query, values)
@@ -25,7 +25,7 @@ resolverHelper.queryByPrimaryKey = (tableName, primaryKey) => {
 
 resolverHelper.queryAll = (tableName) => {
   return `
-    ${tableName}: () => {
+    ${toCamelCase(tableName)}: () => {
       const query = 'SELECT * FROM ${tableName}';
       return db.query(query)
         .then(data => data.rows)
@@ -200,8 +200,8 @@ resolverHelper.junctionTableRelationships = (
   refByTableFKKey
 ) => {
   return `
-    ${refByTableFKName}: (${tableName}) => {
-      const query = 'SELECT * FROM ${refByTableFKName} LEFT OUTER JOIN ${refByTable} ON ${refByTableFKName}.${refByTableFKKey} = ${refByTable}.${refByTableFK} WHERE ${refByTable}.${refByTableTableNameAlias} = $1':
+    ${toCamelCase(refByTableFKName)}: (${toCamelCase(tableName)}) => {
+      const query = 'SELECT * FROM ${refByTableFKName} LEFT OUTER JOIN ${refByTable} ON ${refByTableFKName}.${refByTableFKKey} = ${refByTable}.${refByTableFK} WHERE ${refByTable}.${refByTableTableNameAlias} = $1';
       const values = [${tableName}.${primaryKey}];
       return db.query(query, values)
         .then(data => data.rows)
@@ -218,7 +218,7 @@ resolverHelper.customObjectsRelationships = (
   return `
     ${toCamelCase(refByTable)}: (${toCamelCase(tableName)}) => {
       const query = 'SELECT * FROM ${refByTable} WHERE ${refByKey} = $1';
-      const values = [${tableName}.${primaryKey}];
+      const values = [${toCamelCase(tableName)}.${primaryKey}];
       return db.query(query, values)
         .then(data => data.rows)
         .catch(err => new Error(err));
@@ -235,7 +235,7 @@ resolverHelper.foreignKeyRelationships = (
   return `
     ${toCamelCase(fkTableName)}: (${toCamelCase(tableName)}) => {
       const query = 'SELECT ${fkTableName}.* FROM ${fkTableName} LEFT OUTER JOIN ${tableName} ON ${fkTableName}.${fkKey} = ${tableName}.${fk} WHERE ${tableName}.${primaryKey} = $1';
-      const values = [${tableName}.${primaryKey}];
+      const values = [${toCamelCase(tableName)}.${primaryKey}];
       return db.query(query, values)
         .then(data => data.rows)
         .catch(err => new Error(err));
