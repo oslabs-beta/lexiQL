@@ -1,9 +1,10 @@
-import React from "react";
+import React from 'react';
 
 export default function footer() {
   return (
     <div className="footer">
-      <div className="footerIcons">
+      <h5>lexiQL Copyright 2021</h5>
+      {/* <div className="footerIcons">
         <a className="footerLink" href="https://www.linkedin.com/">
           LinkedIn
         </a>
@@ -13,7 +14,7 @@ export default function footer() {
         {/* <a className="footerLink" href="https://github.com/oslabs-beta/lexiQL">
           Github
         </a> */}
-      </div>
+      {/* </div>  */}
     </div>
   );
 }
