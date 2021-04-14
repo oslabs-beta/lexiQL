@@ -67,7 +67,7 @@ export default function codeContainer() {
             Resolver
           </button>
           <br/>
-          <button id='copyButton' onClick={() => {navigator.clipboard.writeText(codeState.displayCode)}}>Copy</button>
+          <button id='copyButton' className="codeContainerButton" onClick={() => {navigator.clipboard.writeText(codeState.displayCode)}}>Copy</button>
         </div>
         <br />
         <CodeMirror />
