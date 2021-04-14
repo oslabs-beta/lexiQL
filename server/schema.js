@@ -260,7 +260,7 @@ type Vessel {
   consumables: String
   films: [Film]
   people: [Person]
-  starship_specs: [StarshipSpec]
+  starshipSpecs: [StarshipSpec]
 }
 
 type StarshipSpec {
@@ -400,21 +400,18 @@ const resolvers = {
     },
 
     updatePerson: (parent, args) => {
-      const query =
-        'UPDATE people SET gender = $1, species_id = $2, homeworld_id = $3, height = $4, mass = $5, hair_color = $6, skin_color = $7, eye_color = $8, name = $9, birth_year = $10 WHERE _id = $11 RETURNING *';
-      const values = [
-        args.gender,
-        args.species_id,
-        args.homeworld_id,
-        args.height,
-        args.mass,
-        args.hair_color,
-        args.skin_color,
-        args.eye_color,
-        args.name,
-        args.birth_year,
-        args._id,
-      ];
+      let valList = [];
+      for (const key of Object.keys(args)) {
+        if (key !== '_id') valList.push(args[key]);
+      }
+      valList.push(args._id);
+      const argsArray = Object.keys(args).filter((key) => key !== '_id');
+      let setString = argsArray
+        .map((key, i) => `${key} = $${i + 1}`)
+        .join(', ');
+      const pKArg = `$${argsArray.length + 1}`;
+      const query = `UPDATE people SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
+      const values = valList;
       return db
         .query(query, values)
         .then((data) => data.rows[0])
@@ -448,17 +445,18 @@ const resolvers = {
     },
 
     updateFilm: (parent, args) => {
-      const query =
-        'UPDATE films SET director = $1, opening_crawl = $2, episode_id = $3, title = $4, release_date = $5, producer = $6 WHERE _id = $7 RETURNING *';
-      const values = [
-        args.director,
-        args.opening_crawl,
-        args.episode_id,
-        args.title,
-        args.release_date,
-        args.producer,
-        args._id,
-      ];
+      let valList = [];
+      for (const key of Object.keys(args)) {
+        if (key !== '_id') valList.push(args[key]);
+      }
+      valList.push(args._id);
+      const argsArray = Object.keys(args).filter((key) => key !== '_id');
+      let setString = argsArray
+        .map((key, i) => `${key} = $${i + 1}`)
+        .join(', ');
+      const pKArg = `$${argsArray.length + 1}`;
+      const query = `UPDATE films SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
+      const values = valList;
       return db
         .query(query, values)
         .then((data) => data.rows[0])
@@ -495,20 +493,18 @@ const resolvers = {
     },
 
     updatePlanet: (parent, args) => {
-      const query =
-        'UPDATE planets SET orbital_period = $1, climate = $2, gravity = $3, terrain = $4, surface_water = $5, population = $6, name = $7, rotation_period = $8, diameter = $9 WHERE _id = $10 RETURNING *';
-      const values = [
-        args.orbital_period,
-        args.climate,
-        args.gravity,
-        args.terrain,
-        args.surface_water,
-        args.population,
-        args.name,
-        args.rotation_period,
-        args.diameter,
-        args._id,
-      ];
+      let valList = [];
+      for (const key of Object.keys(args)) {
+        if (key !== '_id') valList.push(args[key]);
+      }
+      valList.push(args._id);
+      const argsArray = Object.keys(args).filter((key) => key !== '_id');
+      let setString = argsArray
+        .map((key, i) => `${key} = $${i + 1}`)
+        .join(', ');
+      const pKArg = `$${argsArray.length + 1}`;
+      const query = `UPDATE planets SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
+      const values = valList;
       return db
         .query(query, values)
         .then((data) => data.rows[0])
@@ -545,20 +541,18 @@ const resolvers = {
     },
 
     updateSpecies: (parent, args) => {
-      const query =
-        'UPDATE species SET hair_colors = $1, name = $2, classification = $3, average_height = $4, average_lifespan = $5, skin_colors = $6, eye_colors = $7, language = $8, homeworld_id = $9 WHERE _id = $10 RETURNING *';
-      const values = [
-        args.hair_colors,
-        args.name,
-        args.classification,
-        args.average_height,
-        args.average_lifespan,
-        args.skin_colors,
-        args.eye_colors,
-        args.language,
-        args.homeworld_id,
-        args._id,
-      ];
+      let valList = [];
+      for (const key of Object.keys(args)) {
+        if (key !== '_id') valList.push(args[key]);
+      }
+      valList.push(args._id);
+      const argsArray = Object.keys(args).filter((key) => key !== '_id');
+      let setString = argsArray
+        .map((key, i) => `${key} = $${i + 1}`)
+        .join(', ');
+      const pKArg = `$${argsArray.length + 1}`;
+      const query = `UPDATE species SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
+      const values = valList;
       return db
         .query(query, values)
         .then((data) => data.rows[0])
@@ -598,23 +592,18 @@ const resolvers = {
     },
 
     updateVessel: (parent, args) => {
-      const query =
-        'UPDATE vessels SET cost_in_credits = $1, length = $2, vessel_type = $3, model = $4, manufacturer = $5, name = $6, vessel_class = $7, max_atmosphering_speed = $8, crew = $9, passengers = $10, cargo_capacity = $11, consumables = $12 WHERE _id = $13 RETURNING *';
-      const values = [
-        args.cost_in_credits,
-        args.length,
-        args.vessel_type,
-        args.model,
-        args.manufacturer,
-        args.name,
-        args.vessel_class,
-        args.max_atmosphering_speed,
-        args.crew,
-        args.passengers,
-        args.cargo_capacity,
-        args.consumables,
-        args._id,
-      ];
+      let valList = [];
+      for (const key of Object.keys(args)) {
+        if (key !== '_id') valList.push(args[key]);
+      }
+      valList.push(args._id);
+      const argsArray = Object.keys(args).filter((key) => key !== '_id');
+      let setString = argsArray
+        .map((key, i) => `${key} = $${i + 1}`)
+        .join(', ');
+      const pKArg = `$${argsArray.length + 1}`;
+      const query = `UPDATE vessels SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
+      const values = valList;
       return db
         .query(query, values)
         .then((data) => data.rows[0])
@@ -641,14 +630,18 @@ const resolvers = {
     },
 
     updateStarshipSpec: (parent, args) => {
-      const query =
-        'UPDATE starship_specs SET vessel_id = $1, MGLT = $2, hyperdrive_rating = $3 WHERE _id = $4 RETURNING *';
-      const values = [
-        args.vessel_id,
-        args.MGLT,
-        args.hyperdrive_rating,
-        args._id,
-      ];
+      let valList = [];
+      for (const key of Object.keys(args)) {
+        if (key !== '_id') valList.push(args[key]);
+      }
+      valList.push(args._id);
+      const argsArray = Object.keys(args).filter((key) => key !== '_id');
+      let setString = argsArray
+        .map((key, i) => `${key} = $${i + 1}`)
+        .join(', ');
+      const pKArg = `$${argsArray.length + 1}`;
+      const query = `UPDATE starship_specs SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
+      const values = valList;
       return db
         .query(query, values)
         .then((data) => data.rows[0])

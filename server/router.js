@@ -35,13 +35,13 @@ router.post(
   }
 );
 
-// router.use(
-//   '/playground',
-//   graphqlHTTP({
-//     schema,
-//     graphiql: true,
-//   })
-// );
+router.use(
+  '/playground',
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+  })
+);
 
 /* Route to get user (table specific) GraphQL Schema and Resolvers */
 // router.post('gql-schema', GQLController.createGQLSchema,
