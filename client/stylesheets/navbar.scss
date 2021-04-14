@@ -41,7 +41,8 @@
 }
 
 #appHeader {
-  background-color: $bright-blue;
+  // background-color: $bright-blue;
+  background-color: $dark-blue;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -49,14 +50,14 @@
   font-family: 'Raleway';
 
   .headerLinks {
-    color: black;
+    color: white;
     font-size: 37px;
     text-decoration: none;
     margin-right: 40px;
   }
 
   .headerLinks:visited {
-    color: black;
+    color: white;
   }
 
   .headerLinks:hover {

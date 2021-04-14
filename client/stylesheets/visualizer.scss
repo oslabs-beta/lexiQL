@@ -23,7 +23,7 @@
   align-items: center;
   margin: -10px -0px 0px -10px;
   // padding: 0px -10px;
-  width: 320px;
+  width: 370px;
   height: 40px;
   background-color: $bright-blue;
   font-size: 20px;
@@ -35,28 +35,68 @@
   display: flex;
   justify-content: space-between;
   // align-items: center;
+  line-height: 1.5em;
 }
 
 .leftColumn {
   // background-color: red;
   display: flex;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   padding: 3px 0px;
+  margin-left: 1px;
 }
 
 .rightColumn {
   // background-color: blue;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-end;
+  // flex-wrap: wrap;
   padding: 3px 0px;
+  margin-right: 4px;
 }
 
-.columnName {
-  margin-left: 5px;
-  // font-weight: bold;
+/* 
+NO HANDLES
+*/
+.noNodeColumnName {
+  margin-left: 15px;
 }
 
-.dataType {
+.noNodeDataType {
+  margin-right: 15px;
   color: rgb(61, 60, 60);
+}
+
+/* 
+TARGET HANDLES (orange) 
+*/
+.targetColumnName {
+  margin-left: 5px;
+  // margin-right: 15px;
+}
+
+.targetDataType {
+  margin-right: 15px;
+  // margin-left: 15px;
+  color: rgb(61, 60, 60);
+}
+
+/* 
+SOURCE HANDLES (blue)
+*/
+.sourceColumnName {
+  margin-left: 15px;
+  // margin-right: 15px;
+}
+
+.sourceDataType {
+  margin-right: 5px;
+  // margin-left: 15px;
+  color: rgb(61, 60, 60);
+}
+
+.sourceDot {
+  margin-top: 10px;
 }

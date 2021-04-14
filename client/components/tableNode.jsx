@@ -1,7 +1,4 @@
-import React, { memo, useContext } from 'react';
-import { Handle } from 'react-flow-renderer';
-
-import { DiagramContext } from '../state/contexts';
+import React, { memo } from 'react';
 import ColumnNode from './columnNode';
 
 export default memo(({ data }) => {
