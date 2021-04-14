@@ -40,6 +40,7 @@
 .leftColumn {
   // background-color: red;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   padding: 3px 0px;
 }
@@ -54,9 +55,17 @@
 
 .columnName {
   margin-left: 5px;
-  // font-weight: bold;
+  margin-right: 5px;
 }
-
+.noNodeColumnName {
+  margin-left: 15px;
+}
 .dataType {
+  margin-right: 5px;
+  margin-left: 5px;
+  color: rgb(61, 60, 60);
+}
+.noNodeDataType {
+  margin-right: 15px;
   color: rgb(61, 60, 60);
 }
