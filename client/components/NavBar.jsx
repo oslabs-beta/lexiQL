@@ -95,7 +95,12 @@ export default function navBar() {
             <img className="homeLogo" id="homeLogo" src={Logo} alt="logo" />
           </Link>
 
-          <Link className="headerLinks" to="/playground">
+          <Link
+            className="headerLinks"
+            to="/playground"
+            target={'_blank'}
+            rel="noopener noreferrer"
+          >
             <p>Playground</p>
           </Link>
         </nav>
