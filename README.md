@@ -30,7 +30,7 @@ Accelerated by <a href="https://github.com/oslabs-beta/" />OS Labs</a>.
 
 <img src="client/assets/codemirror.gif" width="700" height="500" />
 
-#### Test the GQL schema
+#### Test GQL queries
 * Interactively construct full queries using the sample database.
 * Use the "Docs" to explore the possible queries, fields, types, mutations, and more.
 
