@@ -11,8 +11,6 @@ Accelerated by <a href="https://github.com/oslabs-beta/" />OS Labs</a>.
 
 ## Getting Started
 ### Visit www.lexiql.io to utilize the tool.
-#### Visit www.lexiql.io to utilize the tool.
-<b> Visit www.lexiql.io to utilize the tool. </b>
 
 #### Select your database
 * Input your PostgreSQL URI
