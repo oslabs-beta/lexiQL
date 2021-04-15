@@ -20,25 +20,25 @@ Accelerated by <a href="https://github.com/oslabs-beta/" />OS Labs</a>.
   1. [ ] Input your PostgreSQL URI
   2. [ ] OR use the sample database to view data rendered in an interactive diagram.
 
-![selectDBdemo](client/assets/userdbinput.gif)
+<img src="client/assets/userdbinput.gif" width="700" height="500" />
 
 #### View your relational database
   1. [ ] Easily view the relationships between the tables via the links that highlight the foreign key constraints.
   2. [ ] Move any table and arrange them to optimally view the structure of the database and the relationships between the tables.
-
-![visualizerdemo](client/assets/movingtables.gif)
+  3. 
+<img src="client/assets/movingTables.gif" width="700" height="500" />
 
 #### View your GQL schema
   1. [ ] View the generated GraphQL schema, including the types and associated resolvers.
   2. [ ] Use the copy button to effortlessly integrate the code into your project.
 
-![visualizerdemo](client/assets/codemirror.gif)
+<img src="client/assets/codemirror.gif" width="700" height="500" />
 
-#### View your GQL schema
+#### Test the GQL schema
   1. [ ] Interactively construct full queries using the sample database.
   2. [ ] Use the "Docs" to explore the possible queries, fields, types, mutations, and more.
 
-![visualizerdemo](client/assets/graphiql.gif)
+<img src="client/assets/graphiql.gif" width="700" height="500" />
 
 ## Developers
 * Christopher Carney – [@Carthanial](https://github.com/Carthanial) <br/>
