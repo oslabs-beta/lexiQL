@@ -25,8 +25,8 @@ Accelerated by <a href="https://github.com/oslabs-beta/" />OS Labs</a>.
 #### View your relational database
   1. [ ] Easily view the relationships between the tables via the links that highlight the foreign key constraints.
   2. [ ] Move any table and arrange them to optimally view the structure of the database and the relationships between the tables.
-  3. 
-<img src="client/assets/movingTables.gif" width="700" height="500" />
+  
+<img src="client/assets/movingtables.gif" width="700" height="500" />
 
 #### View your GQL schema
   1. [ ] View the generated GraphQL schema, including the types and associated resolvers.
