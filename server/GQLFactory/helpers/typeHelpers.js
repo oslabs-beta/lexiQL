@@ -97,9 +97,9 @@ customHelper.getRelationships = (tableName, sqlSchema) => {
     for (const fk of Object.keys(foreignKeys)) {
       if (!inRelationshipString.includes(foreignKeys[fk].referenceTable)) {
         inRelationshipString.push(foreignKeys[fk].referenceTable);
-        relationshipFields += `\n  ${
+        relationshipFields += `\n  ${toCamelCase(
           foreignKeys[fk].referenceTable
-        }: [${pascalCase(singular(foreignKeys[fk].referenceTable))}]`;
+        )}: [${pascalCase(singular(foreignKeys[fk].referenceTable))}]`;
       }
     }
   }
@@ -122,9 +122,9 @@ customHelper.getRelationships = (tableName, sqlSchema) => {
               )
             ) {
               inRelationshipString.push(foreignKeys[foreignFK].referenceTable);
-              relationshipFields += `\n  ${
+              relationshipFields += `\n  ${toCamelCase(
                 foreignKeys[foreignFK].referenceTable
-              }: [${pascalCase(
+              )}: [${pascalCase(
                 singular(foreignKeys[foreignFK].referenceTable)
               )}]`;
             }
@@ -135,9 +135,9 @@ customHelper.getRelationships = (tableName, sqlSchema) => {
       } else {
         if (!inRelationshipString.includes(refTableName)) {
           inRelationshipString.push(refTableName);
-          relationshipFields += `\n  ${refTableName}: [${pascalCase(
-            singular(refTableName)
-          )}]`;
+          relationshipFields += `\n  ${toCamelCase(
+            refTableName
+          )}: [${pascalCase(singular(refTableName))}]`;
         }
       }
     }

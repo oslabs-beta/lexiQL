@@ -12,7 +12,7 @@ export default function aboutUsContainer() {
       name: 'Chris Carney',
       headshot: chrisHeadshot,
       github: 'https://github.com/Carthanial',
-      linkedin: 'https://www.linkedin.com',
+      linkedin: 'https://www.linkedin.com/in/christopher-carney-b75a25209/',
     },
     {
       name: 'Stacy Learn',

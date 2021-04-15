@@ -3,13 +3,15 @@ URI FORM PANEL STYLING
 */
 .uripanel {
   font-family: $orelega-one;
-  flex-basis: 20rem;
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   position: absolute;
-  top: 30%;
-  left: -25%;
-  height: 30%;
-  width: 25%;
+  top: 27%;
+  left: -35%;
+  height: 55%;
+  width: 35%;
   transition: left 0.5s ease-in-out;
   background-color: white;
   z-index: 9;
@@ -17,15 +19,24 @@ URI FORM PANEL STYLING
 }
 
 .uripanel.open {
+  // display: flex;
   left: 0;
+  padding: 0px 0px;
+}
+
+#sampleHeader {
+  font-size: 35px;
+  padding: 0px 0px;
+  margin: 0px 0px;
 }
 
 .uripanelbtn {
   font-size: 50px;
   position: fixed;
   background-color: $orange;
-  color: $bright-blue;
-  border: 2px solid $orange;
+  color: $dark-blue;
+  // border: 2px solid $orange;
+  border: none;
   width: 50px;
   top: 30%;
   left: 0px;
@@ -35,17 +46,48 @@ URI FORM PANEL STYLING
 }
 
 .uripanelbtn:hover {
-  background-color: $dark-blue;
+  // background-color: $dark-blue;
+  filter: brightness(80%);
 }
 
 .uripanelbtn.open {
-  left: 25%;
-  background-color: $bright-blue;
+  left: 35%;
+  background-color: $dark-blue;
   color: $orange;
 }
 
 .uripanelbtn.open:hover {
+  filter: brightness(80%);
+}
+
+#sampleDataButton {
+  margin-bottom: -20px;
+}
+
+#uriAboveForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+}
+
+#sampleDataButton {
+  margin-top: 15px;
+  border: none;
+  border-radius: 5px;
+  width: 50%;
+  padding: 10px 0px;
   background-color: $dark-blue;
+  color: $orange;
+  border: none;
+  font-size: 15px;
+}
+
+#sampleDataButton:hover {
+  cursor: pointer;
+  filter: brightness(85%);
 }
 
 /*
@@ -56,36 +98,55 @@ URI FORM STYLING
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
 
-  .formHeader {
-    font-size: 40px;
-    margin: 30px 0px 0px 10px;
-  }
+.formContainer {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-  .dbInput {
-    width: 80%;
-    margin: 0px 0px 10px 10px;
-  }
+#invalidURI {
+  color: red;
+  font-size: 13px;
+}
 
-  .formButtons {
-    margin: 0px 0px 0px 10px;
-    border: none;
-    border-radius: 5px;
-    width: 50%;
-    padding: 10px 0px;
-    background-color: $bright-blue;
-    color: $orange;
-    border: none;
-    font-size: 15px;
-  }
+// .formHeader {
+//   padding: 0px 0px;
+//   margin: 0px auto;
+//   font-size: 40px;
+//   padding: 0px 0px;
+// }
 
-  .formButtons:hover {
-    cursor: pointer;
-    // filter: brightness(85%);
-    background-color: $dark-blue;
-  }
+#inputHeader {
+  font-size: 35px;
+  padding: 0px 0px;
+  margin: 0px 0px;
+}
 
-  #sampleDataButton {
-    margin-bottom: -20px;
-  }
+.dbInput {
+  width: 80%;
+  margin: 15px 0px -5px 0px;
+}
+
+#uriSubmitButton {
+  margin-bottom: 35px;
+  border: none;
+  border-radius: 5px;
+  width: 50%;
+  padding: 10px 0px;
+  background-color: $dark-blue;
+  color: $orange;
+  border: none;
+  font-size: 15px;
+}
+
+#uriSubmitButton:hover {
+  cursor: pointer;
+  filter: brightness(85%);
 }
