@@ -9,7 +9,7 @@
     font-family: $noto-serif;
     font-size: 60px;
     letter-spacing: 0.1em;
-    margin: -20px auto -40px auto;
+    margin: -20px auto -10px auto;
     padding: 0px 0px;
   }
 }
@@ -18,7 +18,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  height: 450px;
+  height: 550px;
   margin-bottom: 60px;
 
   .imgContainer {
@@ -27,47 +27,52 @@
     width: 50%;
   }
 
+  // class for all gifs
   .demoGif {
-    width: 50%;
+    width: 70%;
     border: 2px solid $orange;
     border-radius: 5px;
     box-shadow: 0px 0px 10px #aaa9a9;
   }
+
   #input {
-    border: 2px solid $orange;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px #aaa9a9;
+    width: 80%;
+    // border: 2px solid $orange;
+    // border-radius: 5px;
+    // box-shadow: 0px 0px 10px #aaa9a9;
   }
 
   #visual {
-    border: 2px solid $orange;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px #aaa9a9;
-  }
-
-  .schemaResolver {
-    width: 50%;
-    height: 80%;
-    display: flex;
-    border: 2px solid $orange;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px #aaa9a9;
+    width: 80%;
+    // border: 2px solid $orange;
+    // border-radius: 5px;
+    // box-shadow: 0px 0px 10px #aaa9a9;
   }
 
   #schemas {
+    width: 80%;
+    // border: 2px solid $orange;
+    // border-radius: 5px;
+    // box-shadow: 0px 0px 10px #aaa9a9;
   }
 
-  #resolvers {
+  #playground {
+    width: 80%;
+    // border: 2px solid $orange;
+    // border-radius: 5px;
+    // box-shadow: 0px 0px 10px #aaa9a9;
   }
 
   .featureWords {
     width: 40%;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .featureName {
+    color: $orange;
     font-weight: normal;
     font-size: 40px;
     letter-spacing: 0.05em;
