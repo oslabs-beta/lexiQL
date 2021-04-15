@@ -1,39 +1,11 @@
 .footer {
   width: 100%;
+  height: 125px;
   display: flex;
   flex-direction: flex-end;
-  // margin: 30px 0px;
-  // padding: 30px 0px;
-  // font-size: 40px;
 
   h5 {
     font-size: 20px;
     margin-left: auto;
   }
 }
-
-// .footerIcons {
-//   font-family: 'Raleway';
-//   color: black;
-//   width: 100%;
-//   display: flex;
-//   justify-content: space-evenly;
-
-//   .footerLink {
-//     text-decoration: none;
-//     color: black;
-//   }
-
-//   .footerLink:visited {
-//     color: black;
-//   }
-
-//   .footerLink:hover {
-//     color: $orange;
-//     // font-size: 41px;
-//   }
-
-//   .footerLink:active {
-//     color: $orange;
-//   }
-// }

@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const { graphqlHTTP } = require('express-graphql');
 const {
   getSQLSchema,
   formatGraphData,
 } = require('./controllers/SQLController');
 const { createGQLSchema } = require('./controllers/GQLController');
+const schema = require('./schema');
 
 /* Route for example SQL Schema and example GQL Schema */
 router.get(
@@ -31,6 +33,14 @@ router.post(
   (req, res) => {
     res.status(200).json(res.locals);
   },
+);
+
+router.use(
+  '/playground',
+  graphqlHTTP({
+    schema,
+    graphiql: true,
+  }),
 );
 
 /* Route to get user (table specific) GraphQL Schema and Resolvers */

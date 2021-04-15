@@ -5,6 +5,7 @@
   align-items: stretch;
   overflow-y: auto;
   font-size: 8px;
+  margin-top: 4px;
 
   .codeButtons {
     display: flex;
@@ -17,15 +18,15 @@
     border-radius: 5px;
     width: 30%;
     padding: 10px 0px;
-    background-color: $bright-blue;
+    background-color: $dark-blue;
     color: $orange;
     font-size: 15px;
   }
 
   .codeContainerButton:hover {
     cursor: pointer;
-    // filter: brightness(85%);
-    background-color: $dark-blue;
+    filter: brightness(85%);
+    // background-color: $dark-blue;
   }
 
   p {
@@ -56,7 +57,7 @@ SCHEMA/RESOLVER PANEL STYLING
   .codeToggleBtn {
     font-size: 50px;
     background-color: $orange;
-    color: $bright-blue;
+    color: $dark-blue;
     position: fixed;
     width: 50px;
     right: 0px;
@@ -67,17 +68,17 @@ SCHEMA/RESOLVER PANEL STYLING
   }
 
   .codeToggleBtn:hover {
-    background-color: $dark-blue;
+    filter: brightness(85%);
   }
 
   .codeToggleBtn.open {
     right: 25%;
-    background-color: $bright-blue;
+    background-color: $dark-blue;
     color: $orange;
   }
 
   .codeToggleBtn.open:hover {
-    background-color: $dark-blue;
+    filter: brightness(85%);
   }
   // #copyButton {
   //   display: flex;

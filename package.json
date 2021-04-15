@@ -20,14 +20,18 @@
   },
   "homepage": "https://github.com/ryanmcd118/lexiQL#readme",
   "dependencies": {
+    "buffer": "^6.0.3",
     "camelcase": "^6.2.0",
     "codemirror": "^5.60.0",
     "crypto-browserify": "^3.12.0",
     "crypto-js": "^4.0.0",
     "dagre": "^0.8.5",
     "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
     "file-loader": "^6.2.0",
     "graphiql": "^1.4.1",
+    "graphql": "^15.5.0",
+    "graphql-tools": "^7.0.4",
     "https-browserify": "^1.0.0",
     "mini-css-extract-plugin": "^1.3.9",
     "pascal-case": "^3.1.2",
@@ -45,6 +49,7 @@
     "reactstrap": "^8.9.0",
     "request": "^2.79.0",
     "sass": "^1.32.8",
+    "stream-browserify": "^3.0.0",
     "styled-components": "^5.2.3",
     "url-loader": "^4.1.1"
   },
@@ -72,3 +77,4 @@
     "webpack-dev-server": "^3.11.2"
   }
 }
+
