@@ -18,6 +18,11 @@ export default function DemoContainer() {
       'View the GraphQL schema generated for the provided database, including the types and associated resolvers. The result is ready for GraphQL API implementation.',
       '../assets/visualizer-sample.png',
     ],
+    [
+      'Test your schema on a GraphiQL playground',
+      'Test your newly-generated schemas on the interactive GraphiQL playground.',
+      '../assets/visualizer-sample.png',
+    ],
   ];
 
   const introContent = [];
