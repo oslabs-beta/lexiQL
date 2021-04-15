@@ -21,7 +21,7 @@ Accelerated by <a href="https://github.com/oslabs-beta/" />OS Labs</a>.
   2. [ ] OR use the sample database to view data rendered in an interactive diagram.
 
 <img src="client/assets/userdbinput.gif" width="700" height="500" />
-
+<br>
 #### View your relational database
   1. [ ] Easily view the relationships between the tables via the links that highlight the foreign key constraints.
   2. [ ] Move any table and arrange them to optimally view the structure of the database and the relationships between the tables.
