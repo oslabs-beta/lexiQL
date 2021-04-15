@@ -4,23 +4,23 @@ import DemoItem from '../components/demoItem';
 export default function DemoContainer() {
   const content = [
     [
-      'Imports your PostgresQL database',
-      'Simply paste in your PostgresQL link and lexiQL will auto-generate your relational database schema. Or, select a sample database to try out our tool.',
+      'Import your PostgreSQL database',
+      'Simply input a PostgreSQL database URI, and lexiQL will auto-generate your relational database schema. (Don’t have a database to input right now but still want to test our tool? Use our sample database to explore what lexiQL can do for you.)',
       '../assets/db-input.png',
     ],
     [
-      'Visualizes your database schema',
-      'Interact with your database schema and view relationships between your tables.',
+      'Visualize your relational database',
+      'Dynamically interact with your relational database and view complex relationships between your tables.',
       '../assets/visualizer-sample.png',
     ],
     [
-      'Generates a GraphQL schema',
-      'View the GraphQL schema generated for the provided database, including the types and associated resolvers. The result is ready for GraphQL API implementation.',
+      'Generate GraphQL boilerplate',
+      'View your new GraphQL schema, including types and resolvers. The result is ready for GraphQL API implementation and can be easily copied for injection into your code.',
       '../assets/visualizer-sample.png',
     ],
     [
-      'Test your schema on a GraphiQL playground',
-      'Test your newly-generated schemas on the interactive GraphiQL playground.',
+      'Test GraphQL schemas on a playground',
+      'Test GraphQL functionality schemas on an integrated GraphiQL interface, exploring queries and mutations on the provided database.',
       '../assets/visualizer-sample.png',
     ],
   ];
