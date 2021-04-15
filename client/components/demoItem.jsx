@@ -1,20 +1,15 @@
 import React from 'react';
-import example from '../assets/visualizer-sample.png';
-import input from '../assets/db-input.png';
-import visual from '../assets/db-visualizer.png';
-import schemas from '../assets/schemas-result.png';
-import resolvers from '../assets/resolvers-result.png';
+import UserInput from '../assets/userdbinput.gif';
+import MovingTables from '../assets/movingtables.gif';
+import CodeMirror from '../assets/codemirror.gif';
+import graphiql from '../assets/graphiql.gif';
 
 export default function demoItem({ index, title, description, gif }) {
-  // console.log("gif path: ", gif);
-  // console.log("description: ", description);
-  // console.log("example: ", example);
-
   if (index === 0) {
     return (
       <div className="demoItem">
         <div className="imgContainer">
-          <img className="demoGif" id="input" src={input} alt="demo-gif" />
+          <img className="demoGif" id="input" src={UserInput} alt="demo-gif" />
         </div>
         <div className="featureWords">
           <h1 className="featureName">{title}</h1>
@@ -30,19 +25,25 @@ export default function demoItem({ index, title, description, gif }) {
           <h1 className="featureName">{title}</h1>
           <p className="featureDescription">{description}</p>
         </div>
-        <img className="demoGif" id="visual" src={visual} alt="demo-gif" />
+        <div className="imgContainer">
+          <img
+            className="demoGif"
+            id="visual"
+            src={MovingTables}
+            alt="demo-gif"
+          />
+        </div>
       </div>
     );
   }
   if (index === 2) {
     return (
       <div className="demoItem">
-        <div className="schemaResolver">
-          <img className="demoGif" id="schema" src={schemas} alt="demo-gif" />
+        <div className="imgContainer">
           <img
             className="demoGif"
-            id="resolver"
-            src={resolvers}
+            id="schemas"
+            src={CodeMirror}
             alt="demo-gif"
           />
         </div>
@@ -53,32 +54,22 @@ export default function demoItem({ index, title, description, gif }) {
       </div>
     );
   }
-
-  /*--------ORIGINAL CONDITIONAL LOGIC (before temporary hard coding above):
-  if (index % 2) {
-    return (
-      <div className="demoItem">
-        <img
-          id="demoGif"
-          src="/client/assets/visualizer-sample.png"
-          alt="demo-gif"
-        />
-        <div className="featureWords">
-          <h1 className="featureName">{title}</h1>
-          <p className="featureDescription">{description}</p>
-        </div>
-      </div>
-    );
-  } else {
+  if (index === 3) {
     return (
       <div className="demoItem">
         <div className="featureWords">
           <h1 className="featureName">{title}</h1>
           <p className="featureDescription">{description}</p>
         </div>
-        <img id="demoGif" src={example} alt="demo-gif" />
+        <div className="imgContainer">
+          <img
+            className="demoGif"
+            id="playground"
+            src={graphiql}
+            alt="demo-gif"
+          />
+        </div>
       </div>
     );
   }
-  */
 }
