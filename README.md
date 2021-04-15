@@ -1,42 +1,41 @@
-<p align="center"><img src="https://user-images.githubusercontent.com/77026961/114807368-4be50700-9d74-11eb-9af3-af87cd74c9e1.png" style="margin-top: 10px; margin-bottom: -10px;"> </p>
+<img src="https://user-images.githubusercontent.com/77026961/114807368-4be50700-9d74-11eb-9af3-af87cd74c9e1.png" style="margin-top: 10px; margin-bottom: -10px;">
   
 
 <br/>
-<p align="center">
-  <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/oslabs-beta/lexiQL" />
-  <img alt="contributions welcome" src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/oslabs-beta/lexiQL/issues" />
+
+ <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/oslabs-beta/lexiQL" /><img alt="contributions welcome" src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/oslabs-beta/lexiQL/issues" />
     <img alt="Tweet" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Flexiql" />
-</p>
-<p align="center">
-<i>lexiQL</i> is an open-source GraphQL prototyping tool that visualizes your relational database and facilitates GraphQL API prototyping and configuration, allowing developers to to optimize their queries and transition away from RESTful APIs. The tool takes a relational database input and uses it to generate the respective GraphQL schemas alongside an interactive GUI that displays all of the tables in a database, including primary/foreign key relationships between tables, as well as each table’s columns and associated data types. <br/>
+
+
+lexiQL is an open-source GraphQL prototyping tool that visualizes your relational database and facilitates GraphQL API prototyping and configuration, allowing developers to to optimize their queries and transition away from RESTful APIs. The tool takes a relational database input and uses it to generate the respective GraphQL schemas alongside an interactive GUI that displays all of the tables in a database, including primary/foreign key relationships between tables, as well as each table’s columns and associated data types. <br/>
 Accelerated by <a href="https://github.com/oslabs-beta/" />OS Labs</a>.
-</p>
+
 <hr />
 
 ## Getting Started
 <i> Visit www.lexiql.io to utilize the tool. </i>
 
 #### Select your database
-  1. [ ] Input your PostgreSQL URI
-  2. [ ] OR use the sample database to view data rendered in an interactive diagram.
+* Input your PostgreSQL URI
+* OR use the sample database to view data rendered in an interactive diagram.
 
 <img src="client/assets/userdbinput.gif" width="700" height="500" /><br />
 
 #### View your relational database
-  1. [ ] Easily view the relationships between the tables via the links that highlight the foreign key constraints.
-  2. [ ] Move any table and arrange them to optimally view the structure of the database and the relationships between the tables.
+* Easily view the relationships between the tables via the links that highlight the foreign key constraints.
+* Move any table and arrange them to optimally view the structure of the database and the relationships between the tables.
   
 <img src="client/assets/movingtables.gif" width="700" height="500" />
 
 #### View your GQL schema
-  1. [ ] View the generated GraphQL schema, including the types and associated resolvers.
-  2. [ ] Use the copy button to effortlessly integrate the code into your project.
+* View the generated GraphQL schema, including the types and associated resolvers.
+* Use the copy button to effortlessly integrate the code into your project.
 
 <img src="client/assets/codemirror.gif" width="700" height="500" />
 
 #### Test the GQL schema
-  1. [ ] Interactively construct full queries using the sample database.
-  2. [ ] Use the "Docs" to explore the possible queries, fields, types, mutations, and more.
+* Interactively construct full queries using the sample database.
+* Use the "Docs" to explore the possible queries, fields, types, mutations, and more.
 
 <img src="client/assets/graphiql.gif" width="700" height="500" />
 
