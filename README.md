@@ -40,7 +40,7 @@ Accelerated by <a href="https://github.com/oslabs-beta/" />OS Labs</a>.
 * Christopher Carney – [@Carthanial](https://github.com/Carthanial) <br/>
 * Stacy Learn – [@hello-stacy](https://github.com/hello-stacy)  <br/>
 * John Li – [@john-li7](https://github.com/john-li7)  <br/>
-* Ryan McDaniel – [@ryanmcd118](https://github.com/Cryanmcd118) 
+* Ryan McDaniel – [@ryanmcd118](https://github.com/ryanmcd118) 
 
 ## License 
 This product is licensed under the MIT License.
