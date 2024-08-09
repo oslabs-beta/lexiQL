@@ -1,8 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const webpack = require('webpack');
-// const crypto = require('crypto-browserify');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -21,7 +20,17 @@ module.exports = {
       '/data': 'http://localhost:3000',
     },
   },
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      template: './client/index.html',
+      filename: 'index.html',
+      inject: 'body',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [{ from: 'client/favicon.ico', to: 'favicon.ico' }],
+    }),
+  ],
   module: {
     rules: [
       {
@@ -56,11 +65,4 @@ module.exports = {
       stream: require.resolve('stream-browserify'),
     },
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './client/index.html',
-      filename: 'index.html',
-      inject: 'body',
-    }),
-  ],
 };
