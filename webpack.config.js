@@ -12,8 +12,8 @@ module.exports = {
     publicPath: '/',
   },
   devServer: {
-    publicPath: '/public/',
-    contentBase: './client',
+    publicPath: '/',
+    contentBase: path.join(__dirname, 'client'),
     inline: true,
     hot: true,
     proxy: {
