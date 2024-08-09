@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 // route to dummy db
 app.use('/', router);
 // to only run build and get static when in production, not development
-app.use('/build', express.static(path.join(__dirname, '../build')));
+app.use('/public', express.static(path.join(__dirname, '../public')));
 /* Serves Static Files  */
 app.get('/', (req, res) =>
   res.status(200).sendFile(path.resolve(__dirname, '../client/index.html'))

@@ -8,11 +8,11 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: ['babel-polyfill', './client/index.js'],
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
   },
   devServer: {
-    publicPath: '/build/',
+    publicPath: '/public/',
     contentBase: './client',
     inline: true,
     hot: true,
