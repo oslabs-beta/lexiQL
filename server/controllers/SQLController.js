@@ -1,15 +1,21 @@
-const { Pool } = require("pg");
-const CryptoJS = require("crypto-js");
+const fs = require('fs');
+const path = require('path');
+const { Pool } = require('pg');
+const CryptoJS = require('crypto-js');
+
+const secretKey = require('../secretKey');
 /* Example db URI */
 const EX_PG_URI =
-  "postgres://zhocexop:Ipv9EKas6bU6z9ehDXZQRorjITIXijGv@ziggy.db.elephantsql.com:5432/zhocexop";
-const fs = require("fs");
-const sqlQuery = fs.readFileSync("server/tableQuery.sql", "utf8");
-const secretKey = require("../secretKey");
+  'postgres://zhocexop:Ipv9EKas6bU6z9ehDXZQRorjITIXijGv@ziggy.db.elephantsql.com:5432/zhocexop';
+
+const sqlFilePath = path.resolve(__dirname, '../../public/tableQuery.sql');
+console.log('Attempting to read SQL file from:', sqlFilePath);
+
+const sqlQuery = fs.readFileSync(sqlFilePath, 'utf8');
 
 const SQLController = {};
 
-// function to decrypt incoming PSQL URLs
+// decrypt incoming PSQL URLs
 const decryptedURI = (encryptedURL) => {
   const bytes = CryptoJS.AES.decrypt(encryptedURL, secretKey);
   const decrypted = bytes.toString(CryptoJS.enc.Utf8);
@@ -35,7 +41,7 @@ SQLController.getSQLSchema = (req, res, next) => {
         log: `Error in getSQLSchema: ${err}`,
         status: 400,
         message: {
-          err: "Unable to connect to SQL database, please confirm URI",
+          err: 'Unable to connect to SQL database, please confirm URI',
         },
       };
       return next(errObj);
@@ -47,6 +53,7 @@ SQLController.formatGraphData = (req, res, next) => {
   try {
     const sqlSchema = res.locals.SQLSchema;
     let graphData = [];
+
     for (const tableName of Object.keys(sqlSchema)) {
       const tableObject = {};
       tableObject[tableName] = sqlSchema[tableName];
@@ -82,6 +89,7 @@ SQLController.formatGraphData = (req, res, next) => {
 
       graphData.push(tableObject);
     }
+
     res.locals.SQLSchema = graphData;
     return next();
   } catch (err) {
@@ -90,7 +98,9 @@ SQLController.formatGraphData = (req, res, next) => {
       status: 400,
       message: { err: `Format graph data failed` },
     };
+
     return next(errObject);
   }
 };
+
 module.exports = SQLController;

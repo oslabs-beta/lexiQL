@@ -1,5 +1,4 @@
 #homeHeader {
-  // background-color: #5a95f5;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -18,7 +17,6 @@
     color: black;
     font-size: 37px;
     text-decoration: none;
-    // margin: 0px 40px 0px 10px;
     margin-right: 40px;
   }
 
@@ -45,7 +43,6 @@
 }
 
 #appHeader {
-  // background-color: $bright-blue;
   background-color: $dark-blue;
   width: 100%;
   display: flex;
@@ -74,7 +71,6 @@
 
   .homeLogo {
     height: 80px;
-    // margin: 10px 25px 0px 0px;
     margin-left: 20px;
   }
 

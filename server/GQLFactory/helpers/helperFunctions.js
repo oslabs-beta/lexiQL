@@ -1,8 +1,3 @@
-// for future uri validation
-// const validateURIFormat = (uri) => {
-//     return uri.slice(0, 12).includes('postgres://');
-//   };
-
 const isJunctionTable = (foreignKeys, columns) => {
   if (!foreignKeys) return false;
   return Object.keys(foreignKeys).length + 1 === Object.keys(columns).length;

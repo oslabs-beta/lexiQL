@@ -26,7 +26,6 @@
   .codeContainerButton:hover {
     cursor: pointer;
     filter: brightness(85%);
-    // background-color: $dark-blue;
   }
 
   p {
@@ -80,8 +79,4 @@ SCHEMA/RESOLVER PANEL STYLING
   .codeToggleBtn.open:hover {
     filter: brightness(85%);
   }
-  // #copyButton {
-  //   display: flex;
-  //   bottom: 0;
-  // }
 }

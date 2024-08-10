@@ -1,19 +1,19 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const webpack = require('webpack');
-// const crypto = require('crypto-browserify');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: ['babel-polyfill', './client/index.js'],
+  entry: ['core-js/stable', 'regenerator-runtime/runtime', './client/index.js'],
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
+    publicPath: '/',
   },
   devServer: {
-    publicPath: '/build/',
-    contentBase: './client',
+    publicPath: '/',
+    contentBase: path.join(__dirname, 'client'),
     inline: true,
     hot: true,
     proxy: {
@@ -21,7 +21,20 @@ module.exports = {
       '/data': 'http://localhost:3000',
     },
   },
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      template: './client/index.html',
+      filename: 'index.html',
+      inject: 'body',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'client/favicon.ico', to: 'favicon.ico' },
+        { from: 'server/tableQuery.sql', to: 'tableQuery.sql' },
+      ],
+    }),
+  ],
   module: {
     rules: [
       {
@@ -56,11 +69,4 @@ module.exports = {
       stream: require.resolve('stream-browserify'),
     },
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './client/index.html',
-      filename: 'index.html',
-      inject: 'body',
-    }),
-  ],
 };

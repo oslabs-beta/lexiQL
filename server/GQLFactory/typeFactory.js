@@ -1,4 +1,3 @@
-const { setType } = require('./helpers/helperFunctions');
 const { mutationsHelper, customHelper } = require('./helpers/typeHelpers');
 const { pascalCase } = require('pascal-case');
 const toCamelCase = require('camelcase');

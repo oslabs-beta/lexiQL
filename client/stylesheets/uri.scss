@@ -19,7 +19,6 @@ URI FORM PANEL STYLING
 }
 
 .uripanel.open {
-  // display: flex;
   left: 0;
   padding: 0px 0px;
 }
@@ -35,7 +34,6 @@ URI FORM PANEL STYLING
   position: fixed;
   background-color: $orange;
   color: $dark-blue;
-  // border: 2px solid $orange;
   border: none;
   width: 50px;
   top: 30%;
@@ -46,7 +44,6 @@ URI FORM PANEL STYLING
 }
 
 .uripanelbtn:hover {
-  // background-color: $dark-blue;
   filter: brightness(80%);
 }
 
@@ -115,13 +112,6 @@ URI FORM STYLING
   color: red;
   font-size: 13px;
 }
-
-// .formHeader {
-//   padding: 0px 0px;
-//   margin: 0px auto;
-//   font-size: 40px;
-//   padding: 0px 0px;
-// }
 
 #inputHeader {
   font-size: 35px;

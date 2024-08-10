@@ -1,6 +1,5 @@
 const { pascalCase } = require('pascal-case');
 const { singular } = require('pluralize');
-const isJunctionTable = require('./helpers/helperFunctions');
 const resolverHelper = require('./helpers/resolverHelpers');
 const resolverFactory = {};
 

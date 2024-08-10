@@ -3,11 +3,10 @@ import TeamMember from '../components/teamMember';
 import chrisHeadshot from '../assets/chris-headshot.png';
 import johnHeadshot from '../assets/john-headshot.png';
 import stacyHeadshot from '../assets/stacy-headshot.png';
-import ryanHeadshot from '../assets/ryan-headshot.jpeg';
+import ryanHeadshot from '../assets/ryan-headshot.png';
 
 export default function aboutUsContainer() {
   const teamMembers = [
-    // need to add Carney's LinkedIn when he makes a profile
     {
       name: 'Chris Carney',
       headshot: chrisHeadshot,
@@ -24,7 +23,7 @@ export default function aboutUsContainer() {
       name: 'John Li',
       headshot: johnHeadshot,
       github: 'https://github.com/john-li7',
-      linkedin: 'https://www.linkedin.com/in/john-li-cpa-7327a380/',
+      linkedin: 'https://www.linkedin.com/in/john-li7/',
     },
     {
       name: 'Ryan McDaniel',
@@ -44,14 +43,14 @@ export default function aboutUsContainer() {
         headshot={teammate.headshot}
         github={teammate.github}
         linkedin={teammate.linkedin}
-      />,
+      />
     );
   }
 
   return (
-    <div className="teamContainer">
+    <div className='teamContainer'>
       <h3>Meet the lexiQL team</h3>
-      <div id="allCards">{teamMemInfo}</div>
+      <div id='allCards'>{teamMemInfo}</div>
     </div>
   );
 }
