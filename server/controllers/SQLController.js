@@ -9,8 +9,12 @@ const EX_PG_URI =
   'postgres://zhocexop:Ipv9EKas6bU6z9ehDXZQRorjITIXijGv@ziggy.db.elephantsql.com:5432/zhocexop';
 
 // const sqlQuery = fs.readFileSync("server/tableQuery.sql", "utf8");
+// const sqlQuery = fs.readFileSync(
+//   path.join(__dirname, '../tableQuery.sql'),
+//   'utf8'
+// );
 const sqlQuery = fs.readFileSync(
-  path.join(__dirname, '../tableQuery.sql'),
+  path.resolve(__dirname, '../../public/tableQuery.sql'),
   'utf8'
 );
 
