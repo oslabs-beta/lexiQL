@@ -4,6 +4,7 @@ const GQLController = {};
 
 GQLController.createGQLSchema = (req, res, next) => {
   const { SQLSchema } = res.locals;
+
   try {
     const types = createTypes(SQLSchema);
     const resolvers = createResolvers(SQLSchema);
@@ -17,6 +18,7 @@ GQLController.createGQLSchema = (req, res, next) => {
         err: 'Unable to create GQL schema',
       },
     };
+
     return next(errObject);
   }
 };

@@ -4,9 +4,7 @@ import ColumnNode from './columnNode';
 export default memo(({ data }) => {
   const { tableName, columns, dataTypes } = data;
 
-  /*
-  // conditional because for some reason the array is undefined for the first two logs?? brute forcing it ...
-*/
+  // conditional -- array is undefined for the first two logs
   let tableColumns;
 
   columns
@@ -22,7 +20,7 @@ export default memo(({ data }) => {
 
   return (
     <>
-      <div className="tableHeader">
+      <div className='tableHeader'>
         <strong>{tableName}</strong>
       </div>
       <br />

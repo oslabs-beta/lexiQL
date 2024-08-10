@@ -6,16 +6,9 @@ import TableNode from '../components/tableNode';
 import { DiagramContext } from '../state/contexts';
 
 const connectionLineStyle = { stroke: '#fff' };
-// const snapGrid = [20, 20];
-// const snapGrid = [0, 0];
 const nodeTypes = {
   selectorNode: TableNode,
 };
-
-// const onLoad = (reactFlowInstance) => {
-//   console.log('flow loaded:', reactFlowInstance);
-//   reactFlowInstance.fitView();
-// };
 
 const CustomNodeFlow = () => {
   const [elements, setElements] = useState([]);
@@ -38,7 +31,7 @@ const CustomNodeFlow = () => {
       connectionLineStyle={connectionLineStyle}
       snapGrid={[0, 0]}
     >
-      <Background variant="dots" gap={12} size={0.5} />
+      <Background variant='dots' gap={12} size={0.5} />
       <Controls />
     </ReactFlow>
   );

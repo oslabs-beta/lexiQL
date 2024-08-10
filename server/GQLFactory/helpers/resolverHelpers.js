@@ -1,6 +1,5 @@
 const toCamelCase = require('camelcase');
 const { singular } = require('pluralize');
-const { pascalCase } = require('pascal-case');
 const { isJunctionTable } = require('./helperFunctions');
 
 const resolverHelper = {};
@@ -106,8 +105,10 @@ resolverHelper.deleteMutation = (tableName, primaryKey) => {
 resolverHelper.identifyRelationships = (tableName, sqlSchema) => {
   const { primaryKey, referencedBy, foreignKeys } = sqlSchema[tableName];
   let resolverBody = '';
+
   /* Keeps track of custom object types already added to resolverBody string */
   const inResolverBody = [];
+
   /* Looping through each table that references tableName */
   for (const refByTable of Object.keys(referencedBy)) {
     /* Shorthand labels for refByTable's properties */

@@ -15,7 +15,7 @@ const sqlQuery = fs.readFileSync(sqlFilePath, 'utf8');
 
 const SQLController = {};
 
-// function to decrypt incoming PSQL URLs
+// decrypt incoming PSQL URLs
 const decryptedURI = (encryptedURL) => {
   const bytes = CryptoJS.AES.decrypt(encryptedURL, secretKey);
   const decrypted = bytes.toString(CryptoJS.enc.Utf8);
@@ -53,6 +53,7 @@ SQLController.formatGraphData = (req, res, next) => {
   try {
     const sqlSchema = res.locals.SQLSchema;
     let graphData = [];
+
     for (const tableName of Object.keys(sqlSchema)) {
       const tableObject = {};
       tableObject[tableName] = sqlSchema[tableName];
@@ -88,6 +89,7 @@ SQLController.formatGraphData = (req, res, next) => {
 
       graphData.push(tableObject);
     }
+
     res.locals.SQLSchema = graphData;
     return next();
   } catch (err) {
@@ -96,7 +98,9 @@ SQLController.formatGraphData = (req, res, next) => {
       status: 400,
       message: { err: `Format graph data failed` },
     };
+
     return next(errObject);
   }
 };
+
 module.exports = SQLController;

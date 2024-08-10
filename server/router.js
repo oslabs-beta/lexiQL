@@ -44,9 +44,4 @@ router.use(
   })
 );
 
-/* Route to get user (table specific) GraphQL Schema and Resolvers */
-// router.post('gql-schema', GQLController.createGQLSchema,
-// (req, res) => {res.status(200).json(res.locals.GQLSchema)
-// });
-
 module.exports = router;
