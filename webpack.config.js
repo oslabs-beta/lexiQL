@@ -29,7 +29,10 @@ module.exports = {
       inject: 'body',
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: 'client/favicon.ico', to: 'favicon.ico' }],
+      patterns: [
+        { from: 'client/favicon.ico', to: 'favicon.ico' },
+        { from: 'server/tableQuery.sql', to: 'tableQuery.sql' },
+      ],
     }),
   ],
   module: {
