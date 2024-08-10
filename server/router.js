@@ -9,18 +9,6 @@ const {
 const { createGQLSchema } = require('./controllers/GQLController');
 const schema = require('./schema');
 
-// TEST ROUTE
-router.get('/test-file', (req, res) => {
-  const testFilePath = path.resolve(__dirname, '../../../public/test.txt');
-  try {
-    const fileContent = fs.readFileSync(testFilePath, 'utf8');
-    res.status(200).send(fileContent);
-  } catch (error) {
-    console.error('Error reading test file:', error.message);
-    res.status(500).send('Failed to read test file');
-  }
-});
-
 /* Route for example SQL Schema and example GQL Schema */
 router.get(
   '/example-schema',
