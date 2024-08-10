@@ -13,10 +13,14 @@ const EX_PG_URI =
 //   path.join(__dirname, '../tableQuery.sql'),
 //   'utf8'
 // );
-const sqlQuery = fs.readFileSync(
-  path.resolve(__dirname, '../../public/tableQuery.sql'),
-  'utf8'
-);
+// const sqlQuery = fs.readFileSync(
+//   path.resolve(__dirname, '../../public/tableQuery.sql'),
+//   'utf8'
+// );
+const sqlFilePath = path.resolve(__dirname, '../../public/tableQuery.sql');
+console.log('Attempting to read SQL file from:', sqlFilePath);
+
+const sqlQuery = fs.readFileSync(sqlFilePath, 'utf8');
 
 const SQLController = {};
 
