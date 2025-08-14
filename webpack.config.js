@@ -7,12 +7,12 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: ['core-js/stable', 'regenerator-runtime/runtime', './client/index.js'],
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
     publicPath: '/',
   },
   devServer: {
-    contentBase: path.join(__dirname, 'build'),
+    contentBase: path.join(__dirname, 'public'),
     publicPath: '/',
     hot: true,
     port: 8080,
