@@ -31,7 +31,7 @@ export default function navBar() {
             </a>
 
             <a
-              href="https://www.linkedin.com/company/lexiql"
+              href="https://github.com/ryanmcd118/lexiQL"
               target="_blank"
               className="headerLinks"
               rel="noreferrer"
