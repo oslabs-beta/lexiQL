@@ -2,21 +2,23 @@ import React, { memo } from 'react';
 import ColumnNode from './columnNode';
 
 export default memo(({ data }) => {
-  const { tableName, columns, dataTypes } = data;
+  const { tableName, columns, dataTypes, hasHandles } = data;
 
   // conditional -- array is undefined for the first two logs
   let tableColumns;
 
-  columns
-    ? (tableColumns = columns.map((column, index) => (
-        <ColumnNode
-          columnName={column}
-          dataType={dataTypes[index]}
-          id={column}
-          tableName={tableName}
-        />
-      )))
-    : tableColumns;
+  if (columns && dataTypes) {
+    tableColumns = columns.map((column, index) => (
+      <ColumnNode
+        key={`${tableName}-${column}`}
+        columnName={column}
+        dataType={dataTypes[index]}
+        id={column}
+        tableName={tableName}
+        hasHandles={hasHandles}
+      />
+    ));
+  }
 
   return (
     <>

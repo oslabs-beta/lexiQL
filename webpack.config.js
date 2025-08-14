@@ -12,13 +12,17 @@ module.exports = {
     publicPath: '/',
   },
   devServer: {
+    contentBase: path.join(__dirname, 'public'),
     publicPath: '/',
-    contentBase: path.join(__dirname, 'client'),
-    inline: true,
     hot: true,
+    port: 8080,
     proxy: {
-      '/': 'http://localhost:3000',
-      '/data': 'http://localhost:3000',
+      '/example-schema': 'http://localhost:3000',
+      '/sql-schema': 'http://localhost:3000',
+      '/playground': 'http://localhost:3000',
+      '/test': 'http://localhost:3000',
+      '/test-mock': 'http://localhost:3000',
+      '/test-gql': 'http://localhost:3000',
     },
   },
   plugins: [

@@ -31,8 +31,20 @@ export default function formContainer() {
         // store the referenced by values to use in 'hasHandles'
         const allRefByValues = [];
 
-        for (let i = 0; i < sqlSchema.length; i += 1) {
-          const fullTable = sqlSchema[i];
+        // Handle both array format (from formatGraphData) and object format (from mock data)
+        let tablesToProcess = [];
+        if (Array.isArray(sqlSchema)) {
+          // Old format: array of objects with table names as keys
+          tablesToProcess = sqlSchema;
+        } else {
+          // New format: direct object with table names as keys
+          tablesToProcess = Object.keys(sqlSchema).map(tableName => ({
+            [tableName]: sqlSchema[tableName]
+          }));
+        }
+
+        for (let i = 0; i < tablesToProcess.length; i += 1) {
+          const fullTable = tablesToProcess[i];
           const tableName = Object.keys(fullTable)[0];
           const tableElements = fullTable[tableName];
 
@@ -60,16 +72,29 @@ export default function formContainer() {
           // check to see if there are any foreign keys and/or referencedByKeys
           if (fkeys) {
             relationalTableData[tableName].foreignKeys = [];
-            for (let j = 0; j < fkeys.length; j++) {
-              const fkeyName = Object.keys(fkeys[j])[0];
+            // Handle both array format and object format for foreignKeys
+            if (Array.isArray(fkeys)) {
+              for (let j = 0; j < fkeys.length; j++) {
+                const fkeyName = Object.keys(fkeys[j])[0];
 
-              // store in the format of [source, target, sourceHandle, targetHandle]
-              relationalTableData[tableName].foreignKeys.push([
-                tableName,
-                fkeys[j][fkeyName].referenceTable,
-                fkeyName,
-                fkeys[j][fkeyName].referenceKey,
-              ]);
+                // store in the format of [source, target, sourceHandle, targetHandle]
+                relationalTableData[tableName].foreignKeys.push([
+                  tableName,
+                  fkeys[j][fkeyName].referenceTable,
+                  fkeyName,
+                  fkeys[j][fkeyName].referenceKey,
+                ]);
+              }
+            } else {
+              // Object format: { fkeyName: { referenceTable, referenceKey } }
+              for (const fkeyName of Object.keys(fkeys)) {
+                relationalTableData[tableName].foreignKeys.push([
+                  tableName,
+                  fkeys[fkeyName].referenceTable,
+                  fkeyName,
+                  fkeys[fkeyName].referenceKey,
+                ]);
+              }
             }
           }
 
@@ -78,15 +103,28 @@ export default function formContainer() {
 
           if (refByKeys) {
             relationalTableData[tableName].referencedBy = [];
-            for (let j = 0; j < refByKeys.length; j++) {
-              const refKey = Object.keys(refByKeys[j])[0];
-              // store in the format of [source, target, sourceHandle, targetHandle]
-              relationalTableData[tableName].referencedBy.push([
-                refKey,
-                tableName,
-                refByKeys[j][refKey],
-                tableElements.primaryKey,
-              ]);
+            // Handle both array format and object format for referencedBy
+            if (Array.isArray(refByKeys)) {
+              for (let j = 0; j < refByKeys.length; j++) {
+                const refKey = Object.keys(refByKeys[j])[0];
+                // store in the format of [source, target, sourceHandle, targetHandle]
+                relationalTableData[tableName].referencedBy.push([
+                  refKey,
+                  tableName,
+                  refByKeys[j][refKey],
+                  tableElements.primaryKey,
+                ]);
+              }
+            } else {
+              // Object format: { refTable: refColumn }
+              for (const refTable of Object.keys(refByKeys)) {
+                relationalTableData[tableName].referencedBy.push([
+                  refTable,
+                  tableName,
+                  refByKeys[refTable],
+                  tableElements.primaryKey,
+                ]);
+              }
             }
           }
 
@@ -102,18 +140,28 @@ export default function formContainer() {
 
           let dataTypes = [];
 
-          for (let j = 0; j < columns.length; j++) {
-            const columnLabel = Object.keys(columns[j])[0];
+          // Handle both array format and object format for columns
+          if (Array.isArray(columns)) {
+            for (let j = 0; j < columns.length; j++) {
+              const columnLabel = Object.keys(columns[j])[0];
 
-            // testing this for the new custom node
-            // store each column and the data type as a key value pair
-            // this saves a key value pair where key is the column name, and its value is the data type
-            tableContents[columnLabel] =
-              fullTable[tableName].columns[j][columnLabel].dataType;
+              // testing this for the new custom node
+              // store each column and the data type as a key value pair
+              // this saves a key value pair where key is the column name, and its value is the data type
+              tableContents[columnLabel] =
+                fullTable[tableName].columns[j][columnLabel].dataType;
 
-            // store column name in columnsList so it ends up being an array of all the columns
-            columnsList.push(columnLabel);
-            dataTypes.push(tableContents[columnLabel]);
+              // store column name in columnsList so it ends up being an array of all the columns
+              columnsList.push(columnLabel);
+              dataTypes.push(tableContents[columnLabel]);
+            }
+          } else {
+            // Object format: { columnName: { dataType, ... } }
+            for (const columnName of Object.keys(columns)) {
+              tableContents[columnName] = columns[columnName].dataType;
+              columnsList.push(columnName);
+              dataTypes.push(tableContents[columnName]);
+            }
           }
 
           // move primary key to front of columnsList array before saving it onto tableNodes
@@ -152,30 +200,28 @@ export default function formContainer() {
             targetPosition: 'left',
           });
 
-          // HOW MANY TABLES TO RENDER PER ROW ON CANVAS
-          let numTables = sqlSchema.length;
-          let tablesPerRow = 0;
+          // Create a well-spaced layout for the tables
+          // Position tables in a grid-like pattern with proper spacing
+          const numTables = tablesToProcess.length;
+          const tablesPerRow = 3; // Show 3 tables per row
+          const tableWidth = 400; // Width of each table
+          const tableHeight = 300; // Height of each table
+          const horizontalSpacing = 450; // More space between tables horizontally
+          const verticalSpacing = 400; // More space between rows
 
-          if (numTables < 5) tablesPerRow = numTables;
-          else {
-            if (numTables % 5 === 1) tablesPerRow = 4;
-            else tablesPerRow = numTables;
-          }
+          const row = Math.floor(i / tablesPerRow);
+          const col = i % tablesPerRow;
 
-          // currently brute-forcing the actual placement of the 4 or 5 tables per row of tables:
-          if (i < tablesPerRow) {
-            tableNodes[i].position.x = 500 * i;
-            tableNodes[i].position.y = 0;
-          } else if (i < tablesPerRow * 2) {
-            tableNodes[i].position.x = 500 * (i - tablesPerRow);
-            tableNodes[i].position.y = 550;
-          } else {
-            tableNodes[i].position.x = 500 * (i - tablesPerRow * 2);
-            tableNodes[i].position.y = 1100;
-          }
+          // Add buffer around the outside to help center the tables
+          const bufferX = 200; // Buffer from left edge
+          const bufferY = 150; // Buffer from top edge
+
+          tableNodes[i].position.x = bufferX + col * horizontalSpacing;
+          tableNodes[i].position.y = bufferY + row * verticalSpacing;
 
           // store the sub obj into the main obj
           dbContents[i] = tableContents;
+          console.log(`Table ${tableName} columns:`, columnsList);
         }
 
         // logic for links
@@ -202,13 +248,18 @@ export default function formContainer() {
           if (relationalData[tableNames[i]].foreignKeys) {
             const currTableFkeys = relationalData[tableNames[i]].foreignKeys;
             for (let j = 0; j < currTableFkeys.length; j++) {
-              tableNodes.push({
+              const edge = {
                 id: `${tableNames[i]}-fkey${j}`,
+                type: 'default',
                 source: currTableFkeys[j][0],
                 target: currTableFkeys[j][1],
-                sourceHandle: currTableFkeys[j][2],
-                targetHandle: currTableFkeys[j][3],
-              });
+                sourceHandle: `${currTableFkeys[j][0]}-${currTableFkeys[j][2]}`,
+                targetHandle: `${currTableFkeys[j][1]}-${currTableFkeys[j][3]}`,
+                animated: true,
+                style: { stroke: '#ff9149', strokeWidth: 2 },
+              };
+              console.log('Creating edge:', JSON.stringify(edge, null, 2));
+              tableNodes.push(edge);
 
               allForeignKeys.push({
                 tableName: tableNames[i],
@@ -221,16 +272,20 @@ export default function formContainer() {
           }
 
           // check to see if the table has a referencedBy key
+          // Skip edge creation for referencedBy to avoid duplicates with foreignKeys
           if (relationalData[tableNames[i]].referencedBy) {
             const currTableRefKeys = relationalData[tableNames[i]].referencedBy;
             for (let j = 0; j < currTableRefKeys.length; j++) {
-              tableNodes.push({
-                id: `${tableNames[i]}-refKey${j}`,
-                source: currTableRefKeys[j][0],
-                target: currTableRefKeys[j][1],
-                sourceHandle: currTableRefKeys[j][2],
-                targetHandle: currTableRefKeys[j][3],
-              });
+              // Removed duplicate edge creation - edges are created from foreignKeys
+              // tableNodes.push({
+              //   id: `${tableNames[i]}-refKey${j}`,
+              //   source: currTableRefKeys[j][0],
+              //   target: currTableRefKeys[j][1],
+              //   sourceHandle: currTableRefKeys[j][2],
+              //   targetHandle: currTableRefKeys[j][3],
+              //   animated: true,
+              //   style: { stroke: '#fff' },
+              // });
 
               allRefByValues.push({
                 tableName: tableNames[i],
@@ -243,11 +298,14 @@ export default function formContainer() {
           }
         }
 
-        // store all the source/target handles that a table has to only render handles for the columns that have them
+        console.log('allForeignKeys array:', JSON.stringify(allForeignKeys, null, 2));
+
+        // Create hasHandles data after foreign key processing
         const hasHandles = {};
 
         // only care about the source and source handles
         allForeignKeys.forEach((obj) => {
+          console.log(`Processing foreign key: source=${obj.source}, sourceHandle=${obj.sourceHandle}`);
           if (!hasHandles[obj.source]) {
             hasHandles[obj.source] = { sourceHandles: [obj.sourceHandle] };
           } else {
@@ -256,7 +314,6 @@ export default function formContainer() {
         });
 
         // only care about the target and target handles
-
         allRefByValues.forEach((obj) => {
           if (!hasHandles[obj.target]) {
             hasHandles[obj.target] = { targetHandles: [obj.targetHandle] };
@@ -271,9 +328,111 @@ export default function formContainer() {
           }
         });
 
-        // console.log('table nodes in formcontainer: ', tableNodes);
-        // console.log('has handles: ', hasHandles);
-        // console.log('relational data: ', relationalData);
+        console.log('hasHandles created:', JSON.stringify(hasHandles, null, 2));
+
+        // Now update the table nodes to include hasHandles data
+        tableNodes.forEach(node => {
+          if (node.type === 'selectorNode') {
+            node.data.hasHandles = hasHandles;
+          }
+        });
+
+        // Create separate nodes for columns that need handles
+        // This allows React Flow to position handles correctly relative to each column
+        const tableNamesForHandles = Object.keys(relationalData);
+        for (let i = 0; i < tableNamesForHandles.length; i++) {
+          const tableName = tableNamesForHandles[i];
+          const tableData = relationalData[tableName];
+          
+          // Check for source handles (foreign keys)
+          if (tableData.foreignKeys) {
+            tableData.foreignKeys.forEach((fk, fkIndex) => {
+              const sourceColumn = fk[2]; // e.g., "user_id"
+              const sourceHandleId = `${tableName}-${sourceColumn}`;
+              
+                             // Create a separate node for this column
+               tableNodes.push({
+                 id: sourceHandleId,
+                 type: 'columnHandleNode',
+                 data: {
+                   tableName: tableName,
+                   columnName: sourceColumn,
+                   isSource: true,
+                 },
+                 style: {
+                   backgroundColor: 'transparent',
+                   border: 'none',
+                   width: 10,
+                   height: 20,
+                 },
+                 position: {
+                   x: 0, // Will be calculated below
+                   y: 0, // Will be calculated below
+                 },
+                 sourcePosition: 'right',
+               });
+            });
+          }
+          
+          // Check for target handles (referenced by)
+          if (tableData.referencedBy) {
+            tableData.referencedBy.forEach((ref, refIndex) => {
+              const targetColumn = ref[3]; // e.g., "id"
+              const targetHandleId = `${tableName}-${targetColumn}`;
+              
+                             // Create a separate node for this column
+               tableNodes.push({
+                 id: targetHandleId,
+                 type: 'columnHandleNode',
+                 data: {
+                   tableName: tableName,
+                   columnName: targetColumn,
+                   isTarget: true,
+                 },
+                 style: {
+                   backgroundColor: 'transparent',
+                   border: 'none',
+                   width: 10,
+                   height: 20,
+                 },
+                 position: {
+                   x: 0, // Will be calculated below
+                   y: 0, // Will be calculated below
+                 },
+                 targetPosition: 'left',
+               });
+            });
+          }
+                 }
+
+         // Position the column handle nodes correctly relative to their tables
+         tableNodes.forEach(node => {
+           if (node.type === 'columnHandleNode') {
+             const tableName = node.data.tableName;
+             const tableIndex = tableNamesForHandles.indexOf(tableName);
+             const tableRow = Math.floor(tableIndex / 3);
+             const tableCol = tableIndex % 3;
+             const tableX = 200 + tableCol * 450;
+             const tableY = 150 + tableRow * 400;
+             
+             if (node.data.isSource) {
+               node.position.x = tableX + 350; // Right side of table
+               node.position.y = tableY;
+             } else if (node.data.isTarget) {
+               node.position.x = tableX - 10; // Left side of table
+               node.position.y = tableY;
+             }
+           }
+         });
+
+         // Separate nodes and edges to avoid timing issues
+        const tableNodesOnly = tableNodes.filter(node => node.type === 'selectorNode');
+        const edgesOnly = tableNodes.filter(node => node.type === 'default');
+        
+        console.log('table nodes only: ', tableNodesOnly);
+        console.log('edges only: ', edgesOnly);
+        console.log('has handles: ', JSON.stringify(hasHandles, null, 2));
+        console.log('relational data: ', JSON.stringify(relationalData, null, 2));
 
         /*
         // if the current column name is included in the foreign keys, create a link where 'source' is the current column name and 'target' is the reference key where you'll have to link to another table
@@ -299,17 +458,29 @@ export default function formContainer() {
         */
         // console.log('dbContents: ', dbContents);
 
+        // First, set the table nodes only (without edges)
         diagramDispatch({
           type: 'SET_TABLES',
           payload: {
             sqlSchema,
             dbContents: [dbContents],
-            tableNodes,
+            tableNodes: tableNodesOnly,
             relationalData,
             primaryKeys,
             hasHandles,
           },
         });
+
+        // Then, after a short delay, add the edges
+        setTimeout(() => {
+          console.log('Adding edges after delay:', edgesOnly);
+          diagramDispatch({
+            type: 'SET_EDGES',
+            payload: {
+              edges: edgesOnly,
+            },
+          });
+        }, 100);
 
         codeDispatch({
           type: 'SET_CODE',
@@ -488,7 +659,7 @@ export default function formContainer() {
           });
 
           // HOW MANY TABLES TO RENDER PER ROW ON CANVAS
-          let numTables = sqlSchema.length;
+          let numTables = tablesToProcess.length;
           let tablesPerRow = 0;
 
           if (numTables < 5) tablesPerRow = numTables;
@@ -547,6 +718,8 @@ export default function formContainer() {
                 target: currTableRefKeys[j][1],
                 sourceHandle: currTableRefKeys[j][2],
                 targetHandle: currTableRefKeys[j][3],
+                animated: true,
+                style: { stroke: '#fff' },
               });
 
               allRefByValues.push({
@@ -588,18 +761,38 @@ export default function formContainer() {
         });
 
         console.log('hashandles: ', hasHandles);
+        console.log('Final tableNodes structure:', tableNodes);
 
+        // Separate nodes and edges to avoid timing issues
+        const tableNodesOnly = tableNodes.filter(node => node.type === 'selectorNode');
+        const edgesOnly = tableNodes.filter(node => node.type === 'default');
+        
+        console.log('table nodes only: ', tableNodesOnly);
+        console.log('edges only: ', edgesOnly);
+
+        // First, set the table nodes only (without edges)
         diagramDispatch({
           type: 'SET_TABLES',
           payload: {
             sqlSchema,
             dbContents: [dbContents],
-            tableNodes,
+            tableNodes: tableNodesOnly,
             relationalData,
             primaryKeys,
             hasHandles,
           },
         });
+
+        // Then, after a short delay, add the edges
+        setTimeout(() => {
+          console.log('Adding edges after delay:', edgesOnly);
+          diagramDispatch({
+            type: 'SET_EDGES',
+            payload: {
+              edges: edgesOnly,
+            },
+          });
+        }, 100);
 
         codeDispatch({
           type: 'SET_CODE',

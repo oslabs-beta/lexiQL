@@ -9,18 +9,15 @@ app.use(express.urlencoded({ extended: true }));
 // route to dummy db
 app.use('/', router);
 
-// Serve static files from the public directory at the root path
-app.use(express.static(path.join(__dirname, '../public')));
-
-// Serve the main index.html file
-app.get('/', (req, res) =>
-  res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'))
-);
+// Serve the main index.html file for the root route
+app.get('/', (req, res) => {
+  res.status(200).send('Backend server is running. Use the webpack dev server at localhost:8080 for the frontend.');
+});
 
 /* /data Refresh Testing */
-app.get('/data', (req, res) =>
-  res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'))
-);
+app.get('/data', (req, res) => {
+  res.status(200).send('Backend server is running. Use the webpack dev server at localhost:8080 for the frontend.');
+});
 
 /* Catch All Route */
 app.use('*', (req, res) => {
