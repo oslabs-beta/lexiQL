@@ -10,6 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js',
     publicPath: '/',
+    clean: true,
   },
   devServer: {
     contentBase: path.join(__dirname, 'public'),
@@ -36,7 +37,11 @@ module.exports = {
       patterns: [
         { from: 'client/favicon.ico', to: 'favicon.ico' },
         { from: 'server/tableQuery.sql', to: 'tableQuery.sql' },
-        { from: 'client/assets/example-schema.json', to: 'example-schema' },
+        {
+          from: 'client/assets/example-schema.json',
+          to: 'example-schema',
+          toType: 'file',
+        },
       ],
     }),
   ],
