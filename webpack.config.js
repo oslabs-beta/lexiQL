@@ -36,6 +36,7 @@ module.exports = {
       patterns: [
         { from: 'client/favicon.ico', to: 'favicon.ico' },
         { from: 'server/tableQuery.sql', to: 'tableQuery.sql' },
+        { from: 'client/assets/example-schema.json', to: 'example-schema' },
       ],
     }),
   ],

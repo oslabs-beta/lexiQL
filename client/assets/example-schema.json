@@ -1,0 +1,126 @@
+{
+  "SQLSchema": {
+    "users": {
+      "primaryKey": "id",
+      "foreignKeys": {},
+      "referencedBy": {
+        "posts": "user_id",
+        "comments": "user_id",
+        "profiles": "user_id",
+        "likes": "user_id"
+      },
+      "columns": {
+        "id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "NO"},
+        "name": {"dataType": "character varying", "columnDefault": null, "charMaxLength": 100, "isNullable": "YES"},
+        "email": {"dataType": "character varying", "columnDefault": null, "charMaxLength": 255, "isNullable": "YES"},
+        "created_at": {"dataType": "timestamp", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"}
+      }
+    },
+    "posts": {
+      "primaryKey": "id",
+      "foreignKeys": {
+        "user_id": {"referenceTable": "users", "referenceKey": "id"},
+        "category_id": {"referenceTable": "categories", "referenceKey": "id"}
+      },
+      "referencedBy": {
+        "comments": "post_id",
+        "tags_posts": "post_id",
+        "likes": "post_id"
+      },
+      "columns": {
+        "id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "NO"},
+        "title": {"dataType": "character varying", "columnDefault": null, "charMaxLength": 255, "isNullable": "YES"},
+        "content": {"dataType": "text", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"},
+        "user_id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"},
+        "category_id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"},
+        "published": {"dataType": "boolean", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"},
+        "created_at": {"dataType": "timestamp", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"}
+      }
+    },
+    "categories": {
+      "primaryKey": "id",
+      "foreignKeys": {},
+      "referencedBy": {
+        "posts": "category_id"
+      },
+      "columns": {
+        "id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "NO"},
+        "name": {"dataType": "character varying", "columnDefault": null, "charMaxLength": 100, "isNullable": "YES"},
+        "description": {"dataType": "text", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"}
+      }
+    },
+    "comments": {
+      "primaryKey": "id",
+      "foreignKeys": {
+        "user_id": {"referenceTable": "users", "referenceKey": "id"},
+        "post_id": {"referenceTable": "posts", "referenceKey": "id"}
+      },
+      "referencedBy": {},
+      "columns": {
+        "id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "NO"},
+        "content": {"dataType": "text", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"},
+        "user_id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"},
+        "post_id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"},
+        "created_at": {"dataType": "timestamp", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"}
+      }
+    },
+    "profiles": {
+      "primaryKey": "id",
+      "foreignKeys": {
+        "user_id": {"referenceTable": "users", "referenceKey": "id"}
+      },
+      "referencedBy": {},
+      "columns": {
+        "id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "NO"},
+        "bio": {"dataType": "text", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"},
+        "avatar_url": {"dataType": "character varying", "columnDefault": null, "charMaxLength": 500, "isNullable": "YES"},
+        "user_id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"}
+      }
+    },
+    "tags": {
+      "primaryKey": "id",
+      "foreignKeys": {},
+      "referencedBy": {
+        "tags_posts": "tag_id"
+      },
+      "columns": {
+        "id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "NO"},
+        "name": {"dataType": "character varying", "columnDefault": null, "charMaxLength": 50, "isNullable": "YES"},
+        "color": {"dataType": "character varying", "columnDefault": null, "charMaxLength": 7, "isNullable": "YES"}
+      }
+    },
+    "tags_posts": {
+      "primaryKey": "id",
+      "foreignKeys": {
+        "tag_id": {"referenceTable": "tags", "referenceKey": "id"},
+        "post_id": {"referenceTable": "posts", "referenceKey": "id"}
+      },
+      "referencedBy": {},
+      "columns": {
+        "id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "NO"},
+        "tag_id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"},
+        "post_id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"}
+      }
+    },
+    "likes": {
+      "primaryKey": "id",
+      "foreignKeys": {
+        "user_id": {"referenceTable": "users", "referenceKey": "id"},
+        "post_id": {"referenceTable": "posts", "referenceKey": "id"}
+      },
+      "referencedBy": {},
+      "columns": {
+        "id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "NO"},
+        "user_id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"},
+        "post_id": {"dataType": "integer", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"},
+        "created_at": {"dataType": "timestamp", "columnDefault": null, "charMaxLength": null, "isNullable": "YES"}
+      }
+    }
+  },
+  "GQLSchema": {
+    "types": "type User { id: Int!, name: String, email: String, createdAt: String, posts: [Post], comments: [Comment], profile: Profile, likes: [Like] }\n\n type Post { id: Int!, title: String, content: String, userId: Int, categoryId: Int, published: Boolean, createdAt: String, user: User, category: Category, comments: [Comment], tags: [Tag], likes: [Like] }\n\n type Category { id: Int!, name: String, description: String, posts: [Post] }\n\n type Comment { id: Int!, content: String, userId: Int, postId: Int, createdAt: String, user: User, post: Post }\n\n type Profile { id: Int!, bio: String, avatarUrl: String, userId: Int, user: User }\n\n type Tag { id: Int!, name: String, color: String, posts: [Post] }\n\n type Like { id: Int!, userId: Int, postId: Int, createdAt: String, user: User, post: Post }\n\n type Query { users: [User], user(id: Int!): User, posts: [Post], post(id: Int!): Post, categories: [Category], category(id: Int!): Category, comments: [Comment], comment(id: Int!): Comment, profiles: [Profile], profile(id: Int!): Profile, tags: [Tag], tag(id: Int!): Tag, likes: [Like], like(id: Int!): Like }",
+    "resolvers": "// sample resolvers omitted for brevity"
+  }
+}
+
+
