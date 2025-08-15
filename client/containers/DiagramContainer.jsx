@@ -1,5 +1,5 @@
 import React from 'react';
-import FlowContainer from './flowContainer';
+import FlowContainer from './FlowContainer.jsx';
 
 export default function DiagramContainer() {
   return (

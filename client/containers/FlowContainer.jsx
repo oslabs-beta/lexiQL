@@ -4,8 +4,6 @@ import ReactFlow, { Background, Controls } from 'react-flow-renderer';
 
 import ColumnHandleNode from '../components/ColumnHandleNode.jsx';
 import TableNode from '../components/TableNode.jsx';
-// import ColumnHandleNode from '../components/ColumnHandleNode';
-// import TableNode from '../components/TableNode';
 import { DiagramContext } from '../state/contexts';
 
 const connectionLineStyle = { stroke: '#ff9149', strokeWidth: 2 };
@@ -14,7 +12,7 @@ const nodeTypes = {
   columnHandleNode: ColumnHandleNode,
 };
 
-const CustomNodeFlow = () => {
+const FlowContainer = () => {
   const [elements, setElements] = useState([]);
 
   const { diagramState } = useContext(DiagramContext);
@@ -66,4 +64,4 @@ const CustomNodeFlow = () => {
   );
 };
 
-export default CustomNodeFlow;
+export default FlowContainer;
