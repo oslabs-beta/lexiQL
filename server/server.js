@@ -38,8 +38,11 @@ app.use((err, req, res, next) => {
   res.status(500).send('Internal Server Error');
 });
 
-app.listen(3000, () => {
-  console.log('Server listening on port 3000');
-});
+let serverInstance = null;
+if (process.env.NODE_ENV !== 'test') {
+  serverInstance = app.listen(3000, () => {
+    console.log('Server listening on port 3000');
+  });
+}
 
 module.exports = app;
