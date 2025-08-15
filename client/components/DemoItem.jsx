@@ -9,7 +9,7 @@ export default function DemoItem({ index, title, description, _gif }) {
     return (
       <div className="demoItem">
         <div className="imgContainer">
-          <img className="demoGif" id="input" src={UserInput} alt="demo-gif" />
+          <img className="demoGif" id="input" src={UserInput} alt="demo-gif" decoding="async" />
         </div>
         <div className="featureWords">
           <h2 className="featureName">{title}</h2>
@@ -26,7 +26,7 @@ export default function DemoItem({ index, title, description, _gif }) {
           <p className="featureDescription">{description}</p>
         </div>
         <div className="imgContainer">
-          <img className="demoGif" id="visual" src={MovingTables} alt="demo-gif" />
+          <img className="demoGif" id="visual" src={MovingTables} alt="demo-gif" decoding="async" />
         </div>
       </div>
     );
@@ -35,7 +35,7 @@ export default function DemoItem({ index, title, description, _gif }) {
     return (
       <div className="demoItem">
         <div className="imgContainer">
-          <img className="demoGif" id="schemas" src={CodeMirror} alt="demo-gif" />
+          <img className="demoGif" id="schemas" src={CodeMirror} alt="demo-gif" decoding="async" />
         </div>
         <div className="featureWords">
           <h2 className="featureName">{title}</h2>
@@ -52,7 +52,7 @@ export default function DemoItem({ index, title, description, _gif }) {
           <p className="featureDescription">{description}</p>
         </div>
         <div className="imgContainer">
-          <img className="demoGif" id="playground" src={graphiql} alt="demo-gif" />
+          <img className="demoGif" id="playground" src={graphiql} alt="demo-gif" decoding="async" />
         </div>
       </div>
     );

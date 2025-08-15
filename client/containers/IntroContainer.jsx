@@ -4,7 +4,14 @@ import Logo from '../assets/new-logo.png';
 export default function IntroContainer() {
   return (
     <div id="about">
-      <img id="logo" src={Logo} alt="logo" />
+      <img
+        id="logo"
+        src={Logo}
+        alt="lexiQL Logo - GraphQL API Generation Tool"
+        loading="eager"
+        decoding="async"
+        fetchPriority="high"
+      />
     </div>
   );
 }
