@@ -1,0 +1,316 @@
+{
+  "SQLSchema": {
+    "users": {
+      "primaryKey": "id",
+      "foreignKeys": {},
+      "referencedBy": {
+        "posts": "user_id",
+        "comments": "user_id",
+        "profiles": "user_id",
+        "likes": "user_id"
+      },
+      "columns": {
+        "id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "NO"
+        },
+        "name": {
+          "dataType": "character varying",
+          "columnDefault": null,
+          "charMaxLength": 100,
+          "isNullable": "YES"
+        },
+        "email": {
+          "dataType": "character varying",
+          "columnDefault": null,
+          "charMaxLength": 255,
+          "isNullable": "YES"
+        },
+        "created_at": {
+          "dataType": "timestamp",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        }
+      }
+    },
+    "posts": {
+      "primaryKey": "id",
+      "foreignKeys": {
+        "user_id": {
+          "referenceTable": "users",
+          "referenceKey": "id"
+        },
+        "category_id": {
+          "referenceTable": "categories",
+          "referenceKey": "id"
+        }
+      },
+      "referencedBy": {
+        "comments": "post_id",
+        "tags_posts": "post_id",
+        "likes": "post_id"
+      },
+      "columns": {
+        "id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "NO"
+        },
+        "title": {
+          "dataType": "character varying",
+          "columnDefault": null,
+          "charMaxLength": 255,
+          "isNullable": "YES"
+        },
+        "content": {
+          "dataType": "text",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        },
+        "user_id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        },
+        "category_id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        },
+        "published": {
+          "dataType": "boolean",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        },
+        "created_at": {
+          "dataType": "timestamp",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        }
+      }
+    },
+    "categories": {
+      "primaryKey": "id",
+      "foreignKeys": {},
+      "referencedBy": {
+        "posts": "category_id"
+      },
+      "columns": {
+        "id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "NO"
+        },
+        "name": {
+          "dataType": "character varying",
+          "columnDefault": null,
+          "charMaxLength": 100,
+          "isNullable": "YES"
+        },
+        "description": {
+          "dataType": "text",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        }
+      }
+    },
+    "comments": {
+      "primaryKey": "id",
+      "foreignKeys": {
+        "user_id": {
+          "referenceTable": "users",
+          "referenceKey": "id"
+        },
+        "post_id": {
+          "referenceTable": "posts",
+          "referenceKey": "id"
+        }
+      },
+      "referencedBy": {},
+      "columns": {
+        "id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "NO"
+        },
+        "content": {
+          "dataType": "text",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        },
+        "user_id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        },
+        "post_id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        },
+        "created_at": {
+          "dataType": "timestamp",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        }
+      }
+    },
+    "profiles": {
+      "primaryKey": "id",
+      "foreignKeys": {
+        "user_id": {
+          "referenceTable": "users",
+          "referenceKey": "id"
+        }
+      },
+      "referencedBy": {},
+      "columns": {
+        "id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "NO"
+        },
+        "bio": {
+          "dataType": "text",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        },
+        "avatar_url": {
+          "dataType": "character varying",
+          "columnDefault": null,
+          "charMaxLength": 500,
+          "isNullable": "YES"
+        },
+        "user_id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        }
+      }
+    },
+    "tags": {
+      "primaryKey": "id",
+      "foreignKeys": {},
+      "referencedBy": {
+        "tags_posts": "tag_id"
+      },
+      "columns": {
+        "id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "NO"
+        },
+        "name": {
+          "dataType": "character varying",
+          "columnDefault": null,
+          "charMaxLength": 50,
+          "isNullable": "YES"
+        },
+        "color": {
+          "dataType": "character varying",
+          "columnDefault": null,
+          "charMaxLength": 7,
+          "isNullable": "YES"
+        }
+      }
+    },
+    "tags_posts": {
+      "primaryKey": "id",
+      "foreignKeys": {
+        "tag_id": {
+          "referenceTable": "tags",
+          "referenceKey": "id"
+        },
+        "post_id": {
+          "referenceTable": "posts",
+          "referenceKey": "id"
+        }
+      },
+      "referencedBy": {},
+      "columns": {
+        "id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "NO"
+        },
+        "tag_id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        },
+        "post_id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        }
+      }
+    },
+    "likes": {
+      "primaryKey": "id",
+      "foreignKeys": {
+        "user_id": {
+          "referenceTable": "users",
+          "referenceKey": "id"
+        },
+        "post_id": {
+          "referenceTable": "posts",
+          "referenceKey": "id"
+        }
+      },
+      "referencedBy": {},
+      "columns": {
+        "id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "NO"
+        },
+        "user_id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        },
+        "post_id": {
+          "dataType": "integer",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        },
+        "created_at": {
+          "dataType": "timestamp",
+          "columnDefault": null,
+          "charMaxLength": null,
+          "isNullable": "YES"
+        }
+      }
+    }
+  },
+  "GQLSchema": {
+    "types": "const typeDefs = `\n  type Query {\n    users: [User!]!\n    user(id: ID!): User!\n    posts: [Post!]!\n    post(id: ID!): Post!\n    categories: [Category!]!\n    category(id: ID!): Category!\n    comments: [Comment!]!\n    comment(id: ID!): Comment!\n    profiles: [Profile!]!\n    profile(id: ID!): Profile!\n    tags: [Tag!]!\n    tag(id: ID!): Tag!\n    likes: [Like!]!\n    like(id: ID!): Like!\n  }\n\n  type Mutation {\n    addUser(\n      name: String,\n      email: String,\n      created_at: String,\n    ): User!\n\n    updateUser(\n      id: ID!,\n      name: String,\n      email: String,\n      created_at: String,\n    ): User!\n\n    deleteUser(id: ID!): User!\n\n    addPost(\n      title: String,\n      content: String,\n      user_id: ID,\n      category_id: ID,\n      published: Boolean,\n      created_at: String,\n    ): Post!\n\n    updatePost(\n      id: ID!,\n      title: String,\n      content: String,\n      user_id: ID,\n      category_id: ID,\n      published: Boolean,\n      created_at: String,\n    ): Post!\n\n    deletePost(id: ID!): Post!\n\n    addCategory(\n      name: String,\n      description: String,\n    ): Category!\n\n    updateCategory(\n      id: ID!,\n      name: String,\n      description: String,\n    ): Category!\n\n    deleteCategory(id: ID!): Category!\n\n    addComment(\n      content: String,\n      user_id: ID,\n      post_id: ID,\n      created_at: String,\n    ): Comment!\n\n    updateComment(\n      id: ID!,\n      content: String,\n      user_id: ID,\n      post_id: ID,\n      created_at: String,\n    ): Comment!\n\n    deleteComment(id: ID!): Comment!\n\n    addProfile(\n      bio: String,\n      avatar_url: String,\n      user_id: ID,\n    ): Profile!\n\n    updateProfile(\n      id: ID!,\n      bio: String,\n      avatar_url: String,\n      user_id: ID,\n    ): Profile!\n\n    deleteProfile(id: ID!): Profile!\n\n    addTag(\n      name: String,\n      color: String,\n    ): Tag!\n\n    updateTag(\n      id: ID!,\n      name: String,\n      color: String,\n    ): Tag!\n\n    deleteTag(id: ID!): Tag!\n\n    addLike(\n      user_id: ID,\n      post_id: ID,\n      created_at: String,\n    ): Like!\n\n    updateLike(\n      id: ID!,\n      user_id: ID,\n      post_id: ID,\n      created_at: String,\n    ): Like!\n\n    deleteLike(id: ID!): Like!\n  }\n\ntype User {\n  id: ID!\n  name: String\n  email: String\n  created_at: String\n  posts: [Post]\n  comments: [Comment]\n  profiles: [Profile]\n  likes: [Like]\n}\n\ntype Post {\n  id: ID!\n  title: String\n  content: String\n  published: Boolean\n  created_at: String\n  users: [User]\n  categories: [Category]\n  comments: [Comment]\n  tags: [Tag]\n  likes: [Like]\n}\n\ntype Category {\n  id: ID!\n  name: String\n  description: String\n  posts: [Post]\n}\n\ntype Comment {\n  id: ID!\n  content: String\n  created_at: String\n  users: [User]\n  posts: [Post]\n}\n\ntype Profile {\n  id: ID!\n  bio: String\n  avatar_url: String\n  users: [User]\n}\n\ntype Tag {\n  id: ID!\n  name: String\n  color: String\n  posts: [Post]\n}\n\ntype Like {\n  id: ID!\n  created_at: String\n  users: [User]\n  posts: [Post]\n}\n\n`;\n\n",
+    "resolvers": "\nconst resolvers = {\n  Query: {    \n\n    user: (parent, args) => {\n      const query = 'SELECT * FROM users WHERE id = $1';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    users: () => {\n      const query = 'SELECT * FROM users';\n      return db.query(query)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n\n    post: (parent, args) => {\n      const query = 'SELECT * FROM posts WHERE id = $1';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    posts: () => {\n      const query = 'SELECT * FROM posts';\n      return db.query(query)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n\n    category: (parent, args) => {\n      const query = 'SELECT * FROM categories WHERE id = $1';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    categories: () => {\n      const query = 'SELECT * FROM categories';\n      return db.query(query)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n\n    comment: (parent, args) => {\n      const query = 'SELECT * FROM comments WHERE id = $1';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    comments: () => {\n      const query = 'SELECT * FROM comments';\n      return db.query(query)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n\n    profile: (parent, args) => {\n      const query = 'SELECT * FROM profiles WHERE id = $1';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    profiles: () => {\n      const query = 'SELECT * FROM profiles';\n      return db.query(query)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n\n    tag: (parent, args) => {\n      const query = 'SELECT * FROM tags WHERE id = $1';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    tags: () => {\n      const query = 'SELECT * FROM tags';\n      return db.query(query)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n\n    like: (parent, args) => {\n      const query = 'SELECT * FROM likes WHERE id = $1';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    likes: () => {\n      const query = 'SELECT * FROM likes';\n      return db.query(query)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n  },\n\n  Mutation: {\n    \n    addUser: (parent, args) => {\n      const query = 'INSERT INTO users (name, email, created_at) VALUES ($1, $2, $3) RETURNING *';\n      const values = [args.name, args.email, args.created_at];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    updateUser: (parent, args) => {\n      let valList = [];\n      for (const key of Object.keys(args)) {\n        if (key !== 'id') valList.push(args[key]);\n      }\n      valList.push(args.id);\n      const argsArray = Object.keys(args).filter((key) => key !== 'id');\n      let setString = argsArray.map((k, i) => k + ' = $' + (i + 1)).join(', ');\n      const pKArg = '$' + (argsArray.length + 1);\n      const query = 'UPDATE users SET ' + setString + ' WHERE id = ' + pKArg + ' RETURNING *';\n      const values = valList;\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    deleteUser: (parent, args) => {\n      const query = 'DELETE FROM users WHERE id = $1 RETURNING *';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    addPost: (parent, args) => {\n      const query = 'INSERT INTO posts (title, content, user_id, category_id, published, created_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';\n      const values = [args.title, args.content, args.user_id, args.category_id, args.published, args.created_at];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    updatePost: (parent, args) => {\n      let valList = [];\n      for (const key of Object.keys(args)) {\n        if (key !== 'id') valList.push(args[key]);\n      }\n      valList.push(args.id);\n      const argsArray = Object.keys(args).filter((key) => key !== 'id');\n      let setString = argsArray.map((k, i) => k + ' = $' + (i + 1)).join(', ');\n      const pKArg = '$' + (argsArray.length + 1);\n      const query = 'UPDATE posts SET ' + setString + ' WHERE id = ' + pKArg + ' RETURNING *';\n      const values = valList;\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    deletePost: (parent, args) => {\n      const query = 'DELETE FROM posts WHERE id = $1 RETURNING *';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    addCategory: (parent, args) => {\n      const query = 'INSERT INTO categories (name, description) VALUES ($1, $2) RETURNING *';\n      const values = [args.name, args.description];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    updateCategory: (parent, args) => {\n      let valList = [];\n      for (const key of Object.keys(args)) {\n        if (key !== 'id') valList.push(args[key]);\n      }\n      valList.push(args.id);\n      const argsArray = Object.keys(args).filter((key) => key !== 'id');\n      let setString = argsArray.map((k, i) => k + ' = $' + (i + 1)).join(', ');\n      const pKArg = '$' + (argsArray.length + 1);\n      const query = 'UPDATE categories SET ' + setString + ' WHERE id = ' + pKArg + ' RETURNING *';\n      const values = valList;\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    deleteCategory: (parent, args) => {\n      const query = 'DELETE FROM categories WHERE id = $1 RETURNING *';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    addComment: (parent, args) => {\n      const query = 'INSERT INTO comments (content, user_id, post_id, created_at) VALUES ($1, $2, $3, $4) RETURNING *';\n      const values = [args.content, args.user_id, args.post_id, args.created_at];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    updateComment: (parent, args) => {\n      let valList = [];\n      for (const key of Object.keys(args)) {\n        if (key !== 'id') valList.push(args[key]);\n      }\n      valList.push(args.id);\n      const argsArray = Object.keys(args).filter((key) => key !== 'id');\n      let setString = argsArray.map((k, i) => k + ' = $' + (i + 1)).join(', ');\n      const pKArg = '$' + (argsArray.length + 1);\n      const query = 'UPDATE comments SET ' + setString + ' WHERE id = ' + pKArg + ' RETURNING *';\n      const values = valList;\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    deleteComment: (parent, args) => {\n      const query = 'DELETE FROM comments WHERE id = $1 RETURNING *';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    addProfile: (parent, args) => {\n      const query = 'INSERT INTO profiles (bio, avatar_url, user_id) VALUES ($1, $2, $3) RETURNING *';\n      const values = [args.bio, args.avatar_url, args.user_id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    updateProfile: (parent, args) => {\n      let valList = [];\n      for (const key of Object.keys(args)) {\n        if (key !== 'id') valList.push(args[key]);\n      }\n      valList.push(args.id);\n      const argsArray = Object.keys(args).filter((key) => key !== 'id');\n      let setString = argsArray.map((k, i) => k + ' = $' + (i + 1)).join(', ');\n      const pKArg = '$' + (argsArray.length + 1);\n      const query = 'UPDATE profiles SET ' + setString + ' WHERE id = ' + pKArg + ' RETURNING *';\n      const values = valList;\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    deleteProfile: (parent, args) => {\n      const query = 'DELETE FROM profiles WHERE id = $1 RETURNING *';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    addTag: (parent, args) => {\n      const query = 'INSERT INTO tags (name, color) VALUES ($1, $2) RETURNING *';\n      const values = [args.name, args.color];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    updateTag: (parent, args) => {\n      let valList = [];\n      for (const key of Object.keys(args)) {\n        if (key !== 'id') valList.push(args[key]);\n      }\n      valList.push(args.id);\n      const argsArray = Object.keys(args).filter((key) => key !== 'id');\n      let setString = argsArray.map((k, i) => k + ' = $' + (i + 1)).join(', ');\n      const pKArg = '$' + (argsArray.length + 1);\n      const query = 'UPDATE tags SET ' + setString + ' WHERE id = ' + pKArg + ' RETURNING *';\n      const values = valList;\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    deleteTag: (parent, args) => {\n      const query = 'DELETE FROM tags WHERE id = $1 RETURNING *';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    addLike: (parent, args) => {\n      const query = 'INSERT INTO likes (user_id, post_id, created_at) VALUES ($1, $2, $3) RETURNING *';\n      const values = [args.user_id, args.post_id, args.created_at];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    updateLike: (parent, args) => {\n      let valList = [];\n      for (const key of Object.keys(args)) {\n        if (key !== 'id') valList.push(args[key]);\n      }\n      valList.push(args.id);\n      const argsArray = Object.keys(args).filter((key) => key !== 'id');\n      let setString = argsArray.map((k, i) => k + ' = $' + (i + 1)).join(', ');\n      const pKArg = '$' + (argsArray.length + 1);\n      const query = 'UPDATE likes SET ' + setString + ' WHERE id = ' + pKArg + ' RETURNING *';\n      const values = valList;\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n    deleteLike: (parent, args) => {\n      const query = 'DELETE FROM likes WHERE id = $1 RETURNING *';\n      const values = [args.id];\n      return db.query(query, values)\n        .then(data => data.rows[0])\n        .catch(err => new Error(err));\n    },\n\n  },\n    \n    User: {\n      \n    posts: (users) => {\n      const query = 'SELECT * FROM posts WHERE user_id = $1';\n      const values = [users.id];\n      return db.query(query, values)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n    comments: (users) => {\n      const query = 'SELECT * FROM comments WHERE user_id = $1';\n      const values = [users.id];\n      return db.query(query, values)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n    profiles: (users) => {\n      const query = 'SELECT * FROM profiles WHERE user_id = $1';\n      const values = [users.id];\n      return db.query(query, values)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n    likes: (users) => {\n      const query = 'SELECT * FROM likes WHERE user_id = $1';\n      const values = [users.id];\n      return db.query(query, values)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n    }, \n\n    Post: {\n      \n    comments: (posts) => {\n      const query = 'SELECT * FROM comments WHERE post_id = $1';\n      const values = [posts.id];\n      return db.query(query, values)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n    users: (posts) => {\n      const query = 'SELECT users.* FROM users LEFT OUTER JOIN posts ON users.id = posts.user_id WHERE posts.id = $1';\n      const values = [posts.id];\n      return db.query(query, values)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    }, \n    categories: (posts) => {\n      const query = 'SELECT categories.* FROM categories LEFT OUTER JOIN posts ON categories.id = posts.category_id WHERE posts.id = $1';\n      const values = [posts.id];\n      return db.query(query, values)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    }, \n    tags: (posts) => {\n      const query = 'SELECT * FROM tags LEFT OUTER JOIN tags_posts ON tags.id = tags_posts.tag_id WHERE tags_posts.post_id = $1';\n      const values = [posts.id];\n      return db.query(query, values)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    }, \n    likes: (posts) => {\n      const query = 'SELECT * FROM likes WHERE post_id = $1';\n      const values = [posts.id];\n      return db.query(query, values)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n    }, \n\n    Category: {\n      \n    posts: (categories) => {\n      const query = 'SELECT * FROM posts WHERE category_id = $1';\n      const values = [categories.id];\n      return db.query(query, values)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    },\n    }, \n\n    Comment: {\n      \n    }, \n\n    Profile: {\n      \n    }, \n\n    Tag: {\n      \n    posts: (tags) => {\n      const query = 'SELECT * FROM posts LEFT OUTER JOIN tags_posts ON posts.id = tags_posts.post_id WHERE tags_posts.tag_id = $1';\n      const values = [tags.id];\n      return db.query(query, values)\n        .then(data => data.rows)\n        .catch(err => new Error(err));\n    }, \n    }, \n\n    Like: {\n      \n    }, \n\n  }\n"
+  }
+}

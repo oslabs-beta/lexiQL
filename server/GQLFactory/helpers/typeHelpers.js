@@ -7,9 +7,7 @@ const { typeConversion, isJunctionTable } = require('./helperFunctions');
 const mutationsHelper = {};
 
 mutationsHelper.create = (tableName, primaryKey, foreignKeys, columns) => {
-  return `\n    ${toCamelCase(
-    `add_${singular(tableName)}`
-  )}(\n${mutationsHelper.mutationFields(
+  return `\n    ${toCamelCase(`add_${singular(tableName)}`)}(\n${mutationsHelper.mutationFields(
     primaryKey,
     foreignKeys,
     columns,
@@ -24,9 +22,7 @@ mutationsHelper.delete = (tableName, primaryKey) => {
 };
 
 mutationsHelper.update = (tableName, primaryKey, foreignKeys, columns) => {
-  return `\n    ${toCamelCase(
-    `update_${singular(tableName)}`
-  )}(\n${mutationsHelper.mutationFields(
+  return `\n    ${toCamelCase(`update_${singular(tableName)}`)}(\n${mutationsHelper.mutationFields(
     primaryKey,
     foreignKeys,
     columns,
@@ -34,12 +30,7 @@ mutationsHelper.update = (tableName, primaryKey, foreignKeys, columns) => {
   )}): ${pascalCase(singular(tableName))}!\n`;
 };
 
-mutationsHelper.mutationFields = (
-  primaryKey,
-  foreignKeys,
-  columns,
-  primaryKeyRequired
-) => {
+mutationsHelper.mutationFields = (primaryKey, foreignKeys, columns, primaryKeyRequired) => {
   let mutationFields = '';
   for (const fieldName of Object.keys(columns)) {
     const { dataType, isNullable } = columns[fieldName];
@@ -107,26 +98,15 @@ customHelper.getRelationships = (tableName, sqlSchema) => {
     for (const refTableName of Object.keys(referencedBy)) {
       // if the referencedby tableName is a junction table, add all of the junction table's foreign keys to
       // the current custom object type's field (excluding its own)
-      if (
-        isJunctionTable(
-          sqlSchema[refTableName].foreignKeys,
-          sqlSchema[refTableName].columns
-        )
-      ) {
+      if (isJunctionTable(sqlSchema[refTableName].foreignKeys, sqlSchema[refTableName].columns)) {
         const { foreignKeys } = sqlSchema[refTableName];
         for (const foreignFK of Object.keys(foreignKeys)) {
           if (foreignKeys[foreignFK].referenceTable !== tableName) {
-            if (
-              !inRelationshipString.includes(
-                foreignKeys[foreignFK].referenceTable
-              )
-            ) {
+            if (!inRelationshipString.includes(foreignKeys[foreignFK].referenceTable)) {
               inRelationshipString.push(foreignKeys[foreignFK].referenceTable);
               relationshipFields += `\n  ${toCamelCase(
                 foreignKeys[foreignFK].referenceTable
-              )}: [${pascalCase(
-                singular(foreignKeys[foreignFK].referenceTable)
-              )}]`;
+              )}: [${pascalCase(singular(foreignKeys[foreignFK].referenceTable))}]`;
             }
           }
         }

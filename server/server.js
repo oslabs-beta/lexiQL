@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require('path');
+// const path = require('path');
 const router = require('./router');
 const app = express();
 
@@ -9,18 +9,23 @@ app.use(express.urlencoded({ extended: true }));
 // route to dummy db
 app.use('/', router);
 
-// Serve static files from the public directory at the root path
-app.use(express.static(path.join(__dirname, '../public')));
-
-// Serve the main index.html file
-app.get('/', (req, res) =>
-  res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'))
-);
+// Serve the main index.html file for the root route
+app.get('/', (req, res) => {
+  res
+    .status(200)
+    .send(
+      'Backend server is running. Use the webpack dev server at localhost:8080 for the frontend.'
+    );
+});
 
 /* /data Refresh Testing */
-app.get('/data', (req, res) =>
-  res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'))
-);
+app.get('/data', (req, res) => {
+  res
+    .status(200)
+    .send(
+      'Backend server is running. Use the webpack dev server at localhost:8080 for the frontend.'
+    );
+});
 
 /* Catch All Route */
 app.use('*', (req, res) => {
@@ -28,13 +33,16 @@ app.use('*', (req, res) => {
 });
 
 /* Global Error Handler */
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
   console.log('error handler', err);
   res.status(500).send('Internal Server Error');
 });
 
-app.listen(3000, () => {
-  console.log('Server listening on port 3000');
-});
+// eslint-disable-next-line no-unused-vars
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(3000, () => {
+    console.log('Server listening on port 3000');
+  });
+}
 
 module.exports = app;

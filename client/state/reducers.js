@@ -15,6 +15,15 @@ export const diagramReducer = (state, action) => {
         primaryKeys: action.payload.primaryKeys,
         hasHandles: action.payload.hasHandles,
       };
+    case 'SET_EDGES': {
+      const newTableNodes = [...state.tableNodes, ...action.payload.edges];
+      return {
+        ...state,
+        tableNodes: newTableNodes,
+      };
+    }
+    default:
+      return state;
   }
 };
 
@@ -46,6 +55,8 @@ export const codeReducer = (state, action) => {
         ...state,
         codeIsOpen: action.payload.codeIsOpen,
       };
+    default:
+      return state;
   }
 };
 
@@ -68,5 +79,7 @@ export const formReducer = (state, action) => {
         sampleDBtext: action.payload.sampleDBtext,
         inputDBtext: action.payload.inputDBtext,
       };
+    default:
+      return state;
   }
 };

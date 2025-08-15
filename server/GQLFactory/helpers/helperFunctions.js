@@ -11,6 +11,8 @@ const setType = (str) => {
       return 'String';
     case 'integer':
       return 'Int';
+    case 'timestamp':
+      return 'String';
     case 'bigint':
       return 'String';
     case 'text':
@@ -28,6 +30,7 @@ const typeConversion = {
   'character varying': 'String',
   character: 'String',
   integer: 'Int',
+  timestamp: 'String',
   text: 'String',
   date: 'String',
   boolean: 'Boolean',

@@ -1,16 +1,16 @@
-@import "./_fonts.scss";
-@import "./_colors.scss";
-@import "./aboutUs.scss";
-@import "./navbar.scss";
-@import "./homePage.scss";
-@import "./aboutProject.scss";
-@import "./demo.scss";
-@import "./dataPage.scss";
-@import "./visualizer.scss";
-@import "./codeContainer.scss";
-@import "./codeMirror.scss";
-@import "./footer.scss";
-@import "./uri.scss";
+@import './_fonts.scss';
+@import './_colors.scss';
+@import './aboutUs.scss';
+@import './navbar.scss';
+@import './homePage.scss';
+@import './aboutProject.scss';
+@import './demo.scss';
+@import './dataPage.scss';
+@import './visualizer.scss';
+@import './codeContainer.scss';
+@import './codeMirror.scss';
+@import './footer.scss';
+@import './uri.scss';
 
 html {
   height: 100%;
@@ -23,7 +23,7 @@ body {
   margin: 0px 0px;
   padding: 0px 0px;
   font-size: 40px;
-  font-family: "Raleway";
-  font-family: "Noto Serif";
+  font-family: 'Raleway';
+  font-family: 'Noto Serif';
   background-size: cover;
 }

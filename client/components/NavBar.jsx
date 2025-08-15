@@ -1,14 +1,13 @@
 import React from 'react';
-import { Route, Switch, Link, useLocation } from 'react-router-dom';
-import HomePage from '../pages/homePage.jsx';
-import DataPage from '../pages/dataPage.jsx';
-import Logo from '../assets/new-logo.png';
-import WhiteLogo from '../assets/white-logo.png';
-import TwitterLogo from '../assets/navy-twitter.png';
-import LinkedinLogo from '../assets/navy-linkedin.png';
+import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import GithubLogo from '../assets/navy-github.png';
+import LinkedinLogo from '../assets/navy-linkedin.png';
+import TwitterLogo from '../assets/navy-twitter.png';
+import WhiteLogo from '../assets/white-logo.png';
+import DataPage from '../pages/DataPage.jsx';
+import HomePage from '../pages/HomePage.jsx';
 
-export default function navBar() {
+export default function NavBar() {
   const location = useLocation();
 
   if (location.pathname === '/') {
@@ -22,12 +21,7 @@ export default function navBar() {
               className="headerLinks"
               rel="noreferrer"
             >
-              <img
-                className="homeLogo"
-                id="homeLogo"
-                src={TwitterLogo}
-                alt="logo"
-              />
+              <img className="homeLogo" id="homeLogo" src={TwitterLogo} alt="logo" />
             </a>
 
             <a
@@ -36,12 +30,7 @@ export default function navBar() {
               className="headerLinks"
               rel="noreferrer"
             >
-              <img
-                className="homeLogo"
-                id="homeLogo"
-                src={LinkedinLogo}
-                alt="logo"
-              />
+              <img className="homeLogo" id="homeLogo" src={LinkedinLogo} alt="logo" />
             </a>
 
             <a
@@ -50,12 +39,7 @@ export default function navBar() {
               className="headerLinks"
               rel="noreferrer"
             >
-              <img
-                className="homeLogo"
-                id="homeLogo"
-                src={GithubLogo}
-                alt="logo"
-              />
+              <img className="homeLogo" id="homeLogo" src={GithubLogo} alt="logo" />
             </a>
           </div>
 
@@ -93,12 +77,7 @@ export default function navBar() {
       <body id="appBody">
         <nav id="appHeader">
           <Link className="headerLogo" to="/">
-            <img
-              className="homeLogo"
-              id="homeLogo"
-              src={WhiteLogo}
-              alt="logo"
-            />
+            <img className="homeLogo" id="homeLogo" src={WhiteLogo} alt="logo" />
           </Link>
 
           <Link
@@ -133,12 +112,7 @@ export default function navBar() {
       <body id="appBody">
         <nav id="appHeader">
           <Link className="headerLogo" to="/">
-            <img
-              className="homeLogo"
-              id="homeLogo"
-              src={WhiteLogo}
-              alt="logo"
-            />
+            <img className="homeLogo" id="homeLogo" src={WhiteLogo} alt="logo" />
           </Link>
           <Link className="headerLinks" to="/data">
             <p>Visualize</p>

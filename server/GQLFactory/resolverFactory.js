@@ -12,16 +12,8 @@ resolverFactory.collectQueries = (tableName, tableData) => {
 /* -------------------------------- */
 resolverFactory.collectMutations = (tableName, tableData) => {
   const { primaryKey, columns } = tableData;
-  const createMutation = resolverHelper.createMutation(
-    tableName,
-    primaryKey,
-    columns
-  );
-  const updateMutation = resolverHelper.updateMutation(
-    tableName,
-    primaryKey,
-    columns
-  );
+  const createMutation = resolverHelper.createMutation(tableName, primaryKey, columns);
+  const updateMutation = resolverHelper.updateMutation(tableName, primaryKey, columns);
   const deleteMutation = resolverHelper.deleteMutation(tableName, primaryKey);
   return `${createMutation}\n${updateMutation}\n${deleteMutation}\n`;
 };
@@ -29,10 +21,7 @@ resolverFactory.collectMutations = (tableName, tableData) => {
 resolverFactory.collectCustomObjectRelationships = (tableName, sqlSchema) => {
   if (!sqlSchema[tableName].referencedBy) return '';
   const resolverName = pascalCase(singular(tableName));
-  const resolverBody = resolverHelper.identifyRelationships(
-    tableName,
-    sqlSchema
-  );
+  const resolverBody = resolverHelper.identifyRelationships(tableName, sqlSchema);
 
   return `
     ${resolverName}: {

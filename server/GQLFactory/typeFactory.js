@@ -32,8 +32,7 @@ typeFactory.customObjects = (tableName, sqlSchema) => {
   const pkType = 'ID';
 
   return `${
-    `type ${pascalCase(singular(tableName))} {\n` +
-    `  ${primaryKey}: ${pkType}!`
+    `type ${pascalCase(singular(tableName))} {\n` + `  ${primaryKey}: ${pkType}!`
   }${customHelper.getFields(
     primaryKey,
     foreignKeys,

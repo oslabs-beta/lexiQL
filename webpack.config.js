@@ -7,18 +7,23 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: ['core-js/stable', 'regenerator-runtime/runtime', './client/index.js'],
   output: {
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
     publicPath: '/',
+    clean: true,
   },
   devServer: {
+    contentBase: path.join(__dirname, 'build'),
     publicPath: '/',
-    contentBase: path.join(__dirname, 'client'),
-    inline: true,
     hot: true,
+    port: 8080,
     proxy: {
-      '/': 'http://localhost:3000',
-      '/data': 'http://localhost:3000',
+      '/example-schema': 'http://localhost:3000',
+      '/sql-schema': 'http://localhost:3000',
+      '/playground': 'http://localhost:3000',
+      '/test': 'http://localhost:3000',
+      '/test-mock': 'http://localhost:3000',
+      '/test-gql': 'http://localhost:3000',
     },
   },
   plugins: [
@@ -32,6 +37,11 @@ module.exports = {
       patterns: [
         { from: 'client/favicon.ico', to: 'favicon.ico' },
         { from: 'server/tableQuery.sql', to: 'tableQuery.sql' },
+        {
+          from: 'client/assets/example-schema.json',
+          to: 'example-schema',
+          toType: 'file',
+        },
       ],
     }),
   ],
