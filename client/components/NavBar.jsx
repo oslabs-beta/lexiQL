@@ -34,7 +34,7 @@ export default function NavBar() {
             </a>
 
             <a
-              href="https://github.com/ryanmcd118/lexiQL"
+              href="https://github.com/oslabs-beta/lexiQL"
               target="_blank"
               className="headerLinks"
               rel="noreferrer"
