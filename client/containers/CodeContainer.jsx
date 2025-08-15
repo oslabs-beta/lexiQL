@@ -1,6 +1,12 @@
-import React, { useContext } from 'react';
-import CodeMirror from '../components/CodeMirror';
+import React, { Suspense, useContext } from 'react';
 import { CodeContext } from '../state/contexts';
+let CodeMirror;
+if (process.env.NODE_ENV === 'test') {
+  // eslint-disable-next-line global-require
+  CodeMirror = require('../components/CodeMirror').default;
+} else {
+  CodeMirror = React.lazy(() => import('../components/CodeMirror'));
+}
 
 export default function CodeContainer() {
   const { codeState, codeDispatch } = useContext(CodeContext);
@@ -75,7 +81,9 @@ export default function CodeContainer() {
           </button>
         </div>
         <br />
-        <CodeMirror />
+        <Suspense fallback={<div style={{ padding: '1rem' }}>Loading editor…</div>}>
+          <CodeMirror />
+        </Suspense>
       </div>
     </div>
   );

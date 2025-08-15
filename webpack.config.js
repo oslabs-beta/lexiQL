@@ -3,12 +3,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: ['core-js/stable', 'regenerator-runtime/runtime', './client/index.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js',
+    filename: isProd ? 'bundle.[contenthash].js' : '[name].bundle.js',
+    chunkFilename: isProd ? '[name].[contenthash].js' : '[name].chunk.js',
     publicPath: '/',
     clean: true,
   },
@@ -45,6 +48,11 @@ module.exports = {
       ],
     }),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
   module: {
     rules: [
       {

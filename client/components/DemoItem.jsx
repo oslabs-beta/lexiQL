@@ -12,7 +12,7 @@ export default function DemoItem({ index, title, description, _gif }) {
           <img className="demoGif" id="input" src={UserInput} alt="demo-gif" />
         </div>
         <div className="featureWords">
-          <h1 className="featureName">{title}</h1>
+          <h2 className="featureName">{title}</h2>
           <p className="featureDescription">{description}</p>
         </div>
       </div>
@@ -22,7 +22,7 @@ export default function DemoItem({ index, title, description, _gif }) {
     return (
       <div className="demoItem">
         <div className="featureWords">
-          <h1 className="featureName">{title}</h1>
+          <h2 className="featureName">{title}</h2>
           <p className="featureDescription">{description}</p>
         </div>
         <div className="imgContainer">
@@ -38,7 +38,7 @@ export default function DemoItem({ index, title, description, _gif }) {
           <img className="demoGif" id="schemas" src={CodeMirror} alt="demo-gif" />
         </div>
         <div className="featureWords">
-          <h1 className="featureName">{title}</h1>
+          <h2 className="featureName">{title}</h2>
           <p className="featureDescription">{description}</p>
         </div>
       </div>
@@ -48,7 +48,7 @@ export default function DemoItem({ index, title, description, _gif }) {
     return (
       <div className="demoItem">
         <div className="featureWords">
-          <h1 className="featureName">{title}</h1>
+          <h2 className="featureName">{title}</h2>
           <p className="featureDescription">{description}</p>
         </div>
         <div className="imgContainer">

@@ -18,7 +18,7 @@ describe('Sample DB button', () => {
     fireEvent.click(button);
 
     // Sidebar and diagram still render after click
-    expect(screen.getByTestId('react-flow-mock')).toBeInTheDocument();
+    expect(await screen.findByTestId('react-flow-mock')).toBeInTheDocument();
     // Code mirror container exists
     expect(document.querySelector('.codeContainer')).toBeTruthy();
   });
