@@ -1,11 +1,11 @@
 import React from 'react';
-import TeamMember from '../components/teamMember';
+import TeamMember from '../components/TeamMember';
 import chrisHeadshot from '../assets/chris-headshot.png';
 import johnHeadshot from '../assets/john-headshot.png';
 import stacyHeadshot from '../assets/stacy-headshot.png';
 import ryanHeadshot from '../assets/ryan-headshot.png';
 
-export default function aboutUsContainer() {
+export default function AboutUsContainer() {
   const teamMembers = [
     {
       name: 'Chris Carney',

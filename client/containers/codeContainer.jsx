@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import CodeMirror from '../components/codeMirror';
+import CodeMirror from '../components/CodeMirror';
 import { CodeContext } from '../state/contexts';
 
 export default function CodeContainer() {

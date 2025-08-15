@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function footer() {
+export default function Footer() {
   return (
     <div className="footer">
       {/* <h5>lexiQL Copyright 2021</h5> */}

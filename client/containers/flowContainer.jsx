@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
-import ReactFlow, { Controls, Background } from 'react-flow-renderer';
+import ReactFlow, { Background, Controls } from 'react-flow-renderer';
 
-import TableNode from '../components/tableNode';
-import ColumnHandleNode from '../components/columnHandleNode';
+import ColumnHandleNode from '../components/ColumnHandleNode';
+import TableNode from '../components/TableNode';
 import { DiagramContext } from '../state/contexts';
 
 const connectionLineStyle = { stroke: '#ff9149', strokeWidth: 2 };

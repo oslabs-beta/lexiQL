@@ -9,9 +9,9 @@ import {
   initialFormState,
 } from '../state/reducers';
 
-import CodeContainer from '../containers/codeContainer';
-import DBInputContainer from '../containers/dbInputContainer';
-import DiagramContainer from '../containers/diagramContainer';
+import CodeContainer from '../containers/CodeContainer';
+import DBInputContainer from '../containers/DBInputContainer';
+import DiagramContainer from '../containers/DiagramContainer';
 
 export default function DataPage() {
   const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);

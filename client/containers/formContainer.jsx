@@ -1,7 +1,7 @@
 import CryptoJS from 'crypto-js';
 import React, { useContext } from 'react';
 import secretKey from '../../server/secretKey';
-import URIbtn from '../components/URIbtn';
+import URIButton from '../components/URIButton';
 import { FormContext } from '../state/contexts';
 
 export default function FormContainer() {
@@ -712,7 +712,7 @@ export default function FormContainer() {
   if (formState.firstFetch) {
     btnDisplay = '';
   } else {
-    btnDisplay = <URIbtn />;
+    btnDisplay = <URIButton />;
   }
 
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import DemoItem from '../components/demoItem';
+import DemoItem from '../components/DemoItem';
 
 export default function DemoContainer() {
   const content = [

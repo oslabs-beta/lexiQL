@@ -1,11 +1,11 @@
 import React from 'react';
 
-import IntroContainer from '../containers/introContainer.jsx';
-import DemoContainer from '../containers/demoContainer.jsx';
-import AboutUsContainer from '../containers/aboutUsContainer.jsx';
-import Footer from '../containers/footer.jsx';
+import IntroContainer from '../containers/IntroContainer.jsx';
+import DemoContainer from '../containers/DemoContainer.jsx';
+import AboutUsContainer from '../containers/AboutUsContainer.jsx';
+import Footer from '../containers/Footer.jsx';
 
-export default function homePage() {
+export default function HomePage() {
   return (
     <div className="homePage">
       <div className="homePageContent">

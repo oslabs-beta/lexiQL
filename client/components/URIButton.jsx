@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { FormContext } from '../state/contexts';
 
-const URIbtn = () => {
+const URIButton = () => {
   const { formState, formDispatch } = useContext(FormContext);
 
   const toggle = () => {
@@ -24,4 +24,4 @@ const URIbtn = () => {
   );
 };
 
-export default URIbtn;
+export default URIButton;

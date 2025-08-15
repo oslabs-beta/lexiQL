@@ -4,7 +4,7 @@ import graphiql from '../assets/graphiql.gif';
 import MovingTables from '../assets/movingtables.gif';
 import UserInput from '../assets/userdbinput.gif';
 
-export default function demoItem({ index, title, description, _gif }) {
+export default function DemoItem({ index, title, description, _gif }) {
   if (index === 0) {
     return (
       <div className="demoItem">

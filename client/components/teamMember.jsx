@@ -2,7 +2,7 @@ import React from 'react';
 import LinkedinIcon from '../assets/white-linkedin.png';
 import GitHubIcon from '../assets/white-github.png';
 
-export default function teamMember({ name, headshot, github, linkedin }) {
+export default function TeamMember({ name, headshot, github, linkedin }) {
   return (
     <div className="teamMember">
       <img className="headshot" src={headshot} alt="headshot" />
