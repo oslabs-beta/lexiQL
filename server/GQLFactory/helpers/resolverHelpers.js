@@ -34,13 +34,9 @@ resolverHelper.queryAll = (tableName) => {
 
 resolverHelper.createMutation = (tableName, primaryKey, columns) => {
   const mutationName = toCamelCase('add_' + singular(tableName));
-  const columnsArray = Object.keys(columns).filter(
-    (column) => column !== primaryKey
-  );
+  const columnsArray = Object.keys(columns).filter((column) => column !== primaryKey);
   const columnsArgument = columnsArray.join(', ');
-  const valuesArgument = columnsArray
-    .map((column, i) => `$${i + 1}`)
-    .join(', ');
+  const valuesArgument = columnsArray.map((column, i) => `$${i + 1}`).join(', ');
   const valuesList = columnsArray.map((column) => `args.${column}`).join(', ');
 
   return `
@@ -55,15 +51,10 @@ resolverHelper.createMutation = (tableName, primaryKey, columns) => {
 
 resolverHelper.updateMutation = (tableName, primaryKey, columns) => {
   const mutationName = toCamelCase('update_' + singular(tableName));
-  const columnsArray = Object.keys(columns).filter(
-    (column) => column != primaryKey
-  );
-  const setStatement = columnsArray
-    .map((column, i) => `${column} = $${i + 1}`)
-    .join(', ');
+  const columnsArray = Object.keys(columns).filter((column) => column != primaryKey);
+  const setStatement = columnsArray.map((column, i) => `${column} = $${i + 1}`).join(', ');
   const valuesList = [
-    columnsArray.map((column) => `args.${column}`).join(', ') +
-      `, args.${primaryKey}`,
+    columnsArray.map((column) => `args.${column}`).join(', ') + `, args.${primaryKey}`,
   ];
   const primaryKeyArgument = `$${columnsArray.length + 1}`;
 
@@ -126,8 +117,7 @@ resolverHelper.identifyRelationships = (tableName, sqlSchema) => {
         if (refFK[refByTableFK].referenceTable !== tableName) {
           const refByTableFKName =
             refFK[refByTableFK].referenceTable; /* refByTableFKName = people */
-          const refByTableFKKey =
-            refFK[refByTableFK].referenceKey; /* refByTableFKKey = _id */
+          const refByTableFKKey = refFK[refByTableFK].referenceKey; /* refByTableFKKey = _id */
           /* Check if refByTableFKName has already been added to resolverBody string */
           if (!inResolverBody.includes(refByTableFKName)) {
             inResolverBody.push(refByTableFKName);
@@ -200,12 +190,7 @@ resolverHelper.junctionTableRelationships = (
     }, `;
 };
 
-resolverHelper.customObjectsRelationships = (
-  tableName,
-  primaryKey,
-  refByTable,
-  refByKey
-) => {
+resolverHelper.customObjectsRelationships = (tableName, primaryKey, refByTable, refByKey) => {
   return `
     ${toCamelCase(refByTable)}: (${toCamelCase(tableName)}) => {
       const query = 'SELECT * FROM ${refByTable} WHERE ${refByKey} = $1';
@@ -216,13 +201,7 @@ resolverHelper.customObjectsRelationships = (
     },`;
 };
 
-resolverHelper.foreignKeyRelationships = (
-  tableName,
-  primaryKey,
-  fk,
-  fkTableName,
-  fkKey
-) => {
+resolverHelper.foreignKeyRelationships = (tableName, primaryKey, fk, fkTableName, fkKey) => {
   return `
     ${toCamelCase(fkTableName)}: (${toCamelCase(tableName)}) => {
       const query = 'SELECT ${fkTableName}.* FROM ${fkTableName} LEFT OUTER JOIN ${tableName} ON ${fkTableName}.${fkKey} = ${tableName}.${fk} WHERE ${tableName}.${primaryKey} = $1';

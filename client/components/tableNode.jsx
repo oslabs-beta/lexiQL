@@ -21,7 +21,7 @@ export default memo(({ data }) => {
 
   return (
     <>
-      <div className='tableHeader'>
+      <div className="tableHeader">
         <strong>{tableName}</strong>
       </div>
       <br />

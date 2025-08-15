@@ -49,10 +49,7 @@ describe('Route integration', () => {
   describe('/example-schema', () => {
     describe('GET', () => {
       it('responds with 200 status, Content-Type is /json ', () => {
-        return request(server)
-          .get('/example-schema')
-          .expect('Content-Type', /json/)
-          .expect(200);
+        return request(server).get('/example-schema').expect('Content-Type', /json/).expect(200);
       });
     });
   });
@@ -63,10 +60,7 @@ describe('Route integration', () => {
   describe('/sql-schema', () => {
     describe('POST', () => {
       it('responds with 200 status, Content-Type is application/json ', () => {
-        return request(server)
-          .post('/sql-schema')
-          .expect('Content-Type', /json/)
-          .expect(200);
+        return request(server).post('/sql-schema').expect('Content-Type', /json/).expect(200);
       });
     });
   });

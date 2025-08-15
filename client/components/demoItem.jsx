@@ -26,12 +26,7 @@ export default function demoItem({ index, title, description, gif }) {
           <p className="featureDescription">{description}</p>
         </div>
         <div className="imgContainer">
-          <img
-            className="demoGif"
-            id="visual"
-            src={MovingTables}
-            alt="demo-gif"
-          />
+          <img className="demoGif" id="visual" src={MovingTables} alt="demo-gif" />
         </div>
       </div>
     );
@@ -40,12 +35,7 @@ export default function demoItem({ index, title, description, gif }) {
     return (
       <div className="demoItem">
         <div className="imgContainer">
-          <img
-            className="demoGif"
-            id="schemas"
-            src={CodeMirror}
-            alt="demo-gif"
-          />
+          <img className="demoGif" id="schemas" src={CodeMirror} alt="demo-gif" />
         </div>
         <div className="featureWords">
           <h1 className="featureName">{title}</h1>
@@ -62,12 +52,7 @@ export default function demoItem({ index, title, description, gif }) {
           <p className="featureDescription">{description}</p>
         </div>
         <div className="imgContainer">
-          <img
-            className="demoGif"
-            id="playground"
-            src={graphiql}
-            alt="demo-gif"
-          />
+          <img className="demoGif" id="playground" src={graphiql} alt="demo-gif" />
         </div>
       </div>
     );

@@ -38,9 +38,7 @@ export default function codeContainer() {
     <div className="codeContainer" id="codeContainer">
       <button
         type="button"
-        className={
-          codeState.codeIsOpen ? 'codeToggleBtn open' : 'codeToggleBtn'
-        }
+        className={codeState.codeIsOpen ? 'codeToggleBtn open' : 'codeToggleBtn'}
         onClick={toggle}
       >
         {codeState.codeIsOpen ? '-' : '+'}
@@ -65,13 +63,20 @@ export default function codeContainer() {
           >
             Resolver
           </button>
-          <br/>
-          <button id='copyButton' className="codeContainerButton" onClick={() => {navigator.clipboard.writeText(codeState.displayCode)}}>Copy</button>
+          <br />
+          <button
+            id="copyButton"
+            className="codeContainerButton"
+            onClick={() => {
+              navigator.clipboard.writeText(codeState.displayCode);
+            }}
+          >
+            Copy
+          </button>
         </div>
         <br />
         <CodeMirror />
       </div>
-      
     </div>
   );
 }

@@ -29,13 +29,7 @@ export default function DemoContainer() {
   for (let i = 0; i < content.length; i++) {
     const feature = content[i];
     introContent.push(
-      <DemoItem
-        key={i}
-        index={i}
-        title={feature[0]}
-        description={feature[1]}
-        gif={feature[2]}
-      />
+      <DemoItem key={i} index={i} title={feature[0]} description={feature[1]} gif={feature[2]} />
     );
   }
 

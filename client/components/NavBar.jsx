@@ -22,12 +22,7 @@ export default function navBar() {
               className="headerLinks"
               rel="noreferrer"
             >
-              <img
-                className="homeLogo"
-                id="homeLogo"
-                src={TwitterLogo}
-                alt="logo"
-              />
+              <img className="homeLogo" id="homeLogo" src={TwitterLogo} alt="logo" />
             </a>
 
             <a
@@ -36,12 +31,7 @@ export default function navBar() {
               className="headerLinks"
               rel="noreferrer"
             >
-              <img
-                className="homeLogo"
-                id="homeLogo"
-                src={LinkedinLogo}
-                alt="logo"
-              />
+              <img className="homeLogo" id="homeLogo" src={LinkedinLogo} alt="logo" />
             </a>
 
             <a
@@ -50,12 +40,7 @@ export default function navBar() {
               className="headerLinks"
               rel="noreferrer"
             >
-              <img
-                className="homeLogo"
-                id="homeLogo"
-                src={GithubLogo}
-                alt="logo"
-              />
+              <img className="homeLogo" id="homeLogo" src={GithubLogo} alt="logo" />
             </a>
           </div>
 
@@ -93,12 +78,7 @@ export default function navBar() {
       <body id="appBody">
         <nav id="appHeader">
           <Link className="headerLogo" to="/">
-            <img
-              className="homeLogo"
-              id="homeLogo"
-              src={WhiteLogo}
-              alt="logo"
-            />
+            <img className="homeLogo" id="homeLogo" src={WhiteLogo} alt="logo" />
           </Link>
 
           <Link
@@ -133,12 +113,7 @@ export default function navBar() {
       <body id="appBody">
         <nav id="appHeader">
           <Link className="headerLogo" to="/">
-            <img
-              className="homeLogo"
-              id="homeLogo"
-              src={WhiteLogo}
-              alt="logo"
-            />
+            <img className="homeLogo" id="homeLogo" src={WhiteLogo} alt="logo" />
           </Link>
           <Link className="headerLinks" to="/data">
             <p>Visualize</p>

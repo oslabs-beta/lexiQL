@@ -15,10 +15,7 @@ import CodeContainer from '../containers/codeContainer';
 
 export default function dataPage() {
   const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);
-  const [diagramState, diagramDispatch] = useReducer(
-    diagramReducer,
-    initialDiagramState,
-  );
+  const [diagramState, diagramDispatch] = useReducer(diagramReducer, initialDiagramState);
   const [formState, formDispatch] = useReducer(formReducer, initialFormState);
 
   return (

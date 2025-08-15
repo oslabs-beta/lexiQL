@@ -48,9 +48,9 @@ export default function aboutUsContainer() {
   }
 
   return (
-    <div className='teamContainer'>
+    <div className="teamContainer">
       <h3>Meet the lexiQL team</h3>
-      <div id='allCards'>{teamMemInfo}</div>
+      <div id="allCards">{teamMemInfo}</div>
     </div>
   );
 }

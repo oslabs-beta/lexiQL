@@ -11,12 +11,20 @@ app.use('/', router);
 
 // Serve the main index.html file for the root route
 app.get('/', (req, res) => {
-  res.status(200).send('Backend server is running. Use the webpack dev server at localhost:8080 for the frontend.');
+  res
+    .status(200)
+    .send(
+      'Backend server is running. Use the webpack dev server at localhost:8080 for the frontend.'
+    );
 });
 
 /* /data Refresh Testing */
 app.get('/data', (req, res) => {
-  res.status(200).send('Backend server is running. Use the webpack dev server at localhost:8080 for the frontend.');
+  res
+    .status(200)
+    .send(
+      'Backend server is running. Use the webpack dev server at localhost:8080 for the frontend.'
+    );
 });
 
 /* Catch All Route */

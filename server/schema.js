@@ -399,9 +399,7 @@ const resolvers = {
       }
       valList.push(args._id);
       const argsArray = Object.keys(args).filter((key) => key !== '_id');
-      let setString = argsArray
-        .map((key, i) => `${key} = $${i + 1}`)
-        .join(', ');
+      let setString = argsArray.map((key, i) => `${key} = $${i + 1}`).join(', ');
       const pKArg = `$${argsArray.length + 1}`;
       const query = `UPDATE people SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
       const values = valList;
@@ -435,9 +433,7 @@ const resolvers = {
       }
       valList.push(args._id);
       const argsArray = Object.keys(args).filter((key) => key !== '_id');
-      let setString = argsArray
-        .map((key, i) => `${key} = $${i + 1}`)
-        .join(', ');
+      let setString = argsArray.map((key, i) => `${key} = $${i + 1}`).join(', ');
       const pKArg = `$${argsArray.length + 1}`;
       const query = `UPDATE films SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
       const values = valList;
@@ -474,9 +470,7 @@ const resolvers = {
       }
       valList.push(args._id);
       const argsArray = Object.keys(args).filter((key) => key !== '_id');
-      let setString = argsArray
-        .map((key, i) => `${key} = $${i + 1}`)
-        .join(', ');
+      let setString = argsArray.map((key, i) => `${key} = $${i + 1}`).join(', ');
       const pKArg = `$${argsArray.length + 1}`;
       const query = `UPDATE planets SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
       const values = valList;
@@ -513,9 +507,7 @@ const resolvers = {
       }
       valList.push(args._id);
       const argsArray = Object.keys(args).filter((key) => key !== '_id');
-      let setString = argsArray
-        .map((key, i) => `${key} = $${i + 1}`)
-        .join(', ');
+      let setString = argsArray.map((key, i) => `${key} = $${i + 1}`).join(', ');
       const pKArg = `$${argsArray.length + 1}`;
       const query = `UPDATE species SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
       const values = valList;
@@ -555,9 +547,7 @@ const resolvers = {
       }
       valList.push(args._id);
       const argsArray = Object.keys(args).filter((key) => key !== '_id');
-      let setString = argsArray
-        .map((key, i) => `${key} = $${i + 1}`)
-        .join(', ');
+      let setString = argsArray.map((key, i) => `${key} = $${i + 1}`).join(', ');
       const pKArg = `$${argsArray.length + 1}`;
       const query = `UPDATE vessels SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
       const values = valList;
@@ -584,9 +574,7 @@ const resolvers = {
       }
       valList.push(args._id);
       const argsArray = Object.keys(args).filter((key) => key !== '_id');
-      let setString = argsArray
-        .map((key, i) => `${key} = $${i + 1}`)
-        .join(', ');
+      let setString = argsArray.map((key, i) => `${key} = $${i + 1}`).join(', ');
       const pKArg = `$${argsArray.length + 1}`;
       const query = `UPDATE starship_specs SET ${setString} WHERE _id = ${pKArg} RETURNING *`;
       const values = valList;

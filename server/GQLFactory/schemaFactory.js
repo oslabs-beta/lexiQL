@@ -42,10 +42,7 @@ schemaFactory.createResolvers = (sqlSchema) => {
     if (!isJunctionTable(foreignKeys, columns)) {
       queryResolvers += collectQueries(tableName, tableData);
       mutationResolvers += collectMutations(tableName, tableData);
-      customObjectTypeResolvers += collectCustomObjectRelationships(
-        tableName,
-        sqlSchema
-      );
+      customObjectTypeResolvers += collectCustomObjectRelationships(tableName, sqlSchema);
     }
   }
 

@@ -5,13 +5,8 @@ import CryptoJS from 'crypto-js';
 import secretKey from '../../server/secretKey';
 
 export default function formContainer() {
-  const {
-    formState,
-    formDispatch,
-    diagramState,
-    diagramDispatch,
-    codeDispatch,
-  } = useContext(FormContext);
+  const { formState, formDispatch, diagramState, diagramDispatch, codeDispatch } =
+    useContext(FormContext);
 
   // get data from the sample DB
   const handleSampleData = (e) => {
@@ -37,8 +32,8 @@ export default function formContainer() {
           tablesToProcess = sqlSchema;
         } else {
           // New format: direct object with table names as keys
-          tablesToProcess = Object.keys(sqlSchema).map(tableName => ({
-            [tableName]: sqlSchema[tableName]
+          tablesToProcess = Object.keys(sqlSchema).map((tableName) => ({
+            [tableName]: sqlSchema[tableName],
           }));
         }
 
@@ -135,8 +130,7 @@ export default function formContainer() {
           if (Array.isArray(columns)) {
             for (let j = 0; j < columns.length; j++) {
               const columnLabel = Object.keys(columns[j])[0];
-              tableContents[columnLabel] =
-                fullTable[tableName].columns[j][columnLabel].dataType;
+              tableContents[columnLabel] = fullTable[tableName].columns[j][columnLabel].dataType;
 
               // store column name in columnsList so it ends up being an array of all the columns
               columnsList.push(columnLabel);
@@ -272,16 +266,14 @@ export default function formContainer() {
           } else {
             if (!hasHandles[obj.target].targetHandles) {
               hasHandles[obj.target].targetHandles = [obj.targetHandle];
-            } else if (
-              !hasHandles[obj.target].targetHandles.includes(obj.targetHandle)
-            ) {
+            } else if (!hasHandles[obj.target].targetHandles.includes(obj.targetHandle)) {
               hasHandles[obj.target].targetHandles.push(obj.targetHandle);
             }
           }
         });
 
         // Now update the table nodes to include hasHandles data
-        tableNodes.forEach(node => {
+        tableNodes.forEach((node) => {
           if (node.type === 'selectorNode') {
             node.data.hasHandles = hasHandles;
           }
@@ -292,91 +284,91 @@ export default function formContainer() {
         for (let i = 0; i < tableNamesForHandles.length; i++) {
           const tableName = tableNamesForHandles[i];
           const tableData = relationalData[tableName];
-          
+
           // Check for source handles (foreign keys)
           if (tableData.foreignKeys) {
             tableData.foreignKeys.forEach((fk, fkIndex) => {
               const sourceColumn = fk[2]; // e.g., "user_id"
               const sourceHandleId = `${tableName}-${sourceColumn}`;
-              
+
               // Create a separate node for this column
-               tableNodes.push({
-                 id: sourceHandleId,
-                 type: 'columnHandleNode',
-                 data: {
-                   tableName: tableName,
-                   columnName: sourceColumn,
-                   isSource: true,
-                 },
-                 style: {
-                   backgroundColor: 'transparent',
-                   border: 'none',
-                   width: 10,
-                   height: 20,
-                 },
-                 position: {
-                   x: 0, // Will be calculated below
-                   y: 0, // Will be calculated below
-                 },
-                 sourcePosition: 'right',
-               });
+              tableNodes.push({
+                id: sourceHandleId,
+                type: 'columnHandleNode',
+                data: {
+                  tableName: tableName,
+                  columnName: sourceColumn,
+                  isSource: true,
+                },
+                style: {
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  width: 10,
+                  height: 20,
+                },
+                position: {
+                  x: 0, // Will be calculated below
+                  y: 0, // Will be calculated below
+                },
+                sourcePosition: 'right',
+              });
             });
           }
-          
+
           // Check for target handles (referenced by)
           if (tableData.referencedBy) {
             tableData.referencedBy.forEach((ref, refIndex) => {
               const targetColumn = ref[3]; // e.g., "id"
               const targetHandleId = `${tableName}-${targetColumn}`;
-              
-               // Create a separate node for this column
-               tableNodes.push({
-                 id: targetHandleId,
-                 type: 'columnHandleNode',
-                 data: {
-                   tableName: tableName,
-                   columnName: targetColumn,
-                   isTarget: true,
-                 },
-                 style: {
-                   backgroundColor: 'transparent',
-                   border: 'none',
-                   width: 10,
-                   height: 20,
-                 },
-                 position: {
-                   x: 0, // Will be calculated below
-                   y: 0, // Will be calculated below
-                 },
-                 targetPosition: 'left',
-               });
+
+              // Create a separate node for this column
+              tableNodes.push({
+                id: targetHandleId,
+                type: 'columnHandleNode',
+                data: {
+                  tableName: tableName,
+                  columnName: targetColumn,
+                  isTarget: true,
+                },
+                style: {
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  width: 10,
+                  height: 20,
+                },
+                position: {
+                  x: 0, // Will be calculated below
+                  y: 0, // Will be calculated below
+                },
+                targetPosition: 'left',
+              });
             });
           }
-                 }
+        }
 
-         // Position the column handle nodes correctly relative to their tables
-         tableNodes.forEach(node => {
-           if (node.type === 'columnHandleNode') {
-             const tableName = node.data.tableName;
-             const tableIndex = tableNamesForHandles.indexOf(tableName);
-             const tableRow = Math.floor(tableIndex / 3);
-             const tableCol = tableIndex % 3;
-             const tableX = 200 + tableCol * 450;
-             const tableY = 150 + tableRow * 400;
-             
-             if (node.data.isSource) {
-               node.position.x = tableX + 350; // Right side of table
-               node.position.y = tableY;
-             } else if (node.data.isTarget) {
-               node.position.x = tableX - 10; // Left side of table
-               node.position.y = tableY;
-             }
-           }
-         });
+        // Position the column handle nodes correctly relative to their tables
+        tableNodes.forEach((node) => {
+          if (node.type === 'columnHandleNode') {
+            const tableName = node.data.tableName;
+            const tableIndex = tableNamesForHandles.indexOf(tableName);
+            const tableRow = Math.floor(tableIndex / 3);
+            const tableCol = tableIndex % 3;
+            const tableX = 200 + tableCol * 450;
+            const tableY = 150 + tableRow * 400;
 
-         // Separate nodes and edges to avoid timing issues
-        const tableNodesOnly = tableNodes.filter(node => node.type === 'selectorNode');
-        const edgesOnly = tableNodes.filter(node => node.type === 'default');
+            if (node.data.isSource) {
+              node.position.x = tableX + 350; // Right side of table
+              node.position.y = tableY;
+            } else if (node.data.isTarget) {
+              node.position.x = tableX - 10; // Left side of table
+              node.position.y = tableY;
+            }
+          }
+        });
+
+        // Separate nodes and edges to avoid timing issues
+        const tableNodesOnly = tableNodes.filter((node) => node.type === 'selectorNode');
+        const edgesOnly = tableNodes.filter((node) => node.type === 'default');
 
         // First, set the table nodes only (without edges)
         diagramDispatch({
@@ -528,8 +520,7 @@ export default function formContainer() {
 
           for (let j = 0; j < columns.length; j++) {
             const columnLabel = Object.keys(columns[j])[0];
-            tableContents[columnLabel] =
-              fullTable[tableName].columns[j][columnLabel].dataType;
+            tableContents[columnLabel] = fullTable[tableName].columns[j][columnLabel].dataType;
 
             columnsList.push(columnLabel);
             dataTypes.push(tableContents[columnLabel]);
@@ -661,17 +652,15 @@ export default function formContainer() {
           } else {
             if (!hasHandles[obj.target].targetHandles) {
               hasHandles[obj.target].targetHandles = [obj.targetHandle];
-            } else if (
-              !hasHandles[obj.target].targetHandles.includes(obj.targetHandle)
-            ) {
+            } else if (!hasHandles[obj.target].targetHandles.includes(obj.targetHandle)) {
               hasHandles[obj.target].targetHandles.push(obj.targetHandle);
             }
           }
         });
 
         // Separate nodes and edges to avoid timing issues
-        const tableNodesOnly = tableNodes.filter(node => node.type === 'selectorNode');
-        const edgesOnly = tableNodes.filter(node => node.type === 'default');
+        const tableNodesOnly = tableNodes.filter((node) => node.type === 'selectorNode');
+        const edgesOnly = tableNodes.filter((node) => node.type === 'default');
 
         // First, set the table nodes only (without edges)
         diagramDispatch({

@@ -1,7 +1,5 @@
-import React, { memo, useContext } from 'react';
+import React, { memo } from 'react';
 import { Handle } from 'react-flow-renderer';
-
-import { DiagramContext } from '../state/contexts';
 
 export default memo(({ columnName, dataType, id, tableName, hasHandles }) => {
   // object of tables and their respective columns that have source and/or target handles
@@ -48,7 +46,10 @@ export default memo(({ columnName, dataType, id, tableName, hasHandles }) => {
   // render source, target, or no handles accordingly
   if (!colHandles[tableName]) {
     return noHandles;
-  } else if (colHandles[tableName].sourceHandles && colHandles[tableName].sourceHandles.includes(columnName)) {
+  } else if (
+    colHandles[tableName].sourceHandles &&
+    colHandles[tableName].sourceHandles.includes(columnName)
+  ) {
     return (
       <div className="columnDotContainer">
         <div className="leftColumn">
@@ -60,7 +61,10 @@ export default memo(({ columnName, dataType, id, tableName, hasHandles }) => {
         </div>
       </div>
     );
-  } else if (colHandles[tableName].targetHandles && colHandles[tableName].targetHandles.includes(columnName)) {
+  } else if (
+    colHandles[tableName].targetHandles &&
+    colHandles[tableName].targetHandles.includes(columnName)
+  ) {
     return (
       <div className="columnDotContainer">
         <div className="leftColumn">
