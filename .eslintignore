@@ -1,0 +1,12 @@
+node_modules/
+public/
+build/
+coverage/
+dist/
+.tmp/
+.vscode/
+**/bundle.js
+**/*.min.js
+lexiql.zip
+client/assets/
+.vercel/
