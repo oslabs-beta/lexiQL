@@ -1,9 +1,9 @@
 import React from 'react';
-import TeamMember from '../components/TeamMember';
 import chrisHeadshot from '../assets/chris-headshot.png';
 import johnHeadshot from '../assets/john-headshot.png';
-import stacyHeadshot from '../assets/stacy-headshot.png';
 import ryanHeadshot from '../assets/ryan-headshot.png';
+import stacyHeadshot from '../assets/stacy-headshot.png';
+import TeamMember from '../components/TeamMember';
 
 export default function AboutUsContainer() {
   const teamMembers = [
@@ -49,7 +49,7 @@ export default function AboutUsContainer() {
 
   return (
     <div className="teamContainer">
-      <h3>Meet the lexiQL team</h3>
+      <h2>Meet the lexiQL team</h2>
       <div id="allCards">{teamMemInfo}</div>
     </div>
   );

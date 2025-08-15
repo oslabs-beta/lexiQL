@@ -36,7 +36,7 @@ export default function DemoContainer() {
   return (
     <div className="demoContainer">
       <div className="demoHeader">
-        <h3 id="sectionHeader">What is lexiQL?</h3>
+        <h2 id="sectionHeader">What is lexiQL?</h2>
       </div>
       <div className="allDemos">{introContent}</div>
     </div>
