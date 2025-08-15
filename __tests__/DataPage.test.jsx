@@ -3,13 +3,13 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import DataPage from '../client/pages/DataPage.jsx';
 
-test('renders DataPage containers', () => {
+test('renders DataPage containers', async () => {
   render(
     <MemoryRouter initialEntries={['/data']}>
       <DataPage />
     </MemoryRouter>
   );
 
-  // Smoke test: Diagram and Code containers render without crashing
-  expect(screen.getByTestId('react-flow-mock')).toBeInTheDocument();
+  // React.lazy + Suspense renders async; wait for mock to appear
+  expect(await screen.findByTestId('react-flow-mock')).toBeInTheDocument();
 });

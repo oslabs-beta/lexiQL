@@ -21,7 +21,13 @@ export default function NavBar() {
               className="headerLinks"
               rel="noreferrer"
             >
-              <img className="homeLogo" id="homeLogo" src={TwitterLogo} alt="logo" />
+              <img
+                className="homeLogo"
+                id="homeLogo"
+                src={TwitterLogo}
+                alt="logo"
+                decoding="async"
+              />
             </a>
 
             <a
@@ -30,7 +36,13 @@ export default function NavBar() {
               className="headerLinks"
               rel="noreferrer"
             >
-              <img className="homeLogo" id="homeLogo" src={LinkedinLogo} alt="logo" />
+              <img
+                className="homeLogo"
+                id="homeLogo"
+                src={LinkedinLogo}
+                alt="logo"
+                decoding="async"
+              />
             </a>
 
             <a
@@ -39,7 +51,13 @@ export default function NavBar() {
               className="headerLinks"
               rel="noreferrer"
             >
-              <img className="homeLogo" id="homeLogo" src={GithubLogo} alt="logo" />
+              <img
+                className="homeLogo"
+                id="homeLogo"
+                src={GithubLogo}
+                alt="logo"
+                decoding="async"
+              />
             </a>
           </div>
 
@@ -77,7 +95,7 @@ export default function NavBar() {
       <body id="appBody">
         <nav id="appHeader">
           <Link className="headerLogo" to="/">
-            <img className="homeLogo" id="homeLogo" src={WhiteLogo} alt="logo" />
+            <img className="homeLogo" id="homeLogo" src={WhiteLogo} alt="logo" decoding="async" />
           </Link>
 
           <Link
@@ -112,7 +130,7 @@ export default function NavBar() {
       <body id="appBody">
         <nav id="appHeader">
           <Link className="headerLogo" to="/">
-            <img className="homeLogo" id="homeLogo" src={WhiteLogo} alt="logo" />
+            <img className="homeLogo" id="homeLogo" src={WhiteLogo} alt="logo" decoding="async" />
           </Link>
           <Link className="headerLinks" to="/data">
             <p>Visualize</p>
