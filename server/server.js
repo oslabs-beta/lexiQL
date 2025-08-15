@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require('path');
+// const path = require('path');
 const router = require('./router');
 const app = express();
 
@@ -33,11 +33,12 @@ app.use('*', (req, res) => {
 });
 
 /* Global Error Handler */
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
   console.log('error handler', err);
   res.status(500).send('Internal Server Error');
 });
 
+// eslint-disable-next-line no-unused-vars
 let serverInstance = null;
 if (process.env.NODE_ENV !== 'test') {
   serverInstance = app.listen(3000, () => {

@@ -41,5 +41,3 @@ describe('API routes', () => {
     expect(res.text).toBe('Not Found');
   });
 });
-
-
