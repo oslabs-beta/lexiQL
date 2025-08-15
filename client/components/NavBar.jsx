@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import GithubLogo from '../assets/navy-github.png';
 import LinkedinLogo from '../assets/navy-linkedin.png';
 import TwitterLogo from '../assets/navy-twitter.png';
 import WhiteLogo from '../assets/white-logo.png';
-import DataPage from '../pages/DataPage.jsx';
-import HomePage from '../pages/HomePage.jsx';
+
+// Lazy load pages for better performance
+const DataPage = React.lazy(() => import('../pages/DataPage.jsx'));
+const HomePage = React.lazy(() => import('../pages/HomePage.jsx'));
 
 export default function NavBar() {
   const location = useLocation();
 
   if (location.pathname === '/') {
     return (
-      <body id="homeBody">
+      <div id="homeBody">
         <nav id="homeHeader">
           <div className="socialLogos">
             <a
@@ -25,8 +27,9 @@ export default function NavBar() {
                 className="homeLogo"
                 id="homeLogo"
                 src={TwitterLogo}
-                alt="logo"
+                alt="Twitter Profile Link"
                 decoding="async"
+                loading="lazy"
               />
             </a>
 
@@ -40,8 +43,9 @@ export default function NavBar() {
                 className="homeLogo"
                 id="homeLogo"
                 src={LinkedinLogo}
-                alt="logo"
+                alt="LinkedIn Profile Link"
                 decoding="async"
+                loading="lazy"
               />
             </a>
 
@@ -55,8 +59,9 @@ export default function NavBar() {
                 className="homeLogo"
                 id="homeLogo"
                 src={GithubLogo}
-                alt="logo"
+                alt="GitHub Repository Link"
                 decoding="async"
+                loading="lazy"
               />
             </a>
           </div>
@@ -77,25 +82,35 @@ export default function NavBar() {
           </div>
         </nav>
 
-        <Switch>
-          <Route path="/data">
-            <DataPage />
-          </Route>
+        <Suspense fallback={<div className="loading">Loading...</div>}>
+          <Switch>
+            <Route path="/data">
+              <DataPage />
+            </Route>
 
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-        </Switch>
-      </body>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+          </Switch>
+        </Suspense>
+      </div>
     );
   }
 
   if (location.pathname === '/data') {
     return (
-      <body id="appBody">
+      <div id="appBody">
         <nav id="appHeader">
           <Link className="headerLogo" to="/">
-            <img className="homeLogo" id="homeLogo" src={WhiteLogo} alt="logo" decoding="async" />
+            <img
+              className="homeLogo"
+              id="homeLogo"
+              src={WhiteLogo}
+              alt="lexiQL Logo"
+              decoding="async"
+              fetchPriority="high"
+              loading="eager"
+            />
           </Link>
 
           <Link
@@ -108,49 +123,60 @@ export default function NavBar() {
           </Link>
         </nav>
 
-        <Switch>
-          <Route path="/playground">
-            <h1>insert Graphiql playground here</h1>
-          </Route>
+        <Suspense fallback={<div className="loading">Loading...</div>}>
+          <Switch>
+            <Route path="/playground">
+              <h1>insert Graphiql playground here</h1>
+            </Route>
 
-          <Route path="/data">
-            <DataPage />
-          </Route>
+            <Route path="/data">
+              <DataPage />
+            </Route>
 
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-        </Switch>
-      </body>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+          </Switch>
+        </Suspense>
+      </div>
     );
   }
 
   if (location.pathname === '/playground') {
     return (
-      <body id="appBody">
+      <div id="appBody">
         <nav id="appHeader">
           <Link className="headerLogo" to="/">
-            <img className="homeLogo" id="homeLogo" src={WhiteLogo} alt="logo" decoding="async" />
+            <img
+              className="homeLogo"
+              id="homeLogo"
+              src={WhiteLogo}
+              alt="lexiQL Logo"
+              decoding="async"
+              loading="eager"
+            />
           </Link>
           <Link className="headerLinks" to="/data">
             <p>Visualize</p>
           </Link>
         </nav>
 
-        <Switch>
-          <Route path="/playground">
-            <h1>insert Graphiql playground here, Travis</h1>
-          </Route>
+        <Suspense fallback={<div className="loading">Loading...</div>}>
+          <Switch>
+            <Route path="/playground">
+              <h1>insert Graphiql playground here, Travis</h1>
+            </Route>
 
-          <Route path="/data">
-            <DataPage />
-          </Route>
+            <Route path="/data">
+              <DataPage />
+            </Route>
 
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-        </Switch>
-      </body>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+          </Switch>
+        </Suspense>
+      </div>
     );
   }
 }
