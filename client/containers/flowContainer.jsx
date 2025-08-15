@@ -2,8 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import ReactFlow, { Background, Controls } from 'react-flow-renderer';
 
-import ColumnHandleNode from '../components/ColumnHandleNode';
-import TableNode from '../components/TableNode';
+import ColumnHandleNode from '../components/ColumnHandleNode.jsx';
+import TableNode from '../components/TableNode.jsx';
+// import ColumnHandleNode from '../components/ColumnHandleNode';
+// import TableNode from '../components/TableNode';
 import { DiagramContext } from '../state/contexts';
 
 const connectionLineStyle = { stroke: '#ff9149', strokeWidth: 2 };
