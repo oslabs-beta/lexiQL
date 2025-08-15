@@ -39,6 +39,7 @@ module.exports = {
       template: './client/index.html',
       filename: 'index.html',
       inject: 'body',
+      /* eslint-disable indent */
       minify: isProd
         ? {
             removeComments: true,
@@ -46,6 +47,7 @@ module.exports = {
             removeAttributeQuotes: true,
           }
         : false,
+      /* eslint-enable indent */
     }),
     new CopyWebpackPlugin({
       patterns: [

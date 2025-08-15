@@ -10,7 +10,7 @@ export default function IntroContainer() {
         alt="lexiQL Logo - GraphQL API Generation Tool"
         loading="eager"
         decoding="async"
-        fetchpriority="high"
+        fetchPriority="high"
       />
     </div>
   );
