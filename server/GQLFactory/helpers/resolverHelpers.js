@@ -4,8 +4,6 @@ const { isJunctionTable } = require('./helperFunctions');
 
 const resolverHelper = {};
 
-/* */
-
 resolverHelper.queryByPrimaryKey = (tableName, primaryKey) => {
   let queryName = '';
   if (tableName === singular(tableName)) {
@@ -133,22 +131,6 @@ resolverHelper.identifyRelationships = (tableName, sqlSchema) => {
           /* Check if refByTableFKName has already been added to resolverBody string */
           if (!inResolverBody.includes(refByTableFKName)) {
             inResolverBody.push(refByTableFKName);
-            // console.log(
-            //   'tableName: ',
-            //   tableName,
-            //   'primaryKey: ',
-            //   primaryKey,
-            //   'refByTableTableNameAlias: ',
-            //   refByTableTableNameAlias,
-            //   'refByTable: ',
-            //   refByTable,
-            //   'refByTableFK: ',
-            //   refByTableFK,
-            //   'refByTableFKName: ',
-            //   refByTableFKName,
-            //   'refByTableFKKey: ',
-            //   refByTableFKKey
-            // );
 
             /* Use inline comments below as example */
             resolverBody += resolverHelper.junctionTableRelationships(

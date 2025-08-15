@@ -19,7 +19,6 @@ const CustomNodeFlow = () => {
 
   useEffect(() => {
     if (diagramState.tableNodes && diagramState.tableNodes.length > 0) {
-      console.log('Setting elements:', diagramState.tableNodes);
       setElements(diagramState.tableNodes);
     }
   }, [diagramState.tableNodes]);

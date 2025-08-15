@@ -46,14 +46,9 @@ export default memo(({ columnName, dataType, id, tableName, hasHandles }) => {
   );
 
   // render source, target, or no handles accordingly
-  console.log(`ColumnNode: tableName=${tableName}, columnName=${columnName}, colHandles=`, colHandles);
-  console.log(`ColumnNode: Checking if ${columnName} is in sourceHandles:`, colHandles[tableName]?.sourceHandles);
-  console.log(`ColumnNode: Checking if ${columnName} is in targetHandles:`, colHandles[tableName]?.targetHandles);
   if (!colHandles[tableName]) {
-    console.log(`ColumnNode: No handles for table ${tableName}`);
     return noHandles;
   } else if (colHandles[tableName].sourceHandles && colHandles[tableName].sourceHandles.includes(columnName)) {
-    console.log(`ColumnNode: Creating source handle for ${tableName}.${columnName} with ID: ${tableName}-${id}`);
     return (
       <div className="columnDotContainer">
         <div className="leftColumn">
@@ -66,7 +61,6 @@ export default memo(({ columnName, dataType, id, tableName, hasHandles }) => {
       </div>
     );
   } else if (colHandles[tableName].targetHandles && colHandles[tableName].targetHandles.includes(columnName)) {
-    console.log(`ColumnNode: Creating target handle for ${tableName}.${columnName} with ID: ${tableName}-${id}`);
     return (
       <div className="columnDotContainer">
         <div className="leftColumn">
@@ -79,7 +73,6 @@ export default memo(({ columnName, dataType, id, tableName, hasHandles }) => {
       </div>
     );
   } else {
-    console.log(`ColumnNode: No handle for ${tableName}.${columnName}`);
     return noHandles;
   }
 });

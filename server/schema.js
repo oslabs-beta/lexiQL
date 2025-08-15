@@ -9,7 +9,7 @@ const pool = new Pool({
 
 const db = {};
 db.query = (text, params, callback) => {
-  console.log('executed query:', text);
+  console.log('Executed query:', text);
   return pool.query(text, params, callback);
 };
 
@@ -765,11 +765,6 @@ const resolvers = {
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
-  // allowUndefinedInResolve: false,
-  // resolverValidationOptions: {
-  //   // requireResolversForArgs: 'error',
-  //   // requireResolversForAllFields: 'warn',
-  // },
 });
 
 module.exports = schema;

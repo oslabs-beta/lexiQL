@@ -16,10 +16,7 @@ export const diagramReducer = (state, action) => {
         hasHandles: action.payload.hasHandles,
       };
     case 'SET_EDGES':
-      console.log('SET_EDGES action received with edges:', action.payload.edges);
-      console.log('Current tableNodes before adding edges:', state.tableNodes);
       const newTableNodes = [...state.tableNodes, ...action.payload.edges];
-      console.log('New tableNodes after adding edges:', newTableNodes);
       return {
         ...state,
         tableNodes: newTableNodes,

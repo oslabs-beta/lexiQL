@@ -4,7 +4,6 @@ import ColumnNode from './columnNode';
 export default memo(({ data }) => {
   const { tableName, columns, dataTypes, hasHandles } = data;
 
-  // conditional -- array is undefined for the first two logs
   let tableColumns;
 
   if (columns && dataTypes) {

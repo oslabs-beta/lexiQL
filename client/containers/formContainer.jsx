@@ -10,7 +10,6 @@ export default function formContainer() {
     formDispatch,
     diagramState,
     diagramDispatch,
-    codeState,
     codeDispatch,
   } = useContext(FormContext);
 
@@ -130,24 +129,12 @@ export default function formContainer() {
 
           relationalData[tableName] = relationalTableData[tableName];
 
-          // obj to keep track of which columns have source/target handles to help with  to avoid each node having handles when unnecessary
-          /*
-          const hasHandles = {}
-
-          for (let )
-          // iterate over relationalData object
-          */
-
           let dataTypes = [];
 
           // Handle both array format and object format for columns
           if (Array.isArray(columns)) {
             for (let j = 0; j < columns.length; j++) {
               const columnLabel = Object.keys(columns[j])[0];
-
-              // testing this for the new custom node
-              // store each column and the data type as a key value pair
-              // this saves a key value pair where key is the column name, and its value is the data type
               tableContents[columnLabel] =
                 fullTable[tableName].columns[j][columnLabel].dataType;
 
@@ -176,9 +163,7 @@ export default function formContainer() {
 
           tableNodes.push({
             id: `${tableName}`,
-            // id: i.toString(),
             type: 'selectorNode',
-            // data: { onChange: onChange, color: initBgColor },
             data: {
               tableName: tableName,
               columns: columnsList,
@@ -221,25 +206,7 @@ export default function formContainer() {
 
           // store the sub obj into the main obj
           dbContents[i] = tableContents;
-          console.log(`Table ${tableName} columns:`, columnsList);
         }
-
-        // logic for links
-
-        // store everything in tableNodesRev - this is where the nodes are stored, later to be rendered by react flow
-
-        /* 
-        the elements in the 'foreignKeys' key will have a connection from their source handle to the target handle of the reference table/reference key listed in the 'foreignKeys' value
-        
-        format for foreignKeys:
-        {
-        id: 'e2-3',
-        source: '2', <-- this is the foreign key (key in current table)
-        target: '3', <-- this is the reference key (key from a different table)
-        animated: true,
-        style: { stroke: '#fff' },
-      },
-        */
 
         const tableNames = Object.keys(relationalData);
 
@@ -258,7 +225,6 @@ export default function formContainer() {
                 animated: true,
                 style: { stroke: '#ff9149', strokeWidth: 2 },
               };
-              console.log('Creating edge:', JSON.stringify(edge, null, 2));
               tableNodes.push(edge);
 
               allForeignKeys.push({
@@ -276,17 +242,6 @@ export default function formContainer() {
           if (relationalData[tableNames[i]].referencedBy) {
             const currTableRefKeys = relationalData[tableNames[i]].referencedBy;
             for (let j = 0; j < currTableRefKeys.length; j++) {
-              // Removed duplicate edge creation - edges are created from foreignKeys
-              // tableNodes.push({
-              //   id: `${tableNames[i]}-refKey${j}`,
-              //   source: currTableRefKeys[j][0],
-              //   target: currTableRefKeys[j][1],
-              //   sourceHandle: currTableRefKeys[j][2],
-              //   targetHandle: currTableRefKeys[j][3],
-              //   animated: true,
-              //   style: { stroke: '#fff' },
-              // });
-
               allRefByValues.push({
                 tableName: tableNames[i],
                 source: currTableRefKeys[j][0],
@@ -298,14 +253,11 @@ export default function formContainer() {
           }
         }
 
-        console.log('allForeignKeys array:', JSON.stringify(allForeignKeys, null, 2));
-
         // Create hasHandles data after foreign key processing
         const hasHandles = {};
 
         // only care about the source and source handles
         allForeignKeys.forEach((obj) => {
-          console.log(`Processing foreign key: source=${obj.source}, sourceHandle=${obj.sourceHandle}`);
           if (!hasHandles[obj.source]) {
             hasHandles[obj.source] = { sourceHandles: [obj.sourceHandle] };
           } else {
@@ -328,8 +280,6 @@ export default function formContainer() {
           }
         });
 
-        console.log('hasHandles created:', JSON.stringify(hasHandles, null, 2));
-
         // Now update the table nodes to include hasHandles data
         tableNodes.forEach(node => {
           if (node.type === 'selectorNode') {
@@ -338,7 +288,6 @@ export default function formContainer() {
         });
 
         // Create separate nodes for columns that need handles
-        // This allows React Flow to position handles correctly relative to each column
         const tableNamesForHandles = Object.keys(relationalData);
         for (let i = 0; i < tableNamesForHandles.length; i++) {
           const tableName = tableNamesForHandles[i];
@@ -350,7 +299,7 @@ export default function formContainer() {
               const sourceColumn = fk[2]; // e.g., "user_id"
               const sourceHandleId = `${tableName}-${sourceColumn}`;
               
-                             // Create a separate node for this column
+              // Create a separate node for this column
                tableNodes.push({
                  id: sourceHandleId,
                  type: 'columnHandleNode',
@@ -380,7 +329,7 @@ export default function formContainer() {
               const targetColumn = ref[3]; // e.g., "id"
               const targetHandleId = `${tableName}-${targetColumn}`;
               
-                             // Create a separate node for this column
+               // Create a separate node for this column
                tableNodes.push({
                  id: targetHandleId,
                  type: 'columnHandleNode',
@@ -428,35 +377,6 @@ export default function formContainer() {
          // Separate nodes and edges to avoid timing issues
         const tableNodesOnly = tableNodes.filter(node => node.type === 'selectorNode');
         const edgesOnly = tableNodes.filter(node => node.type === 'default');
-        
-        console.log('table nodes only: ', tableNodesOnly);
-        console.log('edges only: ', edgesOnly);
-        console.log('has handles: ', JSON.stringify(hasHandles, null, 2));
-        console.log('relational data: ', JSON.stringify(relationalData, null, 2));
-
-        /*
-        // if the current column name is included in the foreign keys, create a link where 'source' is the current column name and 'target' is the reference key where you'll have to link to another table
-        if ()
-        
-        */
-
-        /* 
-        the elements in the 'referencedBy" key will be nodes from a different table that reference that value
-        
-        format for referencedBy:
-        {
-        id: 'e1-2',
-        source: '1', <-- this is the key that it is referenced by (key from a different table)
-        target: '2', <-- this is the current table's primary key
-        animated: true,
-        style: { stroke: '#fff' },
-      },
-        */
-
-        /*
-        // create a link where the 'source' handle is the value in referencedBy from the respective table, and 'target' is the current table's _id
-        */
-        // console.log('dbContents: ', dbContents);
 
         // First, set the table nodes only (without edges)
         diagramDispatch({
@@ -473,7 +393,6 @@ export default function formContainer() {
 
         // Then, after a short delay, add the edges
         setTimeout(() => {
-          console.log('Adding edges after delay:', edgesOnly);
           diagramDispatch({
             type: 'SET_EDGES',
             payload: {
@@ -512,10 +431,6 @@ export default function formContainer() {
 
     // if there is no input or if input is invalid do nothing
     if (!URILink || !valid.test(URILink)) {
-      // return alert(
-      //   'Missing URI link or the link is invalid. Please enter a valid URI link.',
-      // );
-
       return formDispatch({
         type: 'TOGGLE_FORM',
         payload: {
@@ -524,9 +439,6 @@ export default function formContainer() {
         },
       });
     }
-    // return alert(
-    //   'Missing URI link or the link is invalid. Please enter a valid URI link.',
-    // );
 
     // encrypt URI before sending to server
     const encryptedURL = CryptoJS.AES.encrypt(URILink, secretKey).toString();
@@ -543,6 +455,7 @@ export default function formContainer() {
         const relationalData = {};
         const primaryKeys = {};
         const dbContents = {};
+
         // store the foreign keys to use in 'hasHandles'
         const allForeignKeys = [];
         // store the referenced by values to use in 'hasHandles'
@@ -634,9 +547,7 @@ export default function formContainer() {
           // new logic for custom node to store the stuff
           tableNodes.push({
             id: `${tableName}`,
-            // id: i.toString(),
             type: 'selectorNode',
-            // data: { onChange: onChange, color: initBgColor },
             data: {
               tableName: tableName,
               columns: columnsList,
@@ -658,7 +569,6 @@ export default function formContainer() {
             targetPosition: 'left',
           });
 
-          // HOW MANY TABLES TO RENDER PER ROW ON CANVAS
           let numTables = tablesToProcess.length;
           let tablesPerRow = 0;
 
@@ -668,7 +578,6 @@ export default function formContainer() {
             else tablesPerRow = numTables;
           }
 
-          // for (let j = 0; j < numTables; j++) {}
           if (i < tablesPerRow) {
             tableNodes[i].position.x = 500 * i;
             tableNodes[i].position.y = 0;
@@ -760,15 +669,9 @@ export default function formContainer() {
           }
         });
 
-        console.log('hashandles: ', hasHandles);
-        console.log('Final tableNodes structure:', tableNodes);
-
         // Separate nodes and edges to avoid timing issues
         const tableNodesOnly = tableNodes.filter(node => node.type === 'selectorNode');
         const edgesOnly = tableNodes.filter(node => node.type === 'default');
-        
-        console.log('table nodes only: ', tableNodesOnly);
-        console.log('edges only: ', edgesOnly);
 
         // First, set the table nodes only (without edges)
         diagramDispatch({
@@ -785,7 +688,6 @@ export default function formContainer() {
 
         // Then, after a short delay, add the edges
         setTimeout(() => {
-          console.log('Adding edges after delay:', edgesOnly);
           diagramDispatch({
             type: 'SET_EDGES',
             payload: {
@@ -845,13 +747,11 @@ export default function formContainer() {
           </button>
         </div>
         <form className="formContainer" onSubmit={handleURI}>
-          {/* <label className="formHeader" htmlFor="link"> */}
           <h6 id="inputHeader">
             Or input a link to
             <br />
             your SQL database:
           </h6>
-          {/* </label> */}
           <input className="dbInput" id="URILink" placeholder="postgres://" />
           <p id="invalidURI">{formState.URIvalidation}</p>
           <button className="formButtons" id="uriSubmitButton">
@@ -863,38 +763,3 @@ export default function formContainer() {
     </div>
   );
 }
-
-// og form:
-{
-  /* <div className="uriForm" id="uriForm">
-      {btnDisplay}
-      <div className={formState.formIsOpen ? 'uripanel open' : 'uripanel'}>
-        <p>sample db button location?</p>
-
-        <form onSubmit={handleURI}>
-          <label className="formHeader" htmlFor="link">
-          {/* Get started by using the sample database: */
-}
-//         Link a database:
-//       </label>
-//       <br />
-//       <input className="dbInput" id="URILink" placeholder="postgres://" />
-//       <br />
-//       <p id="invalidURI">{formState.URIvalidation}</p>
-//       Or input a link to your database:
-//       <button className="formButtons" id="uriSubmitButton">
-//         Submit
-//       </button>
-//       <br />
-//     </form>
-//     <button
-//       type="button"
-//       className="formButtons"
-//       id="sampleDataButton"
-//       onClick={handleSampleData}
-//     >
-//       Use Sample Database
-//     </button>
-//     <br />
-//   </div>
-// </div> */}
