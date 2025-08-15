@@ -81,9 +81,11 @@ export default function CodeContainer() {
           </button>
         </div>
         <br />
-        <Suspense fallback={<div style={{ padding: '1rem' }}>Loading editor…</div>}>
-          <CodeMirror />
-        </Suspense>
+        {codeState.codeIsOpen ? (
+          <Suspense fallback={<div style={{ padding: '1rem' }}>Loading editor…</div>}>
+            <CodeMirror />
+          </Suspense>
+        ) : null}
       </div>
     </div>
   );

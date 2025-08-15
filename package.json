@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server/server.js",
     "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development nodemon server/server.js & webpack serve --open --hot --inline",
+    "build:analyze": "NODE_ENV=production ANALYZE=true webpack",
+    "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack serve --open --hot --inline",
     "test": "jest --verbose --runInBand",
     "lint": "eslint . --ext .js,.jsx",
     "lint:fix": "eslint . --ext .js,.jsx --fix",
@@ -82,6 +83,7 @@
     "style-loader": "^2.0.0",
     "supertest": "^7.0.0",
     "webpack": "^5.101.2",
+    "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^3.11.3"
   }

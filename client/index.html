@@ -10,9 +10,19 @@
     />
     <title>lexiQL</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Preload will be handled by webpack asset processing -->
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- DNS prefetch for potential external resources -->
+    <link rel="dns-prefetch" href="//github.com" />
+    <link rel="dns-prefetch" href="//linkedin.com" />
   </head>
   <body>
     <div id="root"></div>
-    <script src="bundle.js"></script>
+    <!-- Script tags are automatically injected by HtmlWebpackPlugin -->
   </body>
 </html>
