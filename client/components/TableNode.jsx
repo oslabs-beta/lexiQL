@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import ColumnNode from './columnNode';
+import ColumnNode from './ColumnNode.jsx';
 
 const TableNode = ({ data }) => {
   const { tableName, columns, dataTypes, hasHandles } = data;

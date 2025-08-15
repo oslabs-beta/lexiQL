@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import DataPage from '../client/pages/dataPage.jsx';
+import DataPage from '../client/pages/DataPage.jsx';
 
 // This is a light interaction test that clicks the "Use Sample Database" button.
 // It doesn't assert the graph structure, but ensures the UI wires are intact.

@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import DataPage from '../client/pages/dataPage.jsx';
+import DataPage from '../client/pages/DataPage.jsx';
 
 describe('DataPage interactions', () => {
   it('toggles the code sidebar open/closed', () => {

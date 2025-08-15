@@ -203,18 +203,33 @@ const sqlQuery = fs.readFileSync(sqlFilePath, 'utf8');
 
 const SQLController = {};
 
-// decrypt incoming PSQL URLs
+// decrypt incoming PSQL URLs safely; return null on failure
 const decryptedURI = (encryptedURL) => {
-  const bytes = CryptoJS.AES.decrypt(encryptedURL, secretKey);
-  const decrypted = bytes.toString(CryptoJS.enc.Utf8);
-  return decrypted;
+  try {
+    const bytes = CryptoJS.AES.decrypt(encryptedURL, secretKey);
+    const decrypted = bytes.toString(CryptoJS.enc.Utf8);
+    if (!decrypted) throw new Error('Empty decrypt');
+    return decrypted;
+  } catch (_err) {
+    return null;
+  }
 };
 
 SQLController.getSQLSchema = (req, res, next) => {
   let PSQL_URI;
 
-  // if user sent URI, call decryptedURI to decrypt the link
-  req.body.link ? (PSQL_URI = decryptedURI(req.body.link)) : (PSQL_URI = EX_PG_URI);
+  // if user sent URI, try to decrypt; fall back to example URI on failure
+  if (req.body.link) {
+    const maybeURI = decryptedURI(req.body.link);
+    if (maybeURI) {
+      PSQL_URI = maybeURI;
+    } else {
+      console.log('Invalid encrypted link provided; falling back to example URI');
+      PSQL_URI = EX_PG_URI;
+    }
+  } else {
+    PSQL_URI = EX_PG_URI;
+  }
 
   console.log('Connecting to database...');
   console.log('Using URI:', PSQL_URI.substring(0, 20) + '...');
