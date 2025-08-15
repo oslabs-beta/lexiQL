@@ -5,7 +5,7 @@ import URIbtn from '../components/URIbtn';
 import { FormContext } from '../state/contexts';
 
 export default function FormContainer() {
-  const { formState, formDispatch, diagramState, diagramDispatch, codeDispatch } =
+  const { formState, formDispatch, /* diagramState */ diagramDispatch, codeDispatch } =
     useContext(FormContext);
 
   // get data from the sample DB
@@ -181,10 +181,10 @@ export default function FormContainer() {
 
           // Create a well-spaced layout for the tables
           // Position tables in a grid-like pattern with proper spacing
-          const numTables = tablesToProcess.length;
+          // layout constants
           const tablesPerRow = 3; // Show 3 tables per row
-          const tableWidth = 400; // Width of each table
-          const tableHeight = 300; // Height of each table
+          // const tableWidth = 400; // Width of each table
+          // const tableHeight = 300; // Height of each table
           const horizontalSpacing = 450; // More space between tables horizontally
           const verticalSpacing = 400; // More space between rows
 
@@ -287,7 +287,7 @@ export default function FormContainer() {
 
           // Check for source handles (foreign keys)
           if (tableData.foreignKeys) {
-            tableData.foreignKeys.forEach((fk, fkIndex) => {
+            tableData.foreignKeys.forEach((fk) => {
               const sourceColumn = fk[2]; // e.g., "user_id"
               const sourceHandleId = `${tableName}-${sourceColumn}`;
 
@@ -317,7 +317,7 @@ export default function FormContainer() {
 
           // Check for target handles (referenced by)
           if (tableData.referencedBy) {
-            tableData.referencedBy.forEach((ref, refIndex) => {
+            tableData.referencedBy.forEach((ref) => {
               const targetColumn = ref[3]; // e.g., "id"
               const targetHandleId = `${tableName}-${targetColumn}`;
 

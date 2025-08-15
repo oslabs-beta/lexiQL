@@ -39,9 +39,8 @@ app.use((err, req, res, _next) => {
 });
 
 // eslint-disable-next-line no-unused-vars
-let serverInstance = null;
 if (process.env.NODE_ENV !== 'test') {
-  serverInstance = app.listen(3000, () => {
+  app.listen(3000, () => {
     console.log('Server listening on port 3000');
   });
 }

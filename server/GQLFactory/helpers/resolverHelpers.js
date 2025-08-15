@@ -49,14 +49,9 @@ resolverHelper.createMutation = (tableName, primaryKey, columns) => {
     },`;
 };
 
-resolverHelper.updateMutation = (tableName, primaryKey, columns) => {
+resolverHelper.updateMutation = (tableName, primaryKey, _columns) => {
   const mutationName = toCamelCase('update_' + singular(tableName));
-  const columnsArray = Object.keys(columns).filter((column) => column != primaryKey);
-  const _setStatement = columnsArray.map((column, i) => `${column} = $${i + 1}`).join(', ');
-  const _valuesList = [
-    columnsArray.map((column) => `args.${column}`).join(', ') + `, args.${primaryKey}`,
-  ];
-  const _primaryKeyArgument = `$${columnsArray.length + 1}`;
+  // cleaned unused variables
 
   return `
     ${mutationName}: (parent, args) => {
