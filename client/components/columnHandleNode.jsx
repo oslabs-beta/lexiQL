@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Handle } from 'react-flow-renderer';
 
-export default memo(({ data }) => {
+const ColumnHandleNode = ({ data }) => {
   const { tableName, columnName, isSource, isTarget } = data;
 
   return (
@@ -32,4 +32,8 @@ export default memo(({ data }) => {
       )}
     </div>
   );
-});
+};
+
+ColumnHandleNode.displayName = 'ColumnHandleNode';
+
+export default memo(ColumnHandleNode);

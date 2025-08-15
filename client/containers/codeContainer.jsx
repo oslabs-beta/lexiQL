@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import CodeMirror from '../components/codeMirror';
 import { CodeContext } from '../state/contexts';
 
-export default function codeContainer() {
+export default function CodeContainer() {
   const { codeState, codeDispatch } = useContext(CodeContext);
 
   const handleSchema = (e) => {

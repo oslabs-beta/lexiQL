@@ -66,9 +66,9 @@ resolverHelper.updateMutation = (tableName, primaryKey, columns) => {
       }
       valList.push(args.${primaryKey});
       const argsArray = Object.keys(args).filter((key) => key !== '${primaryKey}');
-      let setString = argsArray.map((key, i) => \`\${key} = \$\$\{(i + 1)\}\`).join(', ');
-      const pKArg = \`\$\${argsArray.length + 1}\`;
-      const query = \`UPDATE ${tableName} SET \${setString} WHERE ${primaryKey} = \${pKArg} RETURNING *\`;
+      let setString = argsArray.map((k, i) => k + ' = $' + (i + 1)).join(', ');
+      const pKArg = '$' + (argsArray.length + 1);
+      const query = 'UPDATE ${tableName} SET ' + setString + ' WHERE ${primaryKey} = ' + pKArg + ' RETURNING *';
       const values = valList;
       return db.query(query, values)
         .then(data => data.rows[0])

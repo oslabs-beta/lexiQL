@@ -1,10 +1,10 @@
+import CryptoJS from 'crypto-js';
 import React, { useContext } from 'react';
+import secretKey from '../../server/secretKey';
 import URIbtn from '../components/URIbtn';
 import { FormContext } from '../state/contexts';
-import CryptoJS from 'crypto-js';
-import secretKey from '../../server/secretKey';
 
-export default function formContainer() {
+export default function FormContainer() {
   const { formState, formDispatch, diagramState, diagramDispatch, codeDispatch } =
     useContext(FormContext);
 
@@ -560,7 +560,7 @@ export default function formContainer() {
             targetPosition: 'left',
           });
 
-          let numTables = tablesToProcess.length;
+          const numTables = tableNodes.length;
           let tablesPerRow = 0;
 
           if (numTables < 5) tablesPerRow = numTables;

@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import ColumnNode from './columnNode';
 
-export default memo(({ data }) => {
+const TableNode = ({ data }) => {
   const { tableName, columns, dataTypes, hasHandles } = data;
 
   let tableColumns;
@@ -28,4 +28,8 @@ export default memo(({ data }) => {
       {tableColumns}
     </>
   );
-});
+};
+
+TableNode.displayName = 'TableNode';
+
+export default memo(TableNode);

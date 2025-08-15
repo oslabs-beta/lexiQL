@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { CodeContext } from '../state/contexts';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
+import { CodeContext } from '../state/contexts';
 
-export default function codeMirror() {
+export default function CodeMirrorComponent() {
   const { codeState } = useContext(CodeContext);
 
   return (

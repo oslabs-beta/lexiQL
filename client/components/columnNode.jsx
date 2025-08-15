@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Handle } from 'react-flow-renderer';
 
-export default memo(({ columnName, dataType, id, tableName, hasHandles }) => {
+const ColumnNode = ({ columnName, dataType, id, tableName, hasHandles }) => {
   // object of tables and their respective columns that have source and/or target handles
   // (i.e., does not include columns that don't have handles)
   const colHandles = hasHandles;
@@ -79,4 +79,8 @@ export default memo(({ columnName, dataType, id, tableName, hasHandles }) => {
   } else {
     return noHandles;
   }
-});
+};
+
+ColumnNode.displayName = 'ColumnNode';
+
+export default memo(ColumnNode);

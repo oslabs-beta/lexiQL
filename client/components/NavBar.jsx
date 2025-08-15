@@ -1,14 +1,13 @@
 import React from 'react';
-import { Route, Switch, Link, useLocation } from 'react-router-dom';
-import HomePage from '../pages/homePage.jsx';
-import DataPage from '../pages/dataPage.jsx';
-import Logo from '../assets/new-logo.png';
-import WhiteLogo from '../assets/white-logo.png';
-import TwitterLogo from '../assets/navy-twitter.png';
-import LinkedinLogo from '../assets/navy-linkedin.png';
+import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import GithubLogo from '../assets/navy-github.png';
+import LinkedinLogo from '../assets/navy-linkedin.png';
+import TwitterLogo from '../assets/navy-twitter.png';
+import WhiteLogo from '../assets/white-logo.png';
+import DataPage from '../pages/dataPage.jsx';
+import HomePage from '../pages/homePage.jsx';
 
-export default function navBar() {
+export default function NavBar() {
   const location = useLocation();
 
   if (location.pathname === '/') {

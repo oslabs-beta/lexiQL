@@ -15,12 +15,13 @@ export const diagramReducer = (state, action) => {
         primaryKeys: action.payload.primaryKeys,
         hasHandles: action.payload.hasHandles,
       };
-    case 'SET_EDGES':
+    case 'SET_EDGES': {
       const newTableNodes = [...state.tableNodes, ...action.payload.edges];
       return {
         ...state,
         tableNodes: newTableNodes,
       };
+    }
     default:
       return state;
   }

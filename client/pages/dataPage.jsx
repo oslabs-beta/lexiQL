@@ -1,19 +1,19 @@
 import React, { useReducer } from 'react';
-import { DiagramContext, CodeContext, FormContext } from '../state/contexts';
+import { CodeContext, DiagramContext, FormContext } from '../state/contexts';
 import {
-  initialDiagramState,
-  diagramReducer,
-  initialCodeState,
   codeReducer,
-  initialFormState,
+  diagramReducer,
   formReducer,
+  initialCodeState,
+  initialDiagramState,
+  initialFormState,
 } from '../state/reducers';
 
+import CodeContainer from '../containers/codeContainer';
 import DBInputContainer from '../containers/dbInputContainer';
 import DiagramContainer from '../containers/diagramContainer';
-import CodeContainer from '../containers/codeContainer';
 
-export default function dataPage() {
+export default function DataPage() {
   const [codeState, codeDispatch] = useReducer(codeReducer, initialCodeState);
   const [diagramState, diagramDispatch] = useReducer(diagramReducer, initialDiagramState);
   const [formState, formDispatch] = useReducer(formReducer, initialFormState);
