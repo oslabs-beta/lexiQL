@@ -1,52 +1,108 @@
 <img src="https://user-images.githubusercontent.com/77026961/114807368-4be50700-9d74-11eb-9af3-af87cd74c9e1.png" style="margin-top: 10px; margin-bottom: -10px;">
 <br/>
 
-![GitHub package.json version](https://img.shields.io/github/package-json/v/oslabs-beta/lexiQL) ![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat) ![Tweet](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Flexiql)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/oslabs-beta/lexiQL)  
+![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)  
+![Tweet](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Flexiql)
 
-lexiQL is an open-source GraphQL prototyping tool that visualizes your relational database and facilitates GraphQL API prototyping and configuration, allowing developers to to optimize their queries and transition away from RESTful APIs. The tool takes a relational database input and uses it to generate the respective GraphQL schemas alongside an interactive GUI that displays all of the tables in a database, including primary/foreign key relationships between tables, as well as each table’s columns and associated data types. Read more on <a href="https://ryan-mcdaniel.medium.com/introducing-lexiql-56401bbf8d9e">Medium.</a><br/><br/>
-Accelerated by <a href="https://github.com/oslabs-beta/" />OS Labs</a>.
+---
 
-<hr />
+## What is lexiQL?
 
-## Getting Started
+**lexiQL** is an open-source developer tool for **GraphQL prototyping** and **relational database visualization**.
 
-### Visit www.lexiql.io to utilize the tool.
+It helps you go from a PostgreSQL database to a functional GraphQL API in minutes, complete with an interactive diagram, generated schema, and built-in query testing.
 
-#### Select your database
+Built to save time during API design, database onboarding, or a REST-to-GraphQL migration, lexiQL eliminates the need for manual schema mapping and lets you explore data structure visually before you write a single resolver.
 
-- Input your PostgreSQL URI
-- OR use the sample database to view data rendered in an interactive diagram.
+📖 Read the full introduction on [Medium](https://ryan-mcdaniel.medium.com/introducing-lexiql-56401bbf8d9e)  
+🚀 Accelerated by [OS Labs](https://github.com/oslabs-beta/)
+
+---
+
+## Why use lexiQL?
+
+- **Visual Database Explorer** – Instantly understand your schema, including foreign key relationships.
+- **Automatic Schema Generation** – Get GraphQL types and resolvers scaffolded from your database metadata.
+- **Rapid Prototyping** – Move from database connection to running queries in minutes.
+- **Onboarding & Documentation** – Great for introducing new developers to a project’s data model.
+- **REST Migration Aid** – Smooth the transition by mapping your existing relational data into a GraphQL API.
+
+---
+
+## Live Demo
+
+You can try lexiQL now, no setup required! Visit **[www.lexiql.io](http://www.lexiql.io)**.
+
+---
+
+## How It Works
+
+### 1. Connect to a Database
+
+- Enter your PostgreSQL connection URI
+- Or choose the built-in sample database to explore features immediately
 
 <img src="client/assets/userdbinput.gif" width="700" height="500" /><br />
 
-#### View your relational database
+---
 
-- Easily view the relationships between the tables via the links that highlight the foreign key constraints.
-- Move any table and arrange them to optimally view the structure of the database and the relationships between the tables.
+### 2. Visualize Your Data Model
+
+- Interactive ER diagram shows all tables, columns, and data types
+- Relationships are highlighted via foreign key links
+- Tables can be repositioned for easier viewing and diagram organization
 
 <img src="client/assets/movingtables.gif" width="700" height="500" />
 
-#### View your GQL schema
+---
 
-- View the generated GraphQL schema, including the types and associated resolvers.
-- Use the copy button to effortlessly integrate the code into your project.
+### 3. Generate a GraphQL Schema
+
+- Automatically creates `type` definitions and associated resolvers
+- Schema view lets you copy the generated code directly into your backend project
+- Perfect for kickstarting API development without manual mapping
 
 <img src="client/assets/codemirror.gif" width="700" height="500" />
 
-#### Test GQL queries
+---
 
-- Interactively construct full queries using the sample database.
-- Use the "Docs" to explore the possible queries, fields, types, mutations, and more.
+### 4. Test Queries in the Built-in Playground
+
+- Compose GraphQL queries and mutations interactively
+- Browse available fields, types, and relationships in the Docs panel
+- Test API design decisions against live data
 
 <img src="client/assets/graphiql.gif" width="700" height="500" />
 
+---
+
+## Example Use Cases
+
+- **Prototyping a new API** – Start with your existing database, quickly visualize and generate the schema.
+- **Onboarding new engineers** – Give them a visual map of the data model plus a live query playground.
+- **Transitioning from REST** – Map relational tables into GraphQL types without manual boilerplate.
+- **Database exploration** – Use the sample DB to learn GraphQL or demo concepts.
+
+---
+
+## Tech Stack
+
+- **Frontend**: React, React Flow for diagram rendering
+- **Backend**: Node.js, Express, PostgreSQL
+- **Other**: GraphQL, Webpack, Docker
+
+---
+
 ## Developers
 
-- Christopher Carney – [@Carthanial](https://github.com/Carthanial) <br/>
-- Stacy Learn – [@hello-stacy](https://github.com/hello-stacy) <br/>
-- John Li – [@john-li7](https://github.com/john-li7) <br/>
+- Christopher Carney – [@Carthanial](https://github.com/Carthanial)
+- Stacy Learn – [@hello-stacy](https://github.com/hello-stacy)
+- John Li – [@john-li7](https://github.com/john-li7)
 - Ryan McDaniel – [@ryanmcd118](https://github.com/ryanmcd118)
+
+---
 
 ## License
 
-This product is licensed under the MIT License.
+Licensed under the [MIT License](LICENSE).
