@@ -14,14 +14,14 @@
   }
 
   .headerLinks {
-    color: black;
+    color: $dark-blue;
     font-size: 37px;
     text-decoration: none;
     margin-right: 40px;
   }
 
   .headerLinks:visited {
-    color: black;
+    color: $dark-blue;
   }
 
   .headerLinks:hover {
