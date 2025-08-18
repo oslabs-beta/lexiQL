@@ -1,11 +1,132 @@
 .footer {
   width: 100%;
-  height: 125px;
+  background-color: $dark-blue;
+  color: #e0e0e0;
+  font-family: 'Raleway', sans-serif;
+  padding: 16px 20px;
+  min-height: 56px;
   display: flex;
-  flex-direction: flex-end;
+  align-items: center;
+  justify-content: center;
 
-  h5 {
-    font-size: 20px;
-    margin-left: auto;
+  .footer-content {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .footer-brand-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:focus {
+      outline: 2px solid $orange;
+      outline-offset: 2px;
+    }
+  }
+
+  .footer-logo {
+    height: 20px;
+    width: auto;
+    display: block;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  .footer-brand {
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+  }
+
+  .footer-center {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #e0e0e0;
+    flex-shrink: 0;
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .footer-link {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 14px;
+    transition:
+      color 0.2s ease,
+      text-decoration 0.2s ease;
+
+    &:hover {
+      color: $orange;
+      text-decoration: underline;
+    }
+
+    &:focus {
+      outline: 2px solid $orange;
+      outline-offset: 2px;
+    }
+  }
+
+  .footer-divider {
+    color: #999;
+    font-size: 12px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 12px 16px;
+    min-height: auto;
+
+    .footer-content {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .footer-left,
+    .footer-center,
+    .footer-right {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-content {
+      gap: 8px;
+    }
+
+    .footer-center,
+    .footer-right {
+      font-size: 13px;
+      gap: 6px;
+    }
+
+    .footer-divider {
+      font-size: 10px;
+    }
   }
 }
