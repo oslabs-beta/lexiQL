@@ -18,7 +18,7 @@ export default function NavBar() {
         <nav id="homeHeader">
           <div className="socialLogos">
             <a
-              href="https://twitter.com/lexiql"
+              href="https://twitter.com/orbit"
               target="_blank"
               className="headerLinks"
               rel="noreferrer"
@@ -34,7 +34,7 @@ export default function NavBar() {
             </a>
 
             <a
-              href="https://www.linkedin.com/company/lexiql"
+              href="http://linkedin.com/company/orbit-dev"
               target="_blank"
               className="headerLinks"
               rel="noreferrer"
@@ -50,7 +50,7 @@ export default function NavBar() {
             </a>
 
             <a
-              href="https://github.com/oslabs-beta/lexiQL"
+              href="https://github.com/oslabs-beta/Orbit"
               target="_blank"
               className="headerLinks"
               rel="noreferrer"

@@ -8,10 +8,10 @@ export default function Footer() {
         <a className="footerLink" href="https://www.linkedin.com/">
           LinkedIn
         </a>
-        <a className="footerLink" href="https://twitter.com/lexiql">
+        <a className="footerLink" href="https://twitter.com/orbit">
           Twitter
         </a>
-        {/* <a className="footerLink" href="https://github.com/oslabs-beta/lexiQL">
+        {/* <a className="footerLink" href="https://github.com/oslabs-beta/Orbit">
           Github
         </a> */}
       {/* </div>  */}

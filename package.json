@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ryanmcd118/lexiQL.git"
+    "url": "git+https://github.com/ryanmcd118/Orbit.git"
   },
   "author": "Chris Carney, Stacy Learn, John Li, & Ryan McDaniel",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ryanmcd118/lexiQL/issues"
+    "url": "https://github.com/ryanmcd118/Orbit/issues"
   },
-  "homepage": "https://github.com/ryanmcd118/lexiQL#readme",
+  "homepage": "https://github.com/ryanmcd118/Orbit#readme",
   "dependencies": {
     "buffer": "^6.0.3",
     "camelcase": "^5.3.1",

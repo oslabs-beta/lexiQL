@@ -32,7 +32,7 @@ Built to save time during API design, database onboarding, or a REST-to-GraphQL 
 
 ## Live Demo
 
-You can try Orbit now, no setup required! Visit **[www.lexiql.io](http://www.lexiql.io)**.
+You can try Orbit now, no setup required! Visit **[www.orbitdev.io/](https://www.orbitdev.io/)**.
 
 ---
 
