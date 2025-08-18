@@ -1,9 +1,8 @@
-<img src="https://user-images.githubusercontent.com/77026961/114807368-4be50700-9d74-11eb-9af3-af87cd74c9e1.png" style="margin-top: 10px; margin-bottom: -10px;">
+<img alt="orbit-logo-white-background-CROPPED" src="https://github.com/user-attachments/assets/0d297193-9209-4486-8fed-a9053e891bb1" style="margin-top: 10px; margin-bottom: -10px;" />
 <br/>
 
-![GitHub package.json version](https://img.shields.io/github/package-json/v/oslabs-beta/lexiQL)  
-![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)  
-![Tweet](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Flexiql)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/oslabs-beta/Orbit)  
+![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)
 
 ---
 
