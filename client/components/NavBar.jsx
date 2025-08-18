@@ -3,7 +3,7 @@ import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import GithubLogo from '../assets/navy-github.png';
 import LinkedinLogo from '../assets/navy-linkedin.png';
 import TwitterLogo from '../assets/navy-twitter.png';
-import WhiteLogo from '../assets/white-logo.png';
+import WhiteLogo from '../assets/orbit-logo-white.png';
 
 // Lazy load pages for better performance
 const DataPage = React.lazy(() => import('../pages/DataPage.jsx'));
@@ -18,7 +18,7 @@ export default function NavBar() {
         <nav id="homeHeader">
           <div className="socialLogos">
             <a
-              href="https://twitter.com/lexiql"
+              href="https://twitter.com/orbit"
               target="_blank"
               className="headerLinks"
               rel="noreferrer"
@@ -34,7 +34,7 @@ export default function NavBar() {
             </a>
 
             <a
-              href="https://www.linkedin.com/company/lexiql"
+              href="http://linkedin.com/company/orbit-dev"
               target="_blank"
               className="headerLinks"
               rel="noreferrer"
@@ -50,7 +50,7 @@ export default function NavBar() {
             </a>
 
             <a
-              href="https://github.com/oslabs-beta/lexiQL"
+              href="https://github.com/oslabs-beta/Orbit"
               target="_blank"
               className="headerLinks"
               rel="noreferrer"
@@ -106,7 +106,7 @@ export default function NavBar() {
               className="homeLogo"
               id="homeLogo"
               src={WhiteLogo}
-              alt="lexiQL Logo"
+              alt="Orbit Logo"
               decoding="async"
               fetchPriority="high"
               loading="eager"
@@ -151,7 +151,7 @@ export default function NavBar() {
               className="homeLogo"
               id="homeLogo"
               src={WhiteLogo}
-              alt="lexiQL Logo"
+              alt="Orbit Logo"
               decoding="async"
               loading="eager"
             />

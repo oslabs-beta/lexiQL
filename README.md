@@ -7,20 +7,20 @@
 
 ---
 
-## What is lexiQL?
+## What is Orbit?
 
-**lexiQL** is an open-source developer tool for **GraphQL prototyping** and **relational database visualization**.
+**Orbit** is an open-source developer tool for **GraphQL prototyping** and **relational database visualization**.
 
 It helps you go from a PostgreSQL database to a functional GraphQL API in minutes, complete with an interactive diagram, generated schema, and built-in query testing.
 
-Built to save time during API design, database onboarding, or a REST-to-GraphQL migration, lexiQL eliminates the need for manual schema mapping and lets you explore data structure visually before you write a single resolver.
+Built to save time during API design, database onboarding, or a REST-to-GraphQL migration, Orbit eliminates the need for manual schema mapping and lets you explore data structure visually before you write a single resolver.
 
 📖 Read the full introduction on [Medium](https://ryan-mcdaniel.medium.com/introducing-lexiql-56401bbf8d9e)  
 🚀 Accelerated by [OS Labs](https://github.com/oslabs-beta/)
 
 ---
 
-## Why use lexiQL?
+## Why use Orbit?
 
 - **Visual Database Explorer** – Instantly understand your schema, including foreign key relationships.
 - **Automatic Schema Generation** – Get GraphQL types and resolvers scaffolded from your database metadata.
@@ -32,7 +32,7 @@ Built to save time during API design, database onboarding, or a REST-to-GraphQL 
 
 ## Live Demo
 
-You can try lexiQL now, no setup required! Visit **[www.lexiql.io](http://www.lexiql.io)**.
+You can try Orbit now, no setup required! Visit **[www.orbitdev.io/](https://www.orbitdev.io/)**.
 
 ---
 

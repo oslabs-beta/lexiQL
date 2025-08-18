@@ -5,7 +5,7 @@ export default function DemoContainer() {
   const content = [
     [
       'Import your PostgreSQL database',
-      'Simply input a PostgreSQL database URI, and lexiQL will auto-generate your relational database schema. (Don’t have a database to input right now but still want to test our tool? Use our sample database to explore what lexiQL can do for you.)',
+      'Simply input a PostgreSQL database URI, and Orbit will auto-generate your relational database schema. (Don’t have a database to input right now but still want to test our tool? Use our sample database to explore what Orbit can do for you.)',
       '../assets/db-input.png',
     ],
     [
@@ -36,7 +36,7 @@ export default function DemoContainer() {
   return (
     <div className="demoContainer">
       <div className="demoHeader">
-        <h2 id="sectionHeader">What is lexiQL?</h2>
+        <h2 id="sectionHeader">What is Orbit?</h2>
       </div>
       <div className="allDemos">{introContent}</div>
     </div>
