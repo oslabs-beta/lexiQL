@@ -164,7 +164,7 @@ export default function NavBar() {
         <Suspense fallback={<div className="loading">Loading...</div>}>
           <Switch>
             <Route path="/playground">
-              <h1>insert Graphiql playground here, Travis</h1>
+              <h1>insert Graphiql playground here</h1>
             </Route>
 
             <Route path="/data">
