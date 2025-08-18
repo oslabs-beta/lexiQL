@@ -14,7 +14,7 @@ export default function AboutUsContainer() {
       id: 'faq-2',
       question: 'Why is it called Orbit?',
       answer:
-        'We chose the name Orbit because it reflects the way databases organize information — with tables, columns, and relationships all revolving around each other. The graph you see in Orbit feels like a system of connected nodes in motion, which inspired the name.',
+        'We chose the name Orbit because it reflects the way databases organize information: with tables, columns, and relationships all revolving around each other. The graph you see in Orbit feels like a system of connected nodes in motion, which inspired the name.',
     },
     {
       id: 'faq-3',
