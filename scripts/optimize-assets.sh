@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Asset Optimization Script for lexiQL
+# Asset Optimization Script for Orbit
 # This script converts GIF files to optimized video formats and images to modern formats
 
-echo "🚀 Starting asset optimization for lexiQL..."
+echo "🚀 Starting asset optimization for Orbit..."
 
 # Create output directories
 mkdir -p client/assets/optimized/videos

@@ -106,7 +106,7 @@ export default function NavBar() {
               className="homeLogo"
               id="homeLogo"
               src={WhiteLogo}
-              alt="lexiQL Logo"
+              alt="Orbit Logo"
               decoding="async"
               fetchPriority="high"
               loading="eager"
@@ -151,7 +151,7 @@ export default function NavBar() {
               className="homeLogo"
               id="homeLogo"
               src={WhiteLogo}
-              alt="lexiQL Logo"
+              alt="Orbit Logo"
               decoding="async"
               loading="eager"
             />

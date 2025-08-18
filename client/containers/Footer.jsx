@@ -3,7 +3,7 @@ import React from 'react';
 export default function Footer() {
   return (
     <div className="footer">
-      {/* <h5>lexiQL Copyright 2021</h5> */}
+      {/* <h5>Orbit Copyright 2021</h5> */}
       {/* <div className="footerIcons">
         <a className="footerLink" href="https://www.linkedin.com/">
           LinkedIn
