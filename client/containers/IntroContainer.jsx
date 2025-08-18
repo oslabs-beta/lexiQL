@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../assets/new-logo.png';
+import Logo from '../assets/orbit-logo-black.png';
 
 export default function IntroContainer() {
   return (

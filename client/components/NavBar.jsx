@@ -3,7 +3,7 @@ import { Link, Route, Switch, useLocation } from 'react-router-dom';
 import GithubLogo from '../assets/navy-github.png';
 import LinkedinLogo from '../assets/navy-linkedin.png';
 import TwitterLogo from '../assets/navy-twitter.png';
-import WhiteLogo from '../assets/white-logo.png';
+import WhiteLogo from '../assets/orbit-logo-white.png';
 
 // Lazy load pages for better performance
 const DataPage = React.lazy(() => import('../pages/DataPage.jsx'));
