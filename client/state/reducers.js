@@ -64,6 +64,7 @@ export const initialFormState = {
   formIsOpen: true,
   firstFetch: true,
   URIvalidation: '',
+  isLoading: false,
   sampleDBtext: 'Get started by using the sample database:',
   inputDBtext: 'Or put a link to your database:',
 };
@@ -78,6 +79,16 @@ export const formReducer = (state, action) => {
         URIvalidation: action.payload.URIvalidation,
         sampleDBtext: action.payload.sampleDBtext,
         inputDBtext: action.payload.inputDBtext,
+      };
+    case 'SET_LOADING':
+      return {
+        ...state,
+        isLoading: action.payload.isLoading,
+      };
+    case 'SET_VALIDATION':
+      return {
+        ...state,
+        URIvalidation: action.payload.URIvalidation,
       };
     default:
       return state;

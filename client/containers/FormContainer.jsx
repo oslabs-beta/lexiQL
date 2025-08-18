@@ -12,6 +12,12 @@ export default function FormContainer() {
   const handleSampleData = (e) => {
     e.preventDefault();
 
+    // Set loading state
+    formDispatch({
+      type: 'SET_LOADING',
+      payload: { isLoading: true },
+    });
+
     fetch('/example-schema')
       .then((res) => res.json())
       .then((data) => {
@@ -110,12 +116,12 @@ export default function FormContainer() {
                 ]);
               }
             } else {
-              // Object format: { refTable: refColumn }
-              for (const refTable of Object.keys(refByKeys)) {
+              // Object format: { refKey: referenceKey }
+              for (const refKey of Object.keys(refByKeys)) {
                 relationalTableData[tableName].referencedBy.push([
-                  refTable,
+                  refKey,
                   tableName,
-                  refByKeys[refTable],
+                  refByKeys[refKey],
                   tableElements.primaryKey,
                 ]);
               }
@@ -128,11 +134,10 @@ export default function FormContainer() {
 
           // Handle both array format and object format for columns
           if (Array.isArray(columns)) {
+            // Array format: [{ columnName: { dataType, ... } }]
             for (let j = 0; j < columns.length; j++) {
               const columnLabel = Object.keys(columns[j])[0];
               tableContents[columnLabel] = fullTable[tableName].columns[j][columnLabel].dataType;
-
-              // store column name in columnsList so it ends up being an array of all the columns
               columnsList.push(columnLabel);
               dataTypes.push(tableContents[columnLabel]);
             }
@@ -155,7 +160,8 @@ export default function FormContainer() {
             }
           });
 
-          tableNodes.push({
+          // Create table node
+          const tableNode = {
             id: `${tableName}`,
             type: 'selectorNode',
             data: {
@@ -177,37 +183,32 @@ export default function FormContainer() {
             },
             sourcePosition: 'right',
             targetPosition: 'left',
-          });
+          };
 
-          // Create a well-spaced layout for the tables
-          // Position tables in a grid-like pattern with proper spacing
-          // layout constants
-          const tablesPerRow = 3; // Show 3 tables per row
-          // const tableWidth = 400; // Width of each table
-          // const tableHeight = 300; // Height of each table
-          const horizontalSpacing = 450; // More space between tables horizontally
-          const verticalSpacing = 400; // More space between rows
+          // Position the table in a grid layout
+          const tableIndex = tableNodes.length; // Current table index
+          const tablesPerRow = 3;
+          const row = Math.floor(tableIndex / tablesPerRow);
+          const col = tableIndex % tablesPerRow;
 
-          const row = Math.floor(i / tablesPerRow);
-          const col = i % tablesPerRow;
+          tableNode.position.x = 450 * col + 200;
+          tableNode.position.y = 400 * row + 150;
 
-          // Add buffer around the outside to help center the tables
-          const bufferX = 200; // Buffer from left edge
-          const bufferY = 150; // Buffer from top edge
-
-          tableNodes[i].position.x = bufferX + col * horizontalSpacing;
-          tableNodes[i].position.y = bufferY + row * verticalSpacing;
-
-          // store the sub obj into the main obj
+          tableNodes.push(tableNode);
           dbContents[i] = tableContents;
         }
 
+        // Debug: Log the relational data
+        console.log('relationalData:', relationalData);
+
+        // logic for the input DB links
         const tableNames = Object.keys(relationalData);
 
         for (let i = 0; i < tableNames.length; i++) {
           // check to see if the table has a foreignKeys key
           if (relationalData[tableNames[i]].foreignKeys) {
             const currTableFkeys = relationalData[tableNames[i]].foreignKeys;
+            console.log(`Foreign keys for ${tableNames[i]}:`, currTableFkeys);
             for (let j = 0; j < currTableFkeys.length; j++) {
               const edge = {
                 id: `${tableNames[i]}-fkey${j}`,
@@ -219,6 +220,7 @@ export default function FormContainer() {
                 animated: true,
                 style: { stroke: '#ff9149', strokeWidth: 2 },
               };
+              console.log('Creating foreign key edge:', edge);
               tableNodes.push(edge);
 
               allForeignKeys.push({
@@ -232,10 +234,23 @@ export default function FormContainer() {
           }
 
           // check to see if the table has a referencedBy key
-          // Skip edge creation for referencedBy to avoid duplicates with foreignKeys
           if (relationalData[tableNames[i]].referencedBy) {
             const currTableRefKeys = relationalData[tableNames[i]].referencedBy;
+            console.log(`Referenced by for ${tableNames[i]}:`, currTableRefKeys);
             for (let j = 0; j < currTableRefKeys.length; j++) {
+              const edge = {
+                id: `${tableNames[i]}-refKey${j}`,
+                type: 'default',
+                source: currTableRefKeys[j][0],
+                target: currTableRefKeys[j][1],
+                sourceHandle: `${currTableRefKeys[j][0]}-${currTableRefKeys[j][2]}`,
+                targetHandle: `${currTableRefKeys[j][1]}-${currTableRefKeys[j][3]}`,
+                animated: true,
+                style: { stroke: '#ff9149', strokeWidth: 2 },
+              };
+              console.log('Creating referenced by edge:', edge);
+              tableNodes.push(edge);
+
               allRefByValues.push({
                 tableName: tableNames[i],
                 source: currTableRefKeys[j][0],
@@ -247,7 +262,6 @@ export default function FormContainer() {
           }
         }
 
-        // Create hasHandles data after foreign key processing
         const hasHandles = {};
 
         // only care about the source and source handles
@@ -260,6 +274,7 @@ export default function FormContainer() {
         });
 
         // only care about the target and target handles
+
         allRefByValues.forEach((obj) => {
           if (!hasHandles[obj.target]) {
             hasHandles[obj.target] = { targetHandles: [obj.targetHandle] };
@@ -272,103 +287,22 @@ export default function FormContainer() {
           }
         });
 
-        // Now update the table nodes to include hasHandles data
-        tableNodes.forEach((node) => {
-          if (node.type === 'selectorNode') {
-            node.data.hasHandles = hasHandles;
-          }
-        });
-
-        // Create separate nodes for columns that need handles
-        const tableNamesForHandles = Object.keys(relationalData);
-        for (let i = 0; i < tableNamesForHandles.length; i++) {
-          const tableName = tableNamesForHandles[i];
-          const tableData = relationalData[tableName];
-
-          // Check for source handles (foreign keys)
-          if (tableData.foreignKeys) {
-            tableData.foreignKeys.forEach((fk) => {
-              const sourceColumn = fk[2]; // e.g., "user_id"
-              const sourceHandleId = `${tableName}-${sourceColumn}`;
-
-              // Create a separate node for this column
-              tableNodes.push({
-                id: sourceHandleId,
-                type: 'columnHandleNode',
-                data: {
-                  tableName: tableName,
-                  columnName: sourceColumn,
-                  isSource: true,
-                },
-                style: {
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                  width: 10,
-                  height: 20,
-                },
-                position: {
-                  x: 0, // Will be calculated below
-                  y: 0, // Will be calculated below
-                },
-                sourcePosition: 'right',
-              });
-            });
-          }
-
-          // Check for target handles (referenced by)
-          if (tableData.referencedBy) {
-            tableData.referencedBy.forEach((ref) => {
-              const targetColumn = ref[3]; // e.g., "id"
-              const targetHandleId = `${tableName}-${targetColumn}`;
-
-              // Create a separate node for this column
-              tableNodes.push({
-                id: targetHandleId,
-                type: 'columnHandleNode',
-                data: {
-                  tableName: tableName,
-                  columnName: targetColumn,
-                  isTarget: true,
-                },
-                style: {
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                  width: 10,
-                  height: 20,
-                },
-                position: {
-                  x: 0, // Will be calculated below
-                  y: 0, // Will be calculated below
-                },
-                targetPosition: 'left',
-              });
-            });
-          }
-        }
-
-        // Position the column handle nodes correctly relative to their tables
-        tableNodes.forEach((node) => {
-          if (node.type === 'columnHandleNode') {
-            const tableName = node.data.tableName;
-            const tableIndex = tableNamesForHandles.indexOf(tableName);
-            const tableRow = Math.floor(tableIndex / 3);
-            const tableCol = tableIndex % 3;
-            const tableX = 200 + tableCol * 450;
-            const tableY = 150 + tableRow * 400;
-
-            if (node.data.isSource) {
-              node.position.x = tableX + 350; // Right side of table
-              node.position.y = tableY;
-            } else if (node.data.isTarget) {
-              node.position.x = tableX - 10; // Left side of table
-              node.position.y = tableY;
-            }
-          }
-        });
+        // Debug: Log the hasHandles object
+        console.log('hasHandles object:', hasHandles);
 
         // Separate nodes and edges to avoid timing issues
         const tableNodesOnly = tableNodes.filter((node) => node.type === 'selectorNode');
         const edgesOnly = tableNodes.filter((node) => node.type === 'default');
+
+        console.log('tableNodesOnly:', tableNodesOnly);
+        console.log('edgesOnly:', edgesOnly);
+
+        // Attach hasHandles data to table nodes
+        tableNodesOnly.forEach((node) => {
+          // Pass the entire hasHandles object to each table node
+          // The ColumnNode component expects hasHandles[tableName] to access handle data
+          node.data.hasHandles = hasHandles;
+        });
 
         // First, set the table nodes only (without edges)
         diagramDispatch({
@@ -412,6 +346,19 @@ export default function FormContainer() {
             inputDBtext: 'Or input a link to a different database:',
           },
         });
+
+        // Clear loading state
+        formDispatch({
+          type: 'SET_LOADING',
+          payload: { isLoading: false },
+        });
+      })
+      .catch((error) => {
+        console.error('Error loading sample data:', error);
+        formDispatch({
+          type: 'SET_LOADING',
+          payload: { isLoading: false },
+        });
       });
   };
 
@@ -419,18 +366,35 @@ export default function FormContainer() {
   const handleURI = (e) => {
     e.preventDefault();
     const URILink = document.getElementById('URILink').value;
-    const valid = /^postgres:\/\//g;
 
-    // if there is no input or if input is invalid do nothing
-    if (!URILink || !valid.test(URILink)) {
-      return formDispatch({
-        type: 'TOGGLE_FORM',
-        payload: {
-          URIvalidation: 'Invalid URI link.',
-          formIsOpen: true,
-        },
+    // Clear previous validation
+    formDispatch({
+      type: 'SET_VALIDATION',
+      payload: { URIvalidation: '' },
+    });
+
+    // Basic URL validation
+    if (!URILink.trim()) {
+      formDispatch({
+        type: 'SET_VALIDATION',
+        payload: { URIvalidation: 'Please enter a database URL.' },
       });
+      return;
     }
+
+    if (!URILink.startsWith('postgres://')) {
+      formDispatch({
+        type: 'SET_VALIDATION',
+        payload: { URIvalidation: 'URL must start with postgres://' },
+      });
+      return;
+    }
+
+    // Set loading state
+    formDispatch({
+      type: 'SET_LOADING',
+      payload: { isLoading: true },
+    });
 
     // encrypt URI before sending to server
     const encryptedURL = CryptoJS.AES.encrypt(URILink, secretKey).toString();
@@ -518,12 +482,22 @@ export default function FormContainer() {
 
           let dataTypes = [];
 
-          for (let j = 0; j < columns.length; j++) {
-            const columnLabel = Object.keys(columns[j])[0];
-            tableContents[columnLabel] = fullTable[tableName].columns[j][columnLabel].dataType;
-
-            columnsList.push(columnLabel);
-            dataTypes.push(tableContents[columnLabel]);
+          // Handle both array format and object format for columns
+          if (Array.isArray(columns)) {
+            // Array format: [{ columnName: { dataType, ... } }]
+            for (let j = 0; j < columns.length; j++) {
+              const columnLabel = Object.keys(columns[j])[0];
+              tableContents[columnLabel] = fullTable[tableName].columns[j][columnLabel].dataType;
+              columnsList.push(columnLabel);
+              dataTypes.push(tableContents[columnLabel]);
+            }
+          } else {
+            // Object format: { columnName: { dataType, ... } }
+            for (const columnName of Object.keys(columns)) {
+              tableContents[columnName] = columns[columnName].dataType;
+              columnsList.push(columnName);
+              dataTypes.push(tableContents[columnName]);
+            }
           }
 
           // move primary key to front of columnsList array before saving it onto tableNodes
@@ -535,8 +509,8 @@ export default function FormContainer() {
               dataTypes.unshift(matchingCol);
             }
           });
-          // new logic for custom node to store the stuff
-          tableNodes.push({
+          // Create table node
+          const tableNode = {
             id: `${tableName}`,
             type: 'selectorNode',
             data: {
@@ -558,27 +532,18 @@ export default function FormContainer() {
             },
             sourcePosition: 'right',
             targetPosition: 'left',
-          });
+          };
 
-          const numTables = tableNodes.length;
-          let tablesPerRow = 0;
+          // Position the table in a grid layout
+          const tableIndex = tableNodes.length; // Current table index
+          const tablesPerRow = 3;
+          const row = Math.floor(tableIndex / tablesPerRow);
+          const col = tableIndex % tablesPerRow;
 
-          if (numTables < 5) tablesPerRow = numTables;
-          else {
-            if (numTables % 5 === 1) tablesPerRow = 4;
-            else tablesPerRow = numTables;
-          }
+          tableNode.position.x = 450 * col + 200;
+          tableNode.position.y = 400 * row + 150;
 
-          if (i < tablesPerRow) {
-            tableNodes[i].position.x = 500 * i;
-            tableNodes[i].position.y = 0;
-          } else if (i < tablesPerRow * 2) {
-            tableNodes[i].position.x = 500 * (i - tablesPerRow);
-            tableNodes[i].position.y = 550;
-          } else {
-            tableNodes[i].position.x = 500 * (i - tablesPerRow * 2);
-            tableNodes[i].position.y = 1100;
-          }
+          tableNodes.push(tableNode);
           dbContents[i] = tableContents;
         }
 
@@ -592,10 +557,13 @@ export default function FormContainer() {
             for (let j = 0; j < currTableFkeys.length; j++) {
               tableNodes.push({
                 id: `${tableNames[i]}-fkey${j}`,
+                type: 'default',
                 source: currTableFkeys[j][0],
                 target: currTableFkeys[j][1],
-                sourceHandle: currTableFkeys[j][2],
-                targetHandle: currTableFkeys[j][3],
+                sourceHandle: `${currTableFkeys[j][0]}-${currTableFkeys[j][2]}`,
+                targetHandle: `${currTableFkeys[j][1]}-${currTableFkeys[j][3]}`,
+                animated: true,
+                style: { stroke: '#ff9149', strokeWidth: 2 },
               });
 
               allForeignKeys.push({
@@ -614,12 +582,13 @@ export default function FormContainer() {
             for (let j = 0; j < currTableRefKeys.length; j++) {
               tableNodes.push({
                 id: `${tableNames[i]}-refKey${j}`,
+                type: 'default',
                 source: currTableRefKeys[j][0],
                 target: currTableRefKeys[j][1],
-                sourceHandle: currTableRefKeys[j][2],
-                targetHandle: currTableRefKeys[j][3],
+                sourceHandle: `${currTableRefKeys[j][0]}-${currTableRefKeys[j][2]}`,
+                targetHandle: `${currTableRefKeys[j][1]}-${currTableRefKeys[j][3]}`,
                 animated: true,
-                style: { stroke: '#fff' },
+                style: { stroke: '#ff9149', strokeWidth: 2 },
               });
 
               allRefByValues.push({
@@ -645,7 +614,6 @@ export default function FormContainer() {
         });
 
         // only care about the target and target handles
-
         allRefByValues.forEach((obj) => {
           if (!hasHandles[obj.target]) {
             hasHandles[obj.target] = { targetHandles: [obj.targetHandle] };
@@ -661,6 +629,13 @@ export default function FormContainer() {
         // Separate nodes and edges to avoid timing issues
         const tableNodesOnly = tableNodes.filter((node) => node.type === 'selectorNode');
         const edgesOnly = tableNodes.filter((node) => node.type === 'default');
+
+        // Attach hasHandles data to table nodes
+        tableNodesOnly.forEach((node) => {
+          // Pass the entire hasHandles object to each table node
+          // The ColumnNode component expects hasHandles[tableName] to access handle data
+          node.data.hasHandles = hasHandles;
+        });
 
         // First, set the table nodes only (without edges)
         diagramDispatch({
@@ -704,6 +679,19 @@ export default function FormContainer() {
             inputDBtext: 'Or input a link to a different database:',
           },
         });
+
+        // Clear loading state
+        formDispatch({
+          type: 'SET_LOADING',
+          payload: { isLoading: false },
+        });
+      })
+      .catch((error) => {
+        console.error('Error loading sample data:', error);
+        formDispatch({
+          type: 'SET_LOADING',
+          payload: { isLoading: false },
+        });
       });
   };
 
@@ -719,35 +707,85 @@ export default function FormContainer() {
     <div className="uriForm" id="uriForm">
       {btnDisplay}
       <div className={formState.formIsOpen ? 'uripanel open' : 'uripanel'}>
-        <div id="uriAboveForm">
-          <h6 id="sampleHeader">
-            Get started by using
-            <br />
-            our sample database:
-          </h6>
-
+        <div className="database-card">
           <button
             type="button"
-            className="formButtons"
-            id="sampleDataButton"
-            onClick={handleSampleData}
+            className="collapse-button"
+            onClick={() =>
+              formDispatch({ type: 'TOGGLE_FORM', payload: { formIsOpen: !formState.formIsOpen } })
+            }
           >
-            Use Sample Database
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path d="M6 9l6 6 6-6" />
+            </svg>
           </button>
+
+          <h2 className="card-header">Connect to a database</h2>
+          <p className="card-helper">Load our sample data or connect your own URL.</p>
+
+          <div className="card-section">
+            <button
+              type="button"
+              className="primary-button"
+              onClick={handleSampleData}
+              disabled={formState.isLoading}
+            >
+              {formState.isLoading ? <span className="loading-spinner"></span> : 'Load sample data'}
+            </button>
+          </div>
+
+          <form className="formContainer" onSubmit={handleURI}>
+            <div className="card-section">
+              <label htmlFor="URILink" className="input-label">
+                Database connection URL
+              </label>
+              <input
+                className={`database-input ${formState.URIvalidation ? 'error' : ''}`}
+                id="URILink"
+                placeholder="postgres://username:password@host:port/database"
+                disabled={formState.isLoading}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleURI(e);
+                  }
+                }}
+              />
+              <div className="input-helper">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                  <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+                <span>Example: postgres://user:pass@localhost:5432/mydb</span>
+              </div>
+              {formState.URIvalidation && (
+                <p className="error-message">{formState.URIvalidation}</p>
+              )}
+              <button type="submit" className="secondary-button" disabled={formState.isLoading}>
+                {formState.isLoading ? (
+                  <span className="loading-spinner"></span>
+                ) : (
+                  'Connect & generate schema'
+                )}
+              </button>
+            </div>
+          </form>
         </div>
-        <form className="formContainer" onSubmit={handleURI}>
-          <h6 id="inputHeader">
-            Or input a link to
-            <br />
-            your SQL database:
-          </h6>
-          <input className="dbInput" id="URILink" placeholder="postgres://" />
-          <p id="invalidURI">{formState.URIvalidation}</p>
-          <button className="formButtons" id="uriSubmitButton">
-            Submit
-          </button>
-          {/* <br /> */}
-        </form>
       </div>
     </div>
   );

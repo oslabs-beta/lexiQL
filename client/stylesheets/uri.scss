@@ -2,31 +2,22 @@
 URI FORM PANEL STYLING
 */
 .uripanel {
-  font-family: $orelega-one;
+  font-family: 'Raleway', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   position: absolute;
   top: 27%;
   left: -35%;
   height: 55%;
   width: 35%;
   transition: left 0.5s ease-in-out;
-  background-color: white;
   z-index: 9;
-  box-shadow: 0px 0px 10px #aaa9a9;
 }
 
 .uripanel.open {
   left: 0;
-  padding: 0px 0px;
-}
-
-#sampleHeader {
-  font-size: 35px;
-  padding: 0px 0px;
-  margin: 0px 0px;
 }
 
 .uripanelbtn {
@@ -57,34 +48,210 @@ URI FORM PANEL STYLING
   filter: brightness(80%);
 }
 
-#sampleDataButton {
-  margin-bottom: -20px;
-}
-
-#uriAboveForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+/*
+MODERN DATABASE CARD STYLING
+*/
+.database-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(15, 38, 75, 0.12);
   width: 100%;
-  height: 50%;
+  max-width: 380px;
+  border: 1px solid rgba(255, 145, 73, 0.1);
+  position: relative;
 }
 
-#sampleDataButton {
-  margin-top: 15px;
+.collapse-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
   border: none;
-  border-radius: 5px;
-  width: 50%;
-  padding: 10px 0px;
-  background-color: $dark-blue;
-  color: $orange;
-  border: none;
-  font-size: 15px;
-}
-
-#sampleDataButton:hover {
+  color: #666;
   cursor: pointer;
-  filter: brightness(85%);
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: $dark-blue;
+    background-color: rgba(15, 38, 75, 0.05);
+  }
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+}
+
+.card-header {
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: $dark-blue;
+  text-align: center;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+.card-helper {
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  margin: 0 0 24px 0;
+  line-height: 1.4;
+}
+
+.card-section {
+  margin-bottom: 24px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.input-label {
+  display: block;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: $dark-blue;
+  margin-bottom: 8px;
+}
+
+.database-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  background-color: #f8f9fa;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: $orange;
+    background-color: white;
+    box-shadow: 0 0 0 2px rgba(255, 145, 73, 0.2);
+  }
+
+  &::placeholder {
+    color: #666;
+  }
+
+  &.error {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.1);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.primary-button {
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 24px;
+  background-color: $orange;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background-color: darken($orange, 8%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 145, 73, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.secondary-button {
+  width: 100%;
+  padding: 12px 24px;
+  background-color: transparent;
+  color: $dark-blue;
+  border: 2px solid #d0d0d0;
+  border-radius: 8px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 12px;
+
+  &:hover:not(:disabled) {
+    background-color: $dark-blue;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(15, 38, 75, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.input-helper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 0 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  color: #666;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.error-message {
+  color: #dc3545;
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  margin: 8px 0 0 0;
+  min-height: 16px;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /*
@@ -96,47 +263,9 @@ URI FORM STYLING
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .formContainer {
   width: 100%;
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-#invalidURI {
-  color: red;
-  font-size: 13px;
-}
-
-#inputHeader {
-  font-size: 35px;
-  padding: 0px 0px;
-  margin: 0px 0px;
-}
-
-.dbInput {
-  width: 80%;
-  margin: 15px 0px -5px 0px;
-}
-
-#uriSubmitButton {
-  margin-bottom: 35px;
-  border: none;
-  border-radius: 5px;
-  width: 50%;
-  padding: 10px 0px;
-  background-color: $dark-blue;
-  color: $orange;
-  border: none;
-  font-size: 15px;
-}
-
-#uriSubmitButton:hover {
-  cursor: pointer;
-  filter: brightness(85%);
 }
