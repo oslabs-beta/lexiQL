@@ -49,7 +49,7 @@ export default function AboutUsContainer() {
 
   return (
     <div className="teamContainer">
-      <h2>Meet the lexiQL team</h2>
+      <h2>Meet the Orbit team</h2>
       <div id="allCards">{teamMemInfo}</div>
     </div>
   );
