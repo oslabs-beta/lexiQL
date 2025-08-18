@@ -48,7 +48,7 @@
   .faq-accordion {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     margin: 0;
     margin-top: 6px;
     width: 100%;
@@ -58,13 +58,12 @@
     background-color: $dark-blue;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0px 0px 10px #aaa9a9;
-    margin: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  .faq-trigger {
+  .faq-question {
     width: 100%;
-    background: transparent;
+    background-color: $dark-blue;
     border: none;
     padding: 20px 24px;
     display: flex;
@@ -77,11 +76,10 @@
     font-weight: 600;
     text-align: left;
     transition: all 0.2s ease;
-    border-left: 3px solid transparent;
+    border-radius: 8px;
 
     &:hover {
-      border-left-color: $orange;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: lighten($dark-blue, 5%);
     }
 
     &:focus {
@@ -89,13 +87,13 @@
       outline-offset: -2px;
     }
 
-    &.open {
-      border-left-color: $orange;
-      background-color: rgba(255, 255, 255, 0.1);
+    &.expanded {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
     }
   }
 
-  .faq-question {
+  .faq-question-text {
     flex: 1;
     margin-right: 16px;
   }
@@ -103,30 +101,31 @@
   .faq-chevron {
     transition: transform 0.2s ease;
     flex-shrink: 0;
+    color: white;
   }
 
-  .faq-trigger.open .faq-chevron {
+  .faq-question.expanded .faq-chevron {
     transform: rotate(90deg);
   }
 
-  .faq-panel {
+  .faq-answer {
     max-height: 0;
     overflow: hidden;
     transition:
-      max-height 0.2s ease,
-      opacity 0.2s ease;
+      max-height 0.3s ease,
+      opacity 0.3s ease;
     opacity: 0;
-    background-color: rgba(255, 255, 255, 0.02);
+    background-color: lighten($dark-blue, 3%);
 
-    &.open {
-      max-height: 200px;
+    &.expanded {
+      max-height: 300px;
       opacity: 1;
     }
 
     p {
-      padding: 0 24px 20px 24px;
+      padding: 20px 24px;
       margin: 0;
-      color: #5f6e85;
+      color: #e0e0e0;
       font-size: 16px;
       line-height: 1.6;
     }

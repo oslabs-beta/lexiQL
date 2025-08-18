@@ -1,9 +1,9 @@
 import React from 'react';
 
-import IntroContainer from '../containers/IntroContainer.jsx';
 import DemoContainer from '../containers/DemoContainer.jsx';
-import AboutUsContainer from '../containers/AboutUsContainer.jsx';
+import FAQ from '../containers/FAQ.jsx';
 import Footer from '../containers/Footer.jsx';
+import IntroContainer from '../containers/IntroContainer.jsx';
 
 export default function HomePage() {
   return (
@@ -11,7 +11,7 @@ export default function HomePage() {
       <div className="homePageContent">
         <IntroContainer />
         <DemoContainer />
-        <AboutUsContainer />
+        <FAQ />
       </div>
       <Footer />
     </div>
