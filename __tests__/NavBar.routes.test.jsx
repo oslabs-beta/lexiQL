@@ -10,8 +10,8 @@ describe('NavBar route rendering', () => {
         <NavBar />
       </MemoryRouter>
     );
-    expect(screen.getByText(/Docs/i)).toBeInTheDocument();
-    expect(screen.getAllByText(/Visualize/i)[0]).toBeInTheDocument();
+    expect(screen.getByText(/Playground/i)).toBeInTheDocument();
+    expect(screen.getByText(/FAQ/i)).toBeInTheDocument();
   });
 
   it('renders data header at /visualizer', () => {
@@ -20,6 +20,6 @@ describe('NavBar route rendering', () => {
         <NavBar />
       </MemoryRouter>
     );
-    expect(screen.getByText(/Playground/i)).toBeInTheDocument();
+    expect(screen.getByText(/Sandbox/i)).toBeInTheDocument();
   });
 });

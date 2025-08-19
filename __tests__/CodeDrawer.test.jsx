@@ -38,7 +38,7 @@ describe('CodeDrawer', () => {
     expect(screen.getByTestId('code-mirror')).toBeInTheDocument();
 
     // Schema tab should be active
-    expect(screen.getByText('Schema').closest('button')).toHaveClass('active');
+    expect(screen.getByText('Schema').closest('button')).toHaveClass('schema-drawer__tab--active');
   });
 
   it('switches to resolver tab when clicked', () => {
@@ -66,8 +66,8 @@ describe('CodeDrawer', () => {
   it('has a resize handle', () => {
     renderCodeDrawer();
 
-    const resizeHandle = document.querySelector('.resize-handle');
+    const resizeHandle = document.querySelector('.schema-drawer__resize-handle');
     expect(resizeHandle).toBeInTheDocument();
-    expect(resizeHandle).toHaveClass('resize-handle');
+    expect(resizeHandle).toHaveClass('schema-drawer__resize-handle');
   });
 });
