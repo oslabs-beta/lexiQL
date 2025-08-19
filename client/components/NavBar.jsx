@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Link, Route, Switch, useLocation } from 'react-router-dom';
+import { Link, Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import GithubLogo from '../assets/navy-github.png';
 import LinkedinLogo from '../assets/navy-linkedin.png';
 import TwitterLogo from '../assets/navy-twitter.png';
@@ -11,167 +11,161 @@ const HomePage = React.lazy(() => import('../pages/HomePage.jsx'));
 
 export default function NavBar() {
   const location = useLocation();
+  const history = useHistory();
+  const isHomePage = location.pathname === '/';
 
-  if (location.pathname === '/') {
-    return (
-      <div id="homeBody">
-        <nav id="homeHeader">
-          <div className="socialLogos">
-            <a
-              href="https://twitter.com/orbit"
-              target="_blank"
-              className="headerLinks"
-              rel="noreferrer"
-            >
+  const handleFAQClick = () => {
+    if (location.pathname !== '/') {
+      history.push('/');
+      // Wait for navigation to complete, then scroll to FAQ
+      setTimeout(() => {
+        const faqElement = document.getElementById('faq');
+        if (faqElement) {
+          faqElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // If already on homepage, just scroll to FAQ
+      const faqElement = document.getElementById('faq');
+      if (faqElement) {
+        faqElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  return (
+    <div id={isHomePage ? 'homeBody' : 'appBody'}>
+      <nav id={isHomePage ? 'homeHeader' : 'appHeader'}>
+        {isHomePage ? (
+          // Home page navigation
+          <>
+            <div className="socialLogos">
+              <a
+                href="https://twitter.com/orbit"
+                target="_blank"
+                className="headerLinks"
+                rel="noreferrer"
+              >
+                <img
+                  className="homeLogo"
+                  id="homeLogo"
+                  src={TwitterLogo}
+                  alt="Twitter Profile Link"
+                  decoding="async"
+                  loading="lazy"
+                />
+              </a>
+
+              <a
+                href="http://linkedin.com/company/orbit-dev"
+                target="_blank"
+                className="headerLinks"
+                rel="noreferrer"
+              >
+                <img
+                  className="homeLogo"
+                  id="homeLogo"
+                  src={LinkedinLogo}
+                  alt="LinkedIn Profile Link"
+                  decoding="async"
+                  loading="lazy"
+                />
+              </a>
+
+              <a
+                href="https://github.com/oslabs-beta/Orbit"
+                target="_blank"
+                className="headerLinks"
+                rel="noreferrer"
+              >
+                <img
+                  className="homeLogo"
+                  id="homeLogo"
+                  src={GithubLogo}
+                  alt="GitHub Repository Link"
+                  decoding="async"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+
+            <div className="rightLinks">
+              <Link className="headerLinks" to="/visualizer">
+                <p>Playground</p>
+              </Link>
+
+              <a href="#faq" className="headerLinks">
+                <p>FAQ</p>
+              </a>
+            </div>
+          </>
+        ) : (
+          // App page navigation
+          <>
+            <Link className="headerLogo" to="/">
               <img
                 className="homeLogo"
                 id="homeLogo"
-                src={TwitterLogo}
-                alt="Twitter Profile Link"
+                src={WhiteLogo}
+                alt="Orbit Logo"
                 decoding="async"
-                loading="lazy"
+                fetchPriority="high"
+                loading="eager"
               />
-            </a>
-
-            <a
-              href="http://linkedin.com/company/orbit-dev"
-              target="_blank"
-              className="headerLinks"
-              rel="noreferrer"
-            >
-              <img
-                className="homeLogo"
-                id="homeLogo"
-                src={LinkedinLogo}
-                alt="LinkedIn Profile Link"
-                decoding="async"
-                loading="lazy"
-              />
-            </a>
-
-            <a
-              href="https://github.com/oslabs-beta/Orbit"
-              target="_blank"
-              className="headerLinks"
-              rel="noreferrer"
-            >
-              <img
-                className="homeLogo"
-                id="homeLogo"
-                src={GithubLogo}
-                alt="GitHub Repository Link"
-                decoding="async"
-                loading="lazy"
-              />
-            </a>
-          </div>
-
-          <div className="rightLinks">
-            <a href="#faq" className="headerLinks">
-              <p>FAQ</p>
-            </a>
-
-            <Link className="headerLinks" to="/visualizer">
-              <p>Visualize</p>
             </Link>
-          </div>
-        </nav>
 
-        <Suspense fallback={<div className="loading">Loading...</div>}>
-          <Switch>
-            <Route path="/visualizer">
-              <DataPage />
-            </Route>
+            {location.pathname === '/visualizer' && (
+              <div className="rightLinks">
+                <button
+                  onClick={() => window.open('/playground', '_blank')}
+                  className="headerLinks"
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <p>Sandbox</p>
+                </button>
 
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-          </Switch>
-        </Suspense>
-      </div>
-    );
-  }
+                <button
+                  onClick={handleFAQClick}
+                  className="headerLinks"
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <p>FAQ</p>
+                </button>
+              </div>
+            )}
 
-  if (location.pathname === '/visualizer') {
-    return (
-      <div id="appBody">
-        <nav id="appHeader">
-          <Link className="headerLogo" to="/">
-            <img
-              className="homeLogo"
-              id="homeLogo"
-              src={WhiteLogo}
-              alt="Orbit Logo"
-              decoding="async"
-              fetchPriority="high"
-              loading="eager"
-            />
-          </Link>
+            {location.pathname === '/playground' && (
+              <Link className="headerLinks" to="/visualizer">
+                <p>Visualize</p>
+              </Link>
+            )}
+          </>
+        )}
+      </nav>
 
-          <Link
-            className="headerLinks"
-            to="/playground"
-            target={'_blank'}
-            rel="noopener noreferrer"
-          >
-            <p>Playground</p>
-          </Link>
-        </nav>
+      <Suspense fallback={<div className="loading">Loading...</div>}>
+        <Switch>
+          <Route path="/visualizer">
+            <DataPage />
+          </Route>
 
-        <Suspense fallback={<div className="loading">Loading...</div>}>
-          <Switch>
-            <Route path="/playground">
-              <h1>insert Graphiql playground here</h1>
-            </Route>
+          <Route path="/playground">
+            <h1>insert Graphiql playground here</h1>
+          </Route>
 
-            <Route path="/visualizer">
-              <DataPage />
-            </Route>
-
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-          </Switch>
-        </Suspense>
-      </div>
-    );
-  }
-
-  if (location.pathname === '/playground') {
-    return (
-      <div id="appBody">
-        <nav id="appHeader">
-          <Link className="headerLogo" to="/">
-            <img
-              className="homeLogo"
-              id="homeLogo"
-              src={WhiteLogo}
-              alt="Orbit Logo"
-              decoding="async"
-              loading="eager"
-            />
-          </Link>
-          <Link className="headerLinks" to="/visualizer">
-            <p>Visualize</p>
-          </Link>
-        </nav>
-
-        <Suspense fallback={<div className="loading">Loading...</div>}>
-          <Switch>
-            <Route path="/playground">
-              <h1>insert Graphiql playground here</h1>
-            </Route>
-
-            <Route path="/visualizer">
-              <DataPage />
-            </Route>
-
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-          </Switch>
-        </Suspense>
-      </div>
-    );
-  }
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+        </Switch>
+      </Suspense>
+    </div>
+  );
 }

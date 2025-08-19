@@ -50,11 +50,20 @@
   align-items: center;
   font-family: 'Raleway';
 
+  .rightLinks {
+    display: flex;
+  }
+
   .headerLinks {
     color: white;
     font-size: 37px;
+    font-weight: normal !important;
     text-decoration: none;
     margin-right: 40px;
+  }
+
+  .headerLinks p {
+    font-weight: normal !important;
   }
 
   .headerLinks:visited {

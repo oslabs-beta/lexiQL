@@ -17,10 +17,13 @@ module.exports = {
     clean: true,
   },
   devServer: {
-    contentBase: path.join(__dirname, 'build'),
-    publicPath: '/',
+    static: {
+      directory: path.join(__dirname, 'build'),
+      publicPath: '/',
+    },
     hot: true,
     port: 8080,
+    historyApiFallback: true,
     proxy: {
       '/example-schema': 'http://localhost:3000',
       '/sql-schema': 'http://localhost:3000',
