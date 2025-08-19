@@ -52,10 +52,22 @@
   .homeLogo {
     height: 50px;
     margin: 10px -10px 0px 0px;
+    transition: all 0.3s ease;
+    border-radius: 50%;
   }
 
   .homeLogo:hover {
-    height: 55px;
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 2px $orange;
+  }
+
+  .homeLogo:focus {
+    outline: 2px solid $orange;
+    outline-offset: 2px;
+  }
+
+  .homeLogo:active {
+    transform: translateY(0);
   }
 
   // Hamburger menu styles
@@ -97,6 +109,22 @@
     .homeLogo {
       height: 40px;
       margin: 8px -8px 0px 0px;
+      transition: all 0.3s ease;
+      border-radius: 50%;
+    }
+
+    .homeLogo:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 0 2px $orange;
+    }
+
+    .homeLogo:focus {
+      outline: 2px solid $orange;
+      outline-offset: 2px;
+    }
+
+    .homeLogo:active {
+      transform: translateY(0);
     }
 
     .hamburger-menu {
@@ -146,6 +174,22 @@
     .homeLogo {
       height: 35px;
       margin: 6px -6px 0px 0px;
+      transition: all 0.3s ease;
+      border-radius: 50%;
+    }
+
+    .homeLogo:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 0 2px $orange;
+    }
+
+    .homeLogo:focus {
+      outline: 2px solid $orange;
+      outline-offset: 2px;
+    }
+
+    .homeLogo:active {
+      transform: translateY(0);
     }
 
     .hamburger-menu {
