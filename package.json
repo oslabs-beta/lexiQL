@@ -7,7 +7,7 @@
     "start": "node server/server.js",
     "build": "NODE_ENV=production webpack",
     "build:analyze": "NODE_ENV=production ANALYZE=true webpack",
-    "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack serve --open --hot --inline",
+    "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development npx webpack serve --open",
     "test": "jest --verbose --runInBand",
     "lint": "eslint . --ext .js,.jsx",
     "lint:fix": "eslint . --ext .js,.jsx --fix",

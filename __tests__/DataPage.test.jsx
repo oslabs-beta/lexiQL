@@ -5,7 +5,7 @@ import DataPage from '../client/pages/DataPage.jsx';
 
 test('renders DataPage containers', async () => {
   render(
-    <MemoryRouter initialEntries={['/data']}>
+    <MemoryRouter initialEntries={['/visualizer']}>
       <DataPage />
     </MemoryRouter>
   );
