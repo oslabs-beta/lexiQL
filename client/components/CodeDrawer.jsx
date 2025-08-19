@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { CodeContext } from '../state/contexts';
 
 // Import CodeMirror with proper error handling
@@ -8,12 +8,12 @@ try {
 } catch (error) {
   console.error('Failed to load CodeMirror:', error);
   // Fallback component
-  CodeMirror = ({ value, options }) => (
+  const CodeMirrorFallback = ({ value, _options }) => (
     <div className="schema-drawer__editor-fallback">
       <pre>{value || '// CodeMirror failed to load'}</pre>
     </div>
   );
-  CodeMirror.displayName = 'CodeMirrorFallback';
+  CodeMirror = CodeMirrorFallback;
 }
 
 export default function CodeDrawer({ onWidthChange, onCollapseChange }) {
@@ -191,21 +191,24 @@ export default function CodeDrawer({ onWidthChange, onCollapseChange }) {
     setIsResizing(false);
   };
 
-  const handleResize = (e) => {
-    if (!isResizing) return;
+  const handleResize = useCallback(
+    (e) => {
+      if (!isResizing) return;
 
-    const containerWidth = window.innerWidth;
-    const newWidth = ((containerWidth - e.clientX) / containerWidth) * 100;
+      const containerWidth = window.innerWidth;
+      const newWidth = ((containerWidth - e.clientX) / containerWidth) * 100;
 
-    // Limit width between 20% and 60%, minimum 320px
-    const minWidthPercent = (320 / containerWidth) * 100;
-    if (newWidth >= Math.max(20, minWidthPercent) && newWidth <= 60) {
-      setDrawerWidth(newWidth);
-      if (onWidthChange) {
-        onWidthChange(newWidth);
+      // Limit width between 20% and 60%, minimum 320px
+      const minWidthPercent = (320 / containerWidth) * 100;
+      if (newWidth >= Math.max(20, minWidthPercent) && newWidth <= 60) {
+        setDrawerWidth(newWidth);
+        if (onWidthChange) {
+          onWidthChange(newWidth);
+        }
       }
-    }
-  };
+    },
+    [isResizing, onWidthChange]
+  );
 
   useEffect(() => {
     if (isResizing) {
@@ -217,7 +220,7 @@ export default function CodeDrawer({ onWidthChange, onCollapseChange }) {
         document.removeEventListener('mouseup', stopResize);
       };
     }
-  }, [isResizing]);
+  }, [isResizing, handleResize]);
 
   // Set initial display code when component mounts (only once)
   useEffect(() => {
@@ -231,7 +234,7 @@ export default function CodeDrawer({ onWidthChange, onCollapseChange }) {
         },
       });
     }
-  }, []); // Empty dependency array - only run once on mount
+  }, [codeDispatch, codeState.displayCode, codeState.schema, codeState.resolver]); // Include all dependencies
 
   const drawerStyle = {
     width: isCollapsed ? '44px' : `${drawerWidth}%`,
