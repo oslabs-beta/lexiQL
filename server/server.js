@@ -18,8 +18,8 @@ app.get('/', (req, res) => {
     );
 });
 
-/* /data Refresh Testing */
-app.get('/data', (req, res) => {
+/* /visualizer Refresh Testing */
+app.get('/visualizer', (req, res) => {
   res
     .status(200)
     .send(

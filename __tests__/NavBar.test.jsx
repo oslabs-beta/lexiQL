@@ -15,9 +15,9 @@ describe('NavBar', () => {
     expect(screen.getAllByText(/Visualize/i)[0]).toBeInTheDocument();
   });
 
-  it('renders app header with Playground at /data', () => {
+  it('renders app header with Playground at /visualizer', () => {
     render(
-      <MemoryRouter initialEntries={['/data']}>
+      <MemoryRouter initialEntries={['/visualizer']}>
         <NavBar />
       </MemoryRouter>
     );

@@ -14,9 +14,9 @@ describe('NavBar route rendering', () => {
     expect(screen.getAllByText(/Visualize/i)[0]).toBeInTheDocument();
   });
 
-  it('renders data header at /data', () => {
+  it('renders data header at /visualizer', () => {
     render(
-      <MemoryRouter initialEntries={['/data']}>
+      <MemoryRouter initialEntries={['/visualizer']}>
         <NavBar />
       </MemoryRouter>
     );

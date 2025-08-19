@@ -42,13 +42,19 @@ export default function Footer() {
           <span aria-hidden="true" className="footer-divider">
             •
           </span>
-          <a href="#faq" className="footer-link" aria-label="Go to Frequently Asked Questions">
-            FAQ
+          <a
+            href="https://graphql.org/learn/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+            aria-label="Go to GraphQL Documentation"
+          >
+            Docs
           </a>
           <span aria-hidden="true" className="footer-divider">
             •
           </span>
-          <Link to="/data" className="footer-link" aria-label="Go to Orbit Playground">
+          <Link to="/visualizer" className="footer-link" aria-label="Go to Orbit Playground">
             Playground
           </Link>
         </div>

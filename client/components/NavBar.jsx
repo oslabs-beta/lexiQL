@@ -67,16 +67,11 @@ export default function NavBar() {
           </div>
 
           <div className="rightLinks">
-            <a
-              href="https://graphql.org/learn/"
-              target="_blank"
-              className="headerLinks"
-              rel="noreferrer"
-            >
-              <p>Docs</p>
+            <a href="#faq" className="headerLinks">
+              <p>FAQ</p>
             </a>
 
-            <Link className="headerLinks" to="/data">
+            <Link className="headerLinks" to="/visualizer">
               <p>Visualize</p>
             </Link>
           </div>
@@ -84,7 +79,7 @@ export default function NavBar() {
 
         <Suspense fallback={<div className="loading">Loading...</div>}>
           <Switch>
-            <Route path="/data">
+            <Route path="/visualizer">
               <DataPage />
             </Route>
 
@@ -97,7 +92,7 @@ export default function NavBar() {
     );
   }
 
-  if (location.pathname === '/data') {
+  if (location.pathname === '/visualizer') {
     return (
       <div id="appBody">
         <nav id="appHeader">
@@ -129,7 +124,7 @@ export default function NavBar() {
               <h1>insert Graphiql playground here</h1>
             </Route>
 
-            <Route path="/data">
+            <Route path="/visualizer">
               <DataPage />
             </Route>
 
@@ -156,7 +151,7 @@ export default function NavBar() {
               loading="eager"
             />
           </Link>
-          <Link className="headerLinks" to="/data">
+          <Link className="headerLinks" to="/visualizer">
             <p>Visualize</p>
           </Link>
         </nav>
@@ -167,7 +162,7 @@ export default function NavBar() {
               <h1>insert Graphiql playground here</h1>
             </Route>
 
-            <Route path="/data">
+            <Route path="/visualizer">
               <DataPage />
             </Route>
 
