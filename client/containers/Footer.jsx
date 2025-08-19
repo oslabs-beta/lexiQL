@@ -1,20 +1,64 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Logo from '../assets/orbit-logo-white.png';
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <div className="footer">
-      {/* <h5>Orbit Copyright 2021</h5> */}
-      {/* <div className="footerIcons">
-        <a className="footerLink" href="https://www.linkedin.com/">
-          LinkedIn
-        </a>
-        <a className="footerLink" href="https://twitter.com/orbit">
-          Twitter
-        </a>
-        {/* <a className="footerLink" href="https://github.com/oslabs-beta/Orbit">
-          Github
-        </a> */}
-      {/* </div>  */}
-    </div>
+    <footer role="contentinfo" className="footer">
+      <div className="footer-content">
+        <div className="footer-left">
+          <a
+            href="#"
+            className="footer-brand-link"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo(0, 0);
+            }}
+          >
+            <img src={Logo} alt="Orbit" className="footer-logo" />
+          </a>
+        </div>
+
+        <div className="footer-center">
+          <span>© 2021–{currentYear}</span>
+          <span aria-hidden="true" className="footer-divider">
+            •
+          </span>
+          <span>MIT License</span>
+        </div>
+
+        <div className="footer-right">
+          <a
+            href="https://github.com/oslabs-beta/Orbit"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+            aria-label="Open Orbit on GitHub"
+          >
+            GitHub
+          </a>
+          <span aria-hidden="true" className="footer-divider">
+            •
+          </span>
+          <a
+            href="https://graphql.org/learn/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
+            aria-label="Go to GraphQL Documentation"
+          >
+            Docs
+          </a>
+          <span aria-hidden="true" className="footer-divider">
+            •
+          </span>
+          <Link to="/visualizer" className="footer-link" aria-label="Go to Orbit Playground">
+            Playground
+          </Link>
+        </div>
+      </div>
+    </footer>
   );
 }

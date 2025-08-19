@@ -1,37 +1,13 @@
-import React, { Suspense, useContext } from 'react';
+import React, { Suspense, useContext, useEffect, useState } from 'react';
+import CodeDrawer from '../components/CodeDrawer';
 import { CodeContext } from '../state/contexts';
-let CodeMirror;
-if (process.env.NODE_ENV === 'test') {
-  // eslint-disable-next-line global-require
-  CodeMirror = require('../components/CodeMirror').default;
-} else {
-  CodeMirror = React.lazy(() => import('../components/CodeMirror'));
-}
 
 export default function CodeContainer() {
   const { codeState, codeDispatch } = useContext(CodeContext);
+  const [drawerWidth, setDrawerWidth] = useState(32);
+  const [isDrawerCollapsed, setIsDrawerCollapsed] = useState(false);
 
-  const handleSchema = (e) => {
-    e.preventDefault();
-    codeDispatch({
-      type: 'SET_DISPLAY',
-      payload: {
-        displayCode: codeState.schema,
-      },
-    });
-  };
-
-  const handleResolver = (e) => {
-    e.preventDefault();
-    codeDispatch({
-      type: 'SET_DISPLAY',
-      payload: {
-        displayCode: codeState.resolver,
-      },
-    });
-  };
-
-  const toggle = () => {
+  const toggleCodeDrawer = () => {
     codeDispatch({
       type: 'TOGGLE_CODE',
       payload: {
@@ -40,53 +16,46 @@ export default function CodeContainer() {
     });
   };
 
+  // Clear collapsed state when drawer is closed
+  useEffect(() => {
+    if (!codeState.codeIsOpen) {
+      localStorage.removeItem('schema-drawer-collapsed');
+      setIsDrawerCollapsed(false);
+    }
+  }, [codeState.codeIsOpen]);
+
+  const handleDrawerWidthChange = (width) => {
+    setDrawerWidth(width);
+  };
+
+  const handleDrawerCollapseChange = (collapsed) => {
+    setIsDrawerCollapsed(collapsed);
+  };
+
+  const toggleButtonStyle = {
+    right: codeState.codeIsOpen ? (isDrawerCollapsed ? '44px' : `${drawerWidth}%`) : '0',
+  };
+
   return (
     <div className="codeContainer" id="codeContainer">
       <button
         type="button"
-        className={codeState.codeIsOpen ? 'codeToggleBtn open' : 'codeToggleBtn'}
-        onClick={toggle}
+        className={`code-toggle-btn ${codeState.codeIsOpen ? 'open' : ''}`}
+        onClick={toggleCodeDrawer}
+        title={codeState.codeIsOpen ? 'Hide code panel' : 'Show code panel'}
+        style={toggleButtonStyle}
       >
-        {codeState.codeIsOpen ? '-' : '+'}
+        {codeState.codeIsOpen ? '▶' : '◀'}
       </button>
 
-      <div className={codeState.codeIsOpen ? 'sidebar open' : 'sidebar'}>
-        <div className="codeButtons">
-          <button
-            type="button"
-            className="codeContainerButton"
-            id="schemaButton"
-            onClick={handleSchema}
-          >
-            Schema
-          </button>
-          <br />
-          <button
-            type="button"
-            className="codeContainerButton"
-            id="resolverButton"
-            onClick={handleResolver}
-          >
-            Resolver
-          </button>
-          <br />
-          <button
-            id="copyButton"
-            className="codeContainerButton"
-            onClick={() => {
-              navigator.clipboard.writeText(codeState.displayCode);
-            }}
-          >
-            Copy
-          </button>
-        </div>
-        <br />
-        {codeState.codeIsOpen ? (
-          <Suspense fallback={<div style={{ padding: '1rem' }}>Loading editor…</div>}>
-            <CodeMirror />
-          </Suspense>
-        ) : null}
-      </div>
+      {codeState.codeIsOpen && (
+        <Suspense fallback={<div style={{ padding: '1rem' }}>Loading editor…</div>}>
+          <CodeDrawer
+            onWidthChange={handleDrawerWidthChange}
+            onCollapseChange={handleDrawerCollapseChange}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }

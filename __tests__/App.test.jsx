@@ -3,12 +3,12 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../client/App.jsx';
 
-test('renders NavBar and shows Visualize link', () => {
+test('renders NavBar and shows Playground link', () => {
   render(
     <MemoryRouter initialEntries={['/']}>
       <App />
     </MemoryRouter>
   );
 
-  expect(screen.getAllByText(/Visualize/i)[0]).toBeInTheDocument();
+  expect(screen.getByText(/Playground/i)).toBeInTheDocument();
 });
