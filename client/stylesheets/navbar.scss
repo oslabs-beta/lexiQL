@@ -1,9 +1,26 @@
+// Mobile menu backdrop
+.mobile-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
 #homeHeader {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: 'Raleway';
+  position: relative;
 
   .socialLogos {
     margin-left: 40px;
@@ -40,6 +57,115 @@
   .homeLogo:hover {
     height: 55px;
   }
+
+  // Hamburger menu styles
+  .hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+
+    .hamburger-line {
+      width: 25px;
+      height: 3px;
+      background-color: $dark-blue;
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+
+      &.open {
+        &:nth-child(1) {
+          transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          transform: rotate(45deg) translate(-5px, -6px);
+        }
+      }
+    }
+  }
+
+  // Mobile responsive styles
+  @media (max-width: 768px) {
+    .socialLogos {
+      margin-left: 20px;
+    }
+
+    .homeLogo {
+      height: 40px;
+      margin: 8px -8px 0px 0px;
+    }
+
+    .hamburger-menu {
+      display: flex;
+      margin-right: 20px;
+    }
+
+    .rightLinks {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 250px;
+      height: 100vh;
+      background-color: white;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 80px;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+      transition: right 0.3s ease;
+      z-index: 1000;
+
+      &.mobile-open {
+        right: 0;
+      }
+
+      .headerLinks {
+        margin: 20px 0;
+        font-size: 28px;
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .socialLogos {
+      margin-left: 15px;
+    }
+
+    .homeLogo {
+      height: 35px;
+      margin: 6px -6px 0px 0px;
+    }
+
+    .hamburger-menu {
+      margin-right: 15px;
+
+      .hamburger-line {
+        width: 22px;
+        height: 2px;
+      }
+    }
+
+    .rightLinks {
+      width: 200px;
+
+      .headerLinks {
+        font-size: 24px;
+        padding: 12px 0;
+      }
+    }
+  }
 }
 
 #appHeader {
@@ -49,6 +175,7 @@
   justify-content: space-between;
   align-items: center;
   font-family: 'Raleway';
+  position: relative;
 
   .rightLinks {
     display: flex;
@@ -85,5 +212,106 @@
 
   .homeLogo:hover {
     color: $orange;
+  }
+
+  // Hamburger menu styles
+  .hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+
+    .hamburger-line {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+
+      &.open {
+        &:nth-child(1) {
+          transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          transform: rotate(45deg) translate(-5px, -6px);
+        }
+      }
+    }
+  }
+
+  // Mobile responsive styles
+  @media (max-width: 768px) {
+    .homeLogo {
+      height: 60px;
+      margin-left: 15px;
+    }
+
+    .hamburger-menu {
+      display: flex;
+      margin-right: 20px;
+    }
+
+    .rightLinks {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 250px;
+      height: 100vh;
+      background-color: $dark-blue;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 80px;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+      transition: right 0.3s ease;
+      z-index: 1000;
+
+      &.mobile-open {
+        right: 0;
+      }
+
+      .headerLinks {
+        margin: 20px 0;
+        font-size: 28px;
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .homeLogo {
+      height: 50px;
+      margin-left: 10px;
+    }
+
+    .hamburger-menu {
+      margin-right: 15px;
+
+      .hamburger-line {
+        width: 22px;
+        height: 2px;
+      }
+    }
+
+    .rightLinks {
+      width: 200px;
+
+      .headerLinks {
+        font-size: 24px;
+        padding: 12px 0;
+      }
+    }
   }
 }
