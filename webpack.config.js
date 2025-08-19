@@ -17,10 +17,7 @@ module.exports = {
     clean: true,
   },
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'build'),
-      publicPath: '/',
-    },
+    contentBase: path.join(__dirname, 'build'),
     hot: true,
     port: 8080,
     historyApiFallback: true,
