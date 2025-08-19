@@ -164,7 +164,7 @@ Keep production credentials secure. If connecting to a live database, review the
 - Christopher Carney — [@Carthanial](https://github.com/Carthanial)
 - Stacy Learn — [@hello-stacy](https://github.com/hello-stacy)
 - John Li — [@john-li7](https://github.com/john-li7)
-- Ryan McDaniel — [@ryanmcd118](https://github.com/ryanmcd118) | [ryanmcdaniel.io](ryanmcdaniel.io)
+- Ryan McDaniel — [@ryanmcd118](https://github.com/ryanmcd118) | [ryanmcdaniel.io](https://www.ryanmcdaniel.io/)
 
 ---
 
