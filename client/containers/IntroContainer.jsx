@@ -14,7 +14,7 @@ export default function IntroContainer() {
             database.
           </p>
           <div className="hero__ctas">
-            <Link to="/data" className="btn btn--primary">
+            <Link to="/visualizer" className="btn btn--primary">
               Get started
             </Link>
             <a href="https://github.com/oslabs-beta/Orbit" className="btn btn--ghost">

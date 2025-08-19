@@ -1,3 +1,14 @@
 $orange: #ff9149;
 $bright-blue: #5a95f5;
 $dark-blue: #0f264b;
+
+:root {
+  --orbit-orange: #{$orange};
+  --orbit-navy: #{$dark-blue};
+  --orbit-border: rgba(255, 145, 73, 0.2);
+  --orbit-bg-primary: #18263a;
+  --orbit-bg-secondary: #0f1d31;
+  --orbit-text-primary: #eaf0f7;
+  --orbit-text-secondary: #8b9bb4;
+  --orbit-selection: rgba(255, 145, 73, 0.18);
+}

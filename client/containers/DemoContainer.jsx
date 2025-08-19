@@ -52,7 +52,7 @@ export default function DemoContainer() {
       </div>
       <div className="feature-grid">{introContent}</div>
       <div className="demo-ctas">
-        <Link to="/data" className="cta-primary">
+                    <Link to="/visualizer" className="cta-primary">
           Try Orbit now
         </Link>
         <a

@@ -8,12 +8,12 @@ import DataPage from '../client/pages/DataPage.jsx';
 describe('Sample DB button', () => {
   it('clicking "Use Sample Database" does not crash and keeps UI responsive', async () => {
     render(
-      <MemoryRouter initialEntries={['/data']}>
+      <MemoryRouter initialEntries={['/visualizer']}>
         <DataPage />
       </MemoryRouter>
     );
 
-    const button = screen.getByRole('button', { name: /Use Sample Database/i });
+    const button = screen.getByRole('button', { name: /Load sample data/i });
     expect(button).toBeInTheDocument();
     fireEvent.click(button);
 
